@@ -1,0 +1,17 @@
+Fixed (fail -> pass): none
+Regressed (pass -> fail): none
+Unchanged: E01, E02, E03, E04, E05, E06, E07, E08, E09, E10, E11, E12
+
+Summary:
+  passed: 12 -> 12 (+0)
+  total: 12 -> 12 (+0)
+  behaviour_accuracy: 1.0 -> 1.0 (+0.0)
+  retrieval_hit_rate: 1.0 -> 1.0 (+0.0)
+  mean_citation_precision: 1.0 -> 1.0 (+0.0)
+
+Changed settings:
+  ANSWER_MODE: None -> 'llm'
+  GENERATION_MODEL: None -> 'gemma3:4b'
+  GENERATION_PROMPT: None -> 'Answer the question using only the passages below. Reply in one or two sentences, then list the ids of the passages you used in square brackets, for example [hb-01-chunk-0].\n\nPassages:\n{passages}\n\nQuestion: {question}\nAnswer:'
+
+WARNING: More than one setting changed: the difference may not be attributable to one change.

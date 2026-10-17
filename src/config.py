@@ -35,7 +35,7 @@ RERANK_PROMPT = (
 )
 
 # Answer text: "extractive" (cited chunks joined) or "llm" (a local model writes the answer from the cited chunks)
-ANSWER_MODE = "extractive"
+ANSWER_MODE = "llm"
 GENERATION_MODEL = "gemma3:4b"
 GENERATION_PROMPT = (
     "Answer the question using only the passages below. Reply in one or two sentences, "
