@@ -5,7 +5,7 @@
 **Promena:** M5, filter važeće verzije (`CURRENT_ONLY = True`)  
 **Commitovi:** `ee583f3` početno stanje → `2ceaced` specifikacija → `45b8172` promena
 
-> Obavezni deo (odeljci 1–11) odnosi se na commit `45b8172`. Posle njega su odvojeno dodate i izmerene napredne promene A1–A4 (odeljak 12). Za reprodukciju obaveznog dela: `git checkout 45b8172`.
+> Obavezni deo (odeljci 1–11) odnosi se na commit `45b8172`. Posle njega su odvojeno dodate i izmerene napredne promene A1–A4 (odeljak 12). Za reprodukciju obaveznog dela: `git checkout 45b8172`, zatim obrisati `src/__pycache__` (ili pokrenuti sa `PYTHONDONTWRITEBYTECODE=1`). Promena `0.02` → `0.12` ne menja veličinu fajla, pa Python posle brzog `checkout`-a može da učita stari bytecode i prikaže pogrešan rezultat; to nam se desilo pri proveri.
 
 ## 1. Početna provera
 
@@ -161,7 +161,7 @@ Hipoteza je potvrđena: E06 je popravljen jer zastarela verzija više ne ulazi u
 
 ## 10. Korišćenje AI-ja
 
-Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene testove i eval, izdvoji ocene iz `top_k` radi dijagnoze propusta, napiše nacrt specifikacije i implementira filter sa testom. Sve tvrdnje su proverene merenjem, a ne na osnovu reči asistenta: `results/before.json` i `results/after.json` su napravljeni istom komandom, `eval_compare` potvrđuje isti otisak i samo jedno promenjeno podešavanje, a E06 je ručno proveren preko CLI-ja pre i posle (izlazi u `evidence/`). [Dopuniti: šta je svako od nas ručno proverio.]
+Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene testove i eval, izdvoji ocene iz `top_k` radi dijagnoze propusta, napiše nacrt specifikacije i implementira filter sa testom, a u naprednom delu i promene A1–A4, kontrolnu proveru i automatski pregled koda (odeljak 12). Sve tvrdnje su proverene merenjem, a ne na osnovu reči asistenta: `results/before.json` i `results/after.json` su napravljeni istom komandom, `eval_compare` potvrđuje isti otisak i samo jedno promenjeno podešavanje, a E06 je ručno proveren preko CLI-ja pre i posle (izlazi u `evidence/`). [Dopuniti: šta je svako od nas ručno proverio.]
 
 ## 11. Doprinos
 
@@ -181,7 +181,7 @@ Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene tes
 | A2 | prag odbijanja 0.02 → 0.12 (M3) | `235ff78` / `b604373` | `adv1` | 9 → 10 | E10 | none | `REFUSAL_THRESHOLD` |
 | A3a | infrastruktura za embeddinge, režim ostaje `lexical` | `acd95d0` / `a246b7c` | `adv2` | 10 → 10 | none | none | 3 nova (vidi niže) |
 | A3b | semantička pretraga, `bge-m3` preko Ollama | `acd95d0` / `cff812f` | `adv3a` | 10 → 12 | E05, E11 | none | `RETRIEVAL_MODE` |
-| A4 | prag za citate 0.65 (M4) | `8cc7213` / `0781d3f` | `adv3b` | 12 → 12 | none | none | `CITATION_MIN_SCORE` |
+| A4 | prag za citate 0.65 (M4) | `8cc7213` / `0781d3f` | `adv3b` | 12 → 12 | none | none | `CITATION_MIN_SCORE` (posle pregleda koda: `SEMANTIC_CITATION_MIN_SCORE`) |
 
 Ukupno (`evidence/advanced/compare-before-vs-A4.txt`): **6/12 → 12/12**, behaviour accuracy 0.83 → 1.00, retrieval hit rate 0.78 → 1.00, mean citation precision 0.45 → 1.00. Ovo poređenje upozorava na više promenjenih podešavanja, jer zbirno obuhvata svih pet koraka. Pojedinačni doprinosi su u tabeli iznad.
 
@@ -206,6 +206,21 @@ Oba izlaza se slažu sa `results/adv3b.json`. CLI izlazi su snimljeni pre A4, pa
 2. **Moja greška u A3a:** `load_cache`/`save_cache` su imali podrazumevani argument `path=CACHE_PATH`, koji se vezuje pri definisanju funkcije. Zato `monkeypatch` u testu nije delovao i test je upisao lažne vektore u pravi keš. Ispravljeno pre commita (putanja se čita pri pozivu), a lažni keš je obrisan.
 3. **Testovi su zavisili od režima:** posle A3b `test_retrieve_top_k_returns_empty_for_unrelated_query` je pao i pozvao Ollama. Test nije oslabljen. Dodat je `tests/conftest.py`, koji testove drži u leksičkom režimu i blokira svaki mrežni poziv. Keš je zatim napravljen ponovo, samo iz eval pokretanja.
 4. **CLI bez Ollama** je pucao sa traceback-om. Sada ispisuje jasnu poruku i izlazi sa kodom 2.
+
+**Završna provera i pregled koda (posle A4):**
+
+- *Reprodukcija iz čistog klona*, novo `.venv`, ugašen Ollama: svih 7 commitova iz tabele (`ee583f3` … `0781d3f`) daje tačno iste redove kao sačuvani JSON-ovi (6, 7, 9, 10, 10, 12, 12).
+- *`eval/eval_set.json`, `src/eval_runner.py` i `src/eval_compare.py`* su bajt-identični početnom stanju; SHA-256 eval skupa je isti kao u originalnom ZIP-u.
+- *Red-green provera novih testova:* za svaki novi test popravka je privremeno uklonjena (10 mutacija); svaki put je bar jedan test pao.
+- *Automatski pregled koda* (skill `code-review`, nivo high) dao je 10 nalaza. Ispravljeno u commitu `48159d4`:
+  1. `CITATION_MIN_SCORE = 0.65` je bio na kosinusnoj skali, a važio je i u leksičkom režimu. Izmereno: povratak na `lexical` bi dao **9/12** umesto 10/12. Sada postoji `SEMANTIC_CITATION_MIN_SCORE = 0.65`, a `CITATION_MIN_SCORE` je vraćen na `None`; `lexical` ponovo daje 10/12.
+  2. Timeout, neispravan JSON ili pogrešan broj vektora iz Ollama sada daju jasnu `EmbeddingError` umesto traceback-a.
+  3. Keš se upisuje atomski (privremeni fajl + `os.replace`), a oštećen keš daje jasnu grešku.
+  4. Novi test proverava da commitovani keš pokriva ceo eval skup u semantičkom režimu bez mreže.
+
+  Posle ispravki eval je identičan `adv4` (`evidence/advanced/compare-A4-vs-review-fixes.txt`). Poređenje upozorava na dva podešavanja jer je prag samo premešten iz `CITATION_MIN_SCORE` u `SEMANTIC_CITATION_MIN_SCORE`; vrednost i rezultat su isti.
+
+  Svesno nije menjano: `eval_runner` ne hvata `EmbeddingError` (kod koji računa metrike se ne sme menjati; greška ima jasnu poruku); `RETRIEVAL_MIN_SCORE = 0.01` nema efekta na kosinusnoj skali (filtriranje radi prag odbijanja); rečenica duža od `CHUNK_SIZE` postaje jedan duži chunk, kako meni M1 i propisuje, a `CHUNK_OVERLAP` se tada ne koristi iako se beleži u konfiguraciji; `CURRENT_ONLY` isključuje `superseded` umesto da uključuje samo `current` (korpus ima samo ta dva statusa, a meni M5 tako definiše filter); keš se čita pri svakom pitanju, što je zanemarljivo za 36 vektora.
 
 **Preostala ograničenja posle A1–A4:**
 
