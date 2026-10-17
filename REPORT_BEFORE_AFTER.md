@@ -228,12 +228,77 @@ Oba izlaza se slažu sa `results/adv3b.json`. CLI izlazi su snimljeni pre A4, pa
 
 **Preostala ograničenja posle A1–A4:**
 
-1. **Tanke margine:** najslabije podržano eval pitanje ima 0.647, a najjače nepodržano 0.567, pa je prag 0.60 udaljen samo ~0.04 sa obe strane. U kontrolnoj proveri „gym membership“ ima 0.578, a „parking spot“ 0.667. Veći eval skup bi verovatno pokazao greške.
+1. **Tanke margine** (izmereno u odeljku 13: na holdoutu se klase preklapaju): najslabije podržano eval pitanje ima 0.647, a najjače nepodržano 0.567, pa je prag 0.60 udaljen samo ~0.04 sa obe strane. U kontrolnoj proveri „gym membership“ ima 0.578, a „parking spot“ 0.667. Veći eval skup bi verovatno pokazao greške.
 2. **Pragovi su kalibrisani na eval skupu** na kojem se i meri.
 3. **Zavisnost od Ollama** za nova pitanja; leksički režim ostaje dostupan kao potpuno offline rezerva.
-4. **Embeddingi slabije hvataju tačne brojeve i termine.** Hibridna pretraga (BM25 + embeddingi) bila bi sledeći korak, ali nije merena.
+4. **Embeddingi slabije hvataju tačne brojeve i termine.** Hibridna pretraga je izmerena u odeljku 13 (B1) i ovde šteti.
 5. **Istorijska pitanja** i dalje nisu odgovoriva zbog `CURRENT_ONLY` (kao u obaveznom delu).
-6. **„Odgovor“ je i dalje spisak citiranih chunk-ova**, ne generisana rečenica. Generisanje preko LLM-a nije rađeno.
+6. **„Odgovor“ je posle A4 i dalje spisak citiranih chunk-ova.** Generisanje preko LLM-a je urađeno u odeljku 13 (B3).
+
+## 13. Max nivo: generalizacija i poređenje tehnika (odvojeno od obaveznog dela)
+
+Specifikacije: `docs/maxlvl-specs.md`, svaka commitovana pre svoje izmene. Dokazi: `evidence/maxlvl/`.
+
+**Zašto:** posle A4 eval je 12/12, a pragovi su kalibrisani na tih istih 12 pitanja. Zato su uvedena dva nova skupa u istom formatu, a `eval/eval_set.json` i kod metrika nisu menjani (`src/holdout_runner.py` poziva iste funkcije `evaluate_item` i `summarise`):
+
+| Skup | Pitanja | Napisan | Uloga |
+| --- | --- | --- | --- |
+| `eval/holdout_set.json` | 34 | posle A4, commit `7682879`, pre prvog merenja | razvoj i dijagnoza |
+| `eval/test_set.json` | 24 | posle prvog merenja holdouta, commit `bc03d27`, pre svih B promena | slepa provera, pokrenut **jednom**, na kraju |
+
+**Rezultati po koracima** (svaki u odnosu na prethodni zadržani korak):
+
+| Korak | Promena | Commit | eval | holdout | Ishod |
+| --- | --- | --- | --- | --- | --- |
+| B0 | stanje posle A4 (semantic) | `bc03d27` | 12/12 | **29/34** | dijagnoza: hit 1.00, a svih 5 padova je u odluci odgovori/odbij |
+| B0 | leksički režim, radi poređenja | | 10/12 | 16/34 | |
+| B1 | hibridna pretraga (RRF) | `aa310c1` / `6518c6d` | 11/12 | 24/34 | **šteti** (E05, H01, H02, H05, H10, H13), isključeno |
+| B2 | LLM judge za svih 5 kandidata | `a7011ec` / `488aadd` | 12/12 | 29/34 | popravlja 5, kvari 5 |
+| B2b | upit bez da/ne polariteta | `a9a72c1` / `418dd1d` | 11/12 | 28/34 | **hipoteza nije potvrđena**, vraćeno |
+| B2c | judge samo u sivoj zoni kosinusa 0.50–0.70 | `bfe04ad` / `9cf53f4` | 12/12 | **33/34** | zadržano |
+| B3 | LLM piše odgovor iz citata | `3d217f9` / `8935008` | 12/12 | 33/34 | metrike iste; odgovori ručno 23/23 tačni |
+
+**Ključni nalaz B0:** na holdoutu najslabije podržano pitanje ima vrh 0.540 (H08), a najjače nepodržano 0.676 (H34). **Nijedan kosinusni prag ne razdvaja skup**; prag 0.60 iz A3 važio je samo na eval skupu.
+
+**Zašto B2 nije bio dovoljan:** `gemma3:4b` kaže „No.“ i za pasus koji sadrži odgovor, kada je odgovor negativan ili implicitan. Primeri su H03 „Never share passwords, also not with colleagues from IT“ i H23 „Monday to Friday“ za pitanje o vikendu. B2b je proverio da li je uzrok mešanje polariteta da/ne: nije. Uzrok je kapacitet modela. Zato je B2c kaskada: pitanja koja je judge popravio imala su kosinus < 0.68, a ona koja je pokvario ≥ 0.72 (osim H13). Granice 0.50 i 0.70 izvedene su iz holdouta, pa je 33/34 na holdoutu optimistično.
+
+**Slepi test skup, jedno pokretanje** (`evidence/maxlvl/test-final-run.txt`, `compare-test-B0-vs-final.txt`):
+
+| Stanje | Passed | Behaviour | CitPrec |
+| --- | --- | --- | --- |
+| posle A4 (B0) | 21/24 | 0.92 | 0.89 |
+| konačno (B2c + B3) | **22/24** | 0.92 | **1.00** |
+
+- Popravljeno: T19 „team-building budget“ i T21 „reset a forgotten password“, koji su sada tačno odbijeni.
+- Pokvareno: T06 „Are parking places assigned to specific people?“. Judge ne vidi da „spaces are shared“ odgovara (kosinus 0.672, siva zona).
+- T02 „Does sick leave come out of my annual leave?“ pada u oba stanja. Pre je citiran pogrešan chunk istog dokumenta, a sada je pitanje odbijeno.
+- **Zaključak:** stvarni dobitak na neviđenim pitanjima je +1/24, a ne +4/34 kao na holdoutu. Holdout je precenio dobitak, jer su granice sive zone izvedene iz njega. Zato je test skup držan slepim.
+
+**Kvalitet LLM odgovora (B3)** meri se posebno, alatom `src/answer_quality.py`:
+- Stroga provera podniza: eval 9/9, holdout 13/23, test 9/15.
+- Ručni pregled svih odgovora koji nisu prošli strogu proveru (`evidence/maxlvl/answers-holdout-llm-manual-review.md`): svi su činjenično tačni, a svi `[chunk-id]` su validni.
+- Dva odgovora dodaju detalj kog u pasusu nema: H10 „from an appropriate authority“ i T10, uslov za premeštanje dana.
+
+**Trošak i zavisnosti:**
+- Modeli: `bge-m3` (1.2 GB) i `gemma3:4b` (3.3 GB), lokalno preko Ollama. Bez API ključa, bez plaćenog servisa i bez vektorske baze.
+- U sivu zonu pada 2/12 eval, 20/34 holdout i 14/24 test pitanja. Svako takvo pitanje dobija do 5 poziva judge-a, a svako odgovoreno pitanje još jedan poziv za odgovor (oko 0.4 s po pozivu na M-seriji).
+- Odgovori modela keširaju se u `data/llm_cache.json` (48 KB), a embeddingi u `data/embedding_cache.json`. Sva tri skupa i CLI za ta pitanja rade bez Ollama; provereno u čistom klonu sa ugašenim Ollama (59 testova; 12, 33 i 22).
+- Novo pitanje traži Ollama, a bez njega CLI daje jasnu grešku i izlazni kod 2.
+
+**Provera:**
+- Testovi prolaze na svakom od 15 novih commitova.
+- Nove grane koda su proverene mutacijom: hibrid, filter judge-a i siva zona.
+- Testovi nikad ne zovu Ollama (conftest).
+- `eval_set.json`, `eval_runner.py` i `eval_compare.py` su i dalje identični početnom stanju.
+- Jedna greška je uhvaćena u toku rada: commit B2 je prvo prošao sa 2 pala testa, jer `| tail` sakriva izlazni kod. Ispravljeno je pre sledećeg koraka, a provera se od tada radi sa `pipefail`.
+- B2b je meren na necommitovanom upitu i odmah vraćen. Tačan upit je zabeležen u `config` delu fajla `evidence/maxlvl/eval-B2b.json`.
+
+**Preostala ograničenja posle B koraka:**
+
+1. **Judge od 4B je slaba karika:** H13, T06 i T02 pogrešno odbija. Sledeći korak bio bi veći model ili pravi cross-encoder reranker, ali Ollama ga ne nudi kao standardni model, pa to nije mereno.
+2. **Granice sive zone su izvedene iz holdouta.** Test skup od 24 pitanja je mali, pa je razlika +1 unutar šuma.
+3. **Generisani odgovor može da doda nepodržan detalj** (H10, T10). Citati su tačni, ali tekst se ne proverava automatski prema pasusu.
+4. **Konačno stanje zavisi od dva lokalna modela** za svako novo pitanje. Režimi `RERANK = None` i `ANSWER_MODE = "extractive"` ostaju kao jednostavnija rezerva.
 
 ## Dokazi
 
@@ -244,6 +309,7 @@ Oba izlaza se slažu sa `results/adv3b.json`. CLI izlazi su snimljeni pre A4, pa
 - `evidence/pytest-before.txt`, `evidence/pytest-after.txt`
 - `docs/change-spec.md`: specifikacija, commitovana pre promene
 - Napredni deo: `docs/advanced-specs.md`; `evidence/advanced/` (`adv1.json`, `adv2.json`, `adv3a.json`, `adv3b.json`, `adv4.json`, `compare-*.txt`, CLI izlazi, kontrolna provera)
+- Max nivo: `docs/maxlvl-specs.md`; `eval/holdout_set.json`, `eval/test_set.json`; `evidence/maxlvl/` (`holdout-*.json`, `eval-B*.json`, `test-*.json`, `compare-*.txt`, `answers-*.json`, ručni pregled odgovora, `test-final-run.txt`)
 
 ## Kontrolna lista pre predaje
 

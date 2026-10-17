@@ -39,6 +39,23 @@ ollama serve
 
 Without Ollama the CLI prints an error and exits with code 2. Set `RETRIEVAL_MODE = "lexical"` in `src/config.py` to go back to the fully offline lexical retriever. Tests always run in lexical mode and never call Ollama (`tests/conftest.py`).
 
+## Max level: holdout, test set, LLM judge and LLM answers
+
+Specs: `docs/maxlvl-specs.md`. Evidence: `evidence/maxlvl/`. Report: section 13.
+
+```bash
+python -m src.holdout_runner --out results/holdout.json                          # 34 holdout questions
+python -m src.holdout_runner --set eval/test_set.json --out results/test.json   # 24 blind test questions
+python -m src.answer_quality --set holdout --out results/answers.json           # answer text quality
+```
+
+The shipped configuration adds two steps on top of semantic retrieval:
+
+- `RERANK = "llm-gray-zone"`: when the top cosine is between 0.50 and 0.70, `gemma3:4b` judges each of the top 5 candidates ("does the passage contain the answer?") and the system refuses if none passes. Above 0.70 it answers, below 0.50 it refuses.
+- `ANSWER_MODE = "llm"`: `gemma3:4b` writes a one- or two-sentence answer from the cited chunks only, with `[chunk-id]` markers. Citations do not change.
+
+Model replies are cached in `data/llm_cache.json`, so all three sets run offline. New questions need `ollama pull gemma3:4b`. Results: eval 12/12, holdout 33/34, blind test 22/24 (21/24 before these steps). Hybrid retrieval (`RETRIEVAL_MODE = "hybrid"`) is available but made results worse.
+
 ## Project layout
 
 - `src/config.py`: every tunable setting in one place. The eval runner saves all values with each run.

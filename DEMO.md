@@ -62,4 +62,15 @@ python -m src.eval_runner --out results/demo.json    # 12/12, radi bez Ollama
 cat evidence/advanced/compare-before-vs-A4.txt
 ```
 
-Napomenuti: pragovi su kalibrisani na istom skupu, a kontrolna provera van skupa daje 10/10 (semantic) prema 6/10 (lexical).
+Napomenuti: pragovi su kalibrisani na istom skupu, pa je 12/12 optimistično.
+
+## Bonus 2: max nivo, generalizacija (ako ima vremena)
+
+```bash
+python -m src.holdout_runner --out results/demo-holdout.json                         # 33/34
+python -m src.holdout_runner --set eval/test_set.json --out results/demo-test.json  # 22/24
+cat evidence/maxlvl/compare-test-B0-vs-final.txt
+python -m src.cli --question "How many days per week can I work remotely?"         # LLM odgovor sa [chunk-id]
+```
+
+Poruka: na novim pitanjima prag od 0.60 ne radi (klase se preklapaju: 0.540 prema 0.676). Hibrid je štetio, a LLM judge je pomogao tek kao kaskada u sivoj zoni. Na slepom testu dobitak je samo +1/24, što je pošten rezultat (odeljak 13 izveštaja).
