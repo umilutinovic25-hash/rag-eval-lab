@@ -15,15 +15,16 @@ export PYTHONDONTWRITEBYTECODE=1
 ```bash
 git checkout -q ee583f3 && find src -name __pycache__ -exec rm -rf {} +
 python -m src.cli --question "How many days per week can I work remotely?"
+python -m src.eval_runner --out results/demo-before.json
 ```
 
-Pokazati: `Remote work policy (version 2024, superseded)` i „2 days per week“, a važeće je 3 dana.
+Pokazati: `Remote work policy (version 2024, superseded)` i „2 days per week“, a važeće je 3 dana; eval 6/12.
 
 ## 2. Specifikacija, napisana pre koda
 
 ```bash
 git log --oneline ee583f3..45b8172   # spec commit 2ceaced je PRE promene 45b8172
-cat docs/change-spec.md
+git show 2ceaced:docs/change-spec.md
 ```
 
 ## 3. Diff: jedna namera
@@ -37,7 +38,8 @@ git diff ee583f3 45b8172 -- src
 ```bash
 git checkout -q 45b8172 && find src -name __pycache__ -exec rm -rf {} +
 python -m src.cli --question "How many days per week can I work remotely?"
-cat evidence/compare.txt
+python -m src.eval_runner --out results/demo-after.json
+python -m src.eval_compare results/demo-before.json results/demo-after.json
 ```
 
 Pokazati: `version 2026, current`; `Fixed: E06`, `Regressed: none`, isti `eval_set_sha256`, promenjeno samo `CURRENT_ONLY`.
