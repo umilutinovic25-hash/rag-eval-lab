@@ -3,7 +3,9 @@
 **Par:** Uroš Milutinović i [drugi član para]  
 **Demonstraciju na Sesiji 2 vodi:** [ime]  
 **Promena:** M5, filter važeće verzije (`CURRENT_ONLY = True`)  
-**Commitovi:** `ee583f3` početno stanje → `2ceaced` specifikacija → `45b8172` promena
+**Commitovi:** `ee583f3` početno stanje → `2ceaced` specifikacija → `45b8172` promena  
+**Datum:** 2026-10-17  
+**Šablon:** `docs/sablon-izvestaj-pre-posle.md` (napravljen prema zahtevima zadatka, jer zvanični šablon nije objavljen)
 
 > Obavezni deo (odeljci 1–11) odnosi se na commit `45b8172`. Posle njega su odvojeno dodate i izmerene napredne promene A1–A4 (odeljak 12). Za reprodukciju obaveznog dela: `git checkout 45b8172`, zatim obrisati `src/__pycache__` (ili pokrenuti sa `PYTHONDONTWRITEBYTECODE=1`). Promena `0.02` → `0.12` ne menja veličinu fajla, pa Python posle brzog `checkout`-a može da učita stari bytecode i prikaže pogrešan rezultat; to nam se desilo pri proveri.
 
@@ -35,7 +37,7 @@ Retrieval hit rate (supported): 0.78
 Mean citation precision (answered): 0.45
 ```
 
-## 2. Dokumentovani propusti
+## 2. Dokumentovani propusti (najmanje dva)
 
 Ocene su iz `top_k` polja u `results/before.json`.
 
@@ -137,13 +139,13 @@ Promenjeno je samo jedno podešavanje, pa alat ne upozorava na više promena. Ot
 
 To se slaže sa redom E06 u `results/after.json`.
 
-## 7. Zaključak
+## 7. Zaključak i regresije
 
 Hipoteza je potvrđena: E06 je popravljen jer zastarela verzija više ne ulazi u pretragu, a nijedno pitanje nije palo. Rast CitPrec (0.45 → 0.55) dolazi samo od E06 (0.00 → 1.00). E01, E02 i E03 ostaju na 0.50.
 
 **Regresije:** u eval skupu nema nijedne. Promena koja se ne vidi u metrikama: dopunski drugi citat za E01, E02 i E03 je prešao sa `hb-02` na `hb-03` (npr. E01: `hb-02-chunk-0` → `hb-03-chunk-0`). Citat je i dalje nebitan za pitanje, samo iz važeće verzije. To je predviđeno u specifikaciji.
 
-## 8. Preostala ograničenja
+## 8. Preostala ograničenja (najmanje jedno)
 
 1. **E04 i E09 (chunkovanje):** činjenica „5 business days“ i dalje je u chunk-u koji nije u top-2. Ova promena to nije ni ciljala. Kandidat za sledeću promenu je M1 (sečenje po rečenicama).
 2. **E10 i E11 (pogrešan odgovor umesto odbijanja):** prag 0.02 je prenizak. E11 („parental leave“) ima vrh 0.17, više od nekih podržanih pitanja (E02 ima 0.13), pa ni sama kalibracija praga (M3) ne bi rešila E11 bez rizika da se odbiju podržana pitanja.
@@ -153,11 +155,13 @@ Hipoteza je potvrđena: E06 je popravljen jer zastarela verzija više ne ulazi u
 
 ## 9. Pregled para
 
-> [Komentar para koji je pregledao izveštaj, iz Discord niti „Nedelja 7: pregled para“]
->
-> 1. Da li je promena zaista jedna i da li odgovara specifikaciji?
-> 2. Da li rezultat pre/posle podržava zaključak?
-> 3. Da li je neka regresija ili ograničenje izostavljeno?
+Pregledao: [par / imena]. Komentar iz Discord niti „Nedelja 7: pregled para“:
+
+1. Da li je promena zaista jedna i da li odgovara specifikaciji? [odgovor]
+2. Da li rezultat pre/posle podržava zaključak? [odgovor]
+3. Da li je neka regresija ili ograničenje izostavljeno? [odgovor]
+
+Naš odgovor na komentar: [šta smo promenili ili zašto nismo]
 
 ## 10. Korišćenje AI-ja
 
@@ -240,3 +244,20 @@ Oba izlaza se slažu sa `results/adv3b.json`. CLI izlazi su snimljeni pre A4, pa
 - `evidence/pytest-before.txt`, `evidence/pytest-after.txt`
 - `docs/change-spec.md`: specifikacija, commitovana pre promene
 - Napredni deo: `docs/advanced-specs.md`; `evidence/advanced/` (`adv1.json`, `adv2.json`, `adv3a.json`, `adv3b.json`, `adv4.json`, `compare-*.txt`, CLI izlazi, kontrolna provera)
+
+## Kontrolna lista pre predaje
+
+- [x] `python -m pytest` prolazi posle promene (19 na `45b8172`, 36 na kraju naprednog dela)
+- [x] Eval pokrenut pre i posle istom komandom
+- [x] Poređenje ne prijavljuje različit otisak eval skupa
+- [x] Oba propusta vezana za konkretna eval pitanja (E06, E04/E09, E10/E11, E05)
+- [x] Specifikacija napisana pre izmene i promena joj odgovara (`2ceaced` pre `45b8172`)
+- [x] Diff sadrži jednu promenu po nameri (samo `CURRENT_ONLY`)
+- [x] `eval/eval_set.json` i kod metrika nisu menjani
+- [x] Svaka regresija navedena i objašnjena (nema ih; promena dopunskih citata opisana u odeljku 7)
+- [x] Navedeno bar jedno preostalo ograničenje
+- [x] Ručna CLI provera jednog promenjenog pitanja (E06)
+- [ ] Komentar para unet
+- [x] Beleška o AI-ju (dopuniti šta je svako od nas ručno proverio)
+- [ ] Doprinos oba člana i ime osobe koja vodi demonstraciju
+- [ ] Nedeljni izveštaj poslat tutoru do utorka 20.10.2026. u 12:00 (`[Nedeljni izveštaj] Ime Prezime – Nedelja 7`)
