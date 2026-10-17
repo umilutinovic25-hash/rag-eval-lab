@@ -39,3 +39,14 @@ Promena ide u dva koraka da bi razlika pripadala jednoj odluci:
 | Očekivani efekat | E05 i E11 → PASS. Ostala pitanja ostaju PASS. Očekivano 12/12. |
 | Rizik regresije | Prag je kalibrisan na istom skupu (margina samo 0.04 sa obe strane), pa je rezultat optimističan. Novo pitanje može biti pogrešno odbijeno ili pogrešno odgovoreno. Embeddingi slabije hvataju tačne termine i brojeve. Nova zavisnost: Ollama + model od 1.2 GB i sporiji odgovor za pitanje koje nije u kešu. Testovi ne smeju zavisiti od Ollama. |
 | Provera | `pytest` (lažni embedder), `eval_runner --out results/adv3a.json` (mora biti isto kao `adv2`), zatim `--out results/adv3b.json` i `eval_compare results/adv3a.json results/adv3b.json`, CLI za E05 i E11. |
+
+## A4: prag za citate (M4)
+
+| Polje | Sadržaj |
+| --- | --- |
+| Propust | U `results/adv3b.json` E01, E05 i E07 imaju CitPrec 0.50, jer se uvek citiraju oba top-2 chunk-a. Drugi citat je iz nebitnog dokumenta: E01 `hb-03-chunk-0` (0.571), E05 `hb-06-chunk-0` (0.570), E07 `hb-03-chunk-3` (0.624). Tip: citat (dopuna). |
+| Hipoteza | Dopunski citati imaju kosinus ≤ 0.624, a drugi citati iz pravog dokumenta koji nose dodatni kontekst (E06 0.745, E08 0.678, E09 0.686) su iznad 0.65. Prag 0.65 uklanja dopunu i zadržava ih. |
+| Promena | Implementirati `select_citations` u `src/rag.py`: citiraju se rezultati sa ocenom ≥ `CITATION_MIN_SCORE`, a prvi rezultat se uvek citira kada se odgovara. Postaviti `CITATION_MIN_SCORE = 0.65`. |
+| Očekivani efekat | E01, E05 i E07 dobijaju CitPrec 1.00. Mean citation precision 0.83 → 1.00. Passed ostaje 12/12, jer je činjenica u svakom slučaju u prvom citatu. |
+| Rizik regresije | Prag je na kosinusnoj skali i kalibrisan na eval skupu (margina 0.026 iznad najjačeg dopunskog citata). U leksičkom režimu ista vrednost bi izbacila skoro sve druge citate. Ako je činjenica samo u drugom chunk-u sa ocenom ispod 0.65, biće izgubljena (na ovom skupu to se ne dešava, ali E02, E03 i E04 gube drugi citat iz pravog dokumenta). |
+| Provera | `pytest`, `eval_runner --out results/adv4.json`, `eval_compare results/adv3b.json results/adv4.json`. |
