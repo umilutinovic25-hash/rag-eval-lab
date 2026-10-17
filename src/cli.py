@@ -1,7 +1,9 @@
 import argparse
+import sys
 
 from .chunking import build_chunks
 from .corpus import load_corpus
+from .embeddings import EmbeddingError
 from .rag import build_grounded_answer
 
 
@@ -16,7 +18,11 @@ def main() -> None:
     args = parse_args()
     chunks = build_chunks(load_corpus())
     by_id = {chunk.chunk_id: chunk for chunk in chunks}
-    result = build_grounded_answer(args.question, chunks)
+    try:
+        result = build_grounded_answer(args.question, chunks)
+    except EmbeddingError as error:
+        print(f"Error: {error}", file=sys.stderr)
+        sys.exit(2)
 
     print("Question:")
     print(args.question)

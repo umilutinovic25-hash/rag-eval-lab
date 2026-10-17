@@ -1,0 +1,16 @@
+Question:
+How long until I get a new notebook computer?
+
+Answer:
+Grounded response based on retrieved context:
+[hb-01-chunk-1] After manager approval, a replacement laptop is set up by IT staff with your files, accounts, email and access rights, and handover can take up to 5 business days.
+[hb-06-chunk-0] New colleagues follow a two-week onboarding plan.
+
+Refused: False
+Citations:
+  hb-01-chunk-1: Equipment replacement (version 2026, current)
+  hb-06-chunk-0: Onboarding (version 2026, current)
+
+Retrieved:
+  0.6474  hb-01-chunk-1: After manager approval, a replacement laptop is set up by IT staff with your files, accounts, email and access rights, and handover can take up to 5 business days.
+  0.5698  hb-06-chunk-0: New colleagues follow a two-week onboarding plan.

@@ -1,0 +1,13 @@
+Fixed (fail -> pass): E05, E11
+Regressed (pass -> fail): none
+Unchanged: E01, E02, E03, E04, E06, E07, E08, E09, E10, E12
+
+Summary:
+  passed: 10 -> 12 (+2)
+  total: 12 -> 12 (+0)
+  behaviour_accuracy: 0.9167 -> 1.0 (+0.0833)
+  retrieval_hit_rate: 0.8889 -> 1.0 (+0.1111)
+  mean_citation_precision: 0.65 -> 0.8333 (+0.1833)
+
+Changed settings:
+  RETRIEVAL_MODE: 'lexical' -> 'semantic'

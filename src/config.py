@@ -9,7 +9,7 @@ CHUNK_SIZE = 140
 CHUNK_OVERLAP = 30
 
 # Retrieval
-RETRIEVAL_MODE = "lexical"  # "lexical" or "semantic"
+RETRIEVAL_MODE = "semantic"  # "lexical" or "semantic"
 EMBEDDING_MODEL = "bge-m3"  # local Ollama model, used only in "semantic" mode
 TOP_K = 2
 RETRIEVAL_MIN_SCORE = 0.01
