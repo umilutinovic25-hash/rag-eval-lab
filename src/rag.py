@@ -18,9 +18,9 @@ class RagAnswer:
 
 
 def select_citations(results: list[RetrievalResult]) -> list[RetrievalResult]:
-    if config.CITATION_MIN_SCORE is not None:
-        raise NotImplementedError("CITATION_MIN_SCORE is not implemented yet.")
-    return results
+    if config.CITATION_MIN_SCORE is None or not results:
+        return results
+    return [results[0]] + [item for item in results[1:] if item.score >= config.CITATION_MIN_SCORE]
 
 
 def refusal_threshold() -> float:

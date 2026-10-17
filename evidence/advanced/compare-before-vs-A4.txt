@@ -1,0 +1,21 @@
+Fixed (fail -> pass): E04, E05, E06, E09, E10, E11
+Regressed (pass -> fail): none
+Unchanged: E01, E02, E03, E07, E08, E12
+
+Summary:
+  passed: 6 -> 12 (+6)
+  total: 12 -> 12 (+0)
+  behaviour_accuracy: 0.8333 -> 1.0 (+0.1667)
+  retrieval_hit_rate: 0.7778 -> 1.0 (+0.2222)
+  mean_citation_precision: 0.4545 -> 1.0 (+0.5455)
+
+Changed settings:
+  CHUNK_STRATEGY: 'chars' -> 'sentences'
+  CITATION_MIN_SCORE: None -> 0.65
+  CURRENT_ONLY: False -> True
+  EMBEDDING_MODEL: None -> 'bge-m3'
+  REFUSAL_THRESHOLD: 0.02 -> 0.12
+  RETRIEVAL_MODE: None -> 'semantic'
+  SEMANTIC_REFUSAL_THRESHOLD: None -> 0.6
+
+WARNING: More than one setting changed: the difference may not be attributable to one change.
