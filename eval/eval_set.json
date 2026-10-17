@@ -1,0 +1,116 @@
+[
+  {
+    "id": "E01",
+    "question": "How many days of annual leave do employees get?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-07"
+    ],
+    "expected_fact": "22 days"
+  },
+  {
+    "id": "E02",
+    "question": "How often do passwords need to be changed?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-05"
+    ],
+    "expected_fact": "every 90 days"
+  },
+  {
+    "id": "E03",
+    "question": "What is the yearly training budget per employee?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-08"
+    ],
+    "expected_fact": "800 EUR"
+  },
+  {
+    "id": "E04",
+    "question": "How many business days does a laptop replacement take?",
+    "category": "chunk-boundary",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-01"
+    ],
+    "expected_fact": "5 business days"
+  },
+  {
+    "id": "E05",
+    "question": "How long until I get a new notebook computer?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-01"
+    ],
+    "expected_fact": "5 business days"
+  },
+  {
+    "id": "E06",
+    "question": "How many days per week can I work remotely?",
+    "category": "versioned",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-03"
+    ],
+    "expected_fact": "3 days per week"
+  },
+  {
+    "id": "E07",
+    "question": "What are the IT support hours?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-10"
+    ],
+    "expected_fact": "08:00 to 18:00"
+  },
+  {
+    "id": "E08",
+    "question": "By when must travel receipts be submitted?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-04"
+    ],
+    "expected_fact": "within 30 days"
+  },
+  {
+    "id": "E09",
+    "question": "Where do I request a replacement laptop and how long does it take?",
+    "category": "chunk-boundary",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-01"
+    ],
+    "expected_fact": "5 business days"
+  },
+  {
+    "id": "E10",
+    "question": "What is the current company stock price?",
+    "category": "unsupported",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "E11",
+    "question": "What is the parental leave policy?",
+    "category": "unsupported-near-domain",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "E12",
+    "question": "Who won the 1958 football world cup?",
+    "category": "unsupported",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  }
+]
