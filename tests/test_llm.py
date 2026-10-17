@@ -101,3 +101,27 @@ def test_committed_caches_cover_shipped_config_offline(monkeypatch, which) -> No
     monkeypatch.setattr(config, "RERANK", "llm-gray-zone")
     run = run_eval() if which == "eval" else run_holdout()
     assert run["summary"]["passed"] >= (12 if which == "eval" else 33)
+
+
+def test_llm_answer_mode_keeps_citations_and_uses_model_text(rerank_mode, monkeypatch) -> None:
+    monkeypatch.setattr(config, "RERANK", None)
+    baseline = rag.build_grounded_answer("laptop replacement", CHUNKS)
+    monkeypatch.setattr(config, "ANSWER_MODE", "llm")
+    seen = []
+    monkeypatch.setattr(rag, "write_answer", lambda q, passages: seen.extend(passages) or "It takes 5 business days [a].")
+    result = rag.build_grounded_answer("laptop replacement", CHUNKS)
+    assert result.answer == "It takes 5 business days [a]."
+    assert result.citations == baseline.citations
+    assert [chunk_id for chunk_id, _ in seen] == baseline.citations
+
+
+def test_answer_quality_scores_fact_and_markers() -> None:
+    from src.answer_quality import score_answer
+
+    assert score_answer("Up to 5 business days [hb-01-chunk-1].", ["hb-01-chunk-1"], "5 business days") == {
+        "fact_in_answer": True, "markers_valid": True,
+    }
+    assert score_answer("Five days [hb-09-chunk-0].", ["hb-01-chunk-1"], "5 business days") == {
+        "fact_in_answer": False, "markers_valid": False,
+    }
+    assert score_answer("Five days.", ["hb-01-chunk-1"], "5 business days")["markers_valid"] is False

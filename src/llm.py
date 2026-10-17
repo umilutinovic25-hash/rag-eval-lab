@@ -54,3 +54,9 @@ def passage_answers(question: str, passage: str) -> bool:
     reply = generate(config.RERANK_MODEL, config.RERANK_PROMPT.format(question=question, passage=passage), 3)
     words = reply.lower().split()
     return bool(words) and words[0].strip(".,!:") in ACCEPT_WORDS
+
+
+def write_answer(question: str, passages: list[tuple[str, str]]) -> str:
+    listed = "\n".join(f"[{chunk_id}] {text}" for chunk_id, text in passages)
+    prompt = config.GENERATION_PROMPT.format(passages=listed, question=question)
+    return generate(config.GENERATION_MODEL, prompt, 80)

@@ -1,0 +1,219 @@
+{
+  "answer_mode": "extractive",
+  "answered_supported": 23,
+  "fact_in_answer": 23,
+  "markers_valid": 23,
+  "rows": [
+    {
+      "id": "H01",
+      "answer": "Grounded response based on retrieved context:\n[hb-05-chunk-0] Passwords must be changed every 90 days and must contain at least 12 characters.",
+      "citations": [
+        "hb-05-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H02",
+      "answer": "Grounded response based on retrieved context:\n[hb-05-chunk-1] Multi-factor authentication (MFA) is required for email, VPN and all internal tools.",
+      "citations": [
+        "hb-05-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H03",
+      "answer": "Grounded response based on retrieved context:\n[hb-05-chunk-2] Never share passwords, also not with colleagues from IT.",
+      "citations": [
+        "hb-05-chunk-2"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H04",
+      "answer": "Grounded response based on retrieved context:\n[hb-07-chunk-0] Annual leave policy: employees get 22 days of annual leave per calendar year. Leave requests must be made two weeks in advance in HR portal.",
+      "citations": [
+        "hb-07-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H05",
+      "answer": "Grounded response based on retrieved context:\n[hb-07-chunk-1] Under this policy, unused leave can be carried over until 31 March. Sick leave follows a separate policy.",
+      "citations": [
+        "hb-07-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H06",
+      "answer": "Grounded response based on retrieved context:\n[hb-07-chunk-0] Annual leave policy: employees get 22 days of annual leave per calendar year. Leave requests must be made two weeks in advance in HR portal.",
+      "citations": [
+        "hb-07-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H07",
+      "answer": "Grounded response based on retrieved context:\n[hb-08-chunk-1] Agree training with your manager before booking. Unused budget does not carry over to next year.",
+      "citations": [
+        "hb-08-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H08",
+      "answer": "Grounded response based on retrieved context:\n[hb-08-chunk-0] Each employee has a training budget of 800 EUR per year for courses, conferences and certifications.",
+      "citations": [
+        "hb-08-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H09",
+      "answer": "Grounded response based on retrieved context:\n[hb-08-chunk-1] Agree training with your manager before booking. Unused budget does not carry over to next year.\n[hb-04-chunk-0] Business travel must be approved before booking. Travel receipts must be submitted within 30 days of your return, through finance app.",
+      "citations": [
+        "hb-08-chunk-1",
+        "hb-04-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H10",
+      "answer": "Grounded response based on retrieved context:\n[hb-04-chunk-0] Business travel must be approved before booking. Travel receipts must be submitted within 30 days of your return, through finance app.",
+      "citations": [
+        "hb-04-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H11",
+      "answer": "Grounded response based on retrieved context:\n[hb-04-chunk-0] Business travel must be approved before booking. Travel receipts must be submitted within 30 days of your return, through finance app.",
+      "citations": [
+        "hb-04-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H12",
+      "answer": "Grounded response based on retrieved context:\n[hb-04-chunk-1] Keep original receipts for hotels and flights. Daily allowances follow national rules for each destination.",
+      "citations": [
+        "hb-04-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H14",
+      "answer": "Grounded response based on retrieved context:\n[hb-09-chunk-0] Office access requires your personal badge at every entrance. Lost badges must be reported to reception on same day.\n[hb-01-chunk-2] Report lost or stolen devices to security first. Request a replacement laptop in IT portal under Hardware.",
+      "citations": [
+        "hb-09-chunk-0",
+        "hb-01-chunk-2"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H15",
+      "answer": "Grounded response based on retrieved context:\n[hb-03-chunk-3] Core hours from 10:00 to 15:00 apply on remote days, and you must be reachable by chat and phone during core hours.",
+      "citations": [
+        "hb-03-chunk-3"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H16",
+      "answer": "Grounded response based on retrieved context:\n[hb-03-chunk-1] Remote days per week are agreed with your team lead and recorded in your shared team calendar.",
+      "citations": [
+        "hb-03-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H17",
+      "answer": "Grounded response based on retrieved context:\n[hb-03-chunk-2] Remote work days can be moved within same week.\n[hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week.",
+      "citations": [
+        "hb-03-chunk-2",
+        "hb-03-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H18",
+      "answer": "Grounded response based on retrieved context:\n[hb-06-chunk-0] New colleagues follow a two-week onboarding plan.",
+      "citations": [
+        "hb-06-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H19",
+      "answer": "Grounded response based on retrieved context:\n[hb-06-chunk-2] Your manager schedules a check-in at end of month one and again after three months.",
+      "citations": [
+        "hb-06-chunk-2"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H20",
+      "answer": "Grounded response based on retrieved context:\n[hb-01-chunk-3] Accessories such as mouse or headset are ordered through that same form.",
+      "citations": [
+        "hb-01-chunk-3"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H21",
+      "answer": "Grounded response based on retrieved context:\n[hb-01-chunk-2] Report lost or stolen devices to security first. Request a replacement laptop in IT portal under Hardware.\n[hb-01-chunk-0] Laptop replacement: broken, lost or stolen laptops can be replaced.",
+      "citations": [
+        "hb-01-chunk-2",
+        "hb-01-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H22",
+      "answer": "Grounded response based on retrieved context:\n[hb-10-chunk-1] For a laptop that does not start, bring it to IT desk on floor two. Outside support hours, urgent security incidents go to on-call line.",
+      "citations": [
+        "hb-10-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H23",
+      "answer": "Grounded response based on retrieved context:\n[hb-10-chunk-0] IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.",
+      "citations": [
+        "hb-10-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    },
+    {
+      "id": "H24",
+      "answer": "Grounded response based on retrieved context:\n[hb-10-chunk-1] For a laptop that does not start, bring it to IT desk on floor two. Outside support hours, urgent security incidents go to on-call line.",
+      "citations": [
+        "hb-10-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true
+    }
+  ]
+}

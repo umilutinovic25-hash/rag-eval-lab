@@ -34,6 +34,15 @@ RERANK_PROMPT = (
     "Does the passage contain the information needed to answer the question? Answer only yes or no."
 )
 
+# Answer text: "extractive" (cited chunks joined) or "llm" (a local model writes the answer from the cited chunks)
+ANSWER_MODE = "extractive"
+GENERATION_MODEL = "gemma3:4b"
+GENERATION_PROMPT = (
+    "Answer the question using only the passages below. Reply in one or two sentences, "
+    "then list the ids of the passages you used in square brackets, for example [hb-01-chunk-0].\n\n"
+    "Passages:\n{passages}\n\nQuestion: {question}\nAnswer:"
+)
+
 
 def snapshot() -> dict:
     """Return the current configuration as a plain dict."""

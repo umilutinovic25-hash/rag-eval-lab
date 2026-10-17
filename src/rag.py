@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from . import config
 from .chunking import Chunk, build_chunks
 from .corpus import load_corpus
-from .llm import passage_answers
+from .llm import passage_answers, write_answer
 from .retrieval import RetrievalResult, retrieve_top_k
 
 
@@ -58,8 +58,11 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
             return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=results)
         cited = select_citations(results)
 
-    supporting_points = [f"[{item.chunk.chunk_id}] {item.chunk.text}" for item in cited]
-    answer = "Grounded response based on retrieved context:\n" + "\n".join(supporting_points)
+    if config.ANSWER_MODE == "llm":
+        answer = write_answer(question, [(item.chunk.chunk_id, item.chunk.text) for item in cited])
+    else:
+        supporting_points = [f"[{item.chunk.chunk_id}] {item.chunk.text}" for item in cited]
+        answer = "Grounded response based on retrieved context:\n" + "\n".join(supporting_points)
     return RagAnswer(
         answer=answer,
         citations=[item.chunk.chunk_id for item in cited],
