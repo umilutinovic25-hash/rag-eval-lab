@@ -17,7 +17,7 @@ Svaka promena se meri u odnosu na rezultat prethodne (`after.json` → `adv1.jso
 
 | Polje | Sadržaj |
 | --- | --- |
-| Propust | **E10** „What is the current company stock price?“ treba da bude odbijeno, ali sistem odgovara sa vrhom 0.077 (`hb-05-chunk-1`, `hb-09-chunk-1`), jer chunk-ovi dele samo „is“ i „the“. Tip: pogrešan odgovor (prag 0.02 je prenizak). |
+| Propust | **E10** „What is the current company stock price?“ treba da bude odbijeno, ali sistem odgovara sa vrhom 0.077 (`hb-05-chunk-1`, `hb-09-chunk-1`), jer chunk-ovi sa pitanjem dele samo reč „is“. Tip: pogrešan odgovor (prag 0.02 je prenizak). |
 | Hipoteza | U `results/adv1.json` najniži vrh podržanog pitanja je 0.207 (E04), a E10 ima 0.077. Prag između te dve vrednosti razdvaja ih. Biram 0.12, otprilike sredinu, da ostane margina za podržana pitanja sa drugačijom formulacijom. |
 | Promena | `REFUSAL_THRESHOLD = 0.02` → `0.12`. Bez promene koda. |
 | Očekivani efekat | E10 → PASS (odbijanje). Behaviour accuracy 0.83 → 0.92. |
