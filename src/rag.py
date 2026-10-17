@@ -17,10 +17,17 @@ class RagAnswer:
     retrieved: list[RetrievalResult]
 
 
+def citation_min_score() -> float | None:
+    if config.RETRIEVAL_MODE == "semantic":
+        return config.SEMANTIC_CITATION_MIN_SCORE
+    return config.CITATION_MIN_SCORE
+
+
 def select_citations(results: list[RetrievalResult]) -> list[RetrievalResult]:
-    if config.CITATION_MIN_SCORE is None or not results:
+    min_score = citation_min_score()
+    if min_score is None or not results:
         return results
-    return [results[0]] + [item for item in results[1:] if item.score >= config.CITATION_MIN_SCORE]
+    return [results[0]] + [item for item in results[1:] if item.score >= min_score]
 
 
 def refusal_threshold() -> float:

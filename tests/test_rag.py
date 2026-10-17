@@ -33,3 +33,12 @@ def test_citation_min_score_drops_weak_results_but_keeps_top(monkeypatch) -> Non
 def test_citation_min_score_none_cites_everything(monkeypatch) -> None:
     monkeypatch.setattr(config, "CITATION_MIN_SCORE", None)
     assert len(select_citations([result("a", 0.9), result("b", 0.1)])) == 2
+
+
+def test_citation_threshold_follows_retrieval_mode(monkeypatch) -> None:
+    monkeypatch.setattr(config, "CITATION_MIN_SCORE", None)
+    monkeypatch.setattr(config, "SEMANTIC_CITATION_MIN_SCORE", 0.5)
+    results = [result("a", 0.9), result("b", 0.1)]
+    assert len(select_citations(results)) == 2
+    monkeypatch.setattr(config, "RETRIEVAL_MODE", "semantic")
+    assert [item.chunk.chunk_id for item in select_citations(results)] == ["a"]

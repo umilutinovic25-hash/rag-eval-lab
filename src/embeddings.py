@@ -3,6 +3,7 @@
 import hashlib
 import json
 import math
+import os
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -27,13 +28,18 @@ def load_cache(path: Path | None = None) -> dict[str, list[float]]:
     path = CACHE_PATH if path is None else path
     if not path.exists():
         return {}
-    return json.loads(path.read_text(encoding="utf-8"))
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except ValueError as error:
+        raise EmbeddingError(f"Embedding cache {path} is not valid JSON ({error}). Delete it to rebuild.") from error
 
 
 def save_cache(cache: dict[str, list[float]], path: Path | None = None) -> None:
     path = CACHE_PATH if path is None else path
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(cache, sort_keys=True) + "\n", encoding="utf-8")
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(cache, sort_keys=True) + "\n", encoding="utf-8")
+    os.replace(tmp, path)
 
 
 def request_embeddings(texts: list[str]) -> list[list[float]]:
@@ -41,12 +47,15 @@ def request_embeddings(texts: list[str]) -> list[list[float]]:
     request = urllib.request.Request(OLLAMA_URL, data=payload, headers={"Content-Type": "application/json"})
     try:
         with urllib.request.urlopen(request, timeout=60) as response:
-            return json.load(response)["embeddings"]
-    except (urllib.error.URLError, KeyError) as error:
+            vectors = json.load(response)["embeddings"]
+    except (OSError, ValueError, KeyError, TypeError) as error:
         raise EmbeddingError(
             f"Embedding {len(texts)} uncached text(s) needs Ollama with model "
             f"{config.EMBEDDING_MODEL!r} at {OLLAMA_URL} ({error})."
         ) from error
+    if not isinstance(vectors, list) or len(vectors) != len(texts):
+        raise EmbeddingError(f"Ollama returned {len(vectors) if isinstance(vectors, list) else 'no'} vectors for {len(texts)} text(s).")
+    return vectors
 
 
 def embed(texts: list[str]) -> list[list[float]]:

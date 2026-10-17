@@ -1,6 +1,11 @@
+import io
+import json
+
 import pytest
 
 from src import config, embeddings, rag, retrieval
+
+REAL_REQUEST = embeddings.request_embeddings  # saved before conftest blocks the network
 from src.chunking import Chunk
 
 
@@ -60,3 +65,40 @@ def test_unknown_retrieval_mode_raises(monkeypatch) -> None:
     monkeypatch.setattr(config, "RETRIEVAL_MODE", "magic")
     with pytest.raises(ValueError):
         retrieval.retrieve_top_k("q", [make_chunk("a", "text")], k=1)
+
+
+def test_corrupt_cache_raises_embedding_error(tmp_path) -> None:
+    path = tmp_path / "cache.json"
+    path.write_text("{truncated", encoding="utf-8")
+    with pytest.raises(embeddings.EmbeddingError):
+        embeddings.load_cache(path)
+
+
+def fake_urlopen(body: bytes):
+    class Response(io.BytesIO):
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
+    return lambda request, timeout: Response(body)
+
+
+@pytest.mark.parametrize(
+    "body",
+    [b"not json", json.dumps({"error": "model not found"}).encode(), json.dumps({"embeddings": [[1.0]]}).encode()],
+)
+def test_bad_ollama_response_raises_embedding_error(monkeypatch, body) -> None:
+    monkeypatch.setattr(embeddings.urllib.request, "urlopen", fake_urlopen(body))
+    with pytest.raises(embeddings.EmbeddingError):
+        REAL_REQUEST(["one", "two"])
+
+
+def test_committed_cache_covers_eval_set_offline(monkeypatch) -> None:
+    """The shipped semantic config must run the whole eval set from the committed cache, without Ollama."""
+    from src.eval_runner import run_eval
+
+    monkeypatch.setattr(config, "RETRIEVAL_MODE", "semantic")
+    run = run_eval()
+    assert len(run["results"]) == 12
