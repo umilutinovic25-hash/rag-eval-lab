@@ -1,0 +1,89 @@
+=== B0 (posle A4)
+ID   Category                 Expected Got     Hit  Fact  CitPrec Pass
+----------------------------------------------------------------------
+T01  supported                answer   answer  yes  yes   1.00    PASS
+T02  near-duplicate-trap      answer   answer  yes  no    1.00    FAIL
+T03  paraphrase               answer   answer  yes  yes   1.00    PASS
+T04  paraphrase               answer   answer  yes  yes   1.00    PASS
+T05  paraphrase               answer   answer  yes  yes   1.00    PASS
+T06  paraphrase               answer   answer  yes  yes   1.00    PASS
+T07  paraphrase               answer   answer  yes  yes   1.00    PASS
+T08  supported                answer   answer  yes  yes   1.00    PASS
+T09  versioned                answer   answer  yes  yes   1.00    PASS
+T10  versioned                answer   answer  yes  yes   1.00    PASS
+T11  versioned                answer   answer  yes  yes   1.00    PASS
+T12  supported                answer   answer  yes  yes   1.00    PASS
+T13  supported                answer   answer  yes  yes   1.00    PASS
+T14  supported                answer   answer  yes  yes   1.00    PASS
+T15  supported                answer   answer  yes  yes   1.00    PASS
+T16  supported                answer   answer  yes  yes   1.00    PASS
+T17  paraphrase               answer   answer  yes  yes   1.00    PASS
+T18  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+T19  unsupported-near-domain  refuse   answer  -    -     0.00    FAIL
+T20  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+T21  unsupported-near-domain  refuse   answer  -    -     0.00    FAIL
+T22  unsupported              refuse   refuse  -    -     -       PASS
+T23  unsupported              refuse   refuse  -    -     -       PASS
+T24  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+
+Passed: 21/24
+Behaviour accuracy: 0.92
+Retrieval hit rate (supported): 1.00
+Mean citation precision (answered): 0.89
+eval_set_sha256: c93b6c6bd6a5cc1dfa92c762c4f0f1974f0f3ab76ffb7d025428333976a3845d
+
+=== konačno (B2c + B3)
+ID   Category                 Expected Got     Hit  Fact  CitPrec Pass
+----------------------------------------------------------------------
+T01  supported                answer   answer  yes  yes   1.00    PASS
+T02  near-duplicate-trap      answer   refuse  yes  no    -       FAIL
+T03  paraphrase               answer   answer  yes  yes   1.00    PASS
+T04  paraphrase               answer   answer  yes  yes   1.00    PASS
+T05  paraphrase               answer   answer  yes  yes   1.00    PASS
+T06  paraphrase               answer   refuse  yes  no    -       FAIL
+T07  paraphrase               answer   answer  yes  yes   1.00    PASS
+T08  supported                answer   answer  yes  yes   1.00    PASS
+T09  versioned                answer   answer  yes  yes   1.00    PASS
+T10  versioned                answer   answer  yes  yes   1.00    PASS
+T11  versioned                answer   answer  yes  yes   1.00    PASS
+T12  supported                answer   answer  yes  yes   1.00    PASS
+T13  supported                answer   answer  yes  yes   1.00    PASS
+T14  supported                answer   answer  yes  yes   1.00    PASS
+T15  supported                answer   answer  yes  yes   1.00    PASS
+T16  supported                answer   answer  yes  yes   1.00    PASS
+T17  paraphrase               answer   answer  yes  yes   1.00    PASS
+T18  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+T19  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+T20  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+T21  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+T22  unsupported              refuse   refuse  -    -     -       PASS
+T23  unsupported              refuse   refuse  -    -     -       PASS
+T24  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+
+Passed: 22/24
+Behaviour accuracy: 0.92
+Retrieval hit rate (supported): 1.00
+Mean citation precision (answered): 1.00
+eval_set_sha256: c93b6c6bd6a5cc1dfa92c762c4f0f1974f0f3ab76ffb7d025428333976a3845d
+T01 fact ok Yes, multi-factor authentication (MFA) is required for all internal tools. [hb-05-chunk-1]
+T03 fact ok Unused budget does not carry over to the next year [hb-08-chunk-1]. [hb-08-chunk-0]
+T04 fact ok You can spend up to 800 EUR per year on conferences as part of your training budget. [hb-08-chunk-0]
+T05 fact ok Daily allowances are determined by national rules specific to the destination of travel [hb-04-chunk-1]. 
+
+[hb-04-chunk-1]
+T07 fact ok Yes, you need your personal badge at every entrance when accessing the office. [hb-09-chunk-0]
+T08 ---- ok Lost badges must be reported to reception on the same day they are lost. [hb-09-chunk-0]
+T09 fact ok Yes, you must be reachable by chat and phone during core hours on remote days [hb-03-chunk-3].
+T10 ---- ok Yes, you can move your remote work days within the same week as long as it is agreed upon with your team lead and documented on the shared team calendar. [hb-03-chunk-1], [hb-03-chunk-2]
+T11 ---- ok You should agree your remote days with your team lead. [hb-03-chunk-1]
+T12 fact ok A buddy is assigned to you in your first week to assist with getting started. [hb-06-chunk-1]
+T13 fact ok Yes, there is a check-in scheduled after three months. [hb-06-chunk-2]
+T14 ---- ok IT staff will set up your replacement laptop after it has been approved by a manager, and the process can take up to 5 business days [hb-01-chunk-1]. 
+
+[hb-01-chunk-1]
+T15 ---- ok Yes, a replacement laptop requires manager approval before IT staff sets it up [hb-01-chunk-1]. 
+
+[hb-01-chunk-1]
+T16 ---- ok You can contact IT support through the IT portal or by phone during their operating hours of 08:00 to 18:00, Monday to Friday. [hb-10-chunk-0]
+T17 fact ok The IT helpdesk opens from 08:00 to 18:00, Monday through Friday. [hb-10-chunk-0]
+answers: fact 9/15, markers 15/15

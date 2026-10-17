@@ -91,7 +91,7 @@ def test_uncached_prompt_without_ollama_raises_llm_error(tmp_path, monkeypatch) 
 REAL_REQUEST = llm.request_generation  # saved at import, before conftest blocks the network
 
 
-@pytest.mark.parametrize("which", ["eval", "holdout"])
+@pytest.mark.parametrize("which", ["eval", "holdout", "test"])
 def test_committed_caches_cover_shipped_config_offline(monkeypatch, which) -> None:
     """The shipped config (semantic + gray-zone judge + LLM answers) must run both sets from the committed caches."""
     from src.eval_runner import run_eval
@@ -100,8 +100,10 @@ def test_committed_caches_cover_shipped_config_offline(monkeypatch, which) -> No
     monkeypatch.setattr(config, "RETRIEVAL_MODE", "semantic")
     monkeypatch.setattr(config, "RERANK", "llm-gray-zone")
     monkeypatch.setattr(config, "ANSWER_MODE", "llm")
-    run = run_eval() if which == "eval" else run_holdout()
-    assert run["summary"]["passed"] >= (12 if which == "eval" else 33)
+    from src.holdout_runner import TEST_SET_PATH
+
+    run = {"eval": run_eval, "holdout": run_holdout, "test": lambda: run_holdout(TEST_SET_PATH)}[which]()
+    assert run["summary"]["passed"] == {"eval": 12, "holdout": 33, "test": 22}[which]
 
 
 def test_llm_answer_mode_keeps_citations_and_uses_model_text(rerank_mode, monkeypatch) -> None:
