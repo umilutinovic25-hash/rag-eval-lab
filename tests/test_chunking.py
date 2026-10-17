@@ -1,6 +1,6 @@
 import pytest
 
-from src.chunking import build_chunks, split_text_with_overlap
+from src.chunking import build_chunks, split_text_by_sentences, split_text_with_overlap
 from src.corpus import load_corpus
 
 
@@ -22,3 +22,21 @@ def test_build_chunks_uses_stable_ids_and_keeps_metadata() -> None:
     first = chunks[0]
     assert first.chunk_id == f"{first.doc_id}-chunk-0"
     assert first.version and first.status in {"current", "superseded"}
+
+
+def test_split_text_by_sentences_packs_whole_sentences() -> None:
+    text = "One two. Three four. Five six seven eight nine ten eleven."
+    assert split_text_by_sentences(text, chunk_size=20) == [
+        "One two. Three four.",
+        "Five six seven eight nine ten eleven.",
+    ]
+
+
+def test_split_text_by_sentences_keeps_long_sentence_whole() -> None:
+    long_sentence = "word " * 50 + "end."
+    chunks = split_text_by_sentences(long_sentence.strip(), chunk_size=40)
+    assert chunks == [" ".join(long_sentence.split())]
+
+
+def test_split_text_by_sentences_empty_text() -> None:
+    assert split_text_by_sentences("   ") == []

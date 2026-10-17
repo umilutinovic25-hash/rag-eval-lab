@@ -4,7 +4,7 @@ The eval runner records every value in this module in its JSON output.
 """
 
 # Chunking
-CHUNK_STRATEGY = "chars"  # "chars" or "sentences"
+CHUNK_STRATEGY = "sentences"  # "chars" or "sentences"
 CHUNK_SIZE = 140
 CHUNK_OVERLAP = 30
 
