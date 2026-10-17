@@ -61,6 +61,19 @@ Dodato posle merenja B2, pre izmene. Holdout je ovde razvojni skup, pa je zato z
 | Rizik regresije | Blaži kriterijum može da propusti nepodržana pitanja bliska temi: H25 „sick days“ ↔ „Sick leave follows a separate policy“, E11 „parental leave“ ↔ „Annual leave“. |
 | Provera | `pytest`, `eval_runner`, `holdout_runner`, `eval_compare` u odnosu na B2. |
 
+**Rezultat B2b:** hipoteza nije potvrđena (eval 12 → 11, E09; holdout 29 → 28, H20). Model i dalje kaže „IRRELEVANT“ za „Never share passwords, also not with colleagues from IT“. Uzrok nije polaritet, nego to što model od 4B ne povezuje implicitan ili negativan dokaz sa pitanjem. Upit je vraćen na B2.
+
+## B2c: kaskada (LLM odlučuje samo u sivoj zoni)
+
+| Polje | Sadržaj |
+| --- | --- |
+| Propust | Kao B2: judge popravlja pitanja sa niskim kosinusom (H06 0.548, H08 0.540, H24 0.553, H25 0.622, H34 0.676), a kvari pitanja sa visokim (H03 0.732, H07 0.756, H17 0.719, H23 0.721, H13 0.620). |
+| Hipoteza | Kada je kosinus visok, retrieval je pouzdan i judge samo unosi grešku. Kada je nizak, pitanje nije podržano. Judge vredi samo tamo gde se klase preklapaju. Granice iz B0 (eval + holdout): najviši vrh nepodržanog je 0.676 (H34), najniži vrh podržanog 0.540 (H08). Biram **0.70** i **0.50**, zaokruženo izvan tog opsega. |
+| Promena | `RERANK = "llm-gray-zone"`, `RERANK_GRAY_ZONE = (0.50, 0.70)`. Vrh ≥ 0.70: odgovor i citati kao bez rerankinga (prag citata 0.65). Vrh < 0.50: odbijanje. Između: B2 judge sa B2 upitom. |
+| Očekivani efekat | holdout 29 → 33 (ostaje H13, 0.620, jer judge kaže „no“); eval 12/12, jer su E05 (0.647) i E11 (0.567) u sivoj zoni i B2 judge ih rešava tačno. Pozivi modela samo za pitanja u sivoj zoni. |
+| Rizik regresije | Granice su izvedene iz holdouta, pa je holdout rezultat optimističan. Pravi sud daje samo slepi test skup. Pitanje sa visokim kosinusom koje ipak nije podržano (sinonim teme) biće odgovoreno bez provere. |
+| Provera | `pytest`, `eval_runner`, `holdout_runner`, `eval_compare` u odnosu na B2. |
+
 ## B3: generisanje odgovora lokalnim LLM-om
 
 | Polje | Sadržaj |
