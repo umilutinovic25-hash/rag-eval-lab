@@ -33,15 +33,39 @@ def lexical_score(query: str, chunk_text: str) -> float:
     return overlap / len(c_tokens)
 
 
+RRF_K = 60
+
+
+def semantic_scores(query: str, chunks: list[Chunk]) -> list[float]:
+    if not chunks:
+        return []
+    query_vector, *chunk_vectors = embed([query] + [chunk.text for chunk in chunks])
+    return [cosine(query_vector, vector) for vector in chunk_vectors]
+
+
+def ranks(scores: list[float]) -> list[int]:
+    order = sorted(range(len(scores)), key=lambda i: -scores[i])
+    rank = [0] * len(scores)
+    for position, index in enumerate(order, start=1):
+        rank[index] = position
+    return rank
+
+
 def score_chunks(query: str, chunks: list[Chunk]) -> list[float]:
     if config.RETRIEVAL_MODE == "lexical":
         return [lexical_score(query, chunk.text) for chunk in chunks]
-    if config.RETRIEVAL_MODE == "semantic":
-        if not chunks:
-            return []
-        query_vector, *chunk_vectors = embed([query] + [chunk.text for chunk in chunks])
-        return [cosine(query_vector, vector) for vector in chunk_vectors]
+    if config.RETRIEVAL_MODE in ("semantic", "hybrid"):
+        return semantic_scores(query, chunks)
     raise ValueError(f"Unknown RETRIEVAL_MODE: {config.RETRIEVAL_MODE}")
+
+
+def sort_keys(query: str, chunks: list[Chunk], scores: list[float]) -> list[float]:
+    """Higher is better. Hybrid orders by Reciprocal Rank Fusion; the reported score stays cosine."""
+    if config.RETRIEVAL_MODE != "hybrid":
+        return scores
+    lexical_rank = ranks([lexical_score(query, chunk.text) for chunk in chunks])
+    semantic_rank = ranks(scores)
+    return [1 / (RRF_K + a) + 1 / (RRF_K + b) for a, b in zip(lexical_rank, semantic_rank)]
 
 
 def searchable_chunks(chunks: list[Chunk]) -> list[Chunk]:
@@ -56,10 +80,12 @@ def retrieve_top_k(query: str, chunks: list[Chunk], k: int | None = None) -> lis
         raise ValueError("k must be > 0")
 
     candidates = searchable_chunks(chunks)
+    scores = score_chunks(query, candidates)
+    keys = sort_keys(query, candidates, scores)
     scored = [
-        RetrievalResult(chunk=chunk, score=score)
-        for chunk, score in zip(candidates, score_chunks(query, candidates))
+        (key, RetrievalResult(chunk=chunk, score=score))
+        for chunk, score, key in zip(candidates, scores, keys)
     ]
-    filtered = [item for item in scored if item.score >= config.RETRIEVAL_MIN_SCORE]
-    filtered.sort(key=lambda item: (-item.score, item.chunk.chunk_id))
-    return filtered[:k]
+    filtered = [(key, item) for key, item in scored if item.score >= config.RETRIEVAL_MIN_SCORE]
+    filtered.sort(key=lambda pair: (-pair[0], pair[1].chunk.chunk_id))
+    return [item for _, item in filtered[:k]]

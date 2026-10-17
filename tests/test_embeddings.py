@@ -17,6 +17,9 @@ FAKE_VECTORS = {
     "laptop question": [1.0, 0.0],
     "laptop text": [0.9, 0.1],
     "parking text": [0.0, 1.0],
+    "alpha": [0.9, 0.1],
+    "laptop question": [1.0, 0.0],
+    "beta gamma": [0.7, 0.3],
 }
 
 
@@ -51,6 +54,17 @@ def test_semantic_mode_ranks_by_cosine(semantic_mode) -> None:
     chunks = [make_chunk("b", "parking text"), make_chunk("a", "laptop text")]
     results = retrieval.retrieve_top_k("laptop question", chunks, k=2)
     assert [r.chunk.chunk_id for r in results] == ["a"]
+
+
+def test_hybrid_mode_orders_by_rrf_but_reports_cosine(semantic_mode, monkeypatch) -> None:
+    monkeypatch.setattr(retrieval, "embed", lambda texts: [FAKE_VECTORS.get(t, [0.8, 0.2]) for t in texts])
+    chunks = [make_chunk("c", "beta gamma"), make_chunk("a", "alpha"), make_chunk("b", "laptop question words")]
+    semantic = retrieval.retrieve_top_k("laptop question", chunks, k=2)
+    assert [r.chunk.chunk_id for r in semantic] == ["a", "b"]
+    monkeypatch.setattr(config, "RETRIEVAL_MODE", "hybrid")
+    hybrid = retrieval.retrieve_top_k("laptop question", chunks, k=2)
+    assert [r.chunk.chunk_id for r in hybrid] == ["b", "a"]
+    assert hybrid[0].score == pytest.approx(embeddings.cosine([1.0, 0.0], [0.8, 0.2]))
 
 
 def test_semantic_mode_uses_semantic_refusal_threshold(semantic_mode, monkeypatch) -> None:

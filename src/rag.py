@@ -18,7 +18,7 @@ class RagAnswer:
 
 
 def citation_min_score() -> float | None:
-    if config.RETRIEVAL_MODE == "semantic":
+    if config.RETRIEVAL_MODE in ("semantic", "hybrid"):
         return config.SEMANTIC_CITATION_MIN_SCORE
     return config.CITATION_MIN_SCORE
 
@@ -31,7 +31,7 @@ def select_citations(results: list[RetrievalResult]) -> list[RetrievalResult]:
 
 
 def refusal_threshold() -> float:
-    if config.RETRIEVAL_MODE == "semantic":
+    if config.RETRIEVAL_MODE in ("semantic", "hybrid"):
         return config.SEMANTIC_REFUSAL_THRESHOLD
     return config.REFUSAL_THRESHOLD
 
