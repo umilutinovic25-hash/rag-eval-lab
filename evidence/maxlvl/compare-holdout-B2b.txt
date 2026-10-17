@@ -1,0 +1,13 @@
+Fixed (fail -> pass): none
+Regressed (pass -> fail): H20
+Unchanged: H01, H02, H03, H04, H05, H06, H07, H08, H09, H10, H11, H12, H13, H14, H15, H16, H17, H18, H19, H21, H22, H23, H24, H25, H26, H27, H28, H29, H30, H31, H32, H33, H34
+
+Summary:
+  passed: 29 -> 28 (-1)
+  total: 34 -> 34 (+0)
+  behaviour_accuracy: 0.8529 -> 0.8235 (-0.0294)
+  retrieval_hit_rate: 1.0 -> 1.0 (+0.0)
+  mean_citation_precision: 0.9211 -> 0.9722 (+0.0511)
+
+Changed settings:
+  RERANK_PROMPT: 'Question: {question}\nPassage: {passage}\nDoes the passage contain the information needed to answer the question? Answer only yes or no.' -> 'Question: {question}\nPassage: {passage}\nDoes this passage contain the facts needed to answer the question? It still counts if the facts show that the answer is no. Reply with one word: RELEVANT or IRRELEVANT.'
