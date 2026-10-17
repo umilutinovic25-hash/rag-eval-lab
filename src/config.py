@@ -22,6 +22,11 @@ SEMANTIC_REFUSAL_THRESHOLD = 0.60  # cosine scale, used in "semantic" and "hybri
 CITATION_MIN_SCORE = None  # None or a float score, used only in "lexical" mode
 SEMANTIC_CITATION_MIN_SCORE = 0.65  # cosine scale, used in "semantic" and "hybrid" mode
 
+# Reranking: None, or "llm" (a local model judges each candidate; replaces the score thresholds above)
+RERANK = None
+RERANK_MODEL = "gemma3:4b"
+RERANK_CANDIDATES = 5
+
 
 def snapshot() -> dict:
     """Return the current configuration as a plain dict."""

@@ -1,6 +1,6 @@
 import pytest
 
-from src import config, embeddings
+from src import config, embeddings, llm
 
 
 @pytest.fixture(autouse=True)
@@ -12,3 +12,8 @@ def offline_lexical_defaults(monkeypatch):
         raise AssertionError(f"Test tried to call Ollama for {len(texts)} text(s)")
 
     monkeypatch.setattr(embeddings, "request_embeddings", no_network)
+
+    def no_llm(model, prompt, max_tokens):
+        raise AssertionError(f"Test tried to call Ollama model {model}")
+
+    monkeypatch.setattr(llm, "request_generation", no_llm)

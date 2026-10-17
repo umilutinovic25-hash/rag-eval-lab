@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from . import config
 from .chunking import Chunk, build_chunks
 from .corpus import load_corpus
+from .llm import passage_answers
 from .retrieval import RetrievalResult, retrieve_top_k
 
 
@@ -37,11 +38,18 @@ def refusal_threshold() -> float:
 
 
 def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
-    results = retrieve_top_k(question, chunks)
-    if not results or results[0].score < refusal_threshold():
-        return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=results)
+    if config.RERANK == "llm":
+        candidates = retrieve_top_k(question, chunks, k=config.RERANK_CANDIDATES)
+        results = [item for item in candidates if passage_answers(question, item.chunk.text)][: config.TOP_K]
+        if not results:
+            return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=candidates[: config.TOP_K])
+        cited = results
+    else:
+        results = retrieve_top_k(question, chunks)
+        if not results or results[0].score < refusal_threshold():
+            return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=results)
+        cited = select_citations(results)
 
-    cited = select_citations(results)
     supporting_points = [f"[{item.chunk.chunk_id}] {item.chunk.text}" for item in cited]
     answer = "Grounded response based on retrieved context:\n" + "\n".join(supporting_points)
     return RagAnswer(

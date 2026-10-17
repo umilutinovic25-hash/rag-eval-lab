@@ -4,6 +4,7 @@ import sys
 from .chunking import build_chunks
 from .corpus import load_corpus
 from .embeddings import EmbeddingError
+from .llm import LLMError
 from .rag import build_grounded_answer
 
 
@@ -20,7 +21,7 @@ def main() -> None:
     by_id = {chunk.chunk_id: chunk for chunk in chunks}
     try:
         result = build_grounded_answer(args.question, chunks)
-    except EmbeddingError as error:
+    except (EmbeddingError, LLMError) as error:
         print(f"Error: {error}", file=sys.stderr)
         sys.exit(2)
 
