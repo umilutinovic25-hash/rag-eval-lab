@@ -5,8 +5,9 @@ from src import config, embeddings, llm
 
 @pytest.fixture(autouse=True)
 def offline_lexical_defaults(monkeypatch):
-    """Tests check mechanics: lexical mode by default and never call Ollama."""
+    """Tests check mechanics: lexical mode, no rerank by default, and never call Ollama."""
     monkeypatch.setattr(config, "RETRIEVAL_MODE", "lexical")
+    monkeypatch.setattr(config, "RERANK", None)
 
     def no_network(texts):
         raise AssertionError(f"Test tried to call Ollama for {len(texts)} text(s)")

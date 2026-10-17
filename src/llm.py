@@ -10,11 +10,7 @@ from .embeddings import CACHE_PATH as EMBEDDING_CACHE_PATH, load_cache, save_cac
 
 CACHE_PATH = EMBEDDING_CACHE_PATH.with_name("llm_cache.json")
 OLLAMA_URL = "http://localhost:11434/api/generate"
-JUDGE_PROMPT = (
-    "Question: {question}\n"
-    "Passage: {passage}\n"
-    "Does the passage contain the information needed to answer the question? Answer only yes or no."
-)
+ACCEPT_WORDS = {"yes", "relevant"}
 
 
 class LLMError(RuntimeError):
@@ -55,5 +51,6 @@ def generate(model: str, prompt: str, max_tokens: int) -> str:
 
 
 def passage_answers(question: str, passage: str) -> bool:
-    reply = generate(config.RERANK_MODEL, JUDGE_PROMPT.format(question=question, passage=passage), 3)
-    return reply.lower().startswith("yes")
+    reply = generate(config.RERANK_MODEL, config.RERANK_PROMPT.format(question=question, passage=passage), 3)
+    words = reply.lower().split()
+    return bool(words) and words[0].strip(".,!:") in ACCEPT_WORDS

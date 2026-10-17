@@ -1,0 +1,17 @@
+Fixed (fail -> pass): H06, H08, H24, H25, H34
+Regressed (pass -> fail): H03, H07, H13, H17, H23
+Unchanged: H01, H02, H04, H05, H09, H10, H11, H12, H14, H15, H16, H18, H19, H20, H21, H22, H26, H27, H28, H29, H30, H31, H32, H33
+
+Summary:
+  passed: 29 -> 29 (+0)
+  total: 34 -> 34 (+0)
+  behaviour_accuracy: 0.8529 -> 0.8529 (+0.0)
+  retrieval_hit_rate: 1.0 -> 1.0 (+0.0)
+  mean_citation_precision: 0.913 -> 0.9211 (+0.0081)
+
+Changed settings:
+  RERANK: None -> 'llm'
+  RERANK_CANDIDATES: None -> 5
+  RERANK_MODEL: None -> 'gemma3:4b'
+
+WARNING: More than one setting changed: the difference may not be attributable to one change.
