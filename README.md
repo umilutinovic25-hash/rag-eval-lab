@@ -26,11 +26,25 @@ All tests pass on the starting state. Tests check mechanics, not quality; qualit
 | `python -m src.eval_runner --out results/before.json` | Runs all 12 questions, prints the table and summary, saves the run |
 | `python -m src.eval_compare results/before.json results/after.json` | Fixed, regressed and unchanged questions, metric deltas, changed settings |
 
+## Semantic retrieval (advanced part)
+
+The current configuration uses `RETRIEVAL_MODE = "semantic"`: chunks are ranked by cosine similarity of local `bge-m3` embeddings served by [Ollama](https://ollama.com). Embeddings are cached in `data/embedding_cache.json` (committed), so the eval runner and the CLI for the 12 eval questions run offline without Ollama.
+
+A question that is not in the cache needs Ollama:
+
+```bash
+ollama pull bge-m3
+ollama serve
+```
+
+Without Ollama the CLI prints an error and exits with code 2. Set `RETRIEVAL_MODE = "lexical"` in `src/config.py` to go back to the fully offline lexical retriever. Tests always run in lexical mode and never call Ollama (`tests/conftest.py`).
+
 ## Project layout
 
 - `src/config.py`: every tunable setting in one place. The eval runner saves all values with each run.
 - `src/corpus.py`: ten handbook documents with title, section, version and status.
 - `src/chunking.py`, `src/retrieval.py`, `src/rag.py`: the pipeline.
+- `src/embeddings.py`: Ollama embeddings with an on-disk cache (semantic mode only).
 - `src/eval_runner.py`, `src/eval_compare.py`: evaluation and comparison.
 - `eval/eval_set.json`: the fixed eval set.
 - `docs/improvement-menu.md`: one-change options.

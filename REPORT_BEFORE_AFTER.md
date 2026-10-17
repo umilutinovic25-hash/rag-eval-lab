@@ -5,6 +5,8 @@
 **Promena:** M5, filter važeće verzije (`CURRENT_ONLY = True`)  
 **Commitovi:** `ee583f3` početno stanje → `2ceaced` specifikacija → `45b8172` promena
 
+> Obavezni deo (odeljci 1–11) odnosi se na commit `45b8172`. Posle njega su odvojeno dodate i izmerene napredne promene A1–A4 (odeljak 12). Za reprodukciju obaveznog dela: `git checkout 45b8172`.
+
 ## 1. Početna provera
 
 - `python -m pytest`: **18 passed** (`evidence/pytest-before.txt`)
@@ -168,6 +170,52 @@ Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene tes
 | Uroš Milutinović | [dopuniti] |
 | [drugi član para] | [dopuniti] |
 
+## 12. Napredni cilj (odvojeno od obaveznog dela)
+
+Četiri dodatne promene. Svaka ima svoju specifikaciju, commitovanu pre izmene koda (`docs/advanced-specs.md`), i meri se u odnosu na rezultat **prethodne** promene, istom komandom i sa istim `eval_set_sha256`. Izlazi poređenja su u `evidence/advanced/compare-*.txt`.
+
+| Korak | Promena | Spec / kod | Poređenje sa | Passed | Fixed | Regressed | Promenjena podešavanja |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| M5 (obavezno) | filter važeće verzije | `2ceaced` / `45b8172` | `before` | 6 → 7 | E06 | none | `CURRENT_ONLY` |
+| A1 | sečenje po rečenicama (M1) | `66ea2ff` / `57895a8` | `after` | 7 → 9 | E04, E09 | none | `CHUNK_STRATEGY` |
+| A2 | prag odbijanja 0.02 → 0.12 (M3) | `235ff78` / `b604373` | `adv1` | 9 → 10 | E10 | none | `REFUSAL_THRESHOLD` |
+| A3a | infrastruktura za embeddinge, režim ostaje `lexical` | `acd95d0` / `a246b7c` | `adv2` | 10 → 10 | none | none | 3 nova (vidi niže) |
+| A3b | semantička pretraga, `bge-m3` preko Ollama | `acd95d0` / `cff812f` | `adv3a` | 10 → 12 | E05, E11 | none | `RETRIEVAL_MODE` |
+| A4 | prag za citate 0.65 (M4) | `8cc7213` / `0781d3f` | `adv3b` | 12 → 12 | none | none | `CITATION_MIN_SCORE` |
+
+Ukupno (`evidence/advanced/compare-before-vs-A4.txt`): **6/12 → 12/12**, behaviour accuracy 0.83 → 1.00, retrieval hit rate 0.78 → 1.00, mean citation precision 0.45 → 1.00. Ovo poređenje upozorava na više promenjenih podešavanja, jer zbirno obuhvata svih pet koraka. Pojedinačni doprinosi su u tabeli iznad.
+
+**A3a upozorenje o više podešavanja:** A3a dodaje `RETRIEVAL_MODE = "lexical"`, `EMBEDDING_MODEL` i `SEMANTIC_REFUSAL_THRESHOLD`. Poslednja dva se koriste samo u semantičkom režimu, pa je rezultat identičan `adv2` (Fixed none, Regressed none, sve metrike +0.0). Zatim A3b menja **samo** `RETRIEVAL_MODE` i poređenje ne upozorava. Tako je efekat semantičke pretrage pripisan jednoj odluci.
+
+**Zašto semantička pretraga ima sopstveni prag:** kosinusne ocene (0.36–0.81) nisu na istoj skali kao leksičke (0.07–0.58). Zato `REFUSAL_THRESHOLD = 0.12` iz A2 u semantičkom režimu više ne važi i prestaje da utiče na rezultat; E10 se sada odbija pragom 0.60 (vrh 0.458).
+
+**Ručna provera (CLI):**
+
+- E05 (`evidence/advanced/cli-E05-semantic.txt`): citira `hb-01-chunk-1` (0.6474), *Equipment replacement (2026, current)*: „…handover can take up to 5 business days“.
+- E11 (`evidence/advanced/cli-E11-semantic.txt`): `Refused: True`, vrh `hb-07-chunk-1` sa 0.5673, ispod praga 0.60.
+
+Oba izlaza se slažu sa `results/adv3b.json`. CLI izlazi su snimljeni pre A4, pa E05 tu još ima drugi citat `hb-06-chunk-0` (0.5698); u `adv4.json` taj citat je uklonjen.
+
+**Kontrolna provera van eval skupa:** pragovi 0.60 i 0.65 su birani gledajući isti eval skup, pa 12/12 može biti preoptimistično. Napravio sam zato 10 novih pitanja (6 podržanih parafraza, 4 nepodržana) **izvan** `eval/eval_set.json`, koji nije menjan (`evidence/advanced/holdout_probe.py`, izlaz u `holdout-probe.txt`). Rezultat: leksički režim (A2 stanje) **6/10**, semantički **10/10**. Ovo je mala, ručno napisana provera, a ne zamena za veći eval skup.
+
+**Trošak i zavisnosti semantičke pretrage:** Ollama i model `bge-m3` (1.2 GB) za svako pitanje koje nije u kešu; prvi eval bez keša traje oko 2 s na M-seriji Maca, a sa kešom kao i leksički. Keš (`data/embedding_cache.json`, 36 vektora, ~380 KB) je commitovan, pa eval i CLI za 12 eval pitanja rade bez mreže. To je provereno sa ugašenim Ollama: rezultat je identičan. Bez API ključa, bez plaćenog servisa i bez vektorske baze.
+
+**Greške pronađene i ispravljene usput:**
+
+1. **Sečenje usred reči** (početni kod): `chars` strategija pravi krhotine kao „op is set up“, „iness days“ i „ardware“, pa se tokeni nikad ne poklapaju sa pitanjem. Rešeno u A1.
+2. **Moja greška u A3a:** `load_cache`/`save_cache` su imali podrazumevani argument `path=CACHE_PATH`, koji se vezuje pri definisanju funkcije. Zato `monkeypatch` u testu nije delovao i test je upisao lažne vektore u pravi keš. Ispravljeno pre commita (putanja se čita pri pozivu), a lažni keš je obrisan.
+3. **Testovi su zavisili od režima:** posle A3b `test_retrieve_top_k_returns_empty_for_unrelated_query` je pao i pozvao Ollama. Test nije oslabljen. Dodat je `tests/conftest.py`, koji testove drži u leksičkom režimu i blokira svaki mrežni poziv. Keš je zatim napravljen ponovo, samo iz eval pokretanja.
+4. **CLI bez Ollama** je pucao sa traceback-om. Sada ispisuje jasnu poruku i izlazi sa kodom 2.
+
+**Preostala ograničenja posle A1–A4:**
+
+1. **Tanke margine:** najslabije podržano eval pitanje ima 0.647, a najjače nepodržano 0.567, pa je prag 0.60 udaljen samo ~0.04 sa obe strane. U kontrolnoj proveri „gym membership“ ima 0.578, a „parking spot“ 0.667. Veći eval skup bi verovatno pokazao greške.
+2. **Pragovi su kalibrisani na eval skupu** na kojem se i meri.
+3. **Zavisnost od Ollama** za nova pitanja; leksički režim ostaje dostupan kao potpuno offline rezerva.
+4. **Embeddingi slabije hvataju tačne brojeve i termine.** Hibridna pretraga (BM25 + embeddingi) bila bi sledeći korak, ali nije merena.
+5. **Istorijska pitanja** i dalje nisu odgovoriva zbog `CURRENT_ONLY` (kao u obaveznom delu).
+6. **„Odgovor“ je i dalje spisak citiranih chunk-ova**, ne generisana rečenica. Generisanje preko LLM-a nije rađeno.
+
 ## Dokazi
 
 - `evidence/before.json`, `evidence/after.json`: oba eval rezultata (kopije iz `results/`, koji git ignoriše)
@@ -176,3 +224,4 @@ Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene tes
 - `evidence/cli-E06-before.txt`, `evidence/cli-E06-after.txt`: ručna CLI provera
 - `evidence/pytest-before.txt`, `evidence/pytest-after.txt`
 - `docs/change-spec.md`: specifikacija, commitovana pre promene
+- Napredni deo: `docs/advanced-specs.md`; `evidence/advanced/` (`adv1.json`, `adv2.json`, `adv3a.json`, `adv3b.json`, `adv4.json`, `compare-*.txt`, CLI izlazi, kontrolna provera)

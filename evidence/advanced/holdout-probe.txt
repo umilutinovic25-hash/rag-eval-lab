@@ -1,0 +1,24 @@
+--- lexical
+OK  answer got=answer top=hb-05 0.308  Is two-factor login needed for the VPN?
+BAD answer got=answer top=hb-06 0.125  How do I book a parking spot?
+OK  answer got=answer top=hb-04 0.200  What is the deadline for handing in expense receipts after a trip?
+BAD answer got=answer top=hb-05 0.222  My computer will not turn on, where do I take it?
+BAD answer got=answer top=hb-03 0.250  Can I move unused vacation days to next year?
+OK  answer got=answer top=hb-06 0.158  Who helps me during my first week?
+OK  refuse got=refuse top=hb-09 0.105  What is the dress code at the office?
+OK  refuse got=refuse top=hb-05 0.077  How much is the maternity pay?
+BAD refuse got=answer top=hb-06 0.125  Is there a company gym membership?
+OK  refuse got=refuse top=hb-05 0.077  What is the capital of Australia?
+lexical: 6/10
+--- semantic
+OK  answer got=answer top=hb-05 0.711  Is two-factor login needed for the VPN?
+OK  answer got=answer top=hb-09 0.667  How do I book a parking spot?
+OK  answer got=answer top=hb-04 0.710  What is the deadline for handing in expense receipts after a trip?
+OK  answer got=answer top=hb-10 0.731  My computer will not turn on, where do I take it?
+OK  answer got=answer top=hb-07 0.679  Can I move unused vacation days to next year?
+OK  answer got=answer top=hb-06 0.782  Who helps me during my first week?
+OK  refuse got=refuse top=hb-09 0.572  What is the dress code at the office?
+OK  refuse got=refuse top=hb-08 0.495  How much is the maternity pay?
+OK  refuse got=refuse top=hb-08 0.578  Is there a company gym membership?
+OK  refuse got=refuse top=hb-03 0.362  What is the capital of Australia?
+semantic: 10/10
