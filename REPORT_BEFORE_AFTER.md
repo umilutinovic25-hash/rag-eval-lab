@@ -3,7 +3,7 @@
 **Par:** Uroš Milutinović i [drugi član para]  
 **Demonstraciju na Sesiji 2 vodi:** [ime]  
 **Promena:** M5, filter važeće verzije (`CURRENT_ONLY = True`)  
-**Commitovi:** `ee583f3` početno stanje → `2ceaced` specifikacija → `HEAD` promena
+**Commitovi:** `ee583f3` početno stanje → `2ceaced` specifikacija → `45b8172` promena
 
 ## 1. Početna provera
 
