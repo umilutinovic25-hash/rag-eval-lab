@@ -1,0 +1,19 @@
+Fixed (fail -> pass): H06, H08, H24, H25, H34
+Regressed (pass -> fail): H13
+Unchanged: H01, H02, H03, H04, H05, H07, H09, H10, H11, H12, H14, H15, H16, H17, H18, H19, H20, H21, H22, H23, H26, H27, H28, H29, H30, H31, H32, H33
+
+Summary:
+  passed: 29 -> 33 (+4)
+  total: 34 -> 34 (+0)
+  behaviour_accuracy: 0.8529 -> 0.9706 (+0.1177)
+  retrieval_hit_rate: 1.0 -> 1.0 (+0.0)
+  mean_citation_precision: 0.913 -> 0.9565 (+0.0435)
+
+Changed settings:
+  RERANK: None -> 'llm-gray-zone'
+  RERANK_CANDIDATES: None -> 5
+  RERANK_GRAY_ZONE: None -> [0.5, 0.7]
+  RERANK_MODEL: None -> 'gemma3:4b'
+  RERANK_PROMPT: None -> 'Question: {question}\nPassage: {passage}\nDoes the passage contain the information needed to answer the question? Answer only yes or no.'
+
+WARNING: More than one setting changed: the difference may not be attributable to one change.

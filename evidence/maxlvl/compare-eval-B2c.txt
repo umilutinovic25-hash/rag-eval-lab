@@ -1,0 +1,16 @@
+Fixed (fail -> pass): none
+Regressed (pass -> fail): none
+Unchanged: E01, E02, E03, E04, E05, E06, E07, E08, E09, E10, E11, E12
+
+Summary:
+  passed: 12 -> 12 (+0)
+  total: 12 -> 12 (+0)
+  behaviour_accuracy: 1.0 -> 1.0 (+0.0)
+  retrieval_hit_rate: 1.0 -> 1.0 (+0.0)
+  mean_citation_precision: 0.9444 -> 1.0 (+0.0556)
+
+Changed settings:
+  RERANK: 'llm' -> 'llm-gray-zone'
+  RERANK_GRAY_ZONE: None -> [0.5, 0.7]
+
+WARNING: More than one setting changed: the difference may not be attributable to one change.

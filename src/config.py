@@ -24,7 +24,7 @@ SEMANTIC_CITATION_MIN_SCORE = 0.65  # cosine scale, used in "semantic" and "hybr
 
 # Reranking: None, "llm" (a local model judges each candidate; replaces the score thresholds above)
 # or "llm-gray-zone" (the model judges only when the top score is inside RERANK_GRAY_ZONE)
-RERANK = "llm"
+RERANK = "llm-gray-zone"
 RERANK_MODEL = "gemma3:4b"
 RERANK_CANDIDATES = 5
 RERANK_GRAY_ZONE = (0.50, 0.70)  # cosine scale, used only in "llm-gray-zone"

@@ -1,0 +1,16 @@
+Fixed (fail -> pass): H03, H07, H17, H23
+Regressed (pass -> fail): none
+Unchanged: H01, H02, H04, H05, H06, H08, H09, H10, H11, H12, H13, H14, H15, H16, H18, H19, H20, H21, H22, H24, H25, H26, H27, H28, H29, H30, H31, H32, H33, H34
+
+Summary:
+  passed: 29 -> 33 (+4)
+  total: 34 -> 34 (+0)
+  behaviour_accuracy: 0.8529 -> 0.9706 (+0.1177)
+  retrieval_hit_rate: 1.0 -> 1.0 (+0.0)
+  mean_citation_precision: 0.9211 -> 0.9565 (+0.0354)
+
+Changed settings:
+  RERANK: 'llm' -> 'llm-gray-zone'
+  RERANK_GRAY_ZONE: None -> [0.5, 0.7]
+
+WARNING: More than one setting changed: the difference may not be attributable to one change.
