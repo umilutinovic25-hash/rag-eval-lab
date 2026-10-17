@@ -48,6 +48,19 @@ Svaka promena ispod meri se u odnosu na prethodnu. Ako promena pogorša holdout,
 | Rizik regresije | Model može reći „no“ za pasus kome treba kontekst susednog chunk-a (E04, E09) ili „yes“ za pasus koji je samo blizu (E11 „parental leave“ ↔ „annual leave“). Novi troškovi: model od 3.3 GB i oko 5 poziva po pitanju (~2 s). Odgovori modela keširaju se u `data/llm_cache.json`, pa eval radi offline i deterministički. |
 | Provera | `pytest` (lažni LLM), `eval_runner`, `holdout_runner`, `eval_compare`, CLI za H06 i H34. |
 
+## B2b: upit za proveru bez zamene polariteta
+
+Dodato posle merenja B2, pre izmene. Holdout je ovde razvojni skup, pa je zato završni test skup slep.
+
+| Polje | Sadržaj |
+| --- | --- |
+| Propust | B2 popravlja H06, H08, H24, H25 i H34, ali kvari H03, H07, H17, H23 i H13. Model kaže „No.“ za svih 5 kandidata, uključujući i pasus sa odgovorom. Tip: pogrešno odbijanje. |
+| Hipoteza | Kod H03, H07, H17 i H23 pitanje je da/ne, a tačan odgovor je „ne“ („Is IT support available on weekends?“ → „Monday to Friday“). Model odgovara na **pitanje** umesto na **proveru**, jer obe stvari traže „yes/no“. Ako izlazne reči ne budu yes/no, nego RELEVANT/IRRELEVANT, uz napomenu da i negativan odgovor računa, polaritet se ne meša. H13 („car space“ ↔ „parking“) je obična greška modela, pa ga ova promena verovatno ne popravlja. |
+| Promena | Samo `RERANK_PROMPT`: „Question: ... Passage: ... Does this passage contain the facts needed to answer the question? It still counts if the facts show that the answer is no. Reply with one word: RELEVANT or IRRELEVANT.“ Parser već prihvata „relevant“ kao prvu reč, a „irrelevant“ ne. |
+| Očekivani efekat | H03, H07, H17 i H23 → PASS; holdout 29 → 33; eval 12/12. |
+| Rizik regresije | Blaži kriterijum može da propusti nepodržana pitanja bliska temi: H25 „sick days“ ↔ „Sick leave follows a separate policy“, E11 „parental leave“ ↔ „Annual leave“. |
+| Provera | `pytest`, `eval_runner`, `holdout_runner`, `eval_compare` u odnosu na B2. |
+
 ## B3: generisanje odgovora lokalnim LLM-om
 
 | Polje | Sadržaj |
