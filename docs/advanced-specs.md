@@ -12,3 +12,14 @@ Svaka promena se meri u odnosu na rezultat prethodne (`after.json` → `adv1.jso
 | Očekivani efekat | E04 i E09 → PASS. Ostala podržana pitanja ostaju PASS, jer su činjenice u kratkim rečenicama. |
 | Rizik regresije | Menja se svaki chunk, pa i sve ocene. Duže rečenice dobijaju nižu ocenu (deljenje dužinom), pa se drugi citati i rang mogu promeniti bilo gde. E10 i E11 mogu dobiti drugačiji vrh. |
 | Provera | `pytest`, `python -m src.eval_runner --out results/adv1.json`, `eval_compare results/after.json results/adv1.json`, CLI za E04. |
+
+## A2: kalibracija praga odbijanja (M3)
+
+| Polje | Sadržaj |
+| --- | --- |
+| Propust | **E10** „What is the current company stock price?“ treba da bude odbijeno, ali sistem odgovara sa vrhom 0.077 (`hb-05-chunk-1`, `hb-09-chunk-1`), jer chunk-ovi dele samo „is“ i „the“. Tip: pogrešan odgovor (prag 0.02 je prenizak). |
+| Hipoteza | U `results/adv1.json` najniži vrh podržanog pitanja je 0.207 (E04), a E10 ima 0.077. Prag između te dve vrednosti razdvaja ih. Biram 0.12, otprilike sredinu, da ostane margina za podržana pitanja sa drugačijom formulacijom. |
+| Promena | `REFUSAL_THRESHOLD = 0.02` → `0.12`. Bez promene koda. |
+| Očekivani efekat | E10 → PASS (odbijanje). Behaviour accuracy 0.83 → 0.92. |
+| Rizik regresije | Prag je kalibrisan na istom skupu na kojem se meri, pa je rezultat optimističan. Kratko podržano pitanje sa malo zajedničkih reči moglo bi da bude pogrešno odbijeno. E11 (vrh 0.22) **neće** biti popravljen, jer je iznad vrha E04. |
+| Provera | `python -m src.eval_runner --out results/adv2.json`, `eval_compare results/adv1.json results/adv2.json`, CLI za E10. |
