@@ -3,6 +3,7 @@ import re
 
 from . import config
 from .chunking import Chunk
+from .embeddings import cosine, embed
 
 
 TOKEN_RE = re.compile(r"[a-zA-Z0-9]+")
@@ -32,6 +33,17 @@ def lexical_score(query: str, chunk_text: str) -> float:
     return overlap / len(c_tokens)
 
 
+def score_chunks(query: str, chunks: list[Chunk]) -> list[float]:
+    if config.RETRIEVAL_MODE == "lexical":
+        return [lexical_score(query, chunk.text) for chunk in chunks]
+    if config.RETRIEVAL_MODE == "semantic":
+        if not chunks:
+            return []
+        query_vector, *chunk_vectors = embed([query] + [chunk.text for chunk in chunks])
+        return [cosine(query_vector, vector) for vector in chunk_vectors]
+    raise ValueError(f"Unknown RETRIEVAL_MODE: {config.RETRIEVAL_MODE}")
+
+
 def searchable_chunks(chunks: list[Chunk]) -> list[Chunk]:
     if config.CURRENT_ONLY:
         return [chunk for chunk in chunks if chunk.status != "superseded"]
@@ -43,9 +55,10 @@ def retrieve_top_k(query: str, chunks: list[Chunk], k: int | None = None) -> lis
     if k <= 0:
         raise ValueError("k must be > 0")
 
+    candidates = searchable_chunks(chunks)
     scored = [
-        RetrievalResult(chunk=chunk, score=lexical_score(query, chunk.text))
-        for chunk in searchable_chunks(chunks)
+        RetrievalResult(chunk=chunk, score=score)
+        for chunk, score in zip(candidates, score_chunks(query, candidates))
     ]
     filtered = [item for item in scored if item.score >= config.RETRIEVAL_MIN_SCORE]
     filtered.sort(key=lambda item: (-item.score, item.chunk.chunk_id))

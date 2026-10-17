@@ -23,9 +23,15 @@ def select_citations(results: list[RetrievalResult]) -> list[RetrievalResult]:
     return results
 
 
+def refusal_threshold() -> float:
+    if config.RETRIEVAL_MODE == "semantic":
+        return config.SEMANTIC_REFUSAL_THRESHOLD
+    return config.REFUSAL_THRESHOLD
+
+
 def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
     results = retrieve_top_k(question, chunks)
-    if not results or results[0].score < config.REFUSAL_THRESHOLD:
+    if not results or results[0].score < refusal_threshold():
         return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=results)
 
     cited = select_citations(results)
