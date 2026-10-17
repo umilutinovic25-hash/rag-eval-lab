@@ -1,0 +1,228 @@
+[
+  {
+    "id": "T01",
+    "question": "Is MFA required for internal tools?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-05"
+    ],
+    "expected_fact": "all internal tools"
+  },
+  {
+    "id": "T02",
+    "question": "Does sick leave come out of my annual leave days?",
+    "category": "near-duplicate-trap",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-07"
+    ],
+    "expected_fact": "sick leave follows a separate policy"
+  },
+  {
+    "id": "T03",
+    "question": "What happens to training budget I don't spend?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-08"
+    ],
+    "expected_fact": "does not carry over"
+  },
+  {
+    "id": "T04",
+    "question": "How much can I spend on conferences each year?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-08"
+    ],
+    "expected_fact": "800 eur"
+  },
+  {
+    "id": "T05",
+    "question": "How are daily allowances decided when travelling abroad?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-04"
+    ],
+    "expected_fact": "national rules"
+  },
+  {
+    "id": "T06",
+    "question": "Are parking places assigned to specific people?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-09"
+    ],
+    "expected_fact": "spaces are shared"
+  },
+  {
+    "id": "T07",
+    "question": "Do I need my badge at every door?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-09"
+    ],
+    "expected_fact": "personal badge at every entrance"
+  },
+  {
+    "id": "T08",
+    "question": "By when must a lost badge be reported?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-09"
+    ],
+    "expected_fact": "on same day"
+  },
+  {
+    "id": "T09",
+    "question": "Must I be reachable by phone on remote days?",
+    "category": "versioned",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-03"
+    ],
+    "expected_fact": "reachable by chat and phone"
+  },
+  {
+    "id": "T10",
+    "question": "Can I swap my remote day to another day in the same week?",
+    "category": "versioned",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-03"
+    ],
+    "expected_fact": "moved within same week"
+  },
+  {
+    "id": "T11",
+    "question": "Who do I agree my remote days with?",
+    "category": "versioned",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-03"
+    ],
+    "expected_fact": "agreed with your team lead"
+  },
+  {
+    "id": "T12",
+    "question": "Who is assigned to help me in my first week?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-06"
+    ],
+    "expected_fact": "a buddy is assigned"
+  },
+  {
+    "id": "T13",
+    "question": "Is there a check-in after three months?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-06"
+    ],
+    "expected_fact": "after three months"
+  },
+  {
+    "id": "T14",
+    "question": "Who sets up my replacement laptop?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-01"
+    ],
+    "expected_fact": "set up by it staff"
+  },
+  {
+    "id": "T15",
+    "question": "Does a replacement laptop need my manager's approval?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-01"
+    ],
+    "expected_fact": "after manager approval"
+  },
+  {
+    "id": "T16",
+    "question": "How can I contact IT support?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-10"
+    ],
+    "expected_fact": "through it portal or by phone"
+  },
+  {
+    "id": "T17",
+    "question": "What time does the IT helpdesk open?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-10"
+    ],
+    "expected_fact": "08:00 to 18:00"
+  },
+  {
+    "id": "T18",
+    "question": "How many days of paternity leave do fathers get?",
+    "category": "unsupported-near-domain",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "T19",
+    "question": "What is the budget for team-building events?",
+    "category": "unsupported-near-domain",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "T20",
+    "question": "Can I expense a taxi to the airport?",
+    "category": "unsupported-near-domain",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "T21",
+    "question": "How do I reset a forgotten password?",
+    "category": "unsupported-near-domain",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "T22",
+    "question": "What was the company's revenue this year?",
+    "category": "unsupported",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "T23",
+    "question": "What will the weather be tomorrow?",
+    "category": "unsupported",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "T24",
+    "question": "Is there a canteen in the office?",
+    "category": "unsupported-near-domain",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  }
+]

@@ -17,6 +17,7 @@ from .rag import build_grounded_answer
 
 
 HOLDOUT_SET_PATH = Path(__file__).resolve().parents[1] / "eval" / "holdout_set.json"
+TEST_SET_PATH = HOLDOUT_SET_PATH.with_name("test_set.json")  # run once, at the very end
 
 
 def run_holdout(path: Path = HOLDOUT_SET_PATH) -> dict:
