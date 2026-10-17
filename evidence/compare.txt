@@ -1,0 +1,13 @@
+Fixed (fail -> pass): E06
+Regressed (pass -> fail): none
+Unchanged: E01, E02, E03, E04, E05, E07, E08, E09, E10, E11, E12
+
+Summary:
+  passed: 6 -> 7 (+1)
+  total: 12 -> 12 (+0)
+  behaviour_accuracy: 0.8333 -> 0.8333 (+0.0)
+  retrieval_hit_rate: 0.7778 -> 0.8889 (+0.1111)
+  mean_citation_precision: 0.4545 -> 0.5455 (+0.091)
+
+Changed settings:
+  CURRENT_ONLY: False -> True
