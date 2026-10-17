@@ -1,0 +1,815 @@
+{
+  "created_at": "2026-10-17T16:51:02+00:00",
+  "eval_set_sha256": "37f398d94bbd152edb90bdf8e0d6aaf55860f24fb0eeb45c80261c2c656f0cdc",
+  "config": {
+    "CHUNK_STRATEGY": "sentences",
+    "CHUNK_SIZE": 140,
+    "CHUNK_OVERLAP": 30,
+    "RETRIEVAL_MODE": "hybrid",
+    "EMBEDDING_MODEL": "bge-m3",
+    "TOP_K": 2,
+    "RETRIEVAL_MIN_SCORE": 0.01,
+    "STOPWORDS_ENABLED": false,
+    "CURRENT_ONLY": true,
+    "REFUSAL_THRESHOLD": 0.12,
+    "SEMANTIC_REFUSAL_THRESHOLD": 0.6,
+    "CITATION_MIN_SCORE": null,
+    "SEMANTIC_CITATION_MIN_SCORE": 0.65
+  },
+  "summary": {
+    "passed": 24,
+    "total": 34,
+    "behaviour_accuracy": 0.7059,
+    "retrieval_hit_rate": 0.7917,
+    "mean_citation_precision": 0.8889
+  },
+  "results": [
+    {
+      "id": "H01",
+      "category": "paraphrase",
+      "expected": "answer",
+      "got": "refuse",
+      "behaviour_correct": false,
+      "retrieval_hit": false,
+      "fact_in_citations": false,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-06-chunk-0",
+          "score": 0.425878
+        },
+        {
+          "chunk_id": "hb-06-chunk-2",
+          "score": 0.398246
+        }
+      ],
+      "pass": false
+    },
+    {
+      "id": "H02",
+      "category": "paraphrase",
+      "expected": "answer",
+      "got": "refuse",
+      "behaviour_correct": false,
+      "retrieval_hit": false,
+      "fact_in_citations": false,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-06-chunk-0",
+          "score": 0.451086
+        },
+        {
+          "chunk_id": "hb-10-chunk-1",
+          "score": 0.465257
+        }
+      ],
+      "pass": false
+    },
+    {
+      "id": "H03",
+      "category": "supported",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-05-chunk-2"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-05-chunk-2",
+          "score": 0.732456
+        },
+        {
+          "chunk_id": "hb-10-chunk-0",
+          "score": 0.534475
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H04",
+      "category": "paraphrase",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-07-chunk-0"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-07-chunk-0",
+          "score": 0.65402
+        },
+        {
+          "chunk_id": "hb-04-chunk-0",
+          "score": 0.596986
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H05",
+      "category": "paraphrase",
+      "expected": "answer",
+      "got": "refuse",
+      "behaviour_correct": false,
+      "retrieval_hit": true,
+      "fact_in_citations": false,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-03-chunk-2",
+          "score": 0.55757
+        },
+        {
+          "chunk_id": "hb-07-chunk-1",
+          "score": 0.631715
+        }
+      ],
+      "pass": false
+    },
+    {
+      "id": "H06",
+      "category": "paraphrase",
+      "expected": "answer",
+      "got": "refuse",
+      "behaviour_correct": false,
+      "retrieval_hit": false,
+      "fact_in_citations": false,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-01-chunk-2",
+          "score": 0.48945
+        },
+        {
+          "chunk_id": "hb-06-chunk-0",
+          "score": 0.447775
+        }
+      ],
+      "pass": false
+    },
+    {
+      "id": "H07",
+      "category": "near-duplicate-trap",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-08-chunk-1"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-08-chunk-1",
+          "score": 0.756395
+        },
+        {
+          "chunk_id": "hb-03-chunk-2",
+          "score": 0.541388
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H08",
+      "category": "paraphrase",
+      "expected": "answer",
+      "got": "refuse",
+      "behaviour_correct": false,
+      "retrieval_hit": false,
+      "fact_in_citations": false,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-01-chunk-0",
+          "score": 0.398898
+        },
+        {
+          "chunk_id": "hb-07-chunk-1",
+          "score": 0.41218
+        }
+      ],
+      "pass": false
+    },
+    {
+      "id": "H09",
+      "category": "supported",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-08-chunk-1"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-08-chunk-1",
+          "score": 0.634895
+        },
+        {
+          "chunk_id": "hb-06-chunk-0",
+          "score": 0.510642
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H10",
+      "category": "supported",
+      "expected": "answer",
+      "got": "refuse",
+      "behaviour_correct": false,
+      "retrieval_hit": false,
+      "fact_in_citations": false,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-08-chunk-1",
+          "score": 0.567776
+        },
+        {
+          "chunk_id": "hb-01-chunk-1",
+          "score": 0.484738
+        }
+      ],
+      "pass": false
+    },
+    {
+      "id": "H11",
+      "category": "supported",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-04-chunk-0"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-04-chunk-0",
+          "score": 0.620077
+        },
+        {
+          "chunk_id": "hb-04-chunk-1",
+          "score": 0.60709
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H12",
+      "category": "supported",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-04-chunk-1"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-04-chunk-1",
+          "score": 0.717129
+        },
+        {
+          "chunk_id": "hb-04-chunk-0",
+          "score": 0.579066
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H13",
+      "category": "paraphrase",
+      "expected": "answer",
+      "got": "refuse",
+      "behaviour_correct": false,
+      "retrieval_hit": true,
+      "fact_in_citations": false,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-06-chunk-0",
+          "score": 0.492524
+        },
+        {
+          "chunk_id": "hb-09-chunk-0",
+          "score": 0.516831
+        }
+      ],
+      "pass": false
+    },
+    {
+      "id": "H14",
+      "category": "supported",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-09-chunk-0"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-09-chunk-0",
+          "score": 0.623212
+        },
+        {
+          "chunk_id": "hb-01-chunk-2",
+          "score": 0.571242
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H15",
+      "category": "versioned",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-03-chunk-3"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-03-chunk-3",
+          "score": 0.734797
+        },
+        {
+          "chunk_id": "hb-03-chunk-2",
+          "score": 0.624027
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H16",
+      "category": "versioned",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-03-chunk-1"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-03-chunk-1",
+          "score": 0.705112
+        },
+        {
+          "chunk_id": "hb-03-chunk-2",
+          "score": 0.599381
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H17",
+      "category": "versioned",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-03-chunk-2",
+        "hb-03-chunk-0"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-03-chunk-2",
+          "score": 0.719176
+        },
+        {
+          "chunk_id": "hb-03-chunk-0",
+          "score": 0.668767
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H18",
+      "category": "supported",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-06-chunk-0"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-06-chunk-0",
+          "score": 0.806192
+        },
+        {
+          "chunk_id": "hb-06-chunk-1",
+          "score": 0.569407
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H19",
+      "category": "supported",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-06-chunk-2"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-06-chunk-2",
+          "score": 0.747579
+        },
+        {
+          "chunk_id": "hb-06-chunk-1",
+          "score": 0.561992
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H20",
+      "category": "supported",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-01-chunk-3"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-01-chunk-3",
+          "score": 0.637334
+        },
+        {
+          "chunk_id": "hb-06-chunk-0",
+          "score": 0.494726
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H21",
+      "category": "supported",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-01-chunk-0",
+        "hb-01-chunk-2"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-01-chunk-0",
+          "score": 0.681819
+        },
+        {
+          "chunk_id": "hb-01-chunk-2",
+          "score": 0.757888
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H22",
+      "category": "paraphrase",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-10-chunk-1"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-10-chunk-1",
+          "score": 0.671563
+        },
+        {
+          "chunk_id": "hb-01-chunk-2",
+          "score": 0.605312
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H23",
+      "category": "supported",
+      "expected": "answer",
+      "got": "answer",
+      "behaviour_correct": true,
+      "retrieval_hit": true,
+      "fact_in_citations": true,
+      "citation_precision": 1.0,
+      "cited_chunk_ids": [
+        "hb-10-chunk-0"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-10-chunk-0",
+          "score": 0.721177
+        },
+        {
+          "chunk_id": "hb-10-chunk-1",
+          "score": 0.589981
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H24",
+      "category": "paraphrase",
+      "expected": "answer",
+      "got": "refuse",
+      "behaviour_correct": false,
+      "retrieval_hit": true,
+      "fact_in_citations": false,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-10-chunk-1",
+          "score": 0.553159
+        },
+        {
+          "chunk_id": "hb-01-chunk-2",
+          "score": 0.448356
+        }
+      ],
+      "pass": false
+    },
+    {
+      "id": "H25",
+      "category": "unsupported-near-domain",
+      "expected": "refuse",
+      "got": "answer",
+      "behaviour_correct": false,
+      "retrieval_hit": null,
+      "fact_in_citations": null,
+      "citation_precision": 0.0,
+      "cited_chunk_ids": [
+        "hb-07-chunk-0"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-07-chunk-0",
+          "score": 0.622376
+        },
+        {
+          "chunk_id": "hb-03-chunk-0",
+          "score": 0.523349
+        }
+      ],
+      "pass": false
+    },
+    {
+      "id": "H26",
+      "category": "unsupported",
+      "expected": "refuse",
+      "got": "refuse",
+      "behaviour_correct": true,
+      "retrieval_hit": null,
+      "fact_in_citations": null,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-08-chunk-0",
+          "score": 0.525612
+        },
+        {
+          "chunk_id": "hb-04-chunk-1",
+          "score": 0.345635
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H27",
+      "category": "unsupported",
+      "expected": "refuse",
+      "got": "refuse",
+      "behaviour_correct": true,
+      "retrieval_hit": null,
+      "fact_in_citations": null,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-06-chunk-0",
+          "score": 0.527109
+        },
+        {
+          "chunk_id": "hb-06-chunk-2",
+          "score": 0.505607
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H28",
+      "category": "unsupported-near-domain",
+      "expected": "refuse",
+      "got": "refuse",
+      "behaviour_correct": true,
+      "retrieval_hit": null,
+      "fact_in_citations": null,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-03-chunk-0",
+          "score": 0.490889
+        },
+        {
+          "chunk_id": "hb-09-chunk-0",
+          "score": 0.576194
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H29",
+      "category": "unsupported-near-domain",
+      "expected": "refuse",
+      "got": "refuse",
+      "behaviour_correct": true,
+      "retrieval_hit": null,
+      "fact_in_citations": null,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-08-chunk-0",
+          "score": 0.463434
+        },
+        {
+          "chunk_id": "hb-03-chunk-0",
+          "score": 0.372062
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H30",
+      "category": "unsupported-near-domain",
+      "expected": "refuse",
+      "got": "refuse",
+      "behaviour_correct": true,
+      "retrieval_hit": null,
+      "fact_in_citations": null,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-05-chunk-1",
+          "score": 0.480191
+        },
+        {
+          "chunk_id": "hb-09-chunk-1",
+          "score": 0.402341
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H31",
+      "category": "unsupported",
+      "expected": "refuse",
+      "got": "refuse",
+      "behaviour_correct": true,
+      "retrieval_hit": null,
+      "fact_in_citations": null,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-08-chunk-0",
+          "score": 0.418507
+        },
+        {
+          "chunk_id": "hb-06-chunk-2",
+          "score": 0.410271
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H32",
+      "category": "unsupported",
+      "expected": "refuse",
+      "got": "refuse",
+      "behaviour_correct": true,
+      "retrieval_hit": null,
+      "fact_in_citations": null,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-01-chunk-3",
+          "score": 0.326903
+        },
+        {
+          "chunk_id": "hb-03-chunk-2",
+          "score": 0.333164
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H33",
+      "category": "unsupported-near-domain",
+      "expected": "refuse",
+      "got": "refuse",
+      "behaviour_correct": true,
+      "retrieval_hit": null,
+      "fact_in_citations": null,
+      "citation_precision": null,
+      "cited_chunk_ids": [],
+      "top_k": [
+        {
+          "chunk_id": "hb-08-chunk-0",
+          "score": 0.434562
+        },
+        {
+          "chunk_id": "hb-06-chunk-0",
+          "score": 0.363557
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "H34",
+      "category": "unsupported-near-domain",
+      "expected": "refuse",
+      "got": "answer",
+      "behaviour_correct": false,
+      "retrieval_hit": null,
+      "fact_in_citations": null,
+      "citation_precision": 0.0,
+      "cited_chunk_ids": [
+        "hb-03-chunk-0",
+        "hb-03-chunk-2"
+      ],
+      "top_k": [
+        {
+          "chunk_id": "hb-03-chunk-0",
+          "score": 0.618489
+        },
+        {
+          "chunk_id": "hb-03-chunk-2",
+          "score": 0.676154
+        }
+      ],
+      "pass": false
+    }
+  ]
+}

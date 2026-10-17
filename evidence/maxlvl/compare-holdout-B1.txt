@@ -1,0 +1,13 @@
+Fixed (fail -> pass): none
+Regressed (pass -> fail): H01, H02, H05, H10, H13
+Unchanged: H03, H04, H06, H07, H08, H09, H11, H12, H14, H15, H16, H17, H18, H19, H20, H21, H22, H23, H24, H25, H26, H27, H28, H29, H30, H31, H32, H33, H34
+
+Summary:
+  passed: 29 -> 24 (-5)
+  total: 34 -> 34 (+0)
+  behaviour_accuracy: 0.8529 -> 0.7059 (-0.147)
+  retrieval_hit_rate: 1.0 -> 0.7917 (-0.2083)
+  mean_citation_precision: 0.913 -> 0.8889 (-0.0241)
+
+Changed settings:
+  RETRIEVAL_MODE: 'semantic' -> 'hybrid'
