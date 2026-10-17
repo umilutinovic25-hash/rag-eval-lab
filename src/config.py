@@ -22,10 +22,12 @@ SEMANTIC_REFUSAL_THRESHOLD = 0.60  # cosine scale, used in "semantic" and "hybri
 CITATION_MIN_SCORE = None  # None or a float score, used only in "lexical" mode
 SEMANTIC_CITATION_MIN_SCORE = 0.65  # cosine scale, used in "semantic" and "hybrid" mode
 
-# Reranking: None, or "llm" (a local model judges each candidate; replaces the score thresholds above)
+# Reranking: None, "llm" (a local model judges each candidate; replaces the score thresholds above)
+# or "llm-gray-zone" (the model judges only when the top score is inside RERANK_GRAY_ZONE)
 RERANK = "llm"
 RERANK_MODEL = "gemma3:4b"
 RERANK_CANDIDATES = 5
+RERANK_GRAY_ZONE = (0.50, 0.70)  # cosine scale, used only in "llm-gray-zone"
 RERANK_PROMPT = (
     "Question: {question}\n"
     "Passage: {passage}\n"

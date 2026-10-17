@@ -38,12 +38,20 @@ def refusal_threshold() -> float:
 
 
 def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
-    if config.RERANK == "llm":
+    if config.RERANK in ("llm", "llm-gray-zone"):
         candidates = retrieve_top_k(question, chunks, k=config.RERANK_CANDIDATES)
-        results = [item for item in candidates if passage_answers(question, item.chunk.text)][: config.TOP_K]
-        if not results:
+        top = candidates[0].score if candidates else 0.0
+        low, high = config.RERANK_GRAY_ZONE
+        if config.RERANK == "llm-gray-zone" and top >= high:
+            results = candidates[: config.TOP_K]
+            cited = select_citations(results)
+        elif config.RERANK == "llm-gray-zone" and top < low:
             return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=candidates[: config.TOP_K])
-        cited = results
+        else:
+            results = [item for item in candidates if passage_answers(question, item.chunk.text)][: config.TOP_K]
+            if not results:
+                return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=candidates[: config.TOP_K])
+            cited = results
     else:
         results = retrieve_top_k(question, chunks)
         if not results or results[0].score < refusal_threshold():

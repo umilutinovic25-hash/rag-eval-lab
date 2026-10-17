@@ -46,6 +46,25 @@ def test_rerank_ignores_score_thresholds(rerank_mode, monkeypatch) -> None:
     assert len(rag.build_grounded_answer("laptop", CHUNKS).citations) == 2
 
 
+@pytest.mark.parametrize(
+    "top, judge_calls, refused",
+    [(0.9, 0, False), (0.6, 3, False), (0.3, 0, True)],
+    ids=["above-zone-trusts-retrieval", "inside-zone-asks-judge", "below-zone-refuses"],
+)
+def test_gray_zone_calls_judge_only_inside_zone(rerank_mode, monkeypatch, top, judge_calls, refused) -> None:
+    monkeypatch.setattr(config, "RERANK", "llm-gray-zone")
+    monkeypatch.setattr(config, "RERANK_GRAY_ZONE", (0.5, 0.7))
+    monkeypatch.setattr(config, "SEMANTIC_CITATION_MIN_SCORE", 0.0)
+    monkeypatch.setattr(rag.config, "RETRIEVAL_MODE", "semantic")
+    scored = [rag.RetrievalResult(chunk=chunk, score=top - i * 0.01) for i, chunk in enumerate(CHUNKS)]
+    monkeypatch.setattr(rag, "retrieve_top_k", lambda question, chunks, k=None: scored[:k])
+    calls = []
+    monkeypatch.setattr(rag, "passage_answers", lambda q, p: calls.append(p) or True)
+    result = rag.build_grounded_answer("laptop", CHUNKS)
+    assert len(calls) == judge_calls
+    assert result.refused is refused
+
+
 def test_generate_uses_cache_and_calls_model_once(tmp_path, monkeypatch) -> None:
     monkeypatch.setattr(llm, "CACHE_PATH", tmp_path / "llm.json")
     calls = []
