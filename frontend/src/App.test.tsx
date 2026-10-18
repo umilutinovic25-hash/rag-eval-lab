@@ -33,7 +33,13 @@ beforeEach(() => {
       ok: true,
       json: async () =>
         url.endsWith("/status")
-          ? { ollama: false, models: [], required_models: [] }
+          ? {
+              ollama: false,
+              models: [],
+              required_models: [],
+              documents: 10,
+              current_documents: 9,
+            }
           : url.endsWith("/documents")
             ? { documents: [] }
             : answer,
@@ -42,6 +48,43 @@ beforeEach(() => {
 });
 
 describe("real UI contracts", () => {
+  it("shows the actual archived status of a source", async () => {
+    vi.mocked(fetch).mockImplementation(
+      async (url) =>
+        ({
+          ok: true,
+          json: async () =>
+            String(url).endsWith("/chat")
+              ? {
+                  ...answer,
+                  citations: [
+                    {
+                      ...answer.citations[0],
+                      version: "2024",
+                      status: "superseded",
+                    },
+                  ],
+                }
+              : String(url).endsWith("/documents")
+                ? { documents: [] }
+                : {
+                    ollama: false,
+                    models: [],
+                    required_models: [],
+                    documents: 10,
+                    current_documents: 9,
+                  },
+        }) as Response,
+    );
+    render(<App />);
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "Koliko dana mogu da radim od kuće?",
+      }),
+    );
+    await screen.findByText("Up to 3 days per week.");
+    expect(screen.getByText(/2024\s*Arhiviran/)).toBeInTheDocument();
+  });
   it("clears the previous sources while the next question is pending", async () => {
     render(<App />);
     fireEvent.click(
@@ -164,8 +207,10 @@ describe("real UI contracts", () => {
       }),
     );
     expect(screen.getByText("3 days per week.")).toBeInTheDocument();
-    expect(localStorage.getItem("izvor.conversations.v1")).toContain(
-      "Remote work policy",
+    await waitFor(() =>
+      expect(localStorage.getItem("izvor.conversations.v1")).toContain(
+        "Remote work policy",
+      ),
     );
   });
 
@@ -180,7 +225,13 @@ describe("real UI contracts", () => {
               ? { error: "Pokrenite Ollama ili izaberite režim Bez modela." }
               : String(url).endsWith("/documents")
                 ? { documents: [] }
-                : { ollama: false, models: [], required_models: [] },
+                : {
+                    ollama: false,
+                    models: [],
+                    required_models: [],
+                    documents: 10,
+                    current_documents: 9,
+                  },
         }) as Response,
     );
     render(<App />);

@@ -57,7 +57,7 @@ export interface EvalRow {
   question?: string;
   pass: boolean;
   behaviour_correct: boolean;
-  citation_precision: number;
+  citation_precision: number | null;
   cited_chunk_ids: string[];
   [key: string]: unknown;
 }

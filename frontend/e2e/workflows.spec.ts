@@ -92,6 +92,9 @@ test("history search, remove, undo and persistence keep complete answers", async
   await page.getByRole("button", { name: "Vrati", exact: true }).click();
   await expect(page.locator(".history-row")).toHaveCount(2);
   await expect(page.locator(".answer-text")).toContainText("3 days per week");
+  await expect(
+    page.getByText("Istorija je sačuvana u ovom browseru.", { exact: true }),
+  ).toBeVisible();
   await page.reload();
   await page
     .locator(".history")

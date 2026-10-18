@@ -1,3 +1,5 @@
+import { validApiPayload } from "./contracts";
+
 export async function api<T>(path: string, body?: unknown): Promise<T> {
   let response: Response;
   try {
@@ -27,6 +29,10 @@ export async function api<T>(path: string, body?: unknown): Promise<T> {
     throw new Error(
       (data && typeof data.error === "string" && data.error) ||
         "Zahtev nije završen. Pokušajte ponovo.",
+    );
+  if (!validApiPayload(path, data))
+    throw new Error(
+      "Server je vratio neispravnu strukturu podataka. Pokušajte ponovo; postojeći razgovor ostaje dostupan.",
     );
   return data as T;
 }

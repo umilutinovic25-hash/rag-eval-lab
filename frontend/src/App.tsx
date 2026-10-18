@@ -26,6 +26,7 @@ import {
   X,
 } from "lucide-react";
 import { api, download } from "./api";
+import { validAnswer } from "./contracts";
 import type {
   Answer,
   Chunk,
@@ -62,21 +63,9 @@ const uid = () => crypto.randomUUID();
 const chunksLabel = (n: number) =>
   `${n} ${n === 1 ? "odlomak" : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? "odlomka" : "odlomaka"}`;
 
-function validChunk(value: unknown): value is Chunk {
-  if (!value || typeof value !== "object") return false;
-  const c = value as Record<string, unknown>;
-  return (
-    ["chunk_id", "doc_id", "title", "version", "status", "text"].every(
-      (key) => typeof c[key] === "string",
-    ) &&
-    (c.score === undefined ||
-      (typeof c.score === "number" && Number.isFinite(c.score)))
-  );
-}
-
-function loadConversations(): Conversation[] {
+function loadConversations(raw: string | null): Conversation[] {
   try {
-    const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    const value = JSON.parse(raw || "[]");
     if (!Array.isArray(value)) return [];
     return value
       .filter(
@@ -97,21 +86,7 @@ function loadConversations(): Conversation[] {
           .slice(-30)
           .map((t: Turn) => {
             const r = t.result;
-            if (
-              r &&
-              typeof r.answer === "string" &&
-              typeof r.refused === "boolean" &&
-              Array.isArray(r.citations) &&
-              r.citations.every(validChunk) &&
-              Array.isArray(r.trace) &&
-              r.trace.every((step) => step && typeof step.stage === "string") &&
-              Array.isArray(r.retrieved) &&
-              r.retrieved.every(validChunk) &&
-              typeof r.seconds === "number" &&
-              Number.isFinite(r.seconds) &&
-              (r.profile === "current" || r.profile === "offline")
-            )
-              return t;
+            if (validAnswer(r)) return t;
             return {
               id: t.id,
               question: t.question,
@@ -260,7 +235,15 @@ function SourceInspector({
                         </button>
                       </h3>
                       <div className="source-meta">
-                        {c.version} <span className="dot" /> Aktuelan
+                        {c.version}{" "}
+                        <span
+                          className={`dot ${c.status === "current" ? "" : "amber"}`}
+                        />{" "}
+                        {c.status === "current"
+                          ? "Aktuelan"
+                          : c.status === "superseded"
+                            ? "Arhiviran"
+                            : c.status}
                       </div>
                       <blockquote>{c.text}</blockquote>
                       <code>{c.chunk_id}</code>
@@ -512,13 +495,19 @@ function DocumentsView({
                 aria-label="Pretraži dokumente"
                 placeholder="Pretraži priručnik…"
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setSelectedId(null);
+                }}
               />
             </label>
             <select
               aria-label="Verzije dokumenata"
               value={scope}
-              onChange={(e) => setScope(e.target.value)}
+              onChange={(e) => {
+                setScope(e.target.value);
+                setSelectedId(null);
+              }}
             >
               <option value="current">Aktuelni dokumenti</option>
               <option value="all">Sve verzije</option>
@@ -626,8 +615,29 @@ function DocumentsView({
 
 export default function App() {
   const [page, setPage] = useState<Page>("chat");
-  const [conversations, setConversations] =
-    useState<Conversation[]>(loadConversations);
+  const [historySnapshot] = useState(() => {
+    try {
+      const revision = localStorage.getItem(STORAGE_KEY);
+      return {
+        revision,
+        conversations: loadConversations(revision),
+        readError: false,
+      };
+    } catch {
+      return {
+        revision: null,
+        conversations: [] as Conversation[],
+        readError: true,
+      };
+    }
+  });
+  const [conversations, setConversations] = useState<Conversation[]>(
+    historySnapshot.conversations,
+  );
+  const historyRevision = useRef(historySnapshot.revision);
+  const [savedHistory, setSavedHistory] = useState(
+    historySnapshot.conversations,
+  );
   const [activeId, setActiveId] = useState<string | null>(null);
   const [historyQuery, setHistoryQuery] = useState("");
   const [removed, setRemoved] = useState<{
@@ -646,7 +656,9 @@ export default function App() {
   const [documentsError, setDocumentsError] = useState("");
   const [status, setStatus] = useState<Status | null>(null);
   const [statusOpen, setStatusOpen] = useState(false);
-  const [storageError, setStorageError] = useState(false);
+  const [storageError, setStorageError] = useState<
+    "unavailable" | "conflict" | null
+  >(historySnapshot.readError ? "unavailable" : null);
   const [navOpen, setNavOpen] = useState(false);
   const [compact, setCompact] = useState(
     () =>
@@ -695,16 +707,45 @@ export default function App() {
     refreshStatus();
   }, []);
   useEffect(() => {
-    try {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(conversations.slice(0, 10)),
-      );
-      setStorageError(false);
-    } catch {
-      setStorageError(true);
+    if (conversations === historySnapshot.conversations) return;
+    let cancelled = false;
+    if (!navigator.locks) {
+      setStorageError("unavailable");
+      return;
     }
-  }, [conversations]);
+    void navigator.locks
+      .request("izvor.history.v1", () => {
+        if (cancelled) return;
+        try {
+          if (localStorage.getItem(STORAGE_KEY) !== historyRevision.current) {
+            setStorageError("conflict");
+            return;
+          }
+          const serialized = JSON.stringify(conversations.slice(0, 10));
+          localStorage.setItem(STORAGE_KEY, serialized);
+          historyRevision.current = serialized;
+          setSavedHistory(conversations);
+          setStorageError(null);
+        } catch {
+          setStorageError("unavailable");
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setStorageError("unavailable");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [conversations, historySnapshot]);
+  useEffect(() => {
+    if (conversations === savedHistory) return;
+    const preventLoss = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", preventLoss);
+    return () => window.removeEventListener("beforeunload", preventLoss);
+  }, [conversations, savedHistory]);
   useEffect(() => {
     if (turns.length)
       bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -1139,10 +1180,18 @@ export default function App() {
                 )}
               </div>
               <div className="composer-area">
+                {conversations.length > 0 && !storageError && (
+                  <p className="muted fine" role="status">
+                    {conversations !== savedHistory
+                      ? "Čuvam istoriju…"
+                      : "Istorija je sačuvana u ovom browseru."}
+                  </p>
+                )}
                 {storageError && (
                   <p className="error-notice" role="alert">
-                    Browser ne može da sačuva istoriju. Preuzmite razgovor pre
-                    zatvaranja stranice.
+                    {storageError === "conflict"
+                      ? "Istorija je izmenjena u drugom tabu. Preuzmite ovaj razgovor pre osvežavanja; sačuvana istorija neće biti prepisana."
+                      : "Browser ne može da sačuva istoriju. Preuzmite razgovor pre zatvaranja stranice."}
                   </p>
                 )}
                 <form

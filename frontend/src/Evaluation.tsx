@@ -25,7 +25,8 @@ function failureReasons(row: EvalRow) {
     row.retrieval_hit === false && "Očekivani izvor nije pronađen.",
     row.fact_in_citations === false &&
       "Tražena činjenica nije pronađena u citatima.",
-    row.citation_precision < 1 &&
+    typeof row.citation_precision === "number" &&
+      row.citation_precision < 1 &&
       "Citati uključuju dokument koji se ne očekuje.",
   ].filter(Boolean) as string[];
 }

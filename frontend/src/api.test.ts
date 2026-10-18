@@ -2,6 +2,19 @@ import { describe, expect, it, vi } from "vitest";
 import { api } from "./api";
 
 describe("local API error recovery", () => {
+  it.each(["/chat", "/documents", "/status", "/evaluations"])(
+    "rejects a structurally invalid successful %s response",
+    async (path) => {
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockResolvedValue({
+          ok: true,
+          json: async () => ({ unexpected: "payload" }),
+        }),
+      );
+      await expect(api(path)).rejects.toThrow("neispravn");
+    },
+  );
   it("explains a lost connection without exposing browser exception text", async () => {
     vi.stubGlobal(
       "fetch",

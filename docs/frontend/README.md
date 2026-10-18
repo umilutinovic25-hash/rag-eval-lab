@@ -12,6 +12,12 @@ Svako pitanje obrađuje se nezavisno. Istorija razgovora nije kontekst modela. B
 
 Istoriju je moguće pretražiti i pojedinačno ukloniti razgovor. Dugme „Vrati” vraća poslednji uklonjeni razgovor dok se obaveštenje ne zatvori, stranica ne osveži ili se ne ukloni drugi razgovor. Iz panela citata „Ceo dokument” otvara pravi dokument i označava citirani odlomak; „Nazad na razgovor” ostaje vidljiv pri skrolovanju. Kopiranje odlomka uključuje originalni tekst, naslov, verziju i oznaku izvora. Tokom novog zahteva panel prikazuje stanje obrade tog pitanja, a pri grešci daje uputstvo za oporavak. Oštećeni pojedinačni zapisi u browseru ne uklanjaju ostalu ispravnu istoriju.
 
+Upis istorije koristi Web Locks i proveru prethodno učitane verzije. Ako drugi tab promeni istoriju, zastareli tab prikazuje upozorenje i čuva razgovor u memoriji za izvoz; ne prepisuje sačuvanu istoriju. Pre osvežavanja tog taba treba preuzeti njegov razgovor. Ovo je zaštita od konflikta, a automatsko spajanje razgovora između tabova nije implementirano. Ako browser nema Web Locks ili zabrani skladištenje, razgovor radi u memoriji uz upozorenje da se preuzme. Posle ažuriranja aplikacije osvežiti otvorene tabove da svi koriste ovu zaštitu.
+
+Iznad unosa se vidi da li se istorija još čuva ili je sačuvana. Dok postoje nesačuvane promene, napuštanje stranice aktivira standardno upozorenje browsera. Treba sačekati potvrdu čuvanja pre osvežavanja; prinudno zatvaranje browsera ili procesa i dalje može izgubiti nesačuvane promene.
+
+API odgovori se proveravaju pre prikaza, uključujući odlomke i evaluacione rezultate. Neispravna struktura daje poruku za oporavak. Izvori prikazuju stvarni status dokumenta; promena pretrage ili filtera verzije zatvara prethodni izbor dokumenta. Nedostupna preciznost citata (`null`) ostaje „—” i ne tumači se kao dokaz pogrešnih citata.
+
 ## Funkcionalne celine
 
 - Razgovor: unos preko Enter, novi red preko Shift+Enter, primeri iz keša, stanje obrade, izvoz i kopiranje, vidljive greške, rezervni ekstraktivni odgovor i odbijanje bez dokaza.
@@ -46,7 +52,7 @@ npm run test:e2e
 npm audit
 ```
 
-Browser testovi pokreću lokalni Python server ako već nije aktivan i koriste keš; ne zahtevaju Ollama. Testovi pokrivaju odgovor/citat, nezavisno odbijanje, izvoz, verzije dokumenata, neuspešne evaluacije, pravi replay, offline profil, istoriju i tri širine ekrana. Axe provera obuhvata automatizovane WCAG A/AA kriterijume na početnom ekranu i testiranim ekranima razgovora, dokumenata, evaluacije i statusnog dijaloga; ona ne predstavlja potpunu potvrdu pristupačnosti.
+Browser testovi pokreću lokalni Python server ako već nije aktivan i koriste keš; ne zahtevaju Ollama. Testovi pokrivaju odgovor/citat, nezavisno odbijanje, izvoz, verzije dokumenata, neuspešne evaluacije, pravi replay, offline profil, istoriju i tri širine ekrana. Posebne regresije pokrivaju neispravne API strukture, uklanjanje zastarelog izbora dokumenta, objašnjenje odbijanja bez citata i konflikt dva taba sa očuvanim izvozom. Axe provera obuhvata automatizovane WCAG A/AA kriterijume na početnom ekranu i testiranim ekranima razgovora, dokumenata, evaluacije i statusnog dijaloga; ona ne predstavlja potpunu potvrdu pristupačnosti.
 
 Originalni `eval/eval_set.json`, `src/eval_runner.py`, `src/eval_compare.py`, corpus i istorijski keš nisu menjani radi web interfejsa. Specifikacija M5, njen dokaz i arhiva ostaju izdvojeni.
 
