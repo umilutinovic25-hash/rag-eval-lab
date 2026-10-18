@@ -1,0 +1,273 @@
+{
+  "schema_version": 1,
+  "status": "assistant_candidate_pending_human_review",
+  "created_before_implementation": true,
+  "baseline_revision": "53fbc25",
+  "independent_blind_evidence": false,
+  "reviewer": null,
+  "note": "12 underlying cases, each in two languages. Authored by assistant; no independent human approval. Do not tune against these results.",
+  "items": [
+    {
+      "id": "V01-en",
+      "pair": "receipts",
+      "language": "en",
+      "question": "How soon after returning must I send travel receipts, and through which app?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-04",
+      "required_facts": [
+        "30 days",
+        "finance app"
+      ]
+    },
+    {
+      "id": "V01-sr",
+      "pair": "receipts",
+      "language": "sr",
+      "question": "Koliko dana posle povratka šaljem račune za službeni put i kroz koju aplikaciju?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-04",
+      "required_facts": [
+        "30 dana",
+        "finansijske aplikacije"
+      ]
+    },
+    {
+      "id": "V02-en",
+      "pair": "badge",
+      "language": "en",
+      "question": "What must I use at each office entrance?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-09",
+      "required_facts": [
+        "personal badge"
+      ]
+    },
+    {
+      "id": "V02-sr",
+      "pair": "badge",
+      "language": "sr",
+      "question": "Šta moram da koristim na svakom ulazu u kancelariju?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-09",
+      "required_facts": [
+        "ličnu karticu"
+      ]
+    },
+    {
+      "id": "V03-en",
+      "pair": "parking",
+      "language": "en",
+      "question": "How are parking spaces allocated and reserved?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-09",
+      "required_facts": [
+        "first come, first served",
+        "facilities app"
+      ]
+    },
+    {
+      "id": "V03-sr",
+      "pair": "parking",
+      "language": "sr",
+      "question": "Kako se raspodeljuju i rezervišu parking mesta?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-09",
+      "required_facts": [
+        "redosledu prijave",
+        "aplikacije za prostor"
+      ]
+    },
+    {
+      "id": "V04-en",
+      "pair": "mfa",
+      "language": "en",
+      "question": "Which systems require multi-factor authentication?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-05",
+      "required_facts": [
+        "email",
+        "VPN",
+        "all internal tools"
+      ]
+    },
+    {
+      "id": "V04-sr",
+      "pair": "mfa",
+      "language": "sr",
+      "question": "Za koje sisteme je obavezna višefaktorska autentifikacija?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-05",
+      "required_facts": [
+        "imejl",
+        "VPN",
+        "sve interne alate"
+      ]
+    },
+    {
+      "id": "V05-en",
+      "pair": "budget",
+      "language": "en",
+      "question": "Does unspent training money roll into another year?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-08",
+      "required_facts": [
+        "does not carry over"
+      ]
+    },
+    {
+      "id": "V05-sr",
+      "pair": "budget",
+      "language": "sr",
+      "question": "Da li se neiskorišćen budžet za obuke prenosi u sledeću godinu?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-08",
+      "required_facts": [
+        "ne prenosi"
+      ]
+    },
+    {
+      "id": "V06-en",
+      "pair": "stolen",
+      "language": "en",
+      "question": "Who should hear first when my laptop has been stolen?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-01",
+      "required_facts": [
+        "security first"
+      ]
+    },
+    {
+      "id": "V06-sr",
+      "pair": "stolen",
+      "language": "sr",
+      "question": "Kome prvo treba da prijavim ukraden laptop?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-01",
+      "required_facts": [
+        "prvo službi bezbednosti"
+      ]
+    },
+    {
+      "id": "V07-en",
+      "pair": "leave",
+      "language": "en",
+      "question": "How much notice is required for a leave request and where is it sent?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-07",
+      "required_facts": [
+        "two weeks",
+        "HR portal"
+      ]
+    },
+    {
+      "id": "V07-sr",
+      "pair": "leave",
+      "language": "sr",
+      "question": "Koliko unapred se podnosi zahtev za godišnji odmor i gde?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-07",
+      "required_facts": [
+        "dve nedelje",
+        "HR portal"
+      ]
+    },
+    {
+      "id": "V08-en",
+      "pair": "support",
+      "language": "en",
+      "question": "On which weekdays and during which hours can I contact IT support?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-10",
+      "required_facts": [
+        "08:00",
+        "18:00",
+        "Monday to Friday"
+      ]
+    },
+    {
+      "id": "V08-sr",
+      "pair": "support",
+      "language": "sr",
+      "question": "Kojim danima i u koje vreme radi IT podrška?",
+      "expected_behaviour": "answer",
+      "doc_id": "hb-10",
+      "required_facts": [
+        "08:00",
+        "18:00",
+        "ponedeljka do petka"
+      ]
+    },
+    {
+      "id": "V09-en",
+      "pair": "pay",
+      "language": "en",
+      "question": "How large is the annual salary raise?",
+      "expected_behaviour": "refuse",
+      "doc_id": null,
+      "required_facts": []
+    },
+    {
+      "id": "V09-sr",
+      "pair": "pay",
+      "language": "sr",
+      "question": "Koliko iznosi godišnje povećanje plate?",
+      "expected_behaviour": "refuse",
+      "doc_id": null,
+      "required_facts": []
+    },
+    {
+      "id": "V10-en",
+      "pair": "health",
+      "language": "en",
+      "question": "Which private health insurer covers employees?",
+      "expected_behaviour": "refuse",
+      "doc_id": null,
+      "required_facts": []
+    },
+    {
+      "id": "V10-sr",
+      "pair": "health",
+      "language": "sr",
+      "question": "Koja privatna zdravstvena osiguravajuća kuća pokriva zaposlene?",
+      "expected_behaviour": "refuse",
+      "doc_id": null,
+      "required_facts": []
+    },
+    {
+      "id": "V11-en",
+      "pair": "ceo",
+      "language": "en",
+      "question": "What is the name of the chief executive?",
+      "expected_behaviour": "refuse",
+      "doc_id": null,
+      "required_facts": []
+    },
+    {
+      "id": "V11-sr",
+      "pair": "ceo",
+      "language": "sr",
+      "question": "Kako se zove izvršni direktor?",
+      "expected_behaviour": "refuse",
+      "doc_id": null,
+      "required_facts": []
+    },
+    {
+      "id": "V12-en",
+      "pair": "holiday",
+      "language": "en",
+      "question": "Is the office closed on every public holiday?",
+      "expected_behaviour": "refuse",
+      "doc_id": null,
+      "required_facts": []
+    },
+    {
+      "id": "V12-sr",
+      "pair": "holiday",
+      "language": "sr",
+      "question": "Da li je kancelarija zatvorena za svaki državni praznik?",
+      "expected_behaviour": "refuse",
+      "doc_id": null,
+      "required_facts": []
+    }
+  ]
+}
