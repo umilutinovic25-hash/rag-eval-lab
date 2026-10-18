@@ -1,0 +1,453 @@
+{
+  "created_at": "2026-10-18T23:07:58+00:00",
+  "pairs": 510,
+  "positives": 72,
+  "generator_family": "qwen",
+  "judges": {
+    "span-qwen": {
+      "family": "qwen",
+      "different_family_from_generator": false,
+      "all_pairs": {
+        "pairs": 510,
+        "tp": 58,
+        "fn": 14,
+        "tn": 435,
+        "fp": 3,
+        "tpr": 0.806,
+        "tpr_ci95": [
+          0.7,
+          0.88
+        ],
+        "tnr": 0.993,
+        "tnr_ci95": [
+          0.98,
+          0.998
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 285,
+        "tp": 31,
+        "fn": 8,
+        "tn": 246,
+        "fp": 0,
+        "tpr": 0.795,
+        "tpr_ci95": [
+          0.645,
+          0.892
+        ],
+        "tnr": 1.0,
+        "tnr_ci95": [
+          0.985,
+          1.0
+        ]
+      },
+      "false_negatives": [
+        "eval:E09:hb-01-chunk-1",
+        "holdout:H03:hb-05-chunk-2",
+        "holdout:H17:hb-03-chunk-0",
+        "holdout:H23:hb-10-chunk-0",
+        "test:T02:hb-07-chunk-1",
+        "test:T04:hb-08-chunk-0",
+        "test:T07:hb-09-chunk-0",
+        "test2:U01:hb-05-chunk-0",
+        "test2:U02:hb-05-chunk-2",
+        "test2:U07:hb-08-chunk-0",
+        "test2:U11:hb-09-chunk-1",
+        "test2:U13:hb-03-chunk-0",
+        "test2:U14:hb-03-chunk-3",
+        "test2:U15:hb-03-chunk-3"
+      ]
+    },
+    "yesno-qwen": {
+      "family": "qwen",
+      "different_family_from_generator": false,
+      "all_pairs": {
+        "pairs": 510,
+        "tp": 54,
+        "fn": 18,
+        "tn": 437,
+        "fp": 1,
+        "tpr": 0.75,
+        "tpr_ci95": [
+          0.639,
+          0.836
+        ],
+        "tnr": 0.998,
+        "tnr_ci95": [
+          0.987,
+          1.0
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 285,
+        "tp": 25,
+        "fn": 14,
+        "tn": 246,
+        "fp": 0,
+        "tpr": 0.641,
+        "tpr_ci95": [
+          0.484,
+          0.773
+        ],
+        "tnr": 1.0,
+        "tnr_ci95": [
+          0.985,
+          1.0
+        ]
+      },
+      "false_negatives": [
+        "eval:E05:hb-01-chunk-1",
+        "eval:E09:hb-01-chunk-1",
+        "holdout:H01:hb-05-chunk-0",
+        "holdout:H11:hb-04-chunk-0",
+        "holdout:H13:hb-09-chunk-1",
+        "holdout:H17:hb-03-chunk-0",
+        "holdout:H21:hb-01-chunk-2",
+        "holdout:H23:hb-10-chunk-0",
+        "test:T02:hb-07-chunk-1",
+        "test:T05:hb-04-chunk-1",
+        "test:T06:hb-09-chunk-1",
+        "test2:U05:hb-07-chunk-0",
+        "test2:U07:hb-08-chunk-0",
+        "test2:U11:hb-09-chunk-1",
+        "test2:U12:hb-09-chunk-1",
+        "test2:U13:hb-03-chunk-0",
+        "test2:U16:hb-06-chunk-1",
+        "test2:U22:hb-10-chunk-1"
+      ]
+    },
+    "yesno-gemma": {
+      "family": "gemma",
+      "different_family_from_generator": true,
+      "all_pairs": {
+        "pairs": 510,
+        "tp": 61,
+        "fn": 11,
+        "tn": 418,
+        "fp": 20,
+        "tpr": 0.847,
+        "tpr_ci95": [
+          0.747,
+          0.912
+        ],
+        "tnr": 0.954,
+        "tnr_ci95": [
+          0.931,
+          0.97
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 285,
+        "tp": 31,
+        "fn": 8,
+        "tn": 238,
+        "fp": 8,
+        "tpr": 0.795,
+        "tpr_ci95": [
+          0.645,
+          0.892
+        ],
+        "tnr": 0.967,
+        "tnr_ci95": [
+          0.937,
+          0.983
+        ]
+      },
+      "false_negatives": [
+        "holdout:H03:hb-05-chunk-2",
+        "holdout:H07:hb-08-chunk-1",
+        "holdout:H13:hb-09-chunk-1",
+        "holdout:H17:hb-03-chunk-0",
+        "holdout:H23:hb-10-chunk-0",
+        "test:T02:hb-07-chunk-1",
+        "test:T06:hb-09-chunk-1",
+        "test2:U05:hb-07-chunk-0",
+        "test2:U07:hb-08-chunk-0",
+        "test2:U11:hb-09-chunk-1",
+        "test2:U13:hb-03-chunk-0"
+      ]
+    },
+    "either (shipped)": {
+      "family": "qwen+gemma",
+      "different_family_from_generator": false,
+      "all_pairs": {
+        "pairs": 510,
+        "tp": 65,
+        "fn": 7,
+        "tn": 417,
+        "fp": 21,
+        "tpr": 0.903,
+        "tpr_ci95": [
+          0.813,
+          0.952
+        ],
+        "tnr": 0.952,
+        "tnr_ci95": [
+          0.928,
+          0.968
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 285,
+        "tp": 34,
+        "fn": 5,
+        "tn": 238,
+        "fp": 8,
+        "tpr": 0.872,
+        "tpr_ci95": [
+          0.733,
+          0.944
+        ],
+        "tnr": 0.967,
+        "tnr_ci95": [
+          0.937,
+          0.983
+        ]
+      },
+      "false_negatives": [
+        "holdout:H03:hb-05-chunk-2",
+        "holdout:H17:hb-03-chunk-0",
+        "holdout:H23:hb-10-chunk-0",
+        "test:T02:hb-07-chunk-1",
+        "test2:U07:hb-08-chunk-0",
+        "test2:U11:hb-09-chunk-1",
+        "test2:U13:hb-03-chunk-0"
+      ]
+    },
+    "fewshot-gemma": {
+      "family": "gemma",
+      "different_family_from_generator": true,
+      "all_pairs": {
+        "pairs": 510,
+        "tp": 66,
+        "fn": 6,
+        "tn": 355,
+        "fp": 83,
+        "tpr": 0.917,
+        "tpr_ci95": [
+          0.83,
+          0.961
+        ],
+        "tnr": 0.811,
+        "tnr_ci95": [
+          0.771,
+          0.844
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 285,
+        "tp": 35,
+        "fn": 4,
+        "tn": 200,
+        "fp": 46,
+        "tpr": 0.897,
+        "tpr_ci95": [
+          0.764,
+          0.959
+        ],
+        "tnr": 0.813,
+        "tnr_ci95": [
+          0.76,
+          0.857
+        ]
+      },
+      "false_negatives": [
+        "holdout:H07:hb-08-chunk-1",
+        "holdout:H20:hb-01-chunk-3",
+        "holdout:H23:hb-10-chunk-0",
+        "holdout:H24:hb-10-chunk-1",
+        "test:T02:hb-07-chunk-1",
+        "test2:U05:hb-07-chunk-0"
+      ]
+    },
+    "yesno-mistral": {
+      "family": "mistral",
+      "different_family_from_generator": true,
+      "all_pairs": {
+        "pairs": 510,
+        "tp": 65,
+        "fn": 7,
+        "tn": 418,
+        "fp": 20,
+        "tpr": 0.903,
+        "tpr_ci95": [
+          0.813,
+          0.952
+        ],
+        "tnr": 0.954,
+        "tnr_ci95": [
+          0.931,
+          0.97
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 285,
+        "tp": 35,
+        "fn": 4,
+        "tn": 235,
+        "fp": 11,
+        "tpr": 0.897,
+        "tpr_ci95": [
+          0.764,
+          0.959
+        ],
+        "tnr": 0.955,
+        "tnr_ci95": [
+          0.922,
+          0.975
+        ]
+      },
+      "false_negatives": [
+        "holdout:H03:hb-05-chunk-2",
+        "holdout:H07:hb-08-chunk-1",
+        "holdout:H13:hb-09-chunk-1",
+        "holdout:H23:hb-10-chunk-0",
+        "test:T02:hb-07-chunk-1",
+        "test2:U11:hb-09-chunk-1",
+        "test2:U13:hb-03-chunk-0"
+      ]
+    },
+    "fewshot-mistral": {
+      "family": "mistral",
+      "different_family_from_generator": true,
+      "all_pairs": {
+        "pairs": 510,
+        "tp": 68,
+        "fn": 4,
+        "tn": 325,
+        "fp": 113,
+        "tpr": 0.944,
+        "tpr_ci95": [
+          0.866,
+          0.978
+        ],
+        "tnr": 0.742,
+        "tnr_ci95": [
+          0.699,
+          0.781
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 285,
+        "tp": 36,
+        "fn": 3,
+        "tn": 186,
+        "fp": 60,
+        "tpr": 0.923,
+        "tpr_ci95": [
+          0.797,
+          0.973
+        ],
+        "tnr": 0.756,
+        "tnr_ci95": [
+          0.699,
+          0.806
+        ]
+      },
+      "false_negatives": [
+        "holdout:H07:hb-08-chunk-1",
+        "holdout:H17:hb-03-chunk-0",
+        "test:T02:hb-07-chunk-1",
+        "test2:U13:hb-03-chunk-0"
+      ]
+    },
+    "yesno-llama": {
+      "family": "llama",
+      "different_family_from_generator": true,
+      "all_pairs": {
+        "pairs": 510,
+        "tp": 66,
+        "fn": 6,
+        "tn": 396,
+        "fp": 42,
+        "tpr": 0.917,
+        "tpr_ci95": [
+          0.83,
+          0.961
+        ],
+        "tnr": 0.904,
+        "tnr_ci95": [
+          0.873,
+          0.928
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 285,
+        "tp": 35,
+        "fn": 4,
+        "tn": 227,
+        "fp": 19,
+        "tpr": 0.897,
+        "tpr_ci95": [
+          0.764,
+          0.959
+        ],
+        "tnr": 0.923,
+        "tnr_ci95": [
+          0.883,
+          0.95
+        ]
+      },
+      "false_negatives": [
+        "holdout:H23:hb-10-chunk-0",
+        "test:T06:hb-09-chunk-1",
+        "test2:U05:hb-07-chunk-0",
+        "test2:U10:hb-04-chunk-0",
+        "test2:U11:hb-09-chunk-1",
+        "test2:U13:hb-03-chunk-0"
+      ]
+    },
+    "fewshot-llama": {
+      "family": "llama",
+      "different_family_from_generator": true,
+      "all_pairs": {
+        "pairs": 510,
+        "tp": 60,
+        "fn": 12,
+        "tn": 309,
+        "fp": 129,
+        "tpr": 0.833,
+        "tpr_ci95": [
+          0.731,
+          0.902
+        ],
+        "tnr": 0.705,
+        "tnr_ci95": [
+          0.661,
+          0.746
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 285,
+        "tp": 32,
+        "fn": 7,
+        "tn": 173,
+        "fp": 73,
+        "tpr": 0.821,
+        "tpr_ci95": [
+          0.673,
+          0.91
+        ],
+        "tnr": 0.703,
+        "tnr_ci95": [
+          0.643,
+          0.757
+        ]
+      },
+      "false_negatives": [
+        "eval:E07:hb-10-chunk-0",
+        "holdout:H09:hb-08-chunk-1",
+        "holdout:H17:hb-03-chunk-0",
+        "holdout:H23:hb-10-chunk-0",
+        "test:T03:hb-08-chunk-1",
+        "test:T05:hb-04-chunk-1",
+        "test:T16:hb-10-chunk-0",
+        "test:T17:hb-10-chunk-0",
+        "test2:U09:hb-04-chunk-1",
+        "test2:U11:hb-09-chunk-1",
+        "test2:U13:hb-03-chunk-0",
+        "test2:U18:hb-01-chunk-1"
+      ]
+    }
+  }
+}

@@ -24,6 +24,7 @@ CANDIDATES = {
     "headers": {"CHUNK_HEADERS": True},
     "fewshot": {"RERANK_JUDGE": "fewshot"},
     "json": {"ANSWER_FORMAT": "json"},
+    "mistral-judge": {"RERANK_JUDGE": "yesno", "RERANK_MODEL": "mistral:latest"},
     "headers+fewshot": {"CHUNK_HEADERS": True, "RERANK_JUDGE": "fewshot"},
     "headers+json": {"CHUNK_HEADERS": True, "ANSWER_FORMAT": "json"},
     "top_k=1": {"TOP_K": 1},

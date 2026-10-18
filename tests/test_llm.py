@@ -151,12 +151,13 @@ SHIPPED = {name: getattr(config, name) for name in (
     "EVIDENCE_RULES_ENABLED", "CHUNK_HEADERS", "RERANK_JUDGE", "ANSWER_FORMAT")}  # captured before conftest patches
 
 
-@pytest.mark.parametrize("which", ["eval", "holdout", "test", "test2"])
+@pytest.mark.parametrize("which", ["eval", "holdout", "test", "test2", "test3"])
 def test_committed_caches_cover_the_real_shipped_config(monkeypatch, which) -> None:
     """Every shipped setting, including evidence rules and chunk headers, replays from the committed caches."""
     from src.eval_runner import run_eval
     from src.holdout_runner import TEST2_SET_PATH, TEST_SET_PATH, run_holdout
 
+    test3_path = TEST_SET_PATH.with_name("test3_set.json")
     for name, value in SHIPPED.items():
         monkeypatch.setattr(config, name, value)
     assert SHIPPED["CHUNK_HEADERS"] is True and SHIPPED["EVIDENCE_RULES_ENABLED"] is True
@@ -165,8 +166,9 @@ def test_committed_caches_cover_the_real_shipped_config(monkeypatch, which) -> N
         "holdout": run_holdout,
         "test": lambda: run_holdout(TEST_SET_PATH),
         "test2": lambda: run_holdout(TEST2_SET_PATH),
+        "test3": lambda: run_holdout(test3_path),
     }
-    assert runs[which]()["summary"]["passed"] == {"eval": 12, "holdout": 34, "test": 24, "test2": 32}[which]
+    assert runs[which]()["summary"]["passed"] == {"eval": 12, "holdout": 34, "test": 24, "test2": 32, "test3": 34}[which]
 
 
 def test_llm_answer_mode_keeps_citations_and_uses_model_text(rerank_mode, monkeypatch) -> None:
