@@ -27,7 +27,7 @@ python3 -m src.web                 # optional: --port 8768
 
 The evaluation dashboard labels saved results and cached replay explicitly. A replay is not fresh generation. It separates the baseline (98/102) from the current replay (102/102). These are previously seen sets, not a claim of 100% general accuracy. The original M5 deliverable remains separate and unchanged.
 
-The **Radionica** workspace adds explicitly activated TXT/MD/JSON documents, effective-date metadata, source filters, version diffs, possible-conflict warnings, two-profile comparisons, local feedback and checksummed history backups. Jobs survive restart within their original deadline in `data/runtime/workspace.sqlite`. The `verified` profile namespaces cache entries by observed model digest and generation options; legacy replay remains available as `baseline`. Claim audits are explainable heuristics, not semantic proof.
+The **Radionica** workspace has three tabs: **Eksperimenti** (document library, source filters, version diffs, possible-conflict warnings, two-profile comparison), **Kvalitet i poslovi** (claim audits, fallbacks, local feedback, background jobs) and **Backup razgovora** (checksummed JSON export, preview before import, merge without overwriting). It adds explicitly activated TXT/MD/JSON documents and effective-date metadata. Jobs survive restart within their original deadline in `data/runtime/workspace.sqlite`. The `verified` profile namespaces cache entries by observed model digest and generation options; legacy replay remains available as `baseline`. Claim audits are explainable heuristics, not semantic proof.
 
 A repeatability probe with empty application caches is available through `python -m src.reliability --repeats 3 --out results/stability.json`. It uses only installed models. The measured probe and supplemental Serbian grader are shown in `evidence/expansion/`; the historical candidate result remains 23/24 and the separate inflection-aware check gives 24/24 on the same saved answers. Neither is independent human approval.
 
@@ -45,6 +45,15 @@ python -m pytest              # or ./scripts/run_tests.sh
 ```
 
 All tests pass on the starting state. Tests check mechanics, not quality; quality is measured by the eval runner.
+
+The current HEAD additionally has frontend and browser tests (checked 2026-10-19: pytest 197, vitest 26, Playwright 27, `tsc --noEmit` clean):
+
+```bash
+npm --prefix frontend ci
+npm --prefix frontend run test                                  # vitest
+cd frontend && npx playwright install chromium --only-shell    # once
+npm run test:e2e                                                # own server on 8768, no Ollama needed
+```
 
 ## Commands
 
@@ -95,6 +104,12 @@ Model replies are cached in `data/llm_cache.json`, so all four sets run offline.
 - `src/eval_runner.py`, `src/eval_compare.py`: evaluation and comparison.
 - `eval/eval_set.json`: the fixed eval set.
 - `docs/improvement-menu.md`: one-change options.
+- `src/web.py`, `src/jobs.py`, `src/store.py`: loopback web server, background jobs and local SQLite state (`data/runtime/workspace.sqlite`).
+- `src/library.py`: explicitly activated local documents with effective-date metadata and version diffs.
+- `src/evidence.py`, `src/quality.py`, `src/language_tools.py`: source-derived policy answers, explainable claim audits and conservative query normalisation.
+- `src/model_identity.py`, `src/reliability.py`: model-digest cache namespaces and the repeatability probe.
+- `frontend/`: React + TypeScript app (`Workbench.tsx`, `Quality.tsx`, `backup.ts`), vitest in `src/`, Playwright in `e2e/`.
+- `evidence/expansion/`: measured artifacts of the F1–F22 round.
 
 ## Metrics
 
@@ -150,3 +165,21 @@ python -m src.experiment_runner --mode replay --out results/replay-with-traces.j
 The web workspace supports Serbian Latin/Cyrillic questions, source-bound Serbian extracts with original English citations, bounded background jobs with progress/cancellation/resume, and automatic merging of history across same-origin tabs. New web requests use separate runtime caches; historical evidence remains unchanged. Run `./start-web.command`; details and exact API contracts are in `docs/frontend/README.md`.
 
 Conservative claim checks now also flag explicit person/team scope, reversed minimum/maximum bounds and permission/obligation conflicts. They are heuristics, not an entailment guarantee. `review/acceptance-v2.json` is a frozen assistant-authored candidate (12 underlying cases / 24 language variants), pending human review, not independent blind evidence. The observed advanced automatic result is 23/24 with 24 fresh embedding and 46 LLM requests; the remaining mismatch is Serbian inflection in a substring check. Original four-set scores remain 12/12, 34/34, 23/24, 29/32. See `docs/next-improvements-spec.md` and `evidence/next/`.
+
+## F1–F22: local workspace expansion
+
+Spec: `docs/expansion-spec.md` (baseline commit 1b68204). Evidence: `evidence/expansion/` (`baseline.json`, `core.json`, `final.json` experiment runs; `bilingual-replay.json`; `stability.json` repeatability probe; `supplemental-sr.json` inflection-aware Serbian grader). Original eval sets and metric code, corpus, historical caches and the M5 minimum are unchanged.
+
+- Evidence selection for explicit policy contrasts (`src/evidence.py`); T02 returns only what the source states and marks that deduction from annual leave is not specified.
+- Claim and completeness audits (`src/quality.py`) are heuristics, not entailment proof; suspicious sources are isolated and the model has no tool for commands or writes.
+- Documents activated in the library (`src/library.py`) are sandboxed text with ISO effective dates; an unknown date stays unknown and archived versions are never evidence for the current policy.
+- The `verified` profile keys the cache by observed model digest and generation options (`src/model_identity.py`); `baseline` keeps the historical replay with unknown provenance.
+- Jobs persist in SQLite, resume after a restart within their original 5-minute deadline and keep cancellation.
+- Backups are versioned and checksummed, are previewed before import and never carry active job IDs to another server.
+
+```bash
+python -m src.reliability --repeats 3 --out results/stability.json   # needs installed models + Ollama
+python -m src.experiment_runner --mode replay --out results/replay.json
+```
+
+The advanced replay scores are 98/102 for the baseline and 102/102 for the current replay on previously seen sets; this is not a claim of general accuracy and no human reviewer has approved the Serbian translations or the assistant-authored acceptance cases.
