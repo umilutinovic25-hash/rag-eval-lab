@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import math
 import re
 
 from . import config
@@ -37,10 +38,41 @@ def lexical_score(query: str, chunk_text: str) -> float:
 RRF_K = 60
 
 
+def chunk_embedding_text(chunk: Chunk) -> str:
+    return f"{chunk.title}: {chunk.text}" if config.CHUNK_HEADERS else chunk.text
+
+
+def bm25_scores(query: str, chunks: list[Chunk]) -> list[float]:
+    """Okapi BM25 with IDF over the searched chunks (the corpus statistics are those of the candidates)."""
+    documents = [tokenize(chunk.text) for chunk in chunks]
+    if not documents:
+        return []
+    average = sum(len(tokens) for tokens in documents) / len(documents) or 1.0
+    terms = set(tokenize(query))
+    frequency = {term: sum(1 for tokens in documents if term in tokens) for term in terms}
+    scores = []
+    for tokens in documents:
+        score = 0.0
+        for term in terms:
+            count = tokens.count(term)
+            if not count:
+                continue
+            idf = math.log(1 + (len(documents) - frequency[term] + 0.5) / (frequency[term] + 0.5))
+            norm = count + config.BM25_K1 * (1 - config.BM25_B + config.BM25_B * len(tokens) / average)
+            score += idf * count * (config.BM25_K1 + 1) / norm
+        scores.append(score)
+    return scores
+
+
+def min_max(values: list[float]) -> list[float]:
+    low, high = min(values), max(values)
+    return [0.0 if high == low else (value - low) / (high - low) for value in values]
+
+
 def semantic_scores(query: str, chunks: list[Chunk]) -> list[float]:
     if not chunks:
         return []
-    query_vector, *chunk_vectors = embed([query] + [chunk.text for chunk in chunks])
+    query_vector, *chunk_vectors = embed([query] + [chunk_embedding_text(chunk) for chunk in chunks])
     return [cosine(query_vector, vector) for vector in chunk_vectors]
 
 
@@ -55,13 +87,21 @@ def ranks(scores: list[float]) -> list[int]:
 def score_chunks(query: str, chunks: list[Chunk]) -> list[float]:
     if config.RETRIEVAL_MODE == "lexical":
         return [lexical_score(query, chunk.text) for chunk in chunks]
-    if config.RETRIEVAL_MODE in ("semantic", "hybrid"):
+    if config.RETRIEVAL_MODE == "bm25":
+        return bm25_scores(query, chunks)
+    if config.RETRIEVAL_MODE in config.COSINE_MODES:
         return semantic_scores(query, chunks)
     raise ValueError(f"Unknown RETRIEVAL_MODE: {config.RETRIEVAL_MODE}")
 
 
 def sort_keys(query: str, chunks: list[Chunk], scores: list[float]) -> list[float]:
     """Higher is better. Hybrid orders by Reciprocal Rank Fusion; the reported score stays cosine."""
+    if config.RETRIEVAL_MODE == "hybrid-bm25":
+        if not chunks:
+            return []
+        semantic, keyword = min_max(scores), min_max(bm25_scores(query, chunks))
+        weight = config.HYBRID_WEIGHT
+        return [weight * a + (1 - weight) * b for a, b in zip(semantic, keyword)]
     if config.RETRIEVAL_MODE != "hybrid":
         return scores
     lexical_rank = ranks([lexical_score(query, chunk.text) for chunk in chunks])

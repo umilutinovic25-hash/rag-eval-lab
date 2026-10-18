@@ -26,7 +26,7 @@ class RagAnswer:
 
 
 def citation_min_score() -> float | None:
-    if config.RETRIEVAL_MODE in ("semantic", "hybrid"):
+    if config.RETRIEVAL_MODE in config.COSINE_MODES:
         return config.SEMANTIC_CITATION_MIN_SCORE
     return config.CITATION_MIN_SCORE
 
@@ -39,7 +39,7 @@ def select_citations(results: list[RetrievalResult]) -> list[RetrievalResult]:
 
 
 def refusal_threshold() -> float:
-    if config.RETRIEVAL_MODE in ("semantic", "hybrid"):
+    if config.RETRIEVAL_MODE in config.COSINE_MODES:
         return config.SEMANTIC_REFUSAL_THRESHOLD
     return config.REFUSAL_THRESHOLD
 
@@ -132,7 +132,7 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
             text, selected, rule = evidence
             return RagAnswer(text, [r.chunk.chunk_id for r in selected], False, selected,
                              trace=[{'stage':'evidence','rule':rule,'score_kind':'lexical overlap, not cosine'}], disposition='limited' if rule=='separate_policy_limit' else 'answer')
-    if config.RERANK == "llm-gray-zone" and config.RETRIEVAL_MODE not in ("semantic", "hybrid"):
+    if config.RERANK == "llm-gray-zone" and config.RETRIEVAL_MODE not in config.COSINE_MODES:
         raise ValueError("llm-gray-zone requires semantic or hybrid cosine scores; use the offline profile for lexical.")
     if config.RERANK in ("llm", "llm-gray-zone"):
         candidates = retrieve_top_k(question, chunks, k=config.RERANK_CANDIDATES)

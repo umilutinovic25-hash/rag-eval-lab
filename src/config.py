@@ -9,7 +9,12 @@ CHUNK_SIZE = 140
 CHUNK_OVERLAP = 30
 
 # Retrieval
-RETRIEVAL_MODE = "semantic"  # "lexical", "semantic" or "hybrid"
+RETRIEVAL_MODE = "semantic"  # "lexical", "semantic", "hybrid" (RRF), "hybrid-bm25" (weighted BM25 + cosine) or "bm25" (metrics only)
+COSINE_MODES = ("semantic", "hybrid", "hybrid-bm25")  # modes whose reported score is a cosine
+CHUNK_HEADERS = True  # embed "<document title>: <chunk text>"; the cited text is unchanged
+BM25_K1 = 1.5
+BM25_B = 0.75
+HYBRID_WEIGHT = 0.5  # share of the min-max normalised cosine in "hybrid-bm25"; the rest is BM25
 EMBEDDING_MODEL = "bge-m3"  # local Ollama model, used in "semantic" and "hybrid" mode
 TOP_K = 2
 CONTEXT_NEIGHBORS = 1  # optional expansion after selection, within the same document/version/status
@@ -58,8 +63,22 @@ RERANK_STRUCTURED_PROMPT = (
 )
 
 
+RERANK_FEWSHOT_MODEL = "gemma3:4b"  # used only in "fewshot"; a different family than GENERATION_MODEL
+RERANK_FEWSHOT_PROMPT = (
+    "You check whether an employee handbook passage can answer a question. The passage answers the question when it "
+    "states the fact that was asked for, also when that fact is a rule that forbids, denies or limits something: a "
+    "'no' answer is still an answer. The passage does not answer the question when it only mentions the same topic. "
+    "Reply with yes or no only.\n\n"
+    "Question: Can contractors use the staff kitchen?\nPassage: Contractors must not use the staff kitchen.\nAnswer: yes\n\n"
+    "Question: How many days of paternity leave are given?\nPassage: Parental leave follows a separate policy.\nAnswer: no\n\n"
+    "Question: Is the gym open on Sunday?\nPassage: The gym is open Monday to Saturday.\nAnswer: yes\n\n"
+    "Question: Where do I hand in expense reports?\nPassage: Lockers are assigned by facilities.\nAnswer: no\n\n"
+    "Question: {question}\nPassage: {passage}\nAnswer:"
+)
+
 # Answer text: "extractive" (cited chunks joined) or "llm" (a local model writes the answer from the cited chunks)
 ANSWER_MODE = "llm"
+ANSWER_FORMAT = "text"  # "text" (free text with [id] markers) or "json" (validated JSON rendered into the same text)
 ANSWER_QUOTES = True  # in "llm" mode, add the verbatim text of every cited chunk under the answer
 GENERATION_MODEL = "qwen2.5:7b"
 GENERATION_PROMPT = (
@@ -68,15 +87,22 @@ GENERATION_PROMPT = (
     "in square brackets, for example [hb-01-chunk-0].\n\n"
     "Passages:\n{passages}\n\nQuestion: {question}\nAnswer:"
 )
+GENERATION_JSON_PROMPT = (
+    "Answer the question using only facts stated in the passages below. Do not add conditions, people, steps or details "
+    "that the passages do not state. Reply with ONLY a JSON object with two keys: answer (one or two short sentences) "
+    "and sources (the ids of the passages you used, for example [\"hb-01-chunk-0\"]).\n\n"
+    "Passages:\n{passages}\n\nQuestion: {question}\nJSON:"
+)
 
 
 def apply_profile(name: str) -> None:
     """CLI-only profile: change all coupled settings together, within this process."""
-    global RETRIEVAL_MODE, RERANK, ANSWER_MODE, ANSWER_QUOTES, EVIDENCE_RULES_ENABLED
+    global RETRIEVAL_MODE, RERANK, ANSWER_MODE, ANSWER_QUOTES, EVIDENCE_RULES_ENABLED, CHUNK_HEADERS
     if name in ("current", "verified"):
         return
     if name == "baseline":
         EVIDENCE_RULES_ENABLED = False
+        CHUNK_HEADERS = False  # the historical replay keys embeddings by the bare chunk text
         return
     if name != "offline":
         raise ValueError(f"Unknown profile: {name}")

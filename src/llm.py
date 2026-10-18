@@ -114,8 +114,8 @@ def span_judge(question: str, passage: str) -> bool:
     return span_is_in_passage(span, passage)
 
 
-def yesno_judge(question: str, passage: str, model: str) -> bool:
-    reply = generate(model, config.RERANK_PROMPT.format(question=question, passage=passage), 3)
+def yesno_judge(question: str, passage: str, model: str, prompt: str | None = None) -> bool:
+    reply = generate(model, (prompt or config.RERANK_PROMPT).format(question=question, passage=passage), 3)
     words = reply.lower().split()
     return bool(words) and words[0].strip(".,!:") in ACCEPT_WORDS
 
@@ -145,6 +145,8 @@ def structured_judge(question: str, passage: str) -> bool:
 def passage_answers(question: str, passage: str) -> bool:
     if config.RERANK_JUDGE == "structured":
         return structured_judge(question, passage)
+    if config.RERANK_JUDGE == "fewshot":
+        return yesno_judge(question, passage, config.RERANK_FEWSHOT_MODEL, config.RERANK_FEWSHOT_PROMPT)
     if config.RERANK_JUDGE == "span":
         return span_judge(question, passage)
     if config.RERANK_JUDGE == "either":
@@ -152,7 +154,33 @@ def passage_answers(question: str, passage: str) -> bool:
     return yesno_judge(question, passage, config.RERANK_MODEL)
 
 
+def render_json_answer(response: str, passages: list[tuple[str, str]]) -> str:
+    """Turn a JSON reply into the usual text with [id] markers; anything invalid is returned raw so that the
+    existing structural checks reject it and the extractive fallback is used."""
+    text = response.strip()
+    wrapped = re.fullmatch(r"```(?:json)?\s*\n(.*)\n```", text, re.S | re.I)
+    if wrapped:
+        text = wrapped.group(1)
+    try:
+        data = json.loads(text)
+    except (ValueError, TypeError):
+        return response
+    if not isinstance(data, dict) or set(data) != {"answer", "sources"}:
+        return response
+    answer, sources = data["answer"], data["sources"]
+    ids = {chunk_id for chunk_id, _ in passages}
+    if not isinstance(answer, str) or not answer.strip() or "[" in answer or "]" in answer:
+        return response
+    if not isinstance(sources, list) or not sources or not all(isinstance(i, str) and i in ids for i in sources):
+        return response
+    rendered = answer.strip() + " " + "".join(f"[{i}]" for i in dict.fromkeys(sources))
+    return GenerationText(rendered, getattr(response, "metadata", None))
+
+
 def write_answer(question: str, passages: list[tuple[str, str]]) -> str:
     listed = "\n".join(f"[{chunk_id}] {text}" for chunk_id, text in passages)
+    if config.ANSWER_FORMAT == "json":
+        prompt = config.GENERATION_JSON_PROMPT.format(passages=listed, question=question)
+        return render_json_answer(generate(config.GENERATION_MODEL, prompt, 160), passages)
     prompt = config.GENERATION_PROMPT.format(passages=listed, question=question)
     return generate(config.GENERATION_MODEL, prompt, 80)
