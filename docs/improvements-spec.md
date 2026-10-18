@@ -12,3 +12,11 @@ Polazna verzija: f430863. Nova analiza: ANALIZA-POSLE-C6-2026-10-18.md. Svi skup
 | D6 | Jedinice i negacija vezane uz rečenicu/dokaz; sumnjiv generisani odgovor ide u izvorni tekst. Provera negacije razdvaja klauze; stabilan kosinus za ekstremne konačne ulaze. | Heuristička zaštita, ne semantička garancija. Brojevi ispisani rečima normalizuju se u najčešćim engleskim oblicima; uključiti negativne i pozitivne testove. Meriti učestalost fallback-a, tačne uslove i ne menjati originalne metrike. |
 
 Lokalni modeli su već instalirani; ne preuzimati nove. Žive probe koriste izdvojen keš i jasnu provenance evidenciju. Ako D4/D5 pogoršaju kvalitet, čuvaju se kao isključene opcije uz rezultate. Nije dozvoljeno izmišljati ljudski pregled ili tvrdnju da je sve tačno.
+
+## D4b — kontekst samo za izričite reference
+
+Dodato posle prvih rezultata D4, pre implementacije D4b. D4 zadržava 12/12 eval, ali holdout pada 34→33: H14 ima dokaz, ali se uz nebitan drugi dokument proširenjem dodaje više nebitnih chunk-ova, pa CitPrec pada na 0.40. Zato D4 all-neighbors ostaje isključen. D5 se meri u odnosu na najbolju verziju sa CONTEXT_NEIGHBORS=0, ne na ovu regresiju.
+
+D4b hipoteza: proširenje je potrebno samo kada izabrani pasus izričito upućuje na prethodni (same/that/this form, policy, procedure, process). CONTEXT_POLICY=references dodaje samo do CONTEXT_NEIGHBORS prethodnih pasusa u istoj verziji/dokumentu/statusu. Nema širenja za obične samostalne pasuse ili sledeće pasuse. Ovo nije pravilo za ID H20, nego pravilo za tekstualne reference.
+
+Očekivanje: H20 dobija lokaciju formulara, a H14 nema nove citate. Prihvatiti samo bez novih PASS regresija na četiri skupa i uz lokacione činjenice u model odgovoru ili njegovom jasnom izvoru. Rizici: drugi tipovi anafore nisu obuhvaćeni; prethodni pasus može biti šum. Jedna ova varijanta, bez daljih prompt sweep-ova.
