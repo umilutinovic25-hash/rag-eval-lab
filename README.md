@@ -140,3 +140,9 @@ python -m src.experiment_runner --mode replay --out results/replay-with-traces.j
 ```
 
 `review/completeness-rubric.json` is explicitly an assistant draft, not a human-approved reference or semantic grader. See `docs/improvements-spec.md`, `docs/improvements-results.md`, `evidence/improvements/`. A real empty-cache smoke test for H20 succeeded (1 embedding + 10 LLM requests, no errors/fallback); this is not a fresh generalization test or a cold run of all 102 questions.
+
+## E1–E5: bilingual local workspace and controlled follow-up checks
+
+The web workspace supports Serbian Latin/Cyrillic questions, source-bound Serbian extracts with original English citations, bounded background jobs with progress/cancellation/resume, and automatic merging of history across same-origin tabs. New web requests use separate runtime caches; historical evidence remains unchanged. Run `./start-web.command`; details and exact API contracts are in `docs/frontend/README.md`.
+
+Conservative claim checks now also flag explicit person/team scope, reversed minimum/maximum bounds and permission/obligation conflicts. They are heuristics, not an entailment guarantee. `review/acceptance-v2.json` is a frozen assistant-authored candidate (12 underlying cases / 24 language variants), pending human review, not independent blind evidence. The observed advanced automatic result is 23/24 with 24 fresh embedding and 46 LLM requests; the remaining mismatch is Serbian inflection in a substring check. Original four-set scores remain 12/12, 34/34, 23/24, 29/32. See `docs/next-improvements-spec.md` and `evidence/next/`.

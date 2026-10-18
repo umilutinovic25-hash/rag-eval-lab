@@ -1,0 +1,102 @@
+{
+  "same_question_fingerprints": true,
+  "sets": {
+    "eval": {
+      "before": {
+        "passed": 12,
+        "total": 12,
+        "behaviour_accuracy": 1.0,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "after": {
+        "passed": 12,
+        "total": 12,
+        "behaviour_accuracy": 1.0,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "identical_metric_rows": true,
+      "changed_answer_ids": [],
+      "before_fallbacks": 0,
+      "after_fallbacks": 0
+    },
+    "holdout": {
+      "before": {
+        "passed": 34,
+        "total": 34,
+        "behaviour_accuracy": 1.0,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 0.9583
+      },
+      "after": {
+        "passed": 34,
+        "total": 34,
+        "behaviour_accuracy": 1.0,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 0.9583
+      },
+      "identical_metric_rows": true,
+      "changed_answer_ids": [],
+      "before_fallbacks": 0,
+      "after_fallbacks": 0
+    },
+    "test1": {
+      "before": {
+        "passed": 23,
+        "total": 24,
+        "behaviour_accuracy": 0.9583,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "after": {
+        "passed": 23,
+        "total": 24,
+        "behaviour_accuracy": 0.9583,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "identical_metric_rows": true,
+      "changed_answer_ids": [],
+      "before_fallbacks": 1,
+      "after_fallbacks": 1
+    },
+    "test2": {
+      "before": {
+        "passed": 29,
+        "total": 32,
+        "behaviour_accuracy": 0.9375,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "after": {
+        "passed": 29,
+        "total": 32,
+        "behaviour_accuracy": 0.9375,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "identical_metric_rows": true,
+      "changed_answer_ids": [
+        "U06"
+      ],
+      "before_fallbacks": 0,
+      "after_fallbacks": 1
+    }
+  },
+  "protected_files": {
+    "eval/eval_set.json": "afe46db1e75a0b85bb5c9a93b6763e3b96e5cd7b289e12da6d2671e4d8650064",
+    "src/eval_runner.py": "cc00aad5d3a997772aab06c95bb57299c87c51b82be080b12608ff17a99bd704",
+    "src/eval_compare.py": "c84b246ff3006aa285af2eb2e04addd4fce5264897e0e346ef38f8013b51009c",
+    "src/corpus.py": "52cceca071e43682705234713d12a4b94bbf3617e9e7c44cfcba1f6f94a6ef78",
+    "data/embedding_cache.json": "4ffbfc488d69552e5e3639d8edbe90782f7e4f00c6a2d21391a0fc030e93107d",
+    "data/llm_cache.json": "c73409651435e27a20da533642fd880f9443ef6ab5bc9141135c33d9af02795d",
+    "data/llm_cache-metadata.json": "7e2564bce51674bc9680290a3037252b9b60706a3b871a669a07c9087ab95681",
+    "deliverables/week07-M5-minimum.zip": "ad6133bad75e201c5548ba63d7c1afeea833512bba8b47f381cbf7bd103392db"
+  },
+  "request_totals": {
+    "embeddings": 0,
+    "llm": 0
+  },
+  "interpretation": "Original metrics are identical. U06 now conservatively uses source text after a permission/obligation flag. No independent semantic guarantee; four original failures remain."
+}

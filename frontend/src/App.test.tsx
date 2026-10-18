@@ -26,6 +26,16 @@ const answer: Answer = {
   created_at: "2026-10-18",
 };
 
+const completedJob = (result: Answer) => ({
+  id: "unit-job",
+  status: "completed",
+  progress: { stage: "completed", message: "Spremno" },
+  seconds: 0.1,
+  result,
+  error: null,
+  phases: [],
+});
+
 beforeEach(() => {
   vi.stubGlobal(
     "fetch",
@@ -42,7 +52,7 @@ beforeEach(() => {
             }
           : url.endsWith("/documents")
             ? { documents: [] }
-            : answer,
+            : completedJob(answer),
     })),
   );
 });
@@ -54,8 +64,8 @@ describe("real UI contracts", () => {
         ({
           ok: true,
           json: async () =>
-            String(url).endsWith("/chat")
-              ? {
+            String(url).endsWith("/jobs")
+              ? completedJob({
                   ...answer,
                   citations: [
                     {
@@ -64,7 +74,7 @@ describe("real UI contracts", () => {
                       status: "superseded",
                     },
                   ],
-                }
+                })
               : String(url).endsWith("/documents")
                 ? { documents: [] }
                 : {
@@ -77,6 +87,9 @@ describe("real UI contracts", () => {
         }) as Response,
     );
     render(<App />);
+    fireEvent.change(screen.getByLabelText("Jezik pitanja"), {
+      target: { value: "en" },
+    });
     fireEvent.click(
       screen.getByRole("button", {
         name: "Koliko dana mogu da radim od kuće?",
@@ -87,6 +100,9 @@ describe("real UI contracts", () => {
   });
   it("clears the previous sources while the next question is pending", async () => {
     render(<App />);
+    fireEvent.change(screen.getByLabelText("Jezik pitanja"), {
+      target: { value: "en" },
+    });
     fireEvent.click(
       screen.getByRole("button", {
         name: "Koliko dana mogu da radim od kuće?",
@@ -133,8 +149,10 @@ describe("real UI contracts", () => {
     expect(
       screen.getByRole("button", { name: "Laptop request" }),
     ).toBeInTheDocument();
-    expect(localStorage.getItem("izvor.conversations.v1")).toContain(
-      "Laptop request",
+    await waitFor(() =>
+      expect(localStorage.getItem("izvor.conversations.v1")).toContain(
+        "Laptop request",
+      ),
     );
   });
 
@@ -191,6 +209,9 @@ describe("real UI contracts", () => {
 
   it("sends the exact cached English sample and displays its source", async () => {
     render(<App />);
+    fireEvent.change(screen.getByLabelText("Jezik pitanja"), {
+      target: { value: "en" },
+    });
     fireEvent.click(
       screen.getByRole("button", {
         name: "Koliko dana mogu da radim od kuće?",
@@ -198,11 +219,12 @@ describe("real UI contracts", () => {
     );
     await screen.findByText("Up to 3 days per week.");
     expect(fetch).toHaveBeenCalledWith(
-      "/api/chat",
+      "/api/jobs",
       expect.objectContaining({
         body: JSON.stringify({
           question: "How many days per week can I work remotely?",
           profile: "current",
+          language: "en",
         }),
       }),
     );
@@ -219,9 +241,9 @@ describe("real UI contracts", () => {
     fetchMock.mockImplementation(
       async (url) =>
         ({
-          ok: !String(url).endsWith("/chat"),
+          ok: !String(url).endsWith("/jobs"),
           json: async () =>
-            String(url).endsWith("/chat")
+            String(url).endsWith("/jobs")
               ? { error: "Pokrenite Ollama ili izaberite režim Bez modela." }
               : String(url).endsWith("/documents")
                 ? { documents: [] }
@@ -273,6 +295,9 @@ describe("real UI contracts", () => {
       ]),
     );
     render(<App />);
+    fireEvent.change(screen.getByLabelText("Jezik pitanja"), {
+      target: { value: "en" },
+    });
     fireEvent.click(
       screen.getByRole("button", { name: "Interrupted question" }),
     );

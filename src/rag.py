@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 import re
 
-from . import config
+from . import config, operation
 from .chunking import Chunk, build_chunks
 from .corpus import load_corpus
 from .claim_checks import claim_risks, clauses
@@ -64,7 +64,7 @@ def expand_context(cited: list[RetrievalResult], chunks: list[Chunk], window: in
             index = next(i for i, c in enumerate(siblings) if c.chunk_id == anchor.chunk.chunk_id)
             selected[anchor.chunk.chunk_id] = anchor
             if policy == "references":
-                if not re.search(r"\b(?:same|that|this)\s+(?:form|policy|procedure|process)\b", anchor.chunk.text, re.I):
+                if not re.search(r"\b(?:(?:same|that|this)\s+(?:form|policy|procedure|process)|(?:isti|taj|ovaj)\s+(?:taj\s+)?(?:formular|obrazac|politika|procedura|postupak|proces))\b", anchor.chunk.text, re.I):
                     continue
                 neighbors = siblings[max(0, index-window):index]
             else:
@@ -106,6 +106,7 @@ def generation_issue(text: str, cited: list[RetrievalResult]) -> str | None:
 
 
 def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
+    operation.progress('retrieval', 'Pretražujem odlomke priručnika.')
     trace = []
     def refuse(reason, retrieved):
         trace.append({"stage": "decision", "reason": reason, "refused": True})
@@ -132,6 +133,7 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
         else:
             results = []
             for item in candidates:
+                operation.progress('judge', f'Proveravam relevantnost odlomka {candidates.index(item)+1}/{len(candidates)}.')
                 accepted = passage_answers(question, item.chunk.text)
                 trace.append({"stage": "judge", "chunk_id": item.chunk.chunk_id, "accepted": accepted})
                 if accepted:
@@ -154,6 +156,7 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
         trace.append({"stage": "context", "anchors": anchors, "expanded": [r.chunk.chunk_id for r in cited], "neighbor_scores": "inherited; not retrieval scores"})
     fallback_reason = None
     if config.ANSWER_MODE == "llm":
+        operation.progress('generation', 'Pripremam odgovor iz odabranih izvora.')
         try:
             answer = write_answer(question, [(item.chunk.chunk_id, item.chunk.text) for item in cited])
             trace.append({"stage": "generation", "text": str(answer), "metadata": getattr(answer, "metadata", {"done_reason": "unknown"})})

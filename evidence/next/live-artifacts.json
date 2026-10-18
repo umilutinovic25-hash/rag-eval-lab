@@ -1,0 +1,13 @@
+{
+  "git_dirty_during_run": true,
+  "historical_caches_preserved": true,
+  "note": "The live-source archive matches every source hash recorded by the live run. Cache seeded from historical data; 24 embedding and 46 LLM requests were fresh, not an entirely cold run.",
+  "sha256": {
+    "evidence/next/live-source.zip": "4317bcf4b32d9b1f81ccd19c1dabf35400be07e3c76bba379d8ac237dbf05b8d",
+    "evidence/next/candidate-live.json": "2972dbfe8445dc700df0692620b3d43f4a4dfa8cbb92639975673abf05be9bb0",
+    "evidence/next/candidate-cache/llm_cache.json": "77ec9639a9b6058a2e2e9503df73ba482315b83988a4138208696fa984ce6fc4",
+    "evidence/next/candidate-cache/llm_cache-metadata.json": "181f99b68eda02469fa293956be93490d8c9a13a623b4f2f4db8b28b66046969",
+    "evidence/next/candidate-cache/embedding_cache.json": "0c4a20e44262a4a0587d0f93e75da6eac092b1a1e5cee73da1b1a7b93d77f6e5"
+  },
+  "translation_sha256": "cfc7b12388d0e73b1b0ca2ca4cd23aabbf67fd54053f58a0a147752e9426b212"
+}

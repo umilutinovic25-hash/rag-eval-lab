@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import { api } from "./api";
 
 describe("local API error recovery", () => {
-  it.each(["/chat", "/documents", "/status", "/evaluations"])(
+  it.each(["/chat", "/documents", "/status", "/evaluations", "/jobs"])(
     "rejects a structurally invalid successful %s response",
     async (path) => {
       vi.stubGlobal(

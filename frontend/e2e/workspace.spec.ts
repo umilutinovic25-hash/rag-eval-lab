@@ -16,6 +16,7 @@ test("accessible answer, documents, evaluation and keyboard dialog", async ({
     ).toEqual([]);
   }
   await page.goto("/");
+  await page.getByLabel("Jezik pitanja").selectOption("en");
   await page
     .getByRole("button", {
       name: "Koliko dana mogu da radim od kuće?",
@@ -41,6 +42,7 @@ test("cached grounded answer, original citation, independent refusal, and export
   page,
 }) => {
   await page.goto("/");
+  await page.getByLabel("Jezik pitanja").selectOption("en");
   await page
     .getByRole("button", {
       name: "Koliko dana mogu da radim od kuće?",
@@ -74,6 +76,7 @@ test("document versions, saved evaluation failures, and real replay", async ({
   page,
 }) => {
   await page.goto("/");
+  await page.getByLabel("Jezik pitanja").selectOption("en");
   await page.getByRole("button", { name: "Dokumenti", exact: true }).click();
   await expect(page.locator(".document-row")).toHaveCount(9);
   await page.getByLabel("Verzije dokumenata").selectOption("superseded");
@@ -108,6 +111,7 @@ test("offline profile works and restores after browser refresh", async ({
   page,
 }) => {
   await page.goto("/");
+  await page.getByLabel("Jezik pitanja").selectOption("en");
   await page.getByLabel("Režim pretrage").selectOption("offline");
   await page
     .getByLabel("Pitanje o priručniku")
@@ -128,6 +132,7 @@ for (const width of [1505, 1280, 390]) {
   }) => {
     await page.setViewportSize({ width, height: width === 390 ? 844 : 1045 });
     await page.goto("/");
+    await page.getByLabel("Jezik pitanja").selectOption("en");
     await expect(
       page.getByRole("heading", { name: "Odgovori počinju izvorom." }),
     ).toBeVisible();

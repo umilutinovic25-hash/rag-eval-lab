@@ -8,6 +8,7 @@ export interface Chunk {
   status: string;
   text: string;
   score?: number;
+  translated_text?: string;
 }
 export interface Document {
   doc_id: string;
@@ -23,6 +24,8 @@ export interface Trace {
   [key: string]: unknown;
 }
 export interface Answer {
+  language?: "en" | "sr";
+  translation_review_status?: string | null;
   question: string;
   answer: string;
   refused: boolean;
@@ -35,6 +38,7 @@ export interface Answer {
   created_at: string;
 }
 export interface Turn {
+  jobId?: string;
   id: string;
   question: string;
   result?: Answer;
@@ -95,4 +99,15 @@ export interface Evaluation {
   question_set_sha256: Record<string, string>;
   requests: Record<string, number>;
   runs: Record<string, EvalRun>;
+}
+
+export interface Job {
+  id: string;
+  status:
+    "queued" | "running" | "cancelling" | "completed" | "cancelled" | "failed";
+  progress: { stage: string; message: string };
+  seconds: number;
+  result: Answer | null;
+  error: string | null;
+  phases: { stage: string; seconds: number }[];
 }

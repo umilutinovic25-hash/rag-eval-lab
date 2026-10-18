@@ -1,0 +1,188 @@
+{
+  "status": "assistant_translation_pending_human_review",
+  "language": "sr-Latn",
+  "chunks": {
+    "hb-01-chunk-0": {
+      "source_sha256": "62656ae1d7ccdef0ca1544b24ff6cf0b2ba51767004f284b135feb532f3c0dc8",
+      "doc_id": "hb-01",
+      "version": "2026",
+      "status": "current",
+      "text": "Zamena laptopa: pokvareni, izgubljeni ili ukradeni laptopi mogu se zameniti."
+    },
+    "hb-01-chunk-1": {
+      "source_sha256": "896c495da53a68c9ea04b8b3e81d1249958b88354e552ebf913d98ad227438b5",
+      "doc_id": "hb-01",
+      "version": "2026",
+      "status": "current",
+      "text": "Posle odobrenja rukovodioca, IT služba priprema zamenski laptop sa vašim datotekama, nalozima, imejlom i pravima pristupa; primopredaja može trajati do 5 radnih dana."
+    },
+    "hb-01-chunk-2": {
+      "source_sha256": "3856f28a40d56ab5313648236434180e2015d4c571295ca52785d9bcfd036f77",
+      "doc_id": "hb-01",
+      "version": "2026",
+      "status": "current",
+      "text": "Izgubljene ili ukradene uređaje prijavite prvo službi bezbednosti. Zamenski laptop traži se u IT portalu, u odeljku Hardware."
+    },
+    "hb-01-chunk-3": {
+      "source_sha256": "51072f84b604dcd1da516be25df02afe96aa5edac1319dcb7e5175f364a4701b",
+      "doc_id": "hb-01",
+      "version": "2026",
+      "status": "current",
+      "text": "Dodatna oprema, poput miša ili slušalica, naručuje se kroz isti taj formular."
+    },
+    "hb-02-chunk-0": {
+      "source_sha256": "47048cb660bca73ad79f9df03dc60a883a1417f8c8066088a38a4d50a9b0ac38",
+      "doc_id": "hb-02",
+      "version": "2024",
+      "status": "superseded",
+      "text": "Rad na daljinu: zaposleni mogu da rade od kuće do 2 dana nedeljno. Dani rada na daljinu dogovaraju se sa vođom tima."
+    },
+    "hb-02-chunk-1": {
+      "source_sha256": "e9a7c6c35108474aff5727df6c9fd19c27a6a709dc712b5cd067c76e2060b9f5",
+      "doc_id": "hb-02",
+      "version": "2024",
+      "status": "superseded",
+      "text": "Dani rada na daljinu mogu se pomerati unutar iste nedelje."
+    },
+    "hb-03-chunk-0": {
+      "source_sha256": "c40e0d8a9f7a9a63a5a1823bf0f36a0eb28360a9f1d47cc15061992426bb4f74",
+      "doc_id": "hb-03",
+      "version": "2026",
+      "status": "current",
+      "text": "Rad na daljinu: zaposleni mogu da rade od kuće do 3 dana nedeljno."
+    },
+    "hb-03-chunk-1": {
+      "source_sha256": "b1544d743c1530a057729508fdaed799946d456e1fa857b5fb63a527888d7f56",
+      "doc_id": "hb-03",
+      "version": "2026",
+      "status": "current",
+      "text": "Dani rada na daljinu dogovaraju se sa vođom tima i beleže u zajedničkom timskom kalendaru."
+    },
+    "hb-03-chunk-2": {
+      "source_sha256": "e9a7c6c35108474aff5727df6c9fd19c27a6a709dc712b5cd067c76e2060b9f5",
+      "doc_id": "hb-03",
+      "version": "2026",
+      "status": "current",
+      "text": "Dani rada na daljinu mogu se pomerati unutar iste nedelje."
+    },
+    "hb-03-chunk-3": {
+      "source_sha256": "cfd5b4b5aefd3cdb40b1979f85401763956ee5b6924a3351b7928ca1fedb4b7e",
+      "doc_id": "hb-03",
+      "version": "2026",
+      "status": "current",
+      "text": "Obavezno zajedničko radno vreme od 10:00 do 15:00 važi i za rad na daljinu; tada morate biti dostupni preko četa i telefona."
+    },
+    "hb-04-chunk-0": {
+      "source_sha256": "43044053cfdfbf6c4dc921138638daaf59b8fe61dcc5cffd11e868f5b0fa7ff8",
+      "doc_id": "hb-04",
+      "version": "2026",
+      "status": "current",
+      "text": "Službeni put mora biti odobren pre rezervacije. Računi sa puta dostavljaju se u roku od 30 dana od povratka, preko finansijske aplikacije."
+    },
+    "hb-04-chunk-1": {
+      "source_sha256": "91792dd322eb68525aab4bf1f4b630e69f7d31b6b4fe36b29d2b6c69cf1a785f",
+      "doc_id": "hb-04",
+      "version": "2026",
+      "status": "current",
+      "text": "Sačuvajte originalne račune za hotele i letove. Dnevnice prate nacionalna pravila za svako odredište."
+    },
+    "hb-05-chunk-0": {
+      "source_sha256": "b96fe168dc8594f185b07ab54dd975248731c6698dd0e38a11bc19accbba4f89",
+      "doc_id": "hb-05",
+      "version": "2026",
+      "status": "current",
+      "text": "Lozinke se moraju menjati svakih 90 dana i moraju sadržati najmanje 12 znakova."
+    },
+    "hb-05-chunk-1": {
+      "source_sha256": "c850bc615341082064881074737e7dfb4b269b299f0c9b97392f32e3e685affa",
+      "doc_id": "hb-05",
+      "version": "2026",
+      "status": "current",
+      "text": "Višefaktorska autentifikacija (MFA) obavezna je za imejl, VPN i sve interne alate."
+    },
+    "hb-05-chunk-2": {
+      "source_sha256": "37f64c9ed3ed711c619297cc811b629e74511443bc965abe82551a51abef3fd2",
+      "doc_id": "hb-05",
+      "version": "2026",
+      "status": "current",
+      "text": "Nikada ne delite lozinke, čak ni sa kolegama iz IT službe."
+    },
+    "hb-06-chunk-0": {
+      "source_sha256": "0d1d4af37359cc92baeee54aa358a666461ed0ecb0eb3e2f8dd303812de818da",
+      "doc_id": "hb-06",
+      "version": "2026",
+      "status": "current",
+      "text": "Nove kolege prate dvonedeljni plan uvođenja u posao."
+    },
+    "hb-06-chunk-1": {
+      "source_sha256": "a17c7bf6d048b3663a902b7cd103ed6cc270f05ae0b088ef43fe1eb067cb4ce8",
+      "doc_id": "hb-06",
+      "version": "2026",
+      "status": "current",
+      "text": "U prvoj nedelji dodeljuje vam se kolega za podršku koji pomaže oko alata, ljudi i timskih navika."
+    },
+    "hb-06-chunk-2": {
+      "source_sha256": "032ce5cbce167e1a85889ad481b88876a3b7d8011c2ecb722d7a7fabbe2af356",
+      "doc_id": "hb-06",
+      "version": "2026",
+      "status": "current",
+      "text": "Vaš rukovodilac zakazuje razgovor na kraju prvog meseca i ponovo posle tri meseca."
+    },
+    "hb-07-chunk-0": {
+      "source_sha256": "f0675cb1970984dcfe39fcf578097d6958dedce5303b63e92c8c821ea6b0bc8a",
+      "doc_id": "hb-07",
+      "version": "2026",
+      "status": "current",
+      "text": "Godišnji odmor: zaposleni imaju 22 dana godišnjeg odmora po kalendarskoj godini. Zahtevi za odmor podnose se dve nedelje unapred u HR portalu."
+    },
+    "hb-07-chunk-1": {
+      "source_sha256": "355a3cf0ffade4b9ee2777a75495e9ca187e8fd5168b75c01e98966952b110b8",
+      "doc_id": "hb-07",
+      "version": "2026",
+      "status": "current",
+      "text": "Prema ovoj politici, neiskorišćeni odmor može se preneti do 31. marta. Bolovanje je uređeno posebnom politikom."
+    },
+    "hb-08-chunk-0": {
+      "source_sha256": "dd04ad526f9101efea8f483766268357abc5bba490c94d27e2e03d635df704fa",
+      "doc_id": "hb-08",
+      "version": "2026",
+      "status": "current",
+      "text": "Svaki zaposleni ima budžet za obuke od 800 EUR godišnje za kurseve, konferencije i sertifikacije."
+    },
+    "hb-08-chunk-1": {
+      "source_sha256": "4a64faa94eeceda1ec681bf38e7feeb7793becb21d86a383018b658a7e7047da",
+      "doc_id": "hb-08",
+      "version": "2026",
+      "status": "current",
+      "text": "Obuku dogovorite sa rukovodiocem pre rezervacije. Neiskorišćeni budžet se ne prenosi u sledeću godinu."
+    },
+    "hb-09-chunk-0": {
+      "source_sha256": "e02c86e15c8efe20c395cfbdc0b219f531aae35709ca4ff158eb2a491618ad6f",
+      "doc_id": "hb-09",
+      "version": "2026",
+      "status": "current",
+      "text": "Za ulazak u kancelariju potrebna je lična kartica na svakom ulazu. Gubitak kartice mora se prijaviti recepciji istog dana."
+    },
+    "hb-09-chunk-1": {
+      "source_sha256": "ede2cefebe66836b131ab4740db9e7111f700dfa985c403fa102329c3e2191e6",
+      "doc_id": "hb-09",
+      "version": "2026",
+      "status": "current",
+      "text": "Parking je ograničen: mesta se dele i rezervišu preko aplikacije za prostor, po redosledu prijave."
+    },
+    "hb-10-chunk-0": {
+      "source_sha256": "1262a8cfec7ea15510133ba8a8f7e35e7852e74bce20f6349d2ecfa5208a43b0",
+      "doc_id": "hb-10",
+      "version": "2026",
+      "status": "current",
+      "text": "IT podrška radi od 08:00 do 18:00, od ponedeljka do petka. Podršku kontaktirajte kroz IT portal ili telefonom."
+    },
+    "hb-10-chunk-1": {
+      "source_sha256": "6b523e2fcf41b11c1e60f147dbd8eed128316f6fc6800511f7f14899fa7f03a6",
+      "doc_id": "hb-10",
+      "version": "2026",
+      "status": "current",
+      "text": "Ako laptop ne može da se uključi, donesite ga na IT pult na drugom spratu. Van radnog vremena podrške, hitni bezbednosni incidenti prijavljuju se dežurnoj liniji."
+    }
+  }
+}

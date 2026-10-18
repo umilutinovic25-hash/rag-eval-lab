@@ -4,6 +4,7 @@ test("pending history save warns before refresh and completes after the lock is 
   page,
 }) => {
   await page.goto("/");
+  await page.getByLabel("Jezik pitanja").selectOption("en");
   await page.evaluate(async () => {
     let locked!: () => void;
     const ready = new Promise<void>((resolve) => {
@@ -55,12 +56,18 @@ test("pending history save warns before refresh and completes after the lock is 
 test("a malformed nested chat response becomes an error without blanking the app", async ({
   page,
 }) => {
-  await page.route("**/api/chat", async (route) => {
+  await page.route("**/api/jobs/*", async (route) => {
     const response = await route.fetch();
     const data = await response.json();
-    await route.fulfill({ json: { ...data, citations: [null] } });
+    await route.fulfill({
+      json:
+        data.status === "completed"
+          ? { ...data, result: { ...data.result, citations: [null] } }
+          : data,
+    });
   });
   await page.goto("/");
+  await page.getByLabel("Jezik pitanja").selectOption("en");
   await page
     .getByRole("button", {
       name: "Koliko dana mogu da radim od kuće?",
@@ -75,6 +82,7 @@ test("a refused failed question does not claim that nonexistent citations are wr
   page,
 }) => {
   await page.goto("/");
+  await page.getByLabel("Jezik pitanja").selectOption("en");
   await page.getByRole("button", { name: "Evaluacija", exact: true }).click();
   await page
     .getByRole("tab", { name: "Dodatni test 2 29/32", exact: true })
@@ -99,6 +107,7 @@ test("a malformed extra evaluation run becomes an actionable error", async ({
     });
   });
   await page.goto("/");
+  await page.getByLabel("Jezik pitanja").selectOption("en");
   await page.getByRole("button", { name: "Evaluacija", exact: true }).click();
   await expect(page.getByRole("alert")).toContainText("neispravn");
   await expect(
@@ -110,6 +119,7 @@ test("version filter clears the previously selected document", async ({
   page,
 }) => {
   await page.goto("/");
+  await page.getByLabel("Jezik pitanja").selectOption("en");
   await page.getByRole("button", { name: "Dokumenti", exact: true }).click();
   await page
     .locator(".document-row")
@@ -126,13 +136,15 @@ test("version filter clears the previously selected document", async ({
   ).toBeVisible();
 });
 
-test("a stale tab cannot silently overwrite another tab history", async ({
+test("two tabs automatically merge conversations without overwriting history", async ({
   page,
   context,
 }) => {
   const other = await context.newPage();
   await page.goto("/");
+  await page.getByLabel("Jezik pitanja").selectOption("en");
   await other.goto("/");
+  await other.getByLabel("Jezik pitanja").selectOption("en");
   await page
     .getByRole("button", {
       name: "Koliko dana mogu da radim od kuće?",
@@ -149,16 +161,17 @@ test("a stale tab cannot silently overwrite another tab history", async ({
     .getByRole("button", { name: "Koji je budžet za obuke?", exact: true })
     .click();
   await expect(other.locator(".answer-text")).toContainText("800");
-  await expect(other.getByRole("alert")).toContainText("drugom tabu");
+  await expect(other.locator(".history-row")).toHaveCount(2);
+  await expect(page.locator(".history-row")).toHaveCount(2);
   const stored = await page.evaluate(() =>
     localStorage.getItem("izvor.conversations.v1"),
   );
   expect(stored).toContain("3 days per week");
-  expect(stored).not.toContain("yearly training budget");
+  expect(stored).toContain("yearly training budget");
   const download = other.waitForEvent("download");
   await other.getByLabel("Preuzmi razgovor").click();
   expect((await download).suggestedFilename()).toBe("izvor-razgovor.md");
   await other.screenshot({
-    path: test.info().outputPath("history-conflict.png"),
+    path: test.info().outputPath("history-synced.png"),
   });
 });

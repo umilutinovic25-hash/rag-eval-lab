@@ -1,0 +1,175 @@
+{
+  "reviewer": "",
+  "set_sha256": "1406f81dee8709249aaae72947a5d66cb6bf70496633be789415a8a361d97435",
+  "answers_sha256": "b2cbc89a0baca356ecaecd5dbc621b3bf8e3bc256bfa13e00ce12a2d3fd7edd8",
+  "items": [
+    {
+      "id": "V01-en",
+      "question": "How soon after returning must I send travel receipts, and through which app?",
+      "answer": "You must send travel receipts within 30 days of your return through the finance app. [hb-04-chunk-0]\nSource [hb-04-chunk-0]: \"Business travel must be approved before booking. Travel receipts must be submitted within 30 days of your return, through finance app.\"\nSource [hb-04-chunk-1]: \"Keep original receipts for hotels and flights. Daily allowances follow national rules for each destination.\"",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V01-sr",
+      "question": "Koliko dana posle povratka šaljem račune za službeni put i kroz koju aplikaciju?",
+      "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-04-chunk-0] Službeni put mora biti odobren pre rezervacije. Računi sa puta dostavljaju se u roku od 30 dana od povratka, preko finansijske aplikacije.",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V02-en",
+      "question": "What must I use at each office entrance?",
+      "answer": "Your personal badge. [hb-09-chunk-0]\nSource [hb-09-chunk-0]: \"Office access requires your personal badge at every entrance. Lost badges must be reported to reception on same day.\"",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V02-sr",
+      "question": "Šta moram da koristim na svakom ulazu u kancelariju?",
+      "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-09-chunk-0] Za ulazak u kancelariju potrebna je lična kartica na svakom ulazu. Gubitak kartice mora se prijaviti recepciji istog dana.",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V03-en",
+      "question": "How are parking spaces allocated and reserved?",
+      "answer": "Parking spaces are shared and reserved through the facilities app, on a first come, first served basis. [hb-09-chunk-1]\nSource [hb-09-chunk-1]: \"Parking is limited: spaces are shared and reserved through facilities app, first come, first served.\"",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V03-sr",
+      "question": "Kako se raspodeljuju i rezervišu parking mesta?",
+      "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-09-chunk-1] Parking je ograničen: mesta se dele i rezervišu preko aplikacije za prostor, po redosledu prijave.",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V04-en",
+      "question": "Which systems require multi-factor authentication?",
+      "answer": "Multi-factor authentication is required for email, VPN, and all internal tools. [hb-05-chunk-1]\nSource [hb-05-chunk-1]: \"Multi-factor authentication (MFA) is required for email, VPN and all internal tools.\"",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V04-sr",
+      "question": "Za koje sisteme je obavezna višefaktorska autentifikacija?",
+      "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-05-chunk-1] Višefaktorska autentifikacija (MFA) obavezna je za imejl, VPN i sve interne alate.",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V05-en",
+      "question": "Does unspent training money roll into another year?",
+      "answer": "No, unused budget does not carry over to next year.[hb-08-chunk-1]\nSource [hb-08-chunk-1]: \"Agree training with your manager before booking. Unused budget does not carry over to next year.\"",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V05-sr",
+      "question": "Da li se neiskorišćen budžet za obuke prenosi u sledeću godinu?",
+      "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-08-chunk-1] Obuku dogovorite sa rukovodiocem pre rezervacije. Neiskorišćeni budžet se ne prenosi u sledeću godinu.",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V06-en",
+      "question": "Who should hear first when my laptop has been stolen?",
+      "answer": "Report lost or stolen devices to security first. [hb-01-chunk-2]\nSource [hb-01-chunk-2]: \"Report lost or stolen devices to security first. Request a replacement laptop in IT portal under Hardware.\"",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V06-sr",
+      "question": "Kome prvo treba da prijavim ukraden laptop?",
+      "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-01-chunk-2] Izgubljene ili ukradene uređaje prijavite prvo službi bezbednosti. Zamenski laptop traži se u IT portalu, u odeljku Hardware.",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V07-en",
+      "question": "How much notice is required for a leave request and where is it sent?",
+      "answer": "Employees must make leave requests two weeks in advance in the HR portal. [hb-07-chunk-0]\nSource [hb-07-chunk-0]: \"Annual leave policy: employees get 22 days of annual leave per calendar year. Leave requests must be made two weeks in advance in HR portal.\"",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V07-sr",
+      "question": "Koliko unapred se podnosi zahtev za godišnji odmor i gde?",
+      "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-07-chunk-0] Godišnji odmor: zaposleni imaju 22 dana godišnjeg odmora po kalendarskoj godini. Zahtevi za odmor podnose se dve nedelje unapred u HR portalu.",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V08-en",
+      "question": "On which weekdays and during which hours can I contact IT support?",
+      "answer": "IT support is available from 08:00 to 18:00 on Monday to Friday. [hb-10-chunk-0]\nSource [hb-10-chunk-0]: \"IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.\"",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V08-sr",
+      "question": "Kojim danima i u koje vreme radi IT podrška?",
+      "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-10-chunk-0] IT podrška radi od 08:00 do 18:00, od ponedeljka do petka. Podršku kontaktirajte kroz IT portal ili telefonom.",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V09-en",
+      "question": "How large is the annual salary raise?",
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V09-sr",
+      "question": "Koliko iznosi godišnje povećanje plate?",
+      "answer": "Nemam dovoljno dokaza u dostupnom priručniku da odgovorim na ovo pitanje.",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V10-en",
+      "question": "Which private health insurer covers employees?",
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V10-sr",
+      "question": "Koja privatna zdravstvena osiguravajuća kuća pokriva zaposlene?",
+      "answer": "Nemam dovoljno dokaza u dostupnom priručniku da odgovorim na ovo pitanje.",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V11-en",
+      "question": "What is the name of the chief executive?",
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V11-sr",
+      "question": "Kako se zove izvršni direktor?",
+      "answer": "Nemam dovoljno dokaza u dostupnom priručniku da odgovorim na ovo pitanje.",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V12-en",
+      "question": "Is the office closed on every public holiday?",
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "decision": "pending",
+      "comment": ""
+    },
+    {
+      "id": "V12-sr",
+      "question": "Da li je kancelarija zatvorena za svaki državni praznik?",
+      "answer": "Nemam dovoljno dokaza u dostupnom priručniku da odgovorim na ovo pitanje.",
+      "decision": "pending",
+      "comment": ""
+    }
+  ]
+}

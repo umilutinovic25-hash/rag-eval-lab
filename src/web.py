@@ -7,20 +7,36 @@ from functools import partial
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import mimetypes
+import shutil
 from pathlib import Path
 import threading
 import time
 from urllib.parse import unquote, urlsplit
 import urllib.request
 
-from . import config, embeddings, llm, rag
+from . import config, embeddings, llm, rag, localization, operation
+from .jobs import JobManager, JobCapacityError
 from .chunking import build_chunks
 from .corpus import load_corpus
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_CONFIG = config.snapshot()
 PIPELINE_LOCK = threading.RLock()
+RUNTIME_DIR = ROOT / 'data/runtime'
 SAVED_EVALUATION = ROOT / 'evidence/improvements/final-manifest.json'
+
+
+@contextmanager
+def pipeline_lock():
+    # A legacy synchronous call can own the lock while a cancellable job waits.
+    operation.progress('waiting', 'Čekam završetak prethodne lokalne obrade.')
+    while not PIPELINE_LOCK.acquire(timeout=.1):
+        operation.check()
+    try:
+        operation.check()
+        yield
+    finally:
+        PIPELINE_LOCK.release()
 
 
 @contextmanager
@@ -28,7 +44,7 @@ def profile_scope(profile):
     """The CLI pipeline uses globals; serialize requests and always restore them."""
     if profile not in ('current', 'offline'):
         raise ValueError('Nepoznat režim rada.')
-    with PIPELINE_LOCK:
+    with pipeline_lock():
         previous = config.snapshot()
         try:
             for key, value in BASE_CONFIG.items():
@@ -47,19 +63,52 @@ def documents_payload():
                 for doc in load_corpus()]
 
 
-def chat_payload(question, profile='current'):
+@contextmanager
+def runtime_caches():
+    """Run under PIPELINE_LOCK; preserve historical experiment caches."""
+    previous = embeddings.CACHE_PATH, llm.CACHE_PATH
+    directory = RUNTIME_DIR
+    directory.mkdir(parents=True, exist_ok=True)
+    for source in (*previous, llm.metadata_path()):
+        destination = directory / source.name
+        if source.exists() and not destination.exists():
+            shutil.copyfile(source, destination)
+    embeddings.CACHE_PATH, llm.CACHE_PATH = (directory / p.name for p in previous)
+    try:
+        yield
+    finally:
+        embeddings.CACHE_PATH, llm.CACHE_PATH = previous
+
+
+def chat_payload(question, profile='current', language='auto'):
     if not isinstance(question, str) or not question.strip() or len(question) > 2000:
         raise ValueError('Unesite pitanje od 1 do 2000 znakova.')
     started = time.perf_counter()
-    with profile_scope(profile):
+    language = localization.language_for(question, language)
+    with profile_scope(profile), runtime_caches():
+        operation.progress('retrieval', 'Pretražujem izvorne odlomke.')
         chunks = build_chunks(load_corpus())
         by_id = {c.chunk_id: c for c in chunks}
-        result = rag.build_grounded_answer(question.strip(), chunks)
-        return dict(answer=result.answer, refused=result.refused,
-                    citations=[asdict(by_id[c]) for c in result.citations],
-                    retrieved=[dict(asdict(r.chunk), score=r.score) for r in result.retrieved],
+        query, translated = question.strip(), {}
+        if language == 'sr':
+            chunks = localization.localized_chunks(chunks)
+            translated = {c.chunk_id: c.text for c in chunks}
+            query = localization.retrieval_question(question)
+            config.ANSWER_MODE = 'extractive'
+        result = rag.build_grounded_answer(query, chunks)
+        operation.check()
+        answer = result.answer
+        if language == 'sr':
+            answer = ('Nemam dovoljno dokaza u dostupnom priručniku da odgovorim na ovo pitanje.' if result.refused else
+                      answer.replace('Grounded response based on retrieved context:', 'Odgovor iz prevedenih izvornih odlomaka:', 1))
+        def source(chunk_id):
+            return dict(asdict(by_id[chunk_id]), **({'translated_text': translated[chunk_id]} if translated else {}))
+        return dict(answer=answer, refused=result.refused,
+                    citations=[source(c) for c in result.citations],
+                    retrieved=[dict(source(r.chunk.chunk_id), score=r.score) for r in result.retrieved],
                     trace=result.trace, fallback=result.generation_fallback_reason,
-                    question=question.strip(), profile=profile,
+                    question=question.strip(), profile=profile, language=language, retrieval_question=query,
+                    translation_review_status=localization.REVIEW_STATUS if language == 'sr' else None,
                     seconds=round(time.perf_counter() - started, 3),
                     created_at=datetime.now(timezone.utc).isoformat())
 
@@ -85,6 +134,11 @@ def evaluation_payload(data, origin):
 class WebServer(ThreadingHTTPServer):
     daemon_threads = True
     block_on_close = False
+
+    def server_close(self):
+        if hasattr(self, 'jobs'):
+            self.jobs.close()
+        super().server_close()
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -117,6 +171,9 @@ class Handler(BaseHTTPRequestHandler):
         if not self.valid_host():
             return self.reply(403, {'error': 'Pristup je dozvoljen samo sa lokalne adrese.'})
         path = urlsplit(self.path).path
+        if path.startswith('/api/jobs/'):
+            job = self.server.jobs.get(path.removeprefix('/api/jobs/'))
+            return self.reply(200, job) if job else self.reply(404, {'error': 'Posao ne postoji ili je istekao. Pošaljite pitanje ponovo.'})
         if path == '/api/status':
             online = False
             models = []
@@ -132,7 +189,7 @@ class Handler(BaseHTTPRequestHandler):
                                       documents=len(documents),
                                       current_documents=sum(doc.status == 'current' for doc in documents)))
         if path == '/api/documents':
-            return self.reply(200, {'documents': documents_payload()})
+            return self.reply(200, {'documents': self.server.documents})
         if path == '/api/evaluations':
             try:
                 return self.reply(200, evaluation_payload(json.loads(SAVED_EVALUATION.read_text()), 'saved'))
@@ -157,7 +214,8 @@ class Handler(BaseHTTPRequestHandler):
                                      f'http://127.0.0.1:{self.server.server_address[1]}'):
             return self.reply(403, {'error': 'Zahtev mora poticati iz lokalnog interfejsa.'})
         path = urlsplit(self.path).path
-        if path not in ('/api/chat', '/api/evaluations/run'):
+        cancel_id = path[len('/api/jobs/'):-len('/cancel')] if path.startswith('/api/jobs/') and path.endswith('/cancel') else None
+        if path not in ('/api/chat', '/api/evaluations/run', '/api/jobs') and not cancel_id:
             return self.reply(404, {'error': 'Nepoznata API putanja.'})
         try:
             length = int(self.headers.get('Content-Length', '0'))
@@ -168,8 +226,17 @@ class Handler(BaseHTTPRequestHandler):
             data = json.loads(self.rfile.read(length))
             if not isinstance(data, dict):
                 raise ValueError('Očekivan je JSON objekat.')
+            if cancel_id:
+                job = self.server.jobs.cancel(cancel_id)
+                return self.reply(200, job) if job else self.reply(404, {'error': 'Posao ne postoji ili je istekao.'})
+            if path == '/api/jobs':
+                question, profile, language = data.get('question'), data.get('profile', 'current'), data.get('language', 'auto')
+                if not isinstance(question, str) or not question.strip() or len(question) > 2000 or profile not in ('current', 'offline'):
+                    raise ValueError('Unesite pitanje od 1 do 2000 znakova i ispravan režim.')
+                localization.language_for(question, language)
+                return self.reply(202, self.server.jobs.submit(dict(question=question, profile=profile, language=language)))
             if path == '/api/chat':
-                result = chat_payload(data.get('question'), data.get('profile', 'current'))
+                result = chat_payload(data.get('question'), data.get('profile', 'current'), data.get('language', 'auto'))
             else:
                 from .experiment_runner import execute
                 with profile_scope('current'):
@@ -177,6 +244,8 @@ class Handler(BaseHTTPRequestHandler):
             return self.reply(200, result)
         except (ValueError, UnicodeDecodeError) as error:
             return self.reply(400, {'error': str(error)})
+        except JobCapacityError as error:
+            return self.reply(429, {'error': str(error)})
         except (embeddings.EmbeddingError, llm.LLMError) as error:
             return self.reply(503, {'error': 'Lokalni model nije dostupan za ovo pitanje. Pokrenite Ollama ili izaberite režim Bez modela.', 'detail': str(error)})
         except Exception:
@@ -184,7 +253,11 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def make_server(port=8767, static_dir=None):
-    return WebServer(('127.0.0.1', port), partial(Handler, static_dir=static_dir))
+    documents = documents_payload()
+    server = WebServer(('127.0.0.1', port), partial(Handler, static_dir=static_dir))
+    server.documents = documents
+    server.jobs = JobManager(chat_payload)
+    return server
 
 
 def main():

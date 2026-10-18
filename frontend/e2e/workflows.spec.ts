@@ -11,6 +11,7 @@ for (const width of [1505, 390]) {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.setViewportSize({ width, height: width === 390 ? 844 : 1045 });
     await page.goto("/");
+    await page.getByLabel("Jezik pitanja").selectOption("en");
     await page
       .getByRole("button", {
         name: "Koliko dana mogu da radim od kuće?",
@@ -65,6 +66,7 @@ test("history search, remove, undo and persistence keep complete answers", async
   page,
 }) => {
   await page.goto("/");
+  await page.getByLabel("Jezik pitanja").selectOption("en");
   await page
     .getByRole("button", {
       name: "Koliko dana mogu da radim od kuće?",
@@ -110,6 +112,7 @@ test("connection failure shows retry instructions and clears stale sources", asy
   page,
 }) => {
   await page.goto("/");
+  await page.getByLabel("Jezik pitanja").selectOption("en");
   await page
     .getByRole("button", {
       name: "Koliko dana mogu da radim od kuće?",
@@ -117,7 +120,7 @@ test("connection failure shows retry instructions and clears stale sources", asy
     })
     .click();
   await expect(page.locator(".source-item")).toHaveCount(2);
-  await page.route("**/api/chat", (route) => route.abort("failed"));
+  await page.route("**/api/jobs", (route) => route.abort("failed"));
   await page
     .getByLabel("Pitanje o priručniku")
     .fill("What is the parental leave policy?");

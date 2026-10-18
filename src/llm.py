@@ -5,7 +5,7 @@ import json
 import re
 import urllib.request
 
-from . import config
+from . import config, operation
 from .claim_checks import clauses
 from .embeddings import CACHE_PATH as EMBEDDING_CACHE_PATH, EmbeddingError, load_cache, save_cache
 
@@ -48,17 +48,19 @@ def request_generation(model: str, prompt: str, max_tokens: int) -> str:
     ).encode("utf-8")
     request = urllib.request.Request(OLLAMA_URL, data=payload, headers={"Content-Type": "application/json"})
     try:
-        with urllib.request.urlopen(request, timeout=120) as response:
+        with urllib.request.urlopen(request, timeout=operation.timeout(120)) as response:
             body = json.load(response)
             text = body["response"]
     except (OSError, ValueError, KeyError, TypeError) as error:
         raise LLMError(f"Uncached prompt needs Ollama with model {model!r} at {OLLAMA_URL} ({error}).") from error
+    operation.check()
     if not isinstance(text, str) or not text.strip():
         raise LLMError(f"Ollama returned no text for model {model!r}.")
     return GenerationText(text, {k: body.get(k) for k in ("done_reason", "done", "model", "eval_count", "prompt_eval_count", "total_duration")})
 
 
 def generate(model: str, prompt: str, max_tokens: int) -> str:
+    operation.check()
     try:
         cache = load_cache(CACHE_PATH)
         metadata = load_cache(metadata_path())

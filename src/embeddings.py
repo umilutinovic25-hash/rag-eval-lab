@@ -9,7 +9,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-from . import config
+from . import config, operation
 
 
 CACHE_PATH = Path(__file__).resolve().parents[1] / "data" / "embedding_cache.json"
@@ -68,13 +68,14 @@ def request_embeddings(texts: list[str]) -> list[list[float]]:
     payload = json.dumps({"model": config.EMBEDDING_MODEL, "input": texts}).encode("utf-8")
     request = urllib.request.Request(OLLAMA_URL, data=payload, headers={"Content-Type": "application/json"})
     try:
-        with urllib.request.urlopen(request, timeout=60) as response:
+        with urllib.request.urlopen(request, timeout=operation.timeout(60)) as response:
             vectors = json.load(response)["embeddings"]
     except (OSError, ValueError, KeyError, TypeError) as error:
         raise EmbeddingError(
             f"Embedding {len(texts)} uncached text(s) needs Ollama with model "
             f"{config.EMBEDDING_MODEL!r} at {OLLAMA_URL} ({error})."
         ) from error
+    operation.check()
     if not isinstance(vectors, list) or len(vectors) != len(texts):
         raise EmbeddingError(f"Ollama returned {len(vectors) if isinstance(vectors, list) else 'no'} vectors for {len(texts)} text(s).")
     dimension = None

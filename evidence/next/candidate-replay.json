@@ -1,0 +1,3157 @@
+{
+  "manifest": {
+    "created_at": "2026-10-18T22:13:04.395152+00:00",
+    "git_revision": "364563ed84d36b23bc833a4f14bd604222bf2a6e",
+    "question_set_sha256": "1406f81dee8709249aaae72947a5d66cb6bf70496633be789415a8a361d97435",
+    "frozen_set_verified": true,
+    "profile": "current",
+    "mode": "replay",
+    "source_sha256": {
+      "__init__.py": "da347dee6bd3bb948c5515e7b3f387671889840e5b0778549f7b757ec41eba21",
+      "acceptance_runner.py": "cb7d12f97e5b149d60b1f93d3c19e9f160c4dbc93f2e9c7843e5eb75bf9d57ca",
+      "answer_quality.py": "38f3e9a01fbd23494be9613738bd329d6071d3dc18be2688f3c377d0064bb67a",
+      "chunking.py": "30f3b869d33f895e227ac7778100f5329e44d13a324e8f80f07103a9f6e48fd4",
+      "claim_checks.py": "5cbbe95025cb8ab5bc812e79cb917fe4691a20c506a35bb8efb705176f2d5684",
+      "cli.py": "55a172b46c0f33f6898a11830db9d030984c5f26740e84de387d2a72161243d5",
+      "completeness.py": "20c78746f0ca7471a656560b07d7ff3025689c9e4846e2052c5f673910a7c53c",
+      "config.py": "bae87395a50a9e4c6214926bc10d6799f7e9de79872bb1e41ecb4c3ee98d2d3b",
+      "corpus.py": "52cceca071e43682705234713d12a4b94bbf3617e9e7c44cfcba1f6f94a6ef78",
+      "embeddings.py": "a45569c0e8c9718cd4331e128fc30f72a3d9389d83efe435e0d55b3143c87a77",
+      "eval_compare.py": "c84b246ff3006aa285af2eb2e04addd4fce5264897e0e346ef38f8013b51009c",
+      "eval_runner.py": "cc00aad5d3a997772aab06c95bb57299c87c51b82be080b12608ff17a99bd704",
+      "experiment_runner.py": "0ed608e263bc9fb93caacae8bf2c8b2ec8e22402e0469e61977f1d2c9f9de3a7",
+      "holdout_runner.py": "2b52343462a9db029ccf1e63315f14fcb86df3cdebbf5cd9cb45aa93cd523942",
+      "jobs.py": "0f92586d9d32764fdb2d9e0526aec2313c598f0cf90c78ac613ae92d2a541034",
+      "llm.py": "cc9aaaeebfb41c5a3cbb6402c2055e7b43d2d918468211cf7a45e17f15e7b744",
+      "localization.py": "a34ac02a798b4bb9ee8a429f45fb8014ad9929ae2ec247cc865299c8432fb995",
+      "operation.py": "2f26d8f69bb2dc734d3b182278dc579325035a21cb293fec3fe3419cee163145",
+      "rag.py": "191dca47c5e7ecaad4ec72a73bc9343a4d0762509953fd7d63d0a4d76b0cf147",
+      "retrieval.py": "5f14758cbd5ff2962495995db1eaaf6bd8268bd9960041bb7dc30a3cdf836c2e",
+      "web.py": "3edd371b9b0080dc6a3051659b5a003708cacfe8bfec79ca718c1615344c00ae"
+    },
+    "translation_sha256": "cfc7b12388d0e73b1b0ca2ca4cd23aabbf67fd54053f58a0a147752e9426b212",
+    "answers_sha256": "b2cbc89a0baca356ecaecd5dbc621b3bf8e3bc256bfa13e00ce12a2d3fd7edd8",
+    "cache_before_sha256": {
+      "llm_cache.json": "77ec9639a9b6058a2e2e9503df73ba482315b83988a4138208696fa984ce6fc4",
+      "llm_cache-metadata.json": "181f99b68eda02469fa293956be93490d8c9a13a623b4f2f4db8b28b66046969",
+      "embedding_cache.json": "0c4a20e44262a4a0587d0f93e75da6eac092b1a1e5cee73da1b1a7b93d77f6e5"
+    },
+    "cache_after_sha256": {
+      "llm_cache.json": "77ec9639a9b6058a2e2e9503df73ba482315b83988a4138208696fa984ce6fc4",
+      "llm_cache-metadata.json": "181f99b68eda02469fa293956be93490d8c9a13a623b4f2f4db8b28b66046969",
+      "embedding_cache.json": "0c4a20e44262a4a0587d0f93e75da6eac092b1a1e5cee73da1b1a7b93d77f6e5"
+    },
+    "independent_blind_evidence": false,
+    "review_status": "assistant_candidate_pending_human_review",
+    "reviewer": null,
+    "requests": {
+      "embeddings": 0,
+      "llm": 0
+    },
+    "local_models": {
+      "status": "not_checked"
+    },
+    "interpretation": "Automatic substring/source checks on an assistant-authored frozen candidate. Cached and live calls are counted; no independent human approval.",
+    "latency_seconds": {
+      "p50": 0.013,
+      "p95": 0.015
+    }
+  },
+  "summary": {
+    "passed_automatic_checks": 23,
+    "total_language_variants": 24,
+    "underlying_cases": 12
+  },
+  "results": [
+    {
+      "id": "V01-en",
+      "pair": "receipts",
+      "language": "en",
+      "question": "How soon after returning must I send travel receipts, and through which app?",
+      "behaviour": true,
+      "facts": {
+        "30 days": true,
+        "finance app": true
+      },
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "You must send travel receipts within 30 days of your return through the finance app. [hb-04-chunk-0]\nSource [hb-04-chunk-0]: \"Business travel must be approved before booking. Travel receipts must be submitted within 30 days of your return, through finance app.\"\nSource [hb-04-chunk-1]: \"Keep original receipts for hotels and flights. Daily allowances follow national rules for each destination.\"",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-04-chunk-0",
+            "doc_id": "hb-04",
+            "title": "Travel expenses",
+            "version": "2026",
+            "status": "current",
+            "text": "Business travel must be approved before booking. Travel receipts must be submitted within 30 days of your return, through finance app."
+          },
+          {
+            "chunk_id": "hb-04-chunk-1",
+            "doc_id": "hb-04",
+            "title": "Travel expenses",
+            "version": "2026",
+            "status": "current",
+            "text": "Keep original receipts for hotels and flights. Daily allowances follow national rules for each destination."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-04-chunk-0",
+            "doc_id": "hb-04",
+            "title": "Travel expenses",
+            "version": "2026",
+            "status": "current",
+            "text": "Business travel must be approved before booking. Travel receipts must be submitted within 30 days of your return, through finance app.",
+            "score": 0.7511745442724066
+          },
+          {
+            "chunk_id": "hb-04-chunk-1",
+            "doc_id": "hb-04",
+            "title": "Travel expenses",
+            "version": "2026",
+            "status": "current",
+            "text": "Keep original receipts for hotels and flights. Daily allowances follow national rules for each destination.",
+            "score": 0.658769510846556
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-04-chunk-0",
+                "score": 0.7511745442724066
+              },
+              {
+                "chunk_id": "hb-04-chunk-1",
+                "score": 0.658769510846556
+              },
+              {
+                "chunk_id": "hb-06-chunk-2",
+                "score": 0.5465466277458484
+              },
+              {
+                "chunk_id": "hb-03-chunk-1",
+                "score": 0.5232131688283513
+              },
+              {
+                "chunk_id": "hb-01-chunk-1",
+                "score": 0.5182983679119508
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-04-chunk-0",
+              "hb-04-chunk-1"
+            ],
+            "expanded": [
+              "hb-04-chunk-0",
+              "hb-04-chunk-1"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "generation",
+            "text": "You must send travel receipts within 30 days of your return through the finance app. [hb-04-chunk-0]",
+            "metadata": {
+              "done": true,
+              "done_reason": "stop",
+              "eval_count": 29,
+              "model": "qwen2.5:7b",
+              "prompt_eval_count": 176,
+              "total_duration": 4412207875
+            }
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-04-chunk-0",
+              "hb-04-chunk-1"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "How soon after returning must I send travel receipts, and through which app?",
+        "profile": "current",
+        "language": "en",
+        "retrieval_question": "How soon after returning must I send travel receipts, and through which app?",
+        "translation_review_status": null,
+        "seconds": 0.015,
+        "created_at": "2026-10-18T22:13:04.087728+00:00"
+      },
+      "error": null,
+      "seconds": 0.015,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "generation",
+          "seconds": 0.014
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V01-sr",
+      "pair": "receipts",
+      "language": "sr",
+      "question": "Koliko dana posle povratka šaljem račune za službeni put i kroz koju aplikaciju?",
+      "behaviour": true,
+      "facts": {
+        "30 dana": true,
+        "finansijske aplikacije": true
+      },
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-04-chunk-0] Službeni put mora biti odobren pre rezervacije. Računi sa puta dostavljaju se u roku od 30 dana od povratka, preko finansijske aplikacije.",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-04-chunk-0",
+            "doc_id": "hb-04",
+            "title": "Travel expenses",
+            "version": "2026",
+            "status": "current",
+            "text": "Business travel must be approved before booking. Travel receipts must be submitted within 30 days of your return, through finance app.",
+            "translated_text": "Službeni put mora biti odobren pre rezervacije. Računi sa puta dostavljaju se u roku od 30 dana od povratka, preko finansijske aplikacije."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-04-chunk-0",
+            "doc_id": "hb-04",
+            "title": "Travel expenses",
+            "version": "2026",
+            "status": "current",
+            "text": "Business travel must be approved before booking. Travel receipts must be submitted within 30 days of your return, through finance app.",
+            "translated_text": "Službeni put mora biti odobren pre rezervacije. Računi sa puta dostavljaju se u roku od 30 dana od povratka, preko finansijske aplikacije.",
+            "score": 0.7744938104351531
+          },
+          {
+            "chunk_id": "hb-04-chunk-1",
+            "doc_id": "hb-04",
+            "title": "Travel expenses",
+            "version": "2026",
+            "status": "current",
+            "text": "Keep original receipts for hotels and flights. Daily allowances follow national rules for each destination.",
+            "translated_text": "Sačuvajte originalne račune za hotele i letove. Dnevnice prate nacionalna pravila za svako odredište.",
+            "score": 0.589394555353612
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-04-chunk-0",
+                "score": 0.7744938104351531
+              },
+              {
+                "chunk_id": "hb-04-chunk-1",
+                "score": 0.589394555353612
+              },
+              {
+                "chunk_id": "hb-01-chunk-1",
+                "score": 0.5418619388111555
+              },
+              {
+                "chunk_id": "hb-07-chunk-1",
+                "score": 0.5184420520640322
+              },
+              {
+                "chunk_id": "hb-07-chunk-0",
+                "score": 0.5146467122662631
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-04-chunk-0"
+            ],
+            "expanded": [
+              "hb-04-chunk-0"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-04-chunk-0"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "Koliko dana posle povratka šaljem račune za službeni put i kroz koju aplikaciju?",
+        "profile": "current",
+        "language": "sr",
+        "retrieval_question": "koliko dana posle povratka šaljem račune za službeni put i kroz koju aplikaciju?",
+        "translation_review_status": "assistant_translation_pending_human_review",
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.101090+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V02-en",
+      "pair": "badge",
+      "language": "en",
+      "question": "What must I use at each office entrance?",
+      "behaviour": true,
+      "facts": {
+        "personal badge": true
+      },
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Your personal badge. [hb-09-chunk-0]\nSource [hb-09-chunk-0]: \"Office access requires your personal badge at every entrance. Lost badges must be reported to reception on same day.\"",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-09-chunk-0",
+            "doc_id": "hb-09",
+            "title": "Office access and parking",
+            "version": "2026",
+            "status": "current",
+            "text": "Office access requires your personal badge at every entrance. Lost badges must be reported to reception on same day."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-09-chunk-0",
+            "doc_id": "hb-09",
+            "title": "Office access and parking",
+            "version": "2026",
+            "status": "current",
+            "text": "Office access requires your personal badge at every entrance. Lost badges must be reported to reception on same day.",
+            "score": 0.7249315627101949
+          },
+          {
+            "chunk_id": "hb-05-chunk-1",
+            "doc_id": "hb-05",
+            "title": "Passwords and access",
+            "version": "2026",
+            "status": "current",
+            "text": "Multi-factor authentication (MFA) is required for email, VPN and all internal tools.",
+            "score": 0.5433713662023633
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-09-chunk-0",
+                "score": 0.7249315627101949
+              },
+              {
+                "chunk_id": "hb-05-chunk-1",
+                "score": 0.5433713662023633
+              },
+              {
+                "chunk_id": "hb-01-chunk-3",
+                "score": 0.5398111247559992
+              },
+              {
+                "chunk_id": "hb-05-chunk-0",
+                "score": 0.5200807319745107
+              },
+              {
+                "chunk_id": "hb-04-chunk-1",
+                "score": 0.4964448294413785
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-09-chunk-0"
+            ],
+            "expanded": [
+              "hb-09-chunk-0"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "generation",
+            "text": "Your personal badge. [hb-09-chunk-0]",
+            "metadata": {
+              "done": true,
+              "done_reason": "stop",
+              "eval_count": 15,
+              "model": "qwen2.5:7b",
+              "prompt_eval_count": 138,
+              "total_duration": 722972291
+            }
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-09-chunk-0"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "What must I use at each office entrance?",
+        "profile": "current",
+        "language": "en",
+        "retrieval_question": "What must I use at each office entrance?",
+        "translation_review_status": null,
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.114605+00:00"
+      },
+      "error": null,
+      "seconds": 0.014,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "generation",
+          "seconds": 0.013
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V02-sr",
+      "pair": "badge",
+      "language": "sr",
+      "question": "Šta moram da koristim na svakom ulazu u kancelariju?",
+      "behaviour": true,
+      "facts": {
+        "ličnu karticu": false
+      },
+      "expected_source": true,
+      "automatic_checks_pass": false,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-09-chunk-0] Za ulazak u kancelariju potrebna je lična kartica na svakom ulazu. Gubitak kartice mora se prijaviti recepciji istog dana.",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-09-chunk-0",
+            "doc_id": "hb-09",
+            "title": "Office access and parking",
+            "version": "2026",
+            "status": "current",
+            "text": "Office access requires your personal badge at every entrance. Lost badges must be reported to reception on same day.",
+            "translated_text": "Za ulazak u kancelariju potrebna je lična kartica na svakom ulazu. Gubitak kartice mora se prijaviti recepciji istog dana."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-09-chunk-0",
+            "doc_id": "hb-09",
+            "title": "Office access and parking",
+            "version": "2026",
+            "status": "current",
+            "text": "Office access requires your personal badge at every entrance. Lost badges must be reported to reception on same day.",
+            "translated_text": "Za ulazak u kancelariju potrebna je lična kartica na svakom ulazu. Gubitak kartice mora se prijaviti recepciji istog dana.",
+            "score": 0.7025725340197604
+          },
+          {
+            "chunk_id": "hb-05-chunk-0",
+            "doc_id": "hb-05",
+            "title": "Passwords and access",
+            "version": "2026",
+            "status": "current",
+            "text": "Passwords must be changed every 90 days and must contain at least 12 characters.",
+            "translated_text": "Lozinke se moraju menjati svakih 90 dana i moraju sadržati najmanje 12 znakova.",
+            "score": 0.49215585837971626
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-09-chunk-0",
+                "score": 0.7025725340197604
+              },
+              {
+                "chunk_id": "hb-05-chunk-0",
+                "score": 0.49215585837971626
+              },
+              {
+                "chunk_id": "hb-01-chunk-3",
+                "score": 0.49125779043330653
+              },
+              {
+                "chunk_id": "hb-05-chunk-1",
+                "score": 0.49071000988809804
+              },
+              {
+                "chunk_id": "hb-06-chunk-0",
+                "score": 0.48507281552490644
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-09-chunk-0"
+            ],
+            "expanded": [
+              "hb-09-chunk-0"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-09-chunk-0"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "Šta moram da koristim na svakom ulazu u kancelariju?",
+        "profile": "current",
+        "language": "sr",
+        "retrieval_question": "šta moram da koristim na svakom ulazu u kancelariju?",
+        "translation_review_status": "assistant_translation_pending_human_review",
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.127663+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V03-en",
+      "pair": "parking",
+      "language": "en",
+      "question": "How are parking spaces allocated and reserved?",
+      "behaviour": true,
+      "facts": {
+        "first come, first served": true,
+        "facilities app": true
+      },
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Parking spaces are shared and reserved through the facilities app, on a first come, first served basis. [hb-09-chunk-1]\nSource [hb-09-chunk-1]: \"Parking is limited: spaces are shared and reserved through facilities app, first come, first served.\"",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-09-chunk-1",
+            "doc_id": "hb-09",
+            "title": "Office access and parking",
+            "version": "2026",
+            "status": "current",
+            "text": "Parking is limited: spaces are shared and reserved through facilities app, first come, first served."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-09-chunk-1",
+            "doc_id": "hb-09",
+            "title": "Office access and parking",
+            "version": "2026",
+            "status": "current",
+            "text": "Parking is limited: spaces are shared and reserved through facilities app, first come, first served.",
+            "score": 0.7325079334989295
+          },
+          {
+            "chunk_id": "hb-08-chunk-1",
+            "doc_id": "hb-08",
+            "title": "Training budget",
+            "version": "2026",
+            "status": "current",
+            "text": "Agree training with your manager before booking. Unused budget does not carry over to next year.",
+            "score": 0.46476001689976004
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-09-chunk-1",
+                "score": 0.7325079334989295
+              },
+              {
+                "chunk_id": "hb-08-chunk-1",
+                "score": 0.46476001689976004
+              },
+              {
+                "chunk_id": "hb-04-chunk-1",
+                "score": 0.44287555559144526
+              },
+              {
+                "chunk_id": "hb-06-chunk-0",
+                "score": 0.43745678303023816
+              },
+              {
+                "chunk_id": "hb-01-chunk-3",
+                "score": 0.4325351156444007
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-09-chunk-1"
+            ],
+            "expanded": [
+              "hb-09-chunk-1"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "generation",
+            "text": "Parking spaces are shared and reserved through the facilities app, on a first come, first served basis. [hb-09-chunk-1]",
+            "metadata": {
+              "done": true,
+              "done_reason": "stop",
+              "eval_count": 31,
+              "model": "qwen2.5:7b",
+              "prompt_eval_count": 135,
+              "total_duration": 1263443541
+            }
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-09-chunk-1"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "How are parking spaces allocated and reserved?",
+        "profile": "current",
+        "language": "en",
+        "retrieval_question": "How are parking spaces allocated and reserved?",
+        "translation_review_status": null,
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.140876+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "generation",
+          "seconds": 0.013
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V03-sr",
+      "pair": "parking",
+      "language": "sr",
+      "question": "Kako se raspodeljuju i rezervišu parking mesta?",
+      "behaviour": true,
+      "facts": {
+        "redosledu prijave": true,
+        "aplikacije za prostor": true
+      },
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-09-chunk-1] Parking je ograničen: mesta se dele i rezervišu preko aplikacije za prostor, po redosledu prijave.",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-09-chunk-1",
+            "doc_id": "hb-09",
+            "title": "Office access and parking",
+            "version": "2026",
+            "status": "current",
+            "text": "Parking is limited: spaces are shared and reserved through facilities app, first come, first served.",
+            "translated_text": "Parking je ograničen: mesta se dele i rezervišu preko aplikacije za prostor, po redosledu prijave."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-09-chunk-1",
+            "doc_id": "hb-09",
+            "title": "Office access and parking",
+            "version": "2026",
+            "status": "current",
+            "text": "Parking is limited: spaces are shared and reserved through facilities app, first come, first served.",
+            "translated_text": "Parking je ograničen: mesta se dele i rezervišu preko aplikacije za prostor, po redosledu prijave.",
+            "score": 0.7215236740113848
+          },
+          {
+            "chunk_id": "hb-08-chunk-1",
+            "doc_id": "hb-08",
+            "title": "Training budget",
+            "version": "2026",
+            "status": "current",
+            "text": "Agree training with your manager before booking. Unused budget does not carry over to next year.",
+            "translated_text": "Obuku dogovorite sa rukovodiocem pre rezervacije. Neiskorišćeni budžet se ne prenosi u sledeću godinu.",
+            "score": 0.4460933558992
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-09-chunk-1",
+                "score": 0.7215236740113848
+              },
+              {
+                "chunk_id": "hb-08-chunk-1",
+                "score": 0.4460933558992
+              },
+              {
+                "chunk_id": "hb-07-chunk-1",
+                "score": 0.42834446443058133
+              },
+              {
+                "chunk_id": "hb-06-chunk-0",
+                "score": 0.41433378267030097
+              },
+              {
+                "chunk_id": "hb-04-chunk-1",
+                "score": 0.39765215937517046
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-09-chunk-1"
+            ],
+            "expanded": [
+              "hb-09-chunk-1"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-09-chunk-1"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "Kako se raspodeljuju i rezervišu parking mesta?",
+        "profile": "current",
+        "language": "sr",
+        "retrieval_question": "kako se raspodeljuju i rezervišu parking mesta?",
+        "translation_review_status": "assistant_translation_pending_human_review",
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.153745+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V04-en",
+      "pair": "mfa",
+      "language": "en",
+      "question": "Which systems require multi-factor authentication?",
+      "behaviour": true,
+      "facts": {
+        "email": true,
+        "VPN": true,
+        "all internal tools": true
+      },
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Multi-factor authentication is required for email, VPN, and all internal tools. [hb-05-chunk-1]\nSource [hb-05-chunk-1]: \"Multi-factor authentication (MFA) is required for email, VPN and all internal tools.\"",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-05-chunk-1",
+            "doc_id": "hb-05",
+            "title": "Passwords and access",
+            "version": "2026",
+            "status": "current",
+            "text": "Multi-factor authentication (MFA) is required for email, VPN and all internal tools."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-05-chunk-1",
+            "doc_id": "hb-05",
+            "title": "Passwords and access",
+            "version": "2026",
+            "status": "current",
+            "text": "Multi-factor authentication (MFA) is required for email, VPN and all internal tools.",
+            "score": 0.7645366567174245
+          },
+          {
+            "chunk_id": "hb-05-chunk-0",
+            "doc_id": "hb-05",
+            "title": "Passwords and access",
+            "version": "2026",
+            "status": "current",
+            "text": "Passwords must be changed every 90 days and must contain at least 12 characters.",
+            "score": 0.5549482359497152
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-05-chunk-1",
+                "score": 0.7645366567174245
+              },
+              {
+                "chunk_id": "hb-05-chunk-0",
+                "score": 0.5549482359497152
+              },
+              {
+                "chunk_id": "hb-09-chunk-0",
+                "score": 0.48322353600976853
+              },
+              {
+                "chunk_id": "hb-05-chunk-2",
+                "score": 0.47509963946869777
+              },
+              {
+                "chunk_id": "hb-09-chunk-1",
+                "score": 0.45277462623250714
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-05-chunk-1"
+            ],
+            "expanded": [
+              "hb-05-chunk-1"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "generation",
+            "text": "Multi-factor authentication is required for email, VPN, and all internal tools. [hb-05-chunk-1]",
+            "metadata": {
+              "done": true,
+              "done_reason": "stop",
+              "eval_count": 26,
+              "model": "qwen2.5:7b",
+              "prompt_eval_count": 133,
+              "total_duration": 1075467792
+            }
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-05-chunk-1"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "Which systems require multi-factor authentication?",
+        "profile": "current",
+        "language": "en",
+        "retrieval_question": "Which systems require multi-factor authentication?",
+        "translation_review_status": null,
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.167104+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "generation",
+          "seconds": 0.013
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V04-sr",
+      "pair": "mfa",
+      "language": "sr",
+      "question": "Za koje sisteme je obavezna višefaktorska autentifikacija?",
+      "behaviour": true,
+      "facts": {
+        "imejl": true,
+        "VPN": true,
+        "sve interne alate": true
+      },
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-05-chunk-1] Višefaktorska autentifikacija (MFA) obavezna je za imejl, VPN i sve interne alate.",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-05-chunk-1",
+            "doc_id": "hb-05",
+            "title": "Passwords and access",
+            "version": "2026",
+            "status": "current",
+            "text": "Multi-factor authentication (MFA) is required for email, VPN and all internal tools.",
+            "translated_text": "Višefaktorska autentifikacija (MFA) obavezna je za imejl, VPN i sve interne alate."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-05-chunk-1",
+            "doc_id": "hb-05",
+            "title": "Passwords and access",
+            "version": "2026",
+            "status": "current",
+            "text": "Multi-factor authentication (MFA) is required for email, VPN and all internal tools.",
+            "translated_text": "Višefaktorska autentifikacija (MFA) obavezna je za imejl, VPN i sve interne alate.",
+            "score": 0.7461741370609377
+          },
+          {
+            "chunk_id": "hb-05-chunk-0",
+            "doc_id": "hb-05",
+            "title": "Passwords and access",
+            "version": "2026",
+            "status": "current",
+            "text": "Passwords must be changed every 90 days and must contain at least 12 characters.",
+            "translated_text": "Lozinke se moraju menjati svakih 90 dana i moraju sadržati najmanje 12 znakova.",
+            "score": 0.5076411779780189
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-05-chunk-1",
+                "score": 0.7461741370609377
+              },
+              {
+                "chunk_id": "hb-05-chunk-0",
+                "score": 0.5076411779780189
+              },
+              {
+                "chunk_id": "hb-09-chunk-0",
+                "score": 0.4780136703772736
+              },
+              {
+                "chunk_id": "hb-01-chunk-3",
+                "score": 0.4749004030048048
+              },
+              {
+                "chunk_id": "hb-10-chunk-1",
+                "score": 0.438136184367501
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-05-chunk-1"
+            ],
+            "expanded": [
+              "hb-05-chunk-1"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-05-chunk-1"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "Za koje sisteme je obavezna višefaktorska autentifikacija?",
+        "profile": "current",
+        "language": "sr",
+        "retrieval_question": "za koje sisteme je obavezna višefaktorska autentifikacija?",
+        "translation_review_status": "assistant_translation_pending_human_review",
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.180087+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V05-en",
+      "pair": "budget",
+      "language": "en",
+      "question": "Does unspent training money roll into another year?",
+      "behaviour": true,
+      "facts": {
+        "does not carry over": true
+      },
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "No, unused budget does not carry over to next year.[hb-08-chunk-1]\nSource [hb-08-chunk-1]: \"Agree training with your manager before booking. Unused budget does not carry over to next year.\"",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-08-chunk-1",
+            "doc_id": "hb-08",
+            "title": "Training budget",
+            "version": "2026",
+            "status": "current",
+            "text": "Agree training with your manager before booking. Unused budget does not carry over to next year."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-08-chunk-1",
+            "doc_id": "hb-08",
+            "title": "Training budget",
+            "version": "2026",
+            "status": "current",
+            "text": "Agree training with your manager before booking. Unused budget does not carry over to next year.",
+            "score": 0.7116402565054801
+          },
+          {
+            "chunk_id": "hb-08-chunk-0",
+            "doc_id": "hb-08",
+            "title": "Training budget",
+            "version": "2026",
+            "status": "current",
+            "text": "Each employee has a training budget of 800 EUR per year for courses, conferences and certifications.",
+            "score": 0.5428806255535518
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-08-chunk-1",
+                "score": 0.7116402565054801
+              },
+              {
+                "chunk_id": "hb-08-chunk-0",
+                "score": 0.5428806255535518
+              },
+              {
+                "chunk_id": "hb-07-chunk-1",
+                "score": 0.5337052943593514
+              },
+              {
+                "chunk_id": "hb-06-chunk-2",
+                "score": 0.48806493300458553
+              },
+              {
+                "chunk_id": "hb-06-chunk-0",
+                "score": 0.471598109336059
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-08-chunk-1"
+            ],
+            "expanded": [
+              "hb-08-chunk-1"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "generation",
+            "text": "No, unused budget does not carry over to next year.[hb-08-chunk-1]",
+            "metadata": {
+              "done": true,
+              "done_reason": "stop",
+              "eval_count": 22,
+              "model": "qwen2.5:7b",
+              "prompt_eval_count": 136,
+              "total_duration": 968088958
+            }
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-08-chunk-1"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "Does unspent training money roll into another year?",
+        "profile": "current",
+        "language": "en",
+        "retrieval_question": "Does unspent training money roll into another year?",
+        "translation_review_status": null,
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.193163+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "generation",
+          "seconds": 0.013
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V05-sr",
+      "pair": "budget",
+      "language": "sr",
+      "question": "Da li se neiskorišćen budžet za obuke prenosi u sledeću godinu?",
+      "behaviour": true,
+      "facts": {
+        "ne prenosi": true
+      },
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-08-chunk-1] Obuku dogovorite sa rukovodiocem pre rezervacije. Neiskorišćeni budžet se ne prenosi u sledeću godinu.",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-08-chunk-1",
+            "doc_id": "hb-08",
+            "title": "Training budget",
+            "version": "2026",
+            "status": "current",
+            "text": "Agree training with your manager before booking. Unused budget does not carry over to next year.",
+            "translated_text": "Obuku dogovorite sa rukovodiocem pre rezervacije. Neiskorišćeni budžet se ne prenosi u sledeću godinu."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-08-chunk-1",
+            "doc_id": "hb-08",
+            "title": "Training budget",
+            "version": "2026",
+            "status": "current",
+            "text": "Agree training with your manager before booking. Unused budget does not carry over to next year.",
+            "translated_text": "Obuku dogovorite sa rukovodiocem pre rezervacije. Neiskorišćeni budžet se ne prenosi u sledeću godinu.",
+            "score": 0.7370793751517305
+          },
+          {
+            "chunk_id": "hb-08-chunk-0",
+            "doc_id": "hb-08",
+            "title": "Training budget",
+            "version": "2026",
+            "status": "current",
+            "text": "Each employee has a training budget of 800 EUR per year for courses, conferences and certifications.",
+            "translated_text": "Svaki zaposleni ima budžet za obuke od 800 EUR godišnje za kurseve, konferencije i sertifikacije.",
+            "score": 0.5421867292131409
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-08-chunk-1",
+                "score": 0.7370793751517305
+              },
+              {
+                "chunk_id": "hb-08-chunk-0",
+                "score": 0.5421867292131409
+              },
+              {
+                "chunk_id": "hb-07-chunk-1",
+                "score": 0.5244739077336713
+              },
+              {
+                "chunk_id": "hb-06-chunk-0",
+                "score": 0.4700963326361459
+              },
+              {
+                "chunk_id": "hb-03-chunk-2",
+                "score": 0.4506177197350771
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-08-chunk-1"
+            ],
+            "expanded": [
+              "hb-08-chunk-1"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-08-chunk-1"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "Da li se neiskorišćen budžet za obuke prenosi u sledeću godinu?",
+        "profile": "current",
+        "language": "sr",
+        "retrieval_question": "da li se neiskorišćen budžet za obuke prenosi u sledeću godinu?",
+        "translation_review_status": "assistant_translation_pending_human_review",
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.206188+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V06-en",
+      "pair": "stolen",
+      "language": "en",
+      "question": "Who should hear first when my laptop has been stolen?",
+      "behaviour": true,
+      "facts": {
+        "security first": true
+      },
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Report lost or stolen devices to security first. [hb-01-chunk-2]\nSource [hb-01-chunk-2]: \"Report lost or stolen devices to security first. Request a replacement laptop in IT portal under Hardware.\"",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-01-chunk-2",
+            "doc_id": "hb-01",
+            "title": "Equipment replacement",
+            "version": "2026",
+            "status": "current",
+            "text": "Report lost or stolen devices to security first. Request a replacement laptop in IT portal under Hardware."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-01-chunk-2",
+            "doc_id": "hb-01",
+            "title": "Equipment replacement",
+            "version": "2026",
+            "status": "current",
+            "text": "Report lost or stolen devices to security first. Request a replacement laptop in IT portal under Hardware.",
+            "score": 0.7139847527535559
+          },
+          {
+            "chunk_id": "hb-10-chunk-1",
+            "doc_id": "hb-10",
+            "title": "IT support",
+            "version": "2026",
+            "status": "current",
+            "text": "For a laptop that does not start, bring it to IT desk on floor two. Outside support hours, urgent security incidents go to on-call line.",
+            "score": 0.6189857848317416
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-01-chunk-2",
+                "score": 0.7139847527535559
+              },
+              {
+                "chunk_id": "hb-10-chunk-1",
+                "score": 0.6189857848317416
+              },
+              {
+                "chunk_id": "hb-01-chunk-0",
+                "score": 0.6044726495878038
+              },
+              {
+                "chunk_id": "hb-01-chunk-1",
+                "score": 0.5652801095729574
+              },
+              {
+                "chunk_id": "hb-01-chunk-3",
+                "score": 0.5054875602282409
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-01-chunk-2"
+            ],
+            "expanded": [
+              "hb-01-chunk-2"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "generation",
+            "text": "Report lost or stolen devices to security first. [hb-01-chunk-2]",
+            "metadata": {
+              "done": true,
+              "done_reason": "stop",
+              "eval_count": 20,
+              "model": "qwen2.5:7b",
+              "prompt_eval_count": 138,
+              "total_duration": 874081584
+            }
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-01-chunk-2"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "Who should hear first when my laptop has been stolen?",
+        "profile": "current",
+        "language": "en",
+        "retrieval_question": "Who should hear first when my laptop has been stolen?",
+        "translation_review_status": null,
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.219401+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "generation",
+          "seconds": 0.013
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V06-sr",
+      "pair": "stolen",
+      "language": "sr",
+      "question": "Kome prvo treba da prijavim ukraden laptop?",
+      "behaviour": true,
+      "facts": {
+        "prvo službi bezbednosti": true
+      },
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-01-chunk-2] Izgubljene ili ukradene uređaje prijavite prvo službi bezbednosti. Zamenski laptop traži se u IT portalu, u odeljku Hardware.",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-01-chunk-2",
+            "doc_id": "hb-01",
+            "title": "Equipment replacement",
+            "version": "2026",
+            "status": "current",
+            "text": "Report lost or stolen devices to security first. Request a replacement laptop in IT portal under Hardware.",
+            "translated_text": "Izgubljene ili ukradene uređaje prijavite prvo službi bezbednosti. Zamenski laptop traži se u IT portalu, u odeljku Hardware."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-01-chunk-2",
+            "doc_id": "hb-01",
+            "title": "Equipment replacement",
+            "version": "2026",
+            "status": "current",
+            "text": "Report lost or stolen devices to security first. Request a replacement laptop in IT portal under Hardware.",
+            "translated_text": "Izgubljene ili ukradene uređaje prijavite prvo službi bezbednosti. Zamenski laptop traži se u IT portalu, u odeljku Hardware.",
+            "score": 0.7473936648180758
+          },
+          {
+            "chunk_id": "hb-10-chunk-1",
+            "doc_id": "hb-10",
+            "title": "IT support",
+            "version": "2026",
+            "status": "current",
+            "text": "For a laptop that does not start, bring it to IT desk on floor two. Outside support hours, urgent security incidents go to on-call line.",
+            "translated_text": "Ako laptop ne može da se uključi, donesite ga na IT pult na drugom spratu. Van radnog vremena podrške, hitni bezbednosni incidenti prijavljuju se dežurnoj liniji.",
+            "score": 0.6162168868721947
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-01-chunk-2",
+                "score": 0.7473936648180758
+              },
+              {
+                "chunk_id": "hb-10-chunk-1",
+                "score": 0.6162168868721947
+              },
+              {
+                "chunk_id": "hb-01-chunk-0",
+                "score": 0.5995369791191406
+              },
+              {
+                "chunk_id": "hb-01-chunk-1",
+                "score": 0.5638728408687214
+              },
+              {
+                "chunk_id": "hb-09-chunk-0",
+                "score": 0.5287622767583036
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-01-chunk-2"
+            ],
+            "expanded": [
+              "hb-01-chunk-2"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-01-chunk-2"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "Kome prvo treba da prijavim ukraden laptop?",
+        "profile": "current",
+        "language": "sr",
+        "retrieval_question": "kome prvo treba da prijavim ukraden laptop?",
+        "translation_review_status": "assistant_translation_pending_human_review",
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.232660+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V07-en",
+      "pair": "leave",
+      "language": "en",
+      "question": "How much notice is required for a leave request and where is it sent?",
+      "behaviour": true,
+      "facts": {
+        "two weeks": true,
+        "HR portal": true
+      },
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Employees must make leave requests two weeks in advance in the HR portal. [hb-07-chunk-0]\nSource [hb-07-chunk-0]: \"Annual leave policy: employees get 22 days of annual leave per calendar year. Leave requests must be made two weeks in advance in HR portal.\"",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-07-chunk-0",
+            "doc_id": "hb-07",
+            "title": "Annual leave",
+            "version": "2026",
+            "status": "current",
+            "text": "Annual leave policy: employees get 22 days of annual leave per calendar year. Leave requests must be made two weeks in advance in HR portal."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-07-chunk-0",
+            "doc_id": "hb-07",
+            "title": "Annual leave",
+            "version": "2026",
+            "status": "current",
+            "text": "Annual leave policy: employees get 22 days of annual leave per calendar year. Leave requests must be made two weeks in advance in HR portal.",
+            "score": 0.6427545113817245
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-07-chunk-0",
+                "score": 0.6427545113817245
+              },
+              {
+                "chunk_id": "hb-04-chunk-0",
+                "score": 0.5668172974421881
+              },
+              {
+                "chunk_id": "hb-07-chunk-1",
+                "score": 0.5646453564374743
+              },
+              {
+                "chunk_id": "hb-08-chunk-1",
+                "score": 0.5180279761644245
+              },
+              {
+                "chunk_id": "hb-09-chunk-0",
+                "score": 0.5124491617420501
+              }
+            ]
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-07-chunk-0",
+            "accepted": true
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-04-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-07-chunk-1",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-08-chunk-1",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-09-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-07-chunk-0"
+            ],
+            "expanded": [
+              "hb-07-chunk-0"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "generation",
+            "text": "Employees must make leave requests two weeks in advance in the HR portal. [hb-07-chunk-0]",
+            "metadata": {
+              "done": true,
+              "done_reason": "stop",
+              "eval_count": 25,
+              "model": "qwen2.5:7b",
+              "prompt_eval_count": 153,
+              "total_duration": 3419900041
+            }
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-07-chunk-0"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "How much notice is required for a leave request and where is it sent?",
+        "profile": "current",
+        "language": "en",
+        "retrieval_question": "How much notice is required for a leave request and where is it sent?",
+        "translation_review_status": null,
+        "seconds": 0.015,
+        "created_at": "2026-10-18T22:13:04.247567+00:00"
+      },
+      "error": null,
+      "seconds": 0.015,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.013
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.013
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.013
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.014
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.014
+        },
+        {
+          "stage": "generation",
+          "seconds": 0.015
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V07-sr",
+      "pair": "leave",
+      "language": "sr",
+      "question": "Koliko unapred se podnosi zahtev za godišnji odmor i gde?",
+      "behaviour": true,
+      "facts": {
+        "dve nedelje": true,
+        "HR portal": true
+      },
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-07-chunk-0] Godišnji odmor: zaposleni imaju 22 dana godišnjeg odmora po kalendarskoj godini. Zahtevi za odmor podnose se dve nedelje unapred u HR portalu.",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-07-chunk-0",
+            "doc_id": "hb-07",
+            "title": "Annual leave",
+            "version": "2026",
+            "status": "current",
+            "text": "Annual leave policy: employees get 22 days of annual leave per calendar year. Leave requests must be made two weeks in advance in HR portal.",
+            "translated_text": "Godišnji odmor: zaposleni imaju 22 dana godišnjeg odmora po kalendarskoj godini. Zahtevi za odmor podnose se dve nedelje unapred u HR portalu."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-07-chunk-0",
+            "doc_id": "hb-07",
+            "title": "Annual leave",
+            "version": "2026",
+            "status": "current",
+            "text": "Annual leave policy: employees get 22 days of annual leave per calendar year. Leave requests must be made two weeks in advance in HR portal.",
+            "translated_text": "Godišnji odmor: zaposleni imaju 22 dana godišnjeg odmora po kalendarskoj godini. Zahtevi za odmor podnose se dve nedelje unapred u HR portalu.",
+            "score": 0.6585107605644097
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-07-chunk-0",
+                "score": 0.6585107605644097
+              },
+              {
+                "chunk_id": "hb-07-chunk-1",
+                "score": 0.5842532767673538
+              },
+              {
+                "chunk_id": "hb-04-chunk-0",
+                "score": 0.5431971456496234
+              },
+              {
+                "chunk_id": "hb-08-chunk-1",
+                "score": 0.4699905963262263
+              },
+              {
+                "chunk_id": "hb-03-chunk-2",
+                "score": 0.46546406236058063
+              }
+            ]
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-07-chunk-0",
+            "accepted": true
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-07-chunk-1",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-04-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-08-chunk-1",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-03-chunk-2",
+            "accepted": false
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-07-chunk-0"
+            ],
+            "expanded": [
+              "hb-07-chunk-0"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-07-chunk-0"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "Koliko unapred se podnosi zahtev za godišnji odmor i gde?",
+        "profile": "current",
+        "language": "sr",
+        "retrieval_question": "koliko unapred se podnosi zahtev za godišnji odmor i gde?",
+        "translation_review_status": "assistant_translation_pending_human_review",
+        "seconds": 0.015,
+        "created_at": "2026-10-18T22:13:04.262257+00:00"
+      },
+      "error": null,
+      "seconds": 0.015,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.013
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.013
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.013
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.014
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.014
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V08-en",
+      "pair": "support",
+      "language": "en",
+      "question": "On which weekdays and during which hours can I contact IT support?",
+      "behaviour": true,
+      "facts": {
+        "08:00": true,
+        "18:00": true,
+        "Monday to Friday": true
+      },
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "IT support is available from 08:00 to 18:00 on Monday to Friday. [hb-10-chunk-0]\nSource [hb-10-chunk-0]: \"IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.\"",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-10-chunk-0",
+            "doc_id": "hb-10",
+            "title": "IT support",
+            "version": "2026",
+            "status": "current",
+            "text": "IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-10-chunk-0",
+            "doc_id": "hb-10",
+            "title": "IT support",
+            "version": "2026",
+            "status": "current",
+            "text": "IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.",
+            "score": 0.7959966456575749
+          },
+          {
+            "chunk_id": "hb-03-chunk-3",
+            "doc_id": "hb-03",
+            "title": "Remote work policy",
+            "version": "2026",
+            "status": "current",
+            "text": "Core hours from 10:00 to 15:00 apply on remote days, and you must be reachable by chat and phone during core hours.",
+            "score": 0.6381180327477773
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-10-chunk-0",
+                "score": 0.7959966456575749
+              },
+              {
+                "chunk_id": "hb-03-chunk-3",
+                "score": 0.6381180327477773
+              },
+              {
+                "chunk_id": "hb-03-chunk-2",
+                "score": 0.5964989104981085
+              },
+              {
+                "chunk_id": "hb-10-chunk-1",
+                "score": 0.5923289081190368
+              },
+              {
+                "chunk_id": "hb-01-chunk-1",
+                "score": 0.587700358945355
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-10-chunk-0"
+            ],
+            "expanded": [
+              "hb-10-chunk-0"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "generation",
+            "text": "IT support is available from 08:00 to 18:00 on Monday to Friday. [hb-10-chunk-0]",
+            "metadata": {
+              "done": true,
+              "done_reason": "stop",
+              "eval_count": 34,
+              "model": "qwen2.5:7b",
+              "prompt_eval_count": 152,
+              "total_duration": 3777033250
+            }
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-10-chunk-0"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "On which weekdays and during which hours can I contact IT support?",
+        "profile": "current",
+        "language": "en",
+        "retrieval_question": "On which weekdays and during which hours can I contact IT support?",
+        "translation_review_status": null,
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.275438+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "generation",
+          "seconds": 0.013
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V08-sr",
+      "pair": "support",
+      "language": "sr",
+      "question": "Kojim danima i u koje vreme radi IT podrška?",
+      "behaviour": true,
+      "facts": {
+        "08:00": true,
+        "18:00": true,
+        "ponedeljka do petka": true
+      },
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Odgovor iz prevedenih izvornih odlomaka:\n[hb-10-chunk-0] IT podrška radi od 08:00 do 18:00, od ponedeljka do petka. Podršku kontaktirajte kroz IT portal ili telefonom.",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-10-chunk-0",
+            "doc_id": "hb-10",
+            "title": "IT support",
+            "version": "2026",
+            "status": "current",
+            "text": "IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.",
+            "translated_text": "IT podrška radi od 08:00 do 18:00, od ponedeljka do petka. Podršku kontaktirajte kroz IT portal ili telefonom."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-10-chunk-0",
+            "doc_id": "hb-10",
+            "title": "IT support",
+            "version": "2026",
+            "status": "current",
+            "text": "IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.",
+            "translated_text": "IT podrška radi od 08:00 do 18:00, od ponedeljka do petka. Podršku kontaktirajte kroz IT portal ili telefonom.",
+            "score": 0.7797266880232094
+          },
+          {
+            "chunk_id": "hb-10-chunk-1",
+            "doc_id": "hb-10",
+            "title": "IT support",
+            "version": "2026",
+            "status": "current",
+            "text": "For a laptop that does not start, bring it to IT desk on floor two. Outside support hours, urgent security incidents go to on-call line.",
+            "translated_text": "Ako laptop ne može da se uključi, donesite ga na IT pult na drugom spratu. Van radnog vremena podrške, hitni bezbednosni incidenti prijavljuju se dežurnoj liniji.",
+            "score": 0.5689508975361682
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-10-chunk-0",
+                "score": 0.7797266880232094
+              },
+              {
+                "chunk_id": "hb-10-chunk-1",
+                "score": 0.5689508975361682
+              },
+              {
+                "chunk_id": "hb-01-chunk-1",
+                "score": 0.5322861618453464
+              },
+              {
+                "chunk_id": "hb-03-chunk-3",
+                "score": 0.5303554919169117
+              },
+              {
+                "chunk_id": "hb-06-chunk-1",
+                "score": 0.5269264610390064
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-10-chunk-0"
+            ],
+            "expanded": [
+              "hb-10-chunk-0"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-10-chunk-0"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "Kojim danima i u koje vreme radi IT podrška?",
+        "profile": "current",
+        "language": "sr",
+        "retrieval_question": "kojim danima i u koje vreme radi it podrška?",
+        "translation_review_status": "assistant_translation_pending_human_review",
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.288260+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V09-en",
+      "pair": "pay",
+      "language": "en",
+      "question": "How large is the annual salary raise?",
+      "behaviour": true,
+      "facts": {},
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+        "refused": true,
+        "citations": [],
+        "retrieved": [
+          {
+            "chunk_id": "hb-08-chunk-0",
+            "doc_id": "hb-08",
+            "title": "Training budget",
+            "version": "2026",
+            "status": "current",
+            "text": "Each employee has a training budget of 800 EUR per year for courses, conferences and certifications.",
+            "score": 0.6100115207371636
+          },
+          {
+            "chunk_id": "hb-07-chunk-0",
+            "doc_id": "hb-07",
+            "title": "Annual leave",
+            "version": "2026",
+            "status": "current",
+            "text": "Annual leave policy: employees get 22 days of annual leave per calendar year. Leave requests must be made two weeks in advance in HR portal.",
+            "score": 0.5006241916808823
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-08-chunk-0",
+                "score": 0.6100115207371636
+              },
+              {
+                "chunk_id": "hb-07-chunk-0",
+                "score": 0.5006241916808823
+              },
+              {
+                "chunk_id": "hb-06-chunk-0",
+                "score": 0.48636132852333885
+              },
+              {
+                "chunk_id": "hb-03-chunk-0",
+                "score": 0.4544394674127873
+              },
+              {
+                "chunk_id": "hb-06-chunk-2",
+                "score": 0.44973373710205283
+              }
+            ]
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-08-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-07-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-06-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-03-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-06-chunk-2",
+            "accepted": false
+          },
+          {
+            "stage": "decision",
+            "reason": "no_accepted_candidate",
+            "refused": true
+          }
+        ],
+        "fallback": null,
+        "question": "How large is the annual salary raise?",
+        "profile": "current",
+        "language": "en",
+        "retrieval_question": "How large is the annual salary raise?",
+        "translation_review_status": null,
+        "seconds": 0.015,
+        "created_at": "2026-10-18T22:13:04.303077+00:00"
+      },
+      "error": null,
+      "seconds": 0.015,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.013
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.013
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.014
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.014
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.014
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V09-sr",
+      "pair": "pay",
+      "language": "sr",
+      "question": "Koliko iznosi godišnje povećanje plate?",
+      "behaviour": true,
+      "facts": {},
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Nemam dovoljno dokaza u dostupnom priručniku da odgovorim na ovo pitanje.",
+        "refused": true,
+        "citations": [],
+        "retrieved": [
+          {
+            "chunk_id": "hb-08-chunk-0",
+            "doc_id": "hb-08",
+            "title": "Training budget",
+            "version": "2026",
+            "status": "current",
+            "text": "Each employee has a training budget of 800 EUR per year for courses, conferences and certifications.",
+            "translated_text": "Svaki zaposleni ima budžet za obuke od 800 EUR godišnje za kurseve, konferencije i sertifikacije.",
+            "score": 0.5866994624711067
+          },
+          {
+            "chunk_id": "hb-06-chunk-0",
+            "doc_id": "hb-06",
+            "title": "Onboarding",
+            "version": "2026",
+            "status": "current",
+            "text": "New colleagues follow a two-week onboarding plan.",
+            "translated_text": "Nove kolege prate dvonedeljni plan uvođenja u posao.",
+            "score": 0.4760662672230553
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-08-chunk-0",
+                "score": 0.5866994624711067
+              },
+              {
+                "chunk_id": "hb-06-chunk-0",
+                "score": 0.4760662672230553
+              },
+              {
+                "chunk_id": "hb-07-chunk-0",
+                "score": 0.4533858892836141
+              },
+              {
+                "chunk_id": "hb-07-chunk-1",
+                "score": 0.4048758852725477
+              },
+              {
+                "chunk_id": "hb-05-chunk-0",
+                "score": 0.398845535958658
+              }
+            ]
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-08-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-06-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-07-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-07-chunk-1",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "hb-05-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "decision",
+            "reason": "no_accepted_candidate",
+            "refused": true
+          }
+        ],
+        "fallback": null,
+        "question": "Koliko iznosi godišnje povećanje plate?",
+        "profile": "current",
+        "language": "sr",
+        "retrieval_question": "koliko iznosi godišnje povećanje plate?",
+        "translation_review_status": "assistant_translation_pending_human_review",
+        "seconds": 0.015,
+        "created_at": "2026-10-18T22:13:04.317905+00:00"
+      },
+      "error": null,
+      "seconds": 0.015,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.013
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.013
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.014
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.014
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.014
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V10-en",
+      "pair": "health",
+      "language": "en",
+      "question": "Which private health insurer covers employees?",
+      "behaviour": true,
+      "facts": {},
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+        "refused": true,
+        "citations": [],
+        "retrieved": [
+          {
+            "chunk_id": "hb-06-chunk-0",
+            "doc_id": "hb-06",
+            "title": "Onboarding",
+            "version": "2026",
+            "status": "current",
+            "text": "New colleagues follow a two-week onboarding plan.",
+            "score": 0.3781385131604302
+          },
+          {
+            "chunk_id": "hb-07-chunk-1",
+            "doc_id": "hb-07",
+            "title": "Annual leave",
+            "version": "2026",
+            "status": "current",
+            "text": "Under this policy, unused leave can be carried over until 31 March. Sick leave follows a separate policy.",
+            "score": 0.36954726332069743
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-06-chunk-0",
+                "score": 0.3781385131604302
+              },
+              {
+                "chunk_id": "hb-07-chunk-1",
+                "score": 0.36954726332069743
+              },
+              {
+                "chunk_id": "hb-05-chunk-2",
+                "score": 0.367193313227946
+              },
+              {
+                "chunk_id": "hb-08-chunk-0",
+                "score": 0.36712157680938645
+              },
+              {
+                "chunk_id": "hb-09-chunk-0",
+                "score": 0.3639349624797298
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "below_gray_zone",
+            "refused": true
+          }
+        ],
+        "fallback": null,
+        "question": "Which private health insurer covers employees?",
+        "profile": "current",
+        "language": "en",
+        "retrieval_question": "Which private health insurer covers employees?",
+        "translation_review_status": null,
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.330691+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V10-sr",
+      "pair": "health",
+      "language": "sr",
+      "question": "Koja privatna zdravstvena osiguravajuća kuća pokriva zaposlene?",
+      "behaviour": true,
+      "facts": {},
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Nemam dovoljno dokaza u dostupnom priručniku da odgovorim na ovo pitanje.",
+        "refused": true,
+        "citations": [],
+        "retrieved": [
+          {
+            "chunk_id": "hb-08-chunk-0",
+            "doc_id": "hb-08",
+            "title": "Training budget",
+            "version": "2026",
+            "status": "current",
+            "text": "Each employee has a training budget of 800 EUR per year for courses, conferences and certifications.",
+            "translated_text": "Svaki zaposleni ima budžet za obuke od 800 EUR godišnje za kurseve, konferencije i sertifikacije.",
+            "score": 0.38708908154017013
+          },
+          {
+            "chunk_id": "hb-07-chunk-1",
+            "doc_id": "hb-07",
+            "title": "Annual leave",
+            "version": "2026",
+            "status": "current",
+            "text": "Under this policy, unused leave can be carried over until 31 March. Sick leave follows a separate policy.",
+            "translated_text": "Prema ovoj politici, neiskorišćeni odmor može se preneti do 31. marta. Bolovanje je uređeno posebnom politikom.",
+            "score": 0.3702930425234054
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-08-chunk-0",
+                "score": 0.38708908154017013
+              },
+              {
+                "chunk_id": "hb-07-chunk-1",
+                "score": 0.3702930425234054
+              },
+              {
+                "chunk_id": "hb-06-chunk-0",
+                "score": 0.3552892621278014
+              },
+              {
+                "chunk_id": "hb-03-chunk-0",
+                "score": 0.3246117158275453
+              },
+              {
+                "chunk_id": "hb-05-chunk-2",
+                "score": 0.3104240264710466
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "below_gray_zone",
+            "refused": true
+          }
+        ],
+        "fallback": null,
+        "question": "Koja privatna zdravstvena osiguravajuća kuća pokriva zaposlene?",
+        "profile": "current",
+        "language": "sr",
+        "retrieval_question": "koja privatna zdravstvena osiguravajuća kuća pokriva zaposlene?",
+        "translation_review_status": "assistant_translation_pending_human_review",
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.343598+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V11-en",
+      "pair": "ceo",
+      "language": "en",
+      "question": "What is the name of the chief executive?",
+      "behaviour": true,
+      "facts": {},
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+        "refused": true,
+        "citations": [],
+        "retrieved": [
+          {
+            "chunk_id": "hb-06-chunk-2",
+            "doc_id": "hb-06",
+            "title": "Onboarding",
+            "version": "2026",
+            "status": "current",
+            "text": "Your manager schedules a check-in at end of month one and again after three months.",
+            "score": 0.43344838371614397
+          },
+          {
+            "chunk_id": "hb-06-chunk-0",
+            "doc_id": "hb-06",
+            "title": "Onboarding",
+            "version": "2026",
+            "status": "current",
+            "text": "New colleagues follow a two-week onboarding plan.",
+            "score": 0.41204436496060276
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-06-chunk-2",
+                "score": 0.43344838371614397
+              },
+              {
+                "chunk_id": "hb-06-chunk-0",
+                "score": 0.41204436496060276
+              },
+              {
+                "chunk_id": "hb-03-chunk-1",
+                "score": 0.383541507119051
+              },
+              {
+                "chunk_id": "hb-08-chunk-1",
+                "score": 0.36942886060167
+              },
+              {
+                "chunk_id": "hb-08-chunk-0",
+                "score": 0.36234866204629684
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "below_gray_zone",
+            "refused": true
+          }
+        ],
+        "fallback": null,
+        "question": "What is the name of the chief executive?",
+        "profile": "current",
+        "language": "en",
+        "retrieval_question": "What is the name of the chief executive?",
+        "translation_review_status": null,
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.356378+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V11-sr",
+      "pair": "ceo",
+      "language": "sr",
+      "question": "Kako se zove izvršni direktor?",
+      "behaviour": true,
+      "facts": {},
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Nemam dovoljno dokaza u dostupnom priručniku da odgovorim na ovo pitanje.",
+        "refused": true,
+        "citations": [],
+        "retrieved": [
+          {
+            "chunk_id": "hb-06-chunk-2",
+            "doc_id": "hb-06",
+            "title": "Onboarding",
+            "version": "2026",
+            "status": "current",
+            "text": "Your manager schedules a check-in at end of month one and again after three months.",
+            "translated_text": "Vaš rukovodilac zakazuje razgovor na kraju prvog meseca i ponovo posle tri meseca.",
+            "score": 0.38116695096231046
+          },
+          {
+            "chunk_id": "hb-08-chunk-1",
+            "doc_id": "hb-08",
+            "title": "Training budget",
+            "version": "2026",
+            "status": "current",
+            "text": "Agree training with your manager before booking. Unused budget does not carry over to next year.",
+            "translated_text": "Obuku dogovorite sa rukovodiocem pre rezervacije. Neiskorišćeni budžet se ne prenosi u sledeću godinu.",
+            "score": 0.35820452239401135
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-06-chunk-2",
+                "score": 0.38116695096231046
+              },
+              {
+                "chunk_id": "hb-08-chunk-1",
+                "score": 0.35820452239401135
+              },
+              {
+                "chunk_id": "hb-03-chunk-1",
+                "score": 0.3474830859541975
+              },
+              {
+                "chunk_id": "hb-06-chunk-0",
+                "score": 0.34477266672551915
+              },
+              {
+                "chunk_id": "hb-08-chunk-0",
+                "score": 0.3231510564353396
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "below_gray_zone",
+            "refused": true
+          }
+        ],
+        "fallback": null,
+        "question": "Kako se zove izvršni direktor?",
+        "profile": "current",
+        "language": "sr",
+        "retrieval_question": "kako se zove izvršni direktor?",
+        "translation_review_status": "assistant_translation_pending_human_review",
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.369348+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V12-en",
+      "pair": "holiday",
+      "language": "en",
+      "question": "Is the office closed on every public holiday?",
+      "behaviour": true,
+      "facts": {},
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+        "refused": true,
+        "citations": [],
+        "retrieved": [
+          {
+            "chunk_id": "hb-09-chunk-0",
+            "doc_id": "hb-09",
+            "title": "Office access and parking",
+            "version": "2026",
+            "status": "current",
+            "text": "Office access requires your personal badge at every entrance. Lost badges must be reported to reception on same day.",
+            "score": 0.4998626063447815
+          },
+          {
+            "chunk_id": "hb-03-chunk-2",
+            "doc_id": "hb-03",
+            "title": "Remote work policy",
+            "version": "2026",
+            "status": "current",
+            "text": "Remote work days can be moved within same week.",
+            "score": 0.4979438471701868
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-09-chunk-0",
+                "score": 0.4998626063447815
+              },
+              {
+                "chunk_id": "hb-03-chunk-2",
+                "score": 0.4979438471701868
+              },
+              {
+                "chunk_id": "hb-10-chunk-0",
+                "score": 0.4887869266207887
+              },
+              {
+                "chunk_id": "hb-03-chunk-0",
+                "score": 0.47681979260512153
+              },
+              {
+                "chunk_id": "hb-07-chunk-0",
+                "score": 0.4719618963620229
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "below_gray_zone",
+            "refused": true
+          }
+        ],
+        "fallback": null,
+        "question": "Is the office closed on every public holiday?",
+        "profile": "current",
+        "language": "en",
+        "retrieval_question": "Is the office closed on every public holiday?",
+        "translation_review_status": null,
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.382167+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    },
+    {
+      "id": "V12-sr",
+      "pair": "holiday",
+      "language": "sr",
+      "question": "Da li je kancelarija zatvorena za svaki državni praznik?",
+      "behaviour": true,
+      "facts": {},
+      "expected_source": true,
+      "automatic_checks_pass": true,
+      "semantic_correctness": "not_human_assessed",
+      "result": {
+        "answer": "Nemam dovoljno dokaza u dostupnom priručniku da odgovorim na ovo pitanje.",
+        "refused": true,
+        "citations": [],
+        "retrieved": [
+          {
+            "chunk_id": "hb-09-chunk-0",
+            "doc_id": "hb-09",
+            "title": "Office access and parking",
+            "version": "2026",
+            "status": "current",
+            "text": "Office access requires your personal badge at every entrance. Lost badges must be reported to reception on same day.",
+            "translated_text": "Za ulazak u kancelariju potrebna je lična kartica na svakom ulazu. Gubitak kartice mora se prijaviti recepciji istog dana.",
+            "score": 0.49402160562862213
+          },
+          {
+            "chunk_id": "hb-10-chunk-0",
+            "doc_id": "hb-10",
+            "title": "IT support",
+            "version": "2026",
+            "status": "current",
+            "text": "IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.",
+            "translated_text": "IT podrška radi od 08:00 do 18:00, od ponedeljka do petka. Podršku kontaktirajte kroz IT portal ili telefonom.",
+            "score": 0.45894810284233734
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-09-chunk-0",
+                "score": 0.49402160562862213
+              },
+              {
+                "chunk_id": "hb-10-chunk-0",
+                "score": 0.45894810284233734
+              },
+              {
+                "chunk_id": "hb-07-chunk-1",
+                "score": 0.4347358096888694
+              },
+              {
+                "chunk_id": "hb-03-chunk-2",
+                "score": 0.4328351497384046
+              },
+              {
+                "chunk_id": "hb-07-chunk-0",
+                "score": 0.4326763046556475
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "below_gray_zone",
+            "refused": true
+          }
+        ],
+        "fallback": null,
+        "question": "Da li je kancelarija zatvorena za svaki državni praznik?",
+        "profile": "current",
+        "language": "sr",
+        "retrieval_question": "da li je kancelarija zatvorena za svaki državni praznik?",
+        "translation_review_status": "assistant_translation_pending_human_review",
+        "seconds": 0.013,
+        "created_at": "2026-10-18T22:13:04.395127+00:00"
+      },
+      "error": null,
+      "seconds": 0.013,
+      "phases": [
+        {
+          "stage": "waiting",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.0
+        }
+      ],
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      }
+    }
+  ]
+}

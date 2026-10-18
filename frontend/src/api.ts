@@ -49,3 +49,24 @@ export function download(
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
+
+export async function runChat(
+  body: { question: string; profile: string; language: string },
+  onProgress: (job: import("./types").Job) => void,
+  existingId?: string,
+): Promise<import("./types").Answer> {
+  let job = await api<import("./types").Job>(
+    existingId ? `/jobs/${existingId}` : "/jobs",
+    existingId ? undefined : body,
+  );
+  for (;;) {
+    onProgress(job);
+    if (job.status === "completed" && job.result) return job.result;
+    if (job.status === "cancelled")
+      throw new Error("Obrada je otkazana. Možete postaviti novo pitanje.");
+    if (job.status === "failed")
+      throw new Error(job.error || "Obrada nije završena. Pokušajte ponovo.");
+    await new Promise((resolve) => setTimeout(resolve, 250));
+    job = await api<import("./types").Job>(`/jobs/${job.id}`);
+  }
+}

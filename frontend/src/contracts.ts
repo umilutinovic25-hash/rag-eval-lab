@@ -18,6 +18,8 @@ export function validChunk(v: unknown): v is Chunk {
   return (
     record(v) &&
     fields(v, ["chunk_id", "doc_id", "title", "version", "status", "text"]) &&
+    (v.translated_text === undefined ||
+      typeof v.translated_text === "string") &&
     (v.score === undefined ||
       (typeof v.score === "number" && Number.isFinite(v.score)))
   );
@@ -27,6 +29,10 @@ export function validAnswer(v: unknown): v is Answer {
   return (
     record(v) &&
     fields(v, ["question", "answer", "created_at"]) &&
+    (v.language === undefined || v.language === "en" || v.language === "sr") &&
+    (v.translation_review_status === undefined ||
+      v.translation_review_status === null ||
+      typeof v.translation_review_status === "string") &&
     typeof v.refused === "boolean" &&
     (v.profile === "current" || v.profile === "offline") &&
     (v.fallback === null || typeof v.fallback === "string") &&
@@ -97,6 +103,27 @@ function validRun(v: unknown) {
 export function validApiPayload(path: string, v: unknown): boolean {
   if (path === "/chat") return validAnswer(v);
   if (!record(v)) return false;
+  if (path === "/jobs" || path.startsWith("/jobs/"))
+    return (
+      typeof v.id === "string" &&
+      [
+        "queued",
+        "running",
+        "cancelling",
+        "completed",
+        "cancelled",
+        "failed",
+      ].includes(String(v.status)) &&
+      record(v.progress) &&
+      fields(v.progress, ["stage", "message"]) &&
+      number(v.seconds) &&
+      (v.error === null || typeof v.error === "string") &&
+      (v.status === "completed" ? validAnswer(v.result) : v.result === null) &&
+      arrayOf(
+        v.phases,
+        (p) => record(p) && typeof p.stage === "string" && number(p.seconds),
+      )
+    );
   if (path === "/documents") return arrayOf(v.documents, validDocument);
   if (path === "/status")
     return (

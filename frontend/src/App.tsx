@@ -25,10 +25,11 @@ import {
   Undo2,
   X,
 } from "lucide-react";
-import { api, download } from "./api";
-import { validAnswer } from "./contracts";
+import { api, download, runChat } from "./api";
+import { useHistory } from "./history";
 import type {
   Answer,
+  Job,
   Chunk,
   Conversation,
   Document,
@@ -39,7 +40,6 @@ import type {
 } from "./types";
 import { EvaluationView } from "./Evaluation";
 
-const STORAGE_KEY = "izvor.conversations.v1";
 const samples = [
   [
     "Koliko dana mogu da radim od kuće?",
@@ -62,44 +62,6 @@ const pageNames = {
 const uid = () => crypto.randomUUID();
 const chunksLabel = (n: number) =>
   `${n} ${n === 1 ? "odlomak" : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? "odlomka" : "odlomaka"}`;
-
-function loadConversations(raw: string | null): Conversation[] {
-  try {
-    const value = JSON.parse(raw || "[]");
-    if (!Array.isArray(value)) return [];
-    return value
-      .filter(
-        (c) =>
-          c &&
-          typeof c.id === "string" &&
-          typeof c.title === "string" &&
-          Array.isArray(c.turns),
-      )
-      .slice(0, 10)
-      .map((c) => ({
-        ...c,
-        turns: c.turns
-          .filter(
-            (t: Turn) =>
-              t && typeof t.id === "string" && typeof t.question === "string",
-          )
-          .slice(-30)
-          .map((t: Turn) => {
-            const r = t.result;
-            if (validAnswer(r)) return t;
-            return {
-              id: t.id,
-              question: t.question,
-              error:
-                (typeof t.error === "string" && t.error) ||
-                "Prethodna obrada nije završena. Pošaljite pitanje ponovo.",
-            };
-          }),
-      }));
-  } catch {
-    return [];
-  }
-}
 
 export function AnswerText({
   result,
@@ -245,6 +207,14 @@ function SourceInspector({
                             ? "Arhiviran"
                             : c.status}
                       </div>
+                      {c.translated_text && (
+                        <div className="translated-source">
+                          <p className="fine muted">
+                            Srpski prevod · čeka ljudski pregled
+                          </p>
+                          <blockquote>{c.translated_text}</blockquote>
+                        </div>
+                      )}
                       <blockquote>{c.text}</blockquote>
                       <code>{c.chunk_id}</code>
                       <div className="source-actions">
@@ -288,6 +258,7 @@ function SourceInspector({
                             decision: "Odluka sistema",
                             context: "Proširenje konteksta",
                             generation: "Formiranje odgovora",
+                            timing: "Trajanje obrade",
                             judge: "Provera relevantnosti",
                             rerank: "Provera relevantnosti",
                           } as Record<string, string>
@@ -615,29 +586,13 @@ function DocumentsView({
 
 export default function App() {
   const [page, setPage] = useState<Page>("chat");
-  const [historySnapshot] = useState(() => {
-    try {
-      const revision = localStorage.getItem(STORAGE_KEY);
-      return {
-        revision,
-        conversations: loadConversations(revision),
-        readError: false,
-      };
-    } catch {
-      return {
-        revision: null,
-        conversations: [] as Conversation[],
-        readError: true,
-      };
-    }
-  });
-  const [conversations, setConversations] = useState<Conversation[]>(
-    historySnapshot.conversations,
-  );
-  const historyRevision = useRef(historySnapshot.revision);
-  const [savedHistory, setSavedHistory] = useState(
-    historySnapshot.conversations,
-  );
+  const {
+    conversations,
+    setConversations,
+    markRestored,
+    storageError,
+    saving,
+  } = useHistory();
   const [activeId, setActiveId] = useState<string | null>(null);
   const [historyQuery, setHistoryQuery] = useState("");
   const [removed, setRemoved] = useState<{
@@ -650,15 +605,16 @@ export default function App() {
   } | null>(null);
   const [draft, setDraft] = useState("");
   const [profile, setProfile] = useState<Profile>("current");
+  const [language, setLanguage] = useState("auto");
+  const [jobProgress, setJobProgress] = useState<Job | null>(null);
+  const [cancelError, setCancelError] = useState("");
+  const activeJob = useRef<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const [documents, setDocuments] = useState<Document[]>([]);
   const [documentsError, setDocumentsError] = useState("");
   const [status, setStatus] = useState<Status | null>(null);
   const [statusOpen, setStatusOpen] = useState(false);
-  const [storageError, setStorageError] = useState<
-    "unavailable" | "conflict" | null
-  >(historySnapshot.readError ? "unavailable" : null);
   const [navOpen, setNavOpen] = useState(false);
   const [compact, setCompact] = useState(
     () =>
@@ -685,6 +641,14 @@ export default function App() {
     ? turns.find((t) => t.id === selectedTurn)
     : turns[turns.length - 1];
   const activeResult = activeTurn?.result;
+  useEffect(() => {
+    if (activeId && !conversation && !busy) {
+      setActiveId(null);
+      setSelectedTurn(null);
+      setSelectedSource(null);
+      setSourcesOpen(false);
+    }
+  }, [activeId, conversation, busy]);
   const history = conversations.filter((c) =>
     `${c.title} ${c.turns.map((t) => t.question).join(" ")}`
       .toLocaleLowerCase()
@@ -706,46 +670,6 @@ export default function App() {
     loadDocuments();
     refreshStatus();
   }, []);
-  useEffect(() => {
-    if (conversations === historySnapshot.conversations) return;
-    let cancelled = false;
-    if (!navigator.locks) {
-      setStorageError("unavailable");
-      return;
-    }
-    void navigator.locks
-      .request("izvor.history.v1", () => {
-        if (cancelled) return;
-        try {
-          if (localStorage.getItem(STORAGE_KEY) !== historyRevision.current) {
-            setStorageError("conflict");
-            return;
-          }
-          const serialized = JSON.stringify(conversations.slice(0, 10));
-          localStorage.setItem(STORAGE_KEY, serialized);
-          historyRevision.current = serialized;
-          setSavedHistory(conversations);
-          setStorageError(null);
-        } catch {
-          setStorageError("unavailable");
-        }
-      })
-      .catch(() => {
-        if (!cancelled) setStorageError("unavailable");
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [conversations, historySnapshot]);
-  useEffect(() => {
-    if (conversations === savedHistory) return;
-    const preventLoss = (event: BeforeUnloadEvent) => {
-      event.preventDefault();
-      event.returnValue = "";
-    };
-    window.addEventListener("beforeunload", preventLoss);
-    return () => window.removeEventListener("beforeunload", preventLoss);
-  }, [conversations, savedHistory]);
   useEffect(() => {
     if (turns.length)
       bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -805,6 +729,7 @@ export default function App() {
   function undoRemove() {
     if (!removed || busy) return;
     const restored = removed.conversation;
+    markRestored(restored.id);
     setConversations((cs) => {
       const next = cs.filter((c) => c.id !== restored.id);
       next.splice(Math.min(removed.index, next.length), 0, restored);
@@ -822,28 +747,66 @@ export default function App() {
     setSelectedSource(source);
     setSourcesOpen(true);
   }
-  async function send(text = draft) {
+  async function send(text = draft, resume?: { id: string; turn: Turn }) {
     const question = text.trim();
     if (!question || question.length > 2000 || sending.current) return;
     sending.current = true;
-    const id = activeId || uid();
-    const turnId = uid();
+    const id = resume?.id || activeId || uid();
+    const turnId = resume?.turn.id || uid();
     const turn: Turn = { id: turnId, question };
-    setConversations((current) => {
-      const exists = current.find((c) => c.id === id);
-      return exists
-        ? current.map((c) =>
-            c.id === id ? { ...c, turns: [...c.turns, turn].slice(-30) } : c,
-          )
-        : [{ id, title: question, turns: [turn] }, ...current].slice(0, 10);
-    });
+    if (resume)
+      setConversations((cs) =>
+        cs.map((c) =>
+          c.id === id
+            ? {
+                ...c,
+                turns: c.turns.map((t) =>
+                  t.id === turnId ? { ...t, error: undefined } : t,
+                ),
+              }
+            : c,
+        ),
+      );
+    else
+      setConversations((current) => {
+        const exists = current.find((c) => c.id === id);
+        return exists
+          ? current.map((c) =>
+              c.id === id ? { ...c, turns: [...c.turns, turn].slice(-30) } : c,
+            )
+          : [{ id, title: question, turns: [turn] }, ...current].slice(0, 10);
+      });
     setActiveId(id);
     setDraft("");
     setBusy(true);
+    setJobProgress(null);
+    setCancelError("");
+    activeJob.current = null;
     setSelectedTurn(turnId);
     setSelectedSource(null);
     try {
-      const result = await api<Answer>("/chat", { question, profile });
+      const result = await runChat(
+        { question, profile, language },
+        (job) => {
+          setJobProgress(job);
+          if (activeJob.current !== job.id) {
+            activeJob.current = job.id;
+            setConversations((cs) =>
+              cs.map((c) =>
+                c.id === id
+                  ? {
+                      ...c,
+                      turns: c.turns.map((t) =>
+                        t.id === turnId ? { ...t, jobId: job.id } : t,
+                      ),
+                    }
+                  : c,
+              ),
+            );
+          }
+        },
+        resume?.turn.jobId,
+      );
       setConversations((cs) =>
         cs.map((c) =>
           c.id === id
@@ -876,6 +839,14 @@ export default function App() {
       setBusy(false);
       sending.current = false;
       refreshStatus();
+    }
+  }
+  async function cancelRequest() {
+    if (!activeJob.current) return;
+    try {
+      setJobProgress(await api<Job>(`/jobs/${activeJob.current}/cancel`, {}));
+    } catch (e) {
+      setCancelError((e as Error).message);
     }
   }
   async function copy(turn: Turn) {
@@ -1054,7 +1025,9 @@ export default function App() {
                         <button
                           key={question}
                           disabled={busy}
-                          onClick={() => send(question)}
+                          onClick={() =>
+                            send(language === "en" ? question : label)
+                          }
                         >
                           {label}
                           <ArrowRight size={19} />
@@ -1108,6 +1081,12 @@ export default function App() {
                                 odgovor nije prošao proveru.
                               </div>
                             )}
+                            {turn.result.language === "sr" && (
+                              <p className="fine muted">
+                                Odgovor iz prevedenih izvora. Prevod još nije
+                                ljudski potvrđen; proverite originalni citat.
+                              </p>
+                            )}
                             <div className="answer-footer">
                               <button
                                 className="source-trigger"
@@ -1141,11 +1120,29 @@ export default function App() {
                               </button>
                             </div>
                           </div>
-                        ) : turn.error ? (
+                        ) : turn.error || !busy ? (
                           <div className="error-notice" role="alert">
                             <CircleAlert size={20} />
                             <div>
-                              <p>{turn.error}</p>
+                              <p>
+                                {turn.error ||
+                                  (turn.jobId
+                                    ? "Pozadinski posao može još trajati. Proverite rezultat."
+                                    : "Prethodna obrada nije završena. Pošaljite pitanje ponovo.")}
+                              </p>
+                              {turn.jobId && (
+                                <button
+                                  onClick={() =>
+                                    void send(turn.question, {
+                                      id: conversation!.id,
+                                      turn,
+                                    })
+                                  }
+                                  disabled={busy}
+                                >
+                                  Proveri pozadinski posao
+                                </button>
+                              )}
                               <button onClick={() => setDraft(turn.question)}>
                                 Vrati pitanje u unos
                               </button>
@@ -1155,12 +1152,31 @@ export default function App() {
                           <div className="pending" role="status">
                             <LoaderCircle size={18} className="spin" />
                             <div>
-                              <strong>Proveravam dokumente…</strong>
+                              <strong>
+                                {jobProgress?.progress.message ||
+                                  "Pripremam zahtev…"}
+                              </strong>
                               <p>
                                 {elapsed < 5
-                                  ? "Pretraga, provera dokaza i priprema odgovora."
+                                  ? "Faze i stanje posla dolaze sa lokalnog servera."
                                   : `Lokalnim modelima može biti potrebno više vremena. ${elapsed} s`}
                               </p>
+                              {busy && activeTurn?.id === turn.id && (
+                                <button
+                                  type="button"
+                                  className="text-button"
+                                  onClick={() => void cancelRequest()}
+                                  disabled={
+                                    !jobProgress ||
+                                    jobProgress.status === "cancelling"
+                                  }
+                                >
+                                  {jobProgress?.status === "cancelling"
+                                    ? "Otkazivanje…"
+                                    : "Otkaži obradu"}
+                                </button>
+                              )}
+                              {cancelError && <p role="alert">{cancelError}</p>}
                             </div>
                           </div>
                         )}
@@ -1182,16 +1198,15 @@ export default function App() {
               <div className="composer-area">
                 {conversations.length > 0 && !storageError && (
                   <p className="muted fine" role="status">
-                    {conversations !== savedHistory
+                    {saving
                       ? "Čuvam istoriju…"
                       : "Istorija je sačuvana u ovom browseru."}
                   </p>
                 )}
                 {storageError && (
                   <p className="error-notice" role="alert">
-                    {storageError === "conflict"
-                      ? "Istorija je izmenjena u drugom tabu. Preuzmite ovaj razgovor pre osvežavanja; sačuvana istorija neće biti prepisana."
-                      : "Browser ne može da sačuva istoriju. Preuzmite razgovor pre zatvaranja stranice."}
+                    Browser ne može da sačuva ili uskladi istoriju. Preuzmite
+                    razgovor pre zatvaranja stranice.
                   </p>
                 )}
                 <form
@@ -1235,6 +1250,19 @@ export default function App() {
                       </select>
                       <ChevronDown size={14} />
                     </label>
+                    <label className="language-select">
+                      <span className="sr-only">Jezik pitanja</span>
+                      <select
+                        aria-label="Jezik pitanja"
+                        value={language}
+                        disabled={busy}
+                        onChange={(e) => setLanguage(e.target.value)}
+                      >
+                        <option value="auto">Auto · SR/EN</option>
+                        <option value="sr">Srpski</option>
+                        <option value="en">English</option>
+                      </select>
+                    </label>
                     <span className="send-hint">
                       {draft.length > 1800
                         ? `${draft.length}/2000`
@@ -1256,8 +1284,8 @@ export default function App() {
                 <p className="composer-caption">
                   <Info size={14} />
                   <span>
-                    Odgovori se zasnivaju samo na dokumentima. Modeli obrađuju
-                    pitanja na engleskom.
+                    Pitajte na srpskom ili engleskom. Srpski odgovori su
+                    prevedeni odlomci; originalni citati su dostupni uz odgovor.
                   </span>
                 </p>
               </div>
