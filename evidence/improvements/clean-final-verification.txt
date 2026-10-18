@@ -1,0 +1,44 @@
+$ python -m pytest -q
+........................................................................ [ 52%]
+.................................................................        [100%]
+137 passed in 2.75s
+
+$ python -m src.experiment_runner --mode replay --out results/final-check.json
+eval {'passed': 12, 'total': 12, 'behaviour_accuracy': 1.0, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 1.0} {'embeddings': 0, 'llm': 0} fallbacks 0
+holdout {'passed': 34, 'total': 34, 'behaviour_accuracy': 1.0, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 0.9583} {'embeddings': 0, 'llm': 0} fallbacks 0
+test1 {'passed': 23, 'total': 24, 'behaviour_accuracy': 0.9583, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 1.0} {'embeddings': 0, 'llm': 0} fallbacks 1
+test2 {'passed': 29, 'total': 32, 'behaviour_accuracy': 0.9375, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 1.0} {'embeddings': 0, 'llm': 0} fallbacks 0
+Cached replay only; no fresh model generation.
+
+$ python -m src.completeness --out results/completeness-check.json
+assistant_draft_not_human_approved
+E09 model {'request_location': True, 'request_section': True, 'duration': True} sources {'request_location': True, 'request_section': True, 'duration': True}
+H20 model {'form_location': True, 'form_section': True} sources {'form_location': True, 'form_section': True}
+U17 model {'first_checkin': True, 'second_checkin': True} sources {'first_checkin': True, 'second_checkin': True}
+U13 model {'current_limit': False} sources {'current_limit': False}
+
+M5 package: ...................                                                      [100%]
+19 passed in 0.04s
+
+M5 package: ID   Category                 Expected Got     Hit  Fact  CitPrec Pass
+----------------------------------------------------------------------
+E01  supported                answer   answer  yes  yes   0.50    PASS
+E02  supported                answer   answer  yes  yes   0.50    PASS
+E03  supported                answer   answer  yes  yes   0.50    PASS
+E04  chunk-boundary           answer   answer  yes  no    1.00    FAIL
+E05  paraphrase               answer   answer  no   no    0.00    FAIL
+E06  versioned                answer   answer  yes  yes   1.00    PASS
+E07  supported                answer   answer  yes  yes   1.00    PASS
+E08  supported                answer   answer  yes  yes   0.50    PASS
+E09  chunk-boundary           answer   answer  yes  no    1.00    FAIL
+E10  unsupported              refuse   answer  -    -     0.00    FAIL
+E11  unsupported-near-domain  refuse   answer  -    -     0.00    FAIL
+E12  unsupported              refuse   refuse  -    -     -       PASS
+
+Passed: 7/12
+Behaviour accuracy: 0.83
+Retrieval hit rate (supported): 0.89
+Mean citation precision (answered): 0.55
+eval_set_sha256: afe46db1e75a0b85bb5c9a93b6763e3b96e5cd7b289e12da6d2671e4d8650064
+
+Wrote results/check.json
