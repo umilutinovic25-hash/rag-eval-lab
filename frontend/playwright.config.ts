@@ -1,7 +1,10 @@
 import { defineConfig } from "@playwright/test";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 
 export default defineConfig({
   testDir: "./e2e",
+  outputDir: join(tmpdir(), "izvor-playwright-results"),
   fullyParallel: false,
   workers: 1,
   timeout: 30000,

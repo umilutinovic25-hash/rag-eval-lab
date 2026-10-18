@@ -10,6 +10,8 @@ Za nova pitanja u naprednom režimu potrebno je lokalno instalirati modele `bge-
 
 Svako pitanje obrađuje se nezavisno. Istorija razgovora nije kontekst modela. Browser čuva poslednjih 10 razgovora sa najviše 30 pitanja po razgovoru. Markdown izvoz čuva pitanje, odgovor, citate, verzije, profil i vreme. Statusni dijalog ima komandu za brisanje lokalne istorije. Prekid zahteva osvežavanjem stranice ne prekida već započetu lokalnu obradu; nedovršen zapis je označen za ponovno slanje.
 
+Istoriju je moguće pretražiti i pojedinačno ukloniti razgovor. Dugme „Vrati” vraća poslednji uklonjeni razgovor dok se obaveštenje ne zatvori, stranica ne osveži ili se ne ukloni drugi razgovor. Iz panela citata „Ceo dokument” otvara pravi dokument i označava citirani odlomak; „Nazad na razgovor” ostaje vidljiv pri skrolovanju. Kopiranje odlomka uključuje originalni tekst, naslov, verziju i oznaku izvora. Tokom novog zahteva panel prikazuje stanje obrade tog pitanja, a pri grešci daje uputstvo za oporavak. Oštećeni pojedinačni zapisi u browseru ne uklanjaju ostalu ispravnu istoriju.
+
 ## Funkcionalne celine
 
 - Razgovor: unos preko Enter, novi red preko Shift+Enter, primeri iz keša, stanje obrade, izvoz i kopiranje, vidljive greške, rezervni ekstraktivni odgovor i odbijanje bez dokaza.

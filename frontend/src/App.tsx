@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowDownToLine,
+  ArrowLeft,
   ArrowRight,
   ArrowUp,
   BookOpen,
@@ -20,11 +21,14 @@ import {
   Plus,
   Search,
   ShieldCheck,
+  Trash2,
+  Undo2,
   X,
 } from "lucide-react";
 import { api, download } from "./api";
 import type {
   Answer,
+  Chunk,
   Conversation,
   Document,
   Page,
@@ -58,6 +62,18 @@ const uid = () => crypto.randomUUID();
 const chunksLabel = (n: number) =>
   `${n} ${n === 1 ? "odlomak" : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? "odlomka" : "odlomaka"}`;
 
+function validChunk(value: unknown): value is Chunk {
+  if (!value || typeof value !== "object") return false;
+  const c = value as Record<string, unknown>;
+  return (
+    ["chunk_id", "doc_id", "title", "version", "status", "text"].every(
+      (key) => typeof c[key] === "string",
+    ) &&
+    (c.score === undefined ||
+      (typeof c.score === "number" && Number.isFinite(c.score)))
+  );
+}
+
 function loadConversations(): Conversation[] {
   try {
     const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
@@ -65,6 +81,7 @@ function loadConversations(): Conversation[] {
     return value
       .filter(
         (c) =>
+          c &&
           typeof c.id === "string" &&
           typeof c.title === "string" &&
           Array.isArray(c.turns),
@@ -75,7 +92,7 @@ function loadConversations(): Conversation[] {
         turns: c.turns
           .filter(
             (t: Turn) =>
-              typeof t.id === "string" && typeof t.question === "string",
+              t && typeof t.id === "string" && typeof t.question === "string",
           )
           .slice(-30)
           .map((t: Turn) => {
@@ -83,17 +100,23 @@ function loadConversations(): Conversation[] {
             if (
               r &&
               typeof r.answer === "string" &&
+              typeof r.refused === "boolean" &&
               Array.isArray(r.citations) &&
+              r.citations.every(validChunk) &&
               Array.isArray(r.trace) &&
+              r.trace.every((step) => step && typeof step.stage === "string") &&
               Array.isArray(r.retrieved) &&
-              typeof r.seconds === "number"
+              r.retrieved.every(validChunk) &&
+              typeof r.seconds === "number" &&
+              Number.isFinite(r.seconds) &&
+              (r.profile === "current" || r.profile === "offline")
             )
               return t;
             return {
               id: t.id,
               question: t.question,
               error:
-                t.error ||
+                (typeof t.error === "string" && t.error) ||
                 "Prethodna obrada nije završena. Pošaljite pitanje ponovo.",
             };
           }),
@@ -140,19 +163,39 @@ function SourceInspector({
   selected,
   onSelect,
   onDocuments,
+  onOpenDocument,
+  pending,
+  failed,
   onClose,
 }: {
   result?: Answer;
   selected: string | null;
   onSelect: (id: string) => void;
   onDocuments: () => void;
+  onOpenDocument: (docId: string, chunkId: string) => void;
+  pending: boolean;
+  failed: boolean;
   onClose: () => void;
 }) {
   const [tab, setTab] = useState("sources");
+  const [copyMessage, setCopyMessage] = useState("");
   const selectedChunk = result?.citations.find((c) => c.chunk_id === selected);
   useEffect(() => {
     if (selected) setTab("sources");
+    setCopyMessage("");
   }, [selected]);
+  async function copySource(chunk: Chunk) {
+    try {
+      await navigator.clipboard.writeText(
+        `${chunk.text}\n\n${chunk.title} · ${chunk.version}\n[${chunk.chunk_id}]`,
+      );
+      setCopyMessage("Odlomak i njegova referenca su kopirani.");
+    } catch {
+      setCopyMessage(
+        "Browser nije dozvolio kopiranje. Odlomak možete sačuvati izvozom razgovora.",
+      );
+    }
+  }
   return (
     <aside
       className="inspector"
@@ -196,21 +239,48 @@ function SourceInspector({
             {tab === "sources" ? (
               result.citations.length ? (
                 result.citations.map((c, i) => (
-                  <button
+                  <article
                     key={c.chunk_id}
                     className={`source-item ${selectedChunk?.chunk_id === c.chunk_id ? "selected" : ""}`}
-                    onClick={() => onSelect(c.chunk_id)}
                   >
                     <div className="source-number">{i + 1}</div>
                     <div>
-                      <h3>{c.title}</h3>
+                      <h3>
+                        <button
+                          className="source-title"
+                          onClick={() => onSelect(c.chunk_id)}
+                          aria-label={`Izaberi odlomak ${c.chunk_id}`}
+                          aria-current={
+                            selectedChunk?.chunk_id === c.chunk_id
+                              ? "true"
+                              : undefined
+                          }
+                        >
+                          {c.title}
+                        </button>
+                      </h3>
                       <div className="source-meta">
                         {c.version} <span className="dot" /> Aktuelan
                       </div>
                       <blockquote>{c.text}</blockquote>
                       <code>{c.chunk_id}</code>
+                      <div className="source-actions">
+                        <button
+                          onClick={() => onOpenDocument(c.doc_id, c.chunk_id)}
+                        >
+                          <FileText size={13} />
+                          Ceo dokument
+                        </button>
+                        <button
+                          onClick={() => copySource(c)}
+                          aria-label={`Kopiraj odlomak ${c.chunk_id}`}
+                          title="Kopiraj odlomak i referencu"
+                        >
+                          <Copy size={13} />
+                        </button>
+                      </div>
                     </div>
-                  </button>
+                  </article>
                 ))
               ) : (
                 <div className="small-empty">
@@ -268,6 +338,11 @@ function SourceInspector({
               </div>
             )}
           </div>
+          {copyMessage && (
+            <p className="source-copy-message" role="status">
+              {copyMessage}
+            </p>
+          )}
           <div className="inspector-note">
             <Info size={15} />
             <span>
@@ -280,40 +355,70 @@ function SourceInspector({
       ) : (
         <>
           <div className="inspector-empty">
-            <svg
-              className="document-stack"
-              viewBox="0 0 96 112"
-              fill="none"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <rect x="29" y="28" width="54" height="76" rx="6" />
-              <rect
-                x="23"
-                y="22"
-                width="54"
-                height="76"
-                rx="6"
-                fill="#f9fafb"
-              />
-              <rect
-                x="16"
-                y="15"
-                width="56"
-                height="76"
-                rx="6"
-                fill="#f9fafb"
-              />
-              <rect x="10" y="4" width="57" height="76" rx="6" fill="#f9fafb" />
-              <path
-                d="M22 25h32M22 37h32M22 49h23M22 61h12"
-                strokeLinecap="round"
-              />
-            </svg>
-            <h3>Dokaz uz svaki odgovor</h3>
-            <p>
-              Ovde ćete videti korišćene odlomke, njihove verzije i tok odluke.
-            </p>
+            {pending || failed ? (
+              <>
+                <div className="inspector-request-status">
+                  {pending ? (
+                    <LoaderCircle className="spin" size={34} />
+                  ) : (
+                    <CircleAlert size={34} />
+                  )}
+                </div>
+                <h3>
+                  {pending ? "Proveravam novo pitanje" : "Obrada nije završena"}
+                </h3>
+                <p>
+                  {pending
+                    ? "Odabrani izvori i odluka pojaviće se po završetku obrade."
+                    : "Pokušajte ponovo ili izaberite režim Bez modela."}
+                </p>
+              </>
+            ) : (
+              <>
+                <svg
+                  className="document-stack"
+                  viewBox="0 0 96 112"
+                  fill="none"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <rect x="29" y="28" width="54" height="76" rx="6" />
+                  <rect
+                    x="23"
+                    y="22"
+                    width="54"
+                    height="76"
+                    rx="6"
+                    fill="#f9fafb"
+                  />
+                  <rect
+                    x="16"
+                    y="15"
+                    width="56"
+                    height="76"
+                    rx="6"
+                    fill="#f9fafb"
+                  />
+                  <rect
+                    x="10"
+                    y="4"
+                    width="57"
+                    height="76"
+                    rx="6"
+                    fill="#f9fafb"
+                  />
+                  <path
+                    d="M22 25h32M22 37h32M22 49h23M22 61h12"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <h3>Dokaz uz svaki odgovor</h3>
+                <p>
+                  Ovde ćete videti korišćene odlomke, njihove verzije i tok
+                  odluke.
+                </p>
+              </>
+            )}
           </div>
           <div className="handbook-box">
             <h3>
@@ -341,14 +446,27 @@ function DocumentsView({
   documents,
   error,
   retry,
+  initialSource,
+  onBack,
 }: {
   documents: Document[];
   error: string;
   retry: () => void;
+  initialSource: { docId: string; chunkId: string } | null;
+  onBack: () => void;
 }) {
   const [query, setQuery] = useState("");
   const [scope, setScope] = useState("current");
-  const [selected, setSelected] = useState<Document | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(
+    initialSource?.docId || null,
+  );
+  const selected = documents.find((d) => d.doc_id === selectedId);
+  const highlighted = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!highlighted.current) return;
+    highlighted.current.scrollIntoView({ block: "center", behavior: "auto" });
+    highlighted.current.focus({ preventScroll: true });
+  }, [initialSource?.chunkId, selectedId, documents]);
   const list = documents.filter(
     (d) =>
       (scope === "all" || d.status === scope) &&
@@ -357,7 +475,22 @@ function DocumentsView({
         .includes(query.toLowerCase()),
   );
   return (
-    <div className="content-page documents-page">
+    <div
+      className={`content-page documents-page ${initialSource ? "from-source" : ""}`}
+    >
+      {initialSource && (
+        <div className="document-returnbar">
+          <button className="back-to-chat" onClick={onBack}>
+            <ArrowLeft size={15} />
+            Nazad na razgovor
+          </button>
+          <span>
+            {selected
+              ? `${selected.title} · ${selected.version}`
+              : "Dokument izvora"}
+          </span>
+        </div>
+      )}
       <div className="page-heading">
         <div>
           <h1>Znanje, na jednom mestu.</h1>
@@ -402,7 +535,7 @@ function DocumentsView({
                 <button
                   className={`document-row ${selected?.doc_id === doc.doc_id ? "active" : ""}`}
                   key={doc.doc_id}
-                  onClick={() => setSelected(doc)}
+                  onClick={() => setSelectedId(doc.doc_id)}
                 >
                   <FileText size={22} />
                   <div>
@@ -444,7 +577,7 @@ function DocumentsView({
                     </span>
                     <button
                       className="icon-button"
-                      onClick={() => setSelected(null)}
+                      onClick={() => setSelectedId(null)}
                       aria-label="Zatvori dokument"
                     >
                       <X size={18} />
@@ -457,7 +590,17 @@ function DocumentsView({
                   <p className="document-text">{selected.text}</p>
                   <h3 className="chunks-heading">Odlomci dokumenta</h3>
                   {selected.chunks.map((c) => (
-                    <div className="document-chunk" key={c.chunk_id}>
+                    <div
+                      className={`document-chunk ${initialSource?.chunkId === c.chunk_id ? "is-cited" : ""}`}
+                      ref={
+                        initialSource?.chunkId === c.chunk_id
+                          ? highlighted
+                          : undefined
+                      }
+                      tabIndex={-1}
+                      aria-label={`Odlomak ${c.chunk_id}`}
+                      key={c.chunk_id}
+                    >
                       <code>{c.chunk_id}</code>
                       <p>{c.text}</p>
                     </div>
@@ -486,6 +629,15 @@ export default function App() {
   const [conversations, setConversations] =
     useState<Conversation[]>(loadConversations);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [historyQuery, setHistoryQuery] = useState("");
+  const [removed, setRemoved] = useState<{
+    conversation: Conversation;
+    index: number;
+  } | null>(null);
+  const [initialSource, setInitialSource] = useState<{
+    docId: string;
+    chunkId: string;
+  } | null>(null);
   const [draft, setDraft] = useState("");
   const [profile, setProfile] = useState<Profile>("current");
   const [busy, setBusy] = useState(false);
@@ -517,9 +669,15 @@ export default function App() {
   const sending = useRef(false);
   const conversation = conversations.find((c) => c.id === activeId);
   const turns = conversation?.turns || [];
-  const activeResult =
-    turns.find((t) => t.id === selectedTurn)?.result ||
-    [...turns].reverse().find((t) => t.result)?.result;
+  const activeTurn = selectedTurn
+    ? turns.find((t) => t.id === selectedTurn)
+    : turns[turns.length - 1];
+  const activeResult = activeTurn?.result;
+  const history = conversations.filter((c) =>
+    `${c.title} ${c.turns.map((t) => t.question).join(" ")}`
+      .toLocaleLowerCase()
+      .includes(historyQuery.toLocaleLowerCase().trim()),
+  );
 
   function loadDocuments() {
     setDocumentsError("");
@@ -571,7 +729,11 @@ export default function App() {
     return () => window.removeEventListener("keydown", key);
   }, []);
 
-  function navigate(next: Page) {
+  function navigate(
+    next: Page,
+    source: { docId: string; chunkId: string } | null = null,
+  ) {
+    setInitialSource(next === "documents" ? source : null);
     setPage(next);
     setNavOpen(false);
     setSourcesOpen(false);
@@ -582,8 +744,37 @@ export default function App() {
     setSelectedTurn(null);
     setSelectedSource(null);
     setDraft("");
+    setHistoryQuery("");
     navigate("chat");
     textareaRef.current?.focus();
+  }
+  function removeConversation(id: string) {
+    if (busy) return;
+    const index = conversations.findIndex((c) => c.id === id);
+    if (index < 0) return;
+    setRemoved({ conversation: conversations[index], index });
+    setConversations((cs) => cs.filter((c) => c.id !== id));
+    if (activeId === id) {
+      setActiveId(null);
+      setSelectedTurn(null);
+      setSelectedSource(null);
+      setSourcesOpen(false);
+    }
+  }
+  function undoRemove() {
+    if (!removed || busy) return;
+    const restored = removed.conversation;
+    setConversations((cs) => {
+      const next = cs.filter((c) => c.id !== restored.id);
+      next.splice(Math.min(removed.index, next.length), 0, restored);
+      return next.slice(0, 10);
+    });
+    setActiveId(restored.id);
+    setSelectedTurn(null);
+    setSelectedSource(null);
+    setHistoryQuery("");
+    setRemoved(null);
+    navigate("chat");
   }
   function selectSource(turn: string, source: string) {
     setSelectedTurn(turn);
@@ -706,22 +897,48 @@ export default function App() {
         {!!conversations.length && (
           <div className="history">
             <p>Prethodni razgovori</p>
-            {conversations.map((c) => (
-              <button
-                title={c.title}
-                className={activeId === c.id && page === "chat" ? "active" : ""}
-                key={c.id}
-                disabled={busy}
-                onClick={() => {
-                  setActiveId(c.id);
-                  setSelectedTurn(null);
-                  setSelectedSource(null);
-                  navigate("chat");
-                }}
-              >
-                <MessageSquare size={14} />
-                <span>{c.title}</span>
-              </button>
+            <label className="history-search">
+              <Search size={13} />
+              <input
+                aria-label="Pretraži razgovore"
+                placeholder="Pretraži razgovore…"
+                value={historyQuery}
+                onChange={(e) => setHistoryQuery(e.target.value)}
+              />
+            </label>
+            {!history.length && (
+              <p className="history-no-results">
+                Nema razgovora za ovu pretragu.
+              </p>
+            )}
+            {history.map((c) => (
+              <div className="history-row" key={c.id}>
+                <button
+                  title={c.title}
+                  className={
+                    activeId === c.id && page === "chat" ? "active" : ""
+                  }
+                  disabled={busy}
+                  onClick={() => {
+                    setActiveId(c.id);
+                    setSelectedTurn(null);
+                    setSelectedSource(null);
+                    navigate("chat");
+                  }}
+                >
+                  <MessageSquare size={14} />
+                  <span>{c.title}</span>
+                </button>
+                <button
+                  className="history-delete"
+                  aria-label={`Ukloni razgovor: ${c.title}`}
+                  onClick={() => removeConversation(c.id)}
+                  disabled={busy}
+                  title="Ukloni razgovor"
+                >
+                  <Trash2 size={13} />
+                </button>
+              </div>
             ))}
           </div>
         )}
@@ -1001,6 +1218,8 @@ export default function App() {
               documents={documents}
               error={documentsError}
               retry={loadDocuments}
+              initialSource={initialSource}
+              onBack={() => navigate("chat")}
             />
           ) : (
             <EvaluationView />
@@ -1013,11 +1232,34 @@ export default function App() {
               selected={selectedSource}
               onSelect={setSelectedSource}
               onDocuments={() => navigate("documents")}
+              onOpenDocument={(docId, chunkId) =>
+                navigate("documents", { docId, chunkId })
+              }
+              pending={
+                busy && !!activeTurn && !activeResult && !activeTurn.error
+              }
+              failed={!!activeTurn?.error}
               onClose={() => setSourcesOpen(false)}
             />
           </div>
         )}
       </div>
+      {removed && (
+        <div className="undo-toast" role="status" inert={statusOpen}>
+          <span>Razgovor je uklonjen.</span>
+          <button onClick={undoRemove} disabled={busy}>
+            <Undo2 size={15} />
+            Vrati
+          </button>
+          <button
+            className="icon-button"
+            aria-label="Zatvori obaveštenje"
+            onClick={() => setRemoved(null)}
+          >
+            <X size={15} />
+          </button>
+        </div>
+      )}
       {statusOpen && (
         <div className="modal-backdrop" onClick={() => setStatusOpen(false)}>
           <section
@@ -1099,6 +1341,8 @@ export default function App() {
                 onClick={() => {
                   if (busy) return;
                   setConversations([]);
+                  setRemoved(null);
+                  setHistoryQuery("");
                   setActiveId(null);
                   setSelectedTurn(null);
                   setSelectedSource(null);

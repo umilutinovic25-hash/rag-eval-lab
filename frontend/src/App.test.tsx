@@ -42,6 +42,92 @@ beforeEach(() => {
 });
 
 describe("real UI contracts", () => {
+  it("clears the previous sources while the next question is pending", async () => {
+    render(<App />);
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "Koliko dana mogu da radim od kuće?",
+      }),
+    );
+    await screen.findByText("Up to 3 days per week.");
+    vi.mocked(fetch).mockImplementationOnce(
+      () => new Promise<Response>(() => {}),
+    );
+    fireEvent.change(screen.getByLabelText("Pitanje o priručniku"), {
+      target: { value: "Next question" },
+    });
+    fireEvent.click(screen.getByLabelText("Pošalji pitanje"));
+    expect(screen.getByText("Proveravam novo pitanje")).toBeInTheDocument();
+    expect(screen.queryByText("3 days per week.")).not.toBeInTheDocument();
+  });
+
+  it("filters, removes and restores a local conversation", async () => {
+    localStorage.setItem(
+      "izvor.conversations.v1",
+      JSON.stringify([
+        {
+          id: "a",
+          title: "Remote work",
+          turns: [{ id: "a1", question: "Remote work?", result: answer }],
+        },
+        {
+          id: "b",
+          title: "Laptop request",
+          turns: [{ id: "b1", question: "Laptop?" }],
+        },
+      ]),
+    );
+    render(<App />);
+    fireEvent.change(screen.getByLabelText("Pretraži razgovore"), {
+      target: { value: "Laptop" },
+    });
+    expect(
+      screen.queryByRole("button", { name: "Remote work" }),
+    ).not.toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText("Ukloni razgovor: Laptop request"));
+    expect(screen.getByText("Razgovor je uklonjen.")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Vrati" }));
+    expect(
+      screen.getByRole("button", { name: "Laptop request" }),
+    ).toBeInTheDocument();
+    expect(localStorage.getItem("izvor.conversations.v1")).toContain(
+      "Laptop request",
+    );
+  });
+
+  it("keeps healthy history when another saved entry or citation is corrupt", () => {
+    localStorage.setItem(
+      "izvor.conversations.v1",
+      JSON.stringify([
+        null,
+        {
+          id: "good",
+          title: "Healthy conversation",
+          turns: [{ id: "t", question: "Remote?", result: answer }],
+        },
+        {
+          id: "bad",
+          title: "Damaged answer",
+          turns: [
+            null,
+            {
+              id: "t2",
+              question: "Broken?",
+              result: { ...answer, citations: [null] },
+            },
+          ],
+        },
+      ]),
+    );
+    render(<App />);
+    expect(
+      screen.getByRole("button", { name: "Healthy conversation" }),
+    ).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Damaged answer" }));
+    expect(screen.getByRole("alert")).toHaveTextContent(
+      "Prethodna obrada nije završena",
+    );
+  });
   it("opens verified citations without rendering arbitrary answer HTML", () => {
     const onSource = vi.fn();
     render(

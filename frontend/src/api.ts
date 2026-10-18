@@ -1,16 +1,33 @@
 export async function api<T>(path: string, body?: unknown): Promise<T> {
-  const response = await fetch(`/api${path}`, {
-    ...(body === undefined
-      ? {}
-      : {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        }),
-  });
-  const data = await response.json();
+  let response: Response;
+  try {
+    response = await fetch(`/api${path}`, {
+      ...(body === undefined
+        ? {}
+        : {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          }),
+    });
+  } catch {
+    throw new Error(
+      "Veza sa lokalnim serverom nije dostupna. Proverite da je start-web.command pokrenut, pa pokušajte ponovo.",
+    );
+  }
+  let data;
+  try {
+    data = await response.json();
+  } catch {
+    throw new Error(
+      "Server je vratio neispravan odgovor. Osvežite stranicu i pokušajte ponovo.",
+    );
+  }
   if (!response.ok)
-    throw new Error(data.error || "Zahtev nije završen. Pokušajte ponovo.");
+    throw new Error(
+      (data && typeof data.error === "string" && data.error) ||
+        "Zahtev nije završen. Pokušajte ponovo.",
+    );
   return data as T;
 }
 
