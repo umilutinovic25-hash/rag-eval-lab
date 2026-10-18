@@ -12,8 +12,8 @@ from .embeddings import CACHE_PATH as EMBEDDING_CACHE_PATH, load_cache, save_cac
 CACHE_PATH = EMBEDDING_CACHE_PATH.with_name("llm_cache.json")
 OLLAMA_URL = "http://localhost:11434/api/generate"
 ACCEPT_WORDS = {"yes", "relevant"}
-SPAN_MIN_OVERLAP = 0.8
-WORD_RE = re.compile(r"[a-z0-9:]+")
+WORD_RE = re.compile(r"[a-z0-9]+(?:['’][a-z]+)?")
+NEGATIONS = {"never", "not", "no", "cannot"}
 
 
 class LLMError(RuntimeError):
@@ -54,12 +54,21 @@ def generate(model: str, prompt: str, max_tokens: int) -> str:
 
 
 def span_is_in_passage(span: str, passage: str) -> bool:
-    """The copied evidence must really come from the passage: at least 80% of its words."""
-    if not span or span.strip().upper().startswith("NONE"):
+    """Match contiguous source tokens, preserving a source sentence's negation.
+
+    This checks copied evidence, not relevance or semantic entailment.
+    """
+    words = WORD_RE.findall(span.casefold().replace("’", "'"))
+    if not words or words[0] == "none":
         return False
-    words = WORD_RE.findall(span.lower())
-    passage_words = set(WORD_RE.findall(passage.lower()))
-    return bool(words) and sum(word in passage_words for word in words) / len(words) >= SPAN_MIN_OVERLAP
+    has_negative = lambda tokens: any(t in NEGATIONS or t.endswith("n't") for t in tokens)
+    for sentence in re.split(r"(?<=[.!?])\s+", passage):
+        source = WORD_RE.findall(sentence.casefold().replace("’", "'"))
+        for start in range(len(source) - len(words) + 1):
+            if source[start : start + len(words)] == words:
+                if not has_negative(source) or has_negative(words):
+                    return True
+    return False
 
 
 def span_judge(question: str, passage: str) -> bool:
