@@ -133,3 +133,26 @@ Posle prvog kruga ostali su padovi H13, T02 i T06 (judge pogrešno odbija) i nep
 ## Završno, drugi krug: test 2 (jednom)
 
 `holdout_runner --set eval/test2_set.json` za stanje posle B3 i za konačno stanje, u istom pokretanju i bez daljih izmena posle toga.
+
+**Rezultat B4:** eval 12/12; holdout 33 → 34 (popravljen H13); viđeni test 1 22 → 21 (popravljen T06; pokvareni T04 „How much can I spend on conferences“ i T07 „Do I need my badge at every door?“). Kod T07 model piše odgovor („Yes, you need your badge at every entrance.“) umesto da prepiše reči, pa provera padne (5/8 reči). Kod T04 kaže NONE za „training budget of 800 EUR per year for courses, conferences“. Dakle, judge sa izvlačenjem greši **na drugim** pitanjima nego da/ne judge.
+
+## B4b: unija dva judge-a
+
+Proba na eval + holdout + test 1 (test 1 je ovde razvojni; slepi je test 2):
+
+| Judge | eval | holdout | test 1 | Padovi |
+| --- | --- | --- | --- | --- |
+| izvlačenje (B4) | 12/12 | 34/34 | 21/24 | T02, T04, T07 |
+| izvlačenje, uz odbacivanje „yes/no“ na početku | 12/12 | 34/34 | 21/24 | T02, T04, T07 |
+| izvlačenje, upit „...or that directly help answer it“ | 12/12 | 34/34 | 21/24 | T02, T04, T07 |
+| **da/ne (gemma3:4b) ILI izvlačenje (qwen2.5:7b)** | **12/12** | **34/34** | **23/24** | T02 |
+
+| Polje | Sadržaj |
+| --- | --- |
+| Propust | B4 kvari T04 i T07, koje je B2 judge (da/ne) rešavao, a B2 judge kvari H13 i T06, koje B4 rešava. Tip: pogrešno odbijanje. |
+| Hipoteza | Dva judge-a greše na različitim pitanjima (pogrešno odbijanje), a na eval, holdout i test 1 nijedan nije pogrešno prihvatio nepodržano pitanje u sivoj zoni. Ako pasus prolazi kada ga prihvati **bilo koji**, gube se greške odbijanja, a ne dobijaju greške prihvatanja. |
+| Promena | `RERANK_JUDGE = "either"`: pasus prolazi ako da/ne judge (`RERANK_YESNO_MODEL = "gemma3:4b"`, B2 upit) **ili** judge sa izvlačenjem (`RERANK_MODEL = "qwen2.5:7b"`, B4 upit) kaže da odgovara. Da/ne judge se poziva samo kada izvlačenje kaže ne. |
+| Očekivani efekat | eval 12/12, holdout 34/34, test 1 23/24. |
+| Rizik regresije | Unija je blaža, pa svaka greška prihvatanja bilo kog judge-a prolazi. Dva LLM-a (8 GB ukupno). |
+| Ostaje | **T02** „Does sick leave come out of my annual leave days?“ ↔ „Sick leave follows a separate policy.“ Isti pasus treba prihvatiti za T02, a odbiti za H25 („How many sick days do I get per year?“). Od 5 lokalnih modela tu razliku prave samo izvlačenje sa gemma3:4b (koje na eval-u pogrešno prihvata E11) i da/ne sa llama3.2 (koje pogrešno prihvata E11 i H25). Dodavanje trećeg judge-a samo zbog T02 značilo bi štimovanje sistema na jedno pitanje, pa to nije urađeno. |
+| Provera | `pytest`, eval, holdout, test 1, `eval_compare` u odnosu na B4. |
