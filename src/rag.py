@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import re
 
 from . import config
@@ -19,6 +19,7 @@ class RagAnswer:
     refused: bool
     retrieved: list[RetrievalResult]
     generation_fallback_reason: str | None = None
+    trace: list[dict] = field(default_factory=list)
 
 
 def citation_min_score() -> float | None:
@@ -48,6 +49,8 @@ def extractive_answer(cited: list[RetrievalResult]) -> str:
 
 def generation_issue(text: str, cited: list[RetrievalResult]) -> str | None:
     """Structural and numeric checks only; no claim of semantic verification."""
+    if getattr(text, "metadata", {}).get("done_reason") == "length":
+        return "truncated_answer"
     if not isinstance(text, str) or not text.strip():
         return "empty_answer"
     if any(line.lstrip().startswith(QUOTE_PREFIX) for line in text.splitlines()):
@@ -65,39 +68,53 @@ def generation_issue(text: str, cited: list[RetrievalResult]) -> str | None:
 
 
 def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
+    trace = []
+    def refuse(reason, retrieved):
+        trace.append({"stage": "decision", "reason": reason, "refused": True})
+        return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=retrieved, trace=trace)
+
+    def record_retrieval(results):
+        trace.append({"stage": "retrieval", "candidates": [{"chunk_id": r.chunk.chunk_id, "score": r.score} for r in results]})
+
     if not question.strip():
-        return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=[])
+        return refuse("empty_question", [])
     if config.RERANK == "llm-gray-zone" and config.RETRIEVAL_MODE not in ("semantic", "hybrid"):
         raise ValueError("llm-gray-zone requires semantic or hybrid cosine scores; use the offline profile for lexical.")
     if config.RERANK in ("llm", "llm-gray-zone"):
         candidates = retrieve_top_k(question, chunks, k=config.RERANK_CANDIDATES)
+        record_retrieval(candidates)
         top = candidates[0].score if candidates else 0.0
         low, high = config.RERANK_GRAY_ZONE
         if config.RERANK == "llm-gray-zone" and top >= high:
             results = candidates[: config.TOP_K]
             cited = select_citations(results)
+            trace.append({"stage": "decision", "reason": "above_gray_zone"})
         elif config.RERANK == "llm-gray-zone" and top < low:
-            return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=candidates[: config.TOP_K])
+            return refuse("below_gray_zone", candidates[: config.TOP_K])
         else:
             results = []
             for item in candidates:
-                if passage_answers(question, item.chunk.text):
+                accepted = passage_answers(question, item.chunk.text)
+                trace.append({"stage": "judge", "chunk_id": item.chunk.chunk_id, "accepted": accepted})
+                if accepted:
                     results.append(item)
                     if len(results) == config.TOP_K:
                         break
             if not results:
-                return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=candidates[: config.TOP_K])
+                return refuse("no_accepted_candidate", candidates[: config.TOP_K])
             cited = results
     else:
         results = retrieve_top_k(question, chunks)
+        record_retrieval(results)
         if not results or results[0].score < refusal_threshold():
-            return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=results)
+            return refuse("below_refusal_threshold", results)
         cited = select_citations(results)
 
     fallback_reason = None
     if config.ANSWER_MODE == "llm":
         try:
             answer = write_answer(question, [(item.chunk.chunk_id, item.chunk.text) for item in cited])
+            trace.append({"stage": "generation", "text": str(answer), "metadata": getattr(answer, "metadata", {"done_reason": "unknown"})})
             fallback_reason = generation_issue(answer, cited)
         except LLMError:
             fallback_reason = "generation_error"
@@ -113,6 +130,7 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
         refused=False,
         retrieved=results,
         generation_fallback_reason=fallback_reason,
+        trace=trace + [{"stage": "decision", "refused": False, "citations": [r.chunk.chunk_id for r in cited], "fallback": fallback_reason}],
     )
 
 

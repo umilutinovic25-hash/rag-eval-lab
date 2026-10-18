@@ -20,6 +20,18 @@ class LLMError(RuntimeError):
     """Raised when a prompt is not cached and Ollama cannot answer it."""
 
 
+class GenerationText(str):
+    """Text compatible with historical caches, carrying observed completion metadata."""
+    def __new__(cls, text: str, metadata: dict | None = None):
+        obj = super().__new__(cls, text)
+        obj.metadata = metadata or {"done_reason": "unknown", "provenance": "historical_or_unrecorded"}
+        return obj
+
+
+def metadata_path():
+    return CACHE_PATH.with_name(CACHE_PATH.stem + "-metadata.json")
+
+
 def cache_key(model: str, prompt: str, max_tokens: int) -> str:
     return hashlib.sha256(f"{model}\n{max_tokens}\n{prompt}".encode("utf-8")).hexdigest()
 
@@ -36,27 +48,32 @@ def request_generation(model: str, prompt: str, max_tokens: int) -> str:
     request = urllib.request.Request(OLLAMA_URL, data=payload, headers={"Content-Type": "application/json"})
     try:
         with urllib.request.urlopen(request, timeout=120) as response:
-            text = json.load(response)["response"]
+            body = json.load(response)
+            text = body["response"]
     except (OSError, ValueError, KeyError, TypeError) as error:
         raise LLMError(f"Uncached prompt needs Ollama with model {model!r} at {OLLAMA_URL} ({error}).") from error
     if not isinstance(text, str) or not text.strip():
         raise LLMError(f"Ollama returned no text for model {model!r}.")
-    return text
+    return GenerationText(text, {k: body.get(k) for k in ("done_reason", "done", "model", "eval_count", "prompt_eval_count", "total_duration")})
 
 
 def generate(model: str, prompt: str, max_tokens: int) -> str:
     try:
         cache = load_cache(CACHE_PATH)
+        metadata = load_cache(metadata_path())
     except EmbeddingError as error:
         raise LLMError(str(error)) from error
     key = cache_key(model, prompt, max_tokens)
     if key not in cache:
-        cache[key] = request_generation(model, prompt, max_tokens).strip()
+        response = request_generation(model, prompt, max_tokens)
+        cache[key] = response.strip()
+        metadata[key] = getattr(response, "metadata", {"done_reason": "unknown", "provenance": "unrecorded"})
         save_cache(cache, CACHE_PATH)
+        save_cache(metadata, metadata_path())
     text = cache[key]
     if not isinstance(text, str) or not text.strip():
         raise LLMError("Cached LLM response must be nonempty text.")
-    return text
+    return GenerationText(text, metadata.get(key))
 
 
 def span_is_in_passage(span: str, passage: str) -> bool:

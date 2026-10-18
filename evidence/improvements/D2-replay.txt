@@ -1,0 +1,5 @@
+eval {'passed': 12, 'total': 12, 'behaviour_accuracy': 1.0, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 1.0} {'embeddings': 0, 'llm': 0} fallbacks 0
+holdout {'passed': 34, 'total': 34, 'behaviour_accuracy': 1.0, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 0.9583} {'embeddings': 0, 'llm': 0} fallbacks 0
+test1 {'passed': 23, 'total': 24, 'behaviour_accuracy': 0.9583, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 1.0} {'embeddings': 0, 'llm': 0} fallbacks 0
+test2 {'passed': 29, 'total': 32, 'behaviour_accuracy': 0.9375, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 1.0} {'embeddings': 0, 'llm': 0} fallbacks 0
+Cached replay only; no fresh model generation.
