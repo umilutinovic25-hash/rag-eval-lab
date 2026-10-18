@@ -171,3 +171,17 @@ def test_unsupported_words_flags_only_words_missing_from_sources() -> None:
     assert unsupported_words("Approval comes from an appropriate authority.", sources) == [
         "comes", "appropriate", "authority",
     ]
+
+
+def test_answer_quotes_add_verbatim_cited_text(rerank_mode, monkeypatch) -> None:
+    from src.answer_quality import model_sentence
+
+    monkeypatch.setattr(config, "RERANK", None)
+    monkeypatch.setattr(config, "ANSWER_MODE", "llm")
+    monkeypatch.setattr(config, "ANSWER_QUOTES", True)
+    monkeypatch.setattr(rag, "write_answer", lambda q, passages: "Yes. [a]")
+    result = rag.build_grounded_answer("laptop replacement", CHUNKS)
+    lines = result.answer.splitlines()
+    assert lines[0] == "Yes. [a]"
+    assert lines[1:] == [f'Source [{c}]: "{next(x.text for x in CHUNKS if x.chunk_id == c)}"' for c in result.citations]
+    assert model_sentence(result.answer) == "Yes. [a]"

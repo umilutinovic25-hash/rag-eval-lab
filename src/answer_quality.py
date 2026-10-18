@@ -16,7 +16,7 @@ from .chunking import build_chunks
 from .corpus import load_corpus
 from .eval_runner import EVAL_SET_PATH, load_eval_set, normalise
 from .holdout_runner import HOLDOUT_SET_PATH, TEST_SET_PATH
-from .rag import build_grounded_answer
+from .rag import QUOTE_PREFIX, build_grounded_answer
 
 MARKER_RE = re.compile(r"\[([a-z0-9-]+-chunk-\d+)\]")
 WORD_RE = re.compile(r"[a-z0-9:]+")
@@ -26,6 +26,11 @@ STOPWORDS = set(
     "where how than then also into about after before same only".split()
 )
 SETS = {"eval": EVAL_SET_PATH, "holdout": HOLDOUT_SET_PATH, "test": TEST_SET_PATH}
+
+
+def model_sentence(answer: str) -> str:
+    """The answer without the verbatim Source lines, i.e. only what the model wrote."""
+    return "\n".join(line for line in answer.splitlines() if not line.startswith(QUOTE_PREFIX))
 
 
 def unsupported_words(answer: str, sources: list[str]) -> list[str]:
@@ -59,7 +64,8 @@ def run(path: Path) -> dict:
             continue
         row = {"id": item["id"], "answer": result.answer, "citations": result.citations}
         sources = [text_by_id[chunk_id] for chunk_id in result.citations] + [item["question"]]
-        row.update(score_answer(result.answer, result.citations, item["expected_fact"], sources))
+        row.update(score_answer(model_sentence(result.answer), result.citations, item["expected_fact"], sources))
+        row["fact_in_full_answer"] = normalise(item["expected_fact"]) in normalise(result.answer)
         rows.append(row)
     return {
         "answer_mode": config.ANSWER_MODE,
@@ -67,6 +73,7 @@ def run(path: Path) -> dict:
         "fact_in_answer": sum(row["fact_in_answer"] for row in rows),
         "markers_valid": sum(row["markers_valid"] for row in rows),
         "with_unsupported_words": sum(bool(row["unsupported_words"]) for row in rows),
+        "fact_in_full_answer": sum(row["fact_in_full_answer"] for row in rows),
         "rows": rows,
     }
 
@@ -85,7 +92,8 @@ def main() -> None:
     n = report["answered_supported"]
     print(
         f"\n{args.set} ({report['answer_mode']}): fact in answer {report['fact_in_answer']}/{n}, "
-        f"valid markers {report['markers_valid']}/{n}, with unsupported words {report['with_unsupported_words']}/{n}"
+        f"valid markers {report['markers_valid']}/{n}, with unsupported words {report['with_unsupported_words']}/{n} "
+        f"(model sentence); fact in full answer {report['fact_in_full_answer']}/{n}"
     )
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     Path(args.out).write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

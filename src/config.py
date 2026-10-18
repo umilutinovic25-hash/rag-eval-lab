@@ -44,6 +44,7 @@ RERANK_PROMPT = (
 
 # Answer text: "extractive" (cited chunks joined) or "llm" (a local model writes the answer from the cited chunks)
 ANSWER_MODE = "llm"
+ANSWER_QUOTES = False  # in "llm" mode, add the verbatim text of every cited chunk under the answer
 GENERATION_MODEL = "qwen2.5:7b"
 GENERATION_PROMPT = (
     "Answer the question using only facts stated in the passages below. Do not add conditions, people, steps or details "

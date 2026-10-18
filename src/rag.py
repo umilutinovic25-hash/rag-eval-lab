@@ -7,6 +7,7 @@ from .llm import passage_answers, write_answer
 from .retrieval import RetrievalResult, retrieve_top_k
 
 
+QUOTE_PREFIX = "Source ["
 REFUSAL_MESSAGE = "I do not have enough grounded evidence in the provided corpus to answer that question."
 
 
@@ -60,6 +61,8 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
 
     if config.ANSWER_MODE == "llm":
         answer = write_answer(question, [(item.chunk.chunk_id, item.chunk.text) for item in cited])
+        if config.ANSWER_QUOTES:
+            answer += "".join(f'\n{QUOTE_PREFIX}{item.chunk.chunk_id}]: "{item.chunk.text}"' for item in cited)
     else:
         supporting_points = [f"[{item.chunk.chunk_id}] {item.chunk.text}" for item in cited]
         answer = "Grounded response based on retrieved context:\n" + "\n".join(supporting_points)
