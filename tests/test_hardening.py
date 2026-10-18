@@ -113,3 +113,28 @@ def test_offline_cli_profile():
     result = subprocess.run([sys.executable, "-m", "src.cli", "--profile", "offline", "--question", "How many days of annual leave do employees get?"], capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
     assert "22 days" in result.stdout
+
+from src import answer_quality
+
+
+def test_answer_review_flags_contradiction_without_certifying_correctness():
+    answer = 'Passwords do not need to be changed every 90 days [hb-05-chunk-0].'
+    flags = answer_quality.review_flags(answer, ['Passwords must be changed every 90 days.'], 'every 90 days')
+    assert 'negation_mismatch' in flags
+    assert 'number_not_in_sources' in answer_quality.review_flags('Budget is 900 EUR.', ['Budget is 800 EUR.'], '800 EUR')
+
+
+def test_quality_includes_refusals_in_denominator(tmp_path, monkeypatch):
+    import json
+    p = tmp_path / 'set.json'
+    p.write_text(json.dumps([{'id':'Q1','question':'q','expected_behaviour':'answer','expected_fact':'22 days','expected_doc_ids':['hb-07']}]))
+    monkeypatch.setattr(answer_quality, 'build_grounded_answer', lambda *args: rag.RagAnswer('No evidence', [], True, []))
+    report = answer_quality.run(p)
+    assert report['supported_total'] == 1
+    assert report['false_refusals'] == 1 and report['answered_supported'] == 0
+    assert len(report['rows']) == 1
+    assert report['rows'][0]['semantic_correctness'] == 'not_assessed'
+
+
+def test_test2_available_for_answer_quality():
+    assert 'test2' in answer_quality.SETS

@@ -1,0 +1,533 @@
+{
+  "answer_mode": "llm",
+  "total_questions": 24,
+  "supported_total": 17,
+  "answered_supported": 16,
+  "supported_answer_coverage": 0.9411764705882353,
+  "false_refusals": 1,
+  "unsupported_answers": 0,
+  "fact_in_answer": 5,
+  "markers_valid": 16,
+  "with_unsupported_words": 1,
+  "fact_in_full_answer": 16,
+  "semantic_correctness": "not_assessed; lexical signals require independent review",
+  "rows_with_review_flags": 2,
+  "rows": [
+    {
+      "id": "T01",
+      "question": "Is MFA required for internal tools?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Yes. [hb-05-chunk-1]\nSource [hb-05-chunk-1]: \"Multi-factor authentication (MFA) is required for email, VPN and all internal tools.\"",
+      "citations": [
+        "hb-05-chunk-1"
+      ],
+      "expected_fact": "all internal tools",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "T02",
+      "question": "Does sick leave come out of my annual leave days?",
+      "expected": "answer",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": "sick leave follows a separate policy",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": [
+        "false_refusal"
+      ]
+    },
+    {
+      "id": "T03",
+      "question": "What happens to training budget I don't spend?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Unused budget does not carry over to next year. [hb-08-chunk-1]\nSource [hb-08-chunk-1]: \"Agree training with your manager before booking. Unused budget does not carry over to next year.\"\nSource [hb-08-chunk-0]: \"Each employee has a training budget of 800 EUR per year for courses, conferences and certifications.\"",
+      "citations": [
+        "hb-08-chunk-1",
+        "hb-08-chunk-0"
+      ],
+      "expected_fact": "does not carry over",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "T04",
+      "question": "How much can I spend on conferences each year?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Each employee has a training budget of 800 EUR per year for courses, conferences, and certifications. [hb-08-chunk-0]\nSource [hb-08-chunk-0]: \"Each employee has a training budget of 800 EUR per year for courses, conferences and certifications.\"",
+      "citations": [
+        "hb-08-chunk-0"
+      ],
+      "expected_fact": "800 eur",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "T05",
+      "question": "How are daily allowances decided when travelling abroad?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Daily allowances follow national rules for each destination. [hb-04-chunk-1]\nSource [hb-04-chunk-1]: \"Keep original receipts for hotels and flights. Daily allowances follow national rules for each destination.\"",
+      "citations": [
+        "hb-04-chunk-1"
+      ],
+      "expected_fact": "national rules",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "T06",
+      "question": "Are parking places assigned to specific people?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "No, parking places are not assigned to specific people; they are shared and reserved through the facilities app on a first-come, first-served basis. [hb-09-chunk-1]\nSource [hb-09-chunk-1]: \"Parking is limited: spaces are shared and reserved through facilities app, first come, first served.\"",
+      "citations": [
+        "hb-09-chunk-1"
+      ],
+      "expected_fact": "spaces are shared",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [
+        "basis"
+      ],
+      "fact_in_full_answer": true,
+      "review_flags": [
+        "negation_mismatch"
+      ]
+    },
+    {
+      "id": "T07",
+      "question": "Do I need my badge at every door?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Yes, you need your badge at every door. [hb-09-chunk-0]\nSource [hb-09-chunk-0]: \"Office access requires your personal badge at every entrance. Lost badges must be reported to reception on same day.\"",
+      "citations": [
+        "hb-09-chunk-0"
+      ],
+      "expected_fact": "personal badge at every entrance",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "T08",
+      "question": "By when must a lost badge be reported?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "On the same day. [hb-09-chunk-0]\nSource [hb-09-chunk-0]: \"Office access requires your personal badge at every entrance. Lost badges must be reported to reception on same day.\"",
+      "citations": [
+        "hb-09-chunk-0"
+      ],
+      "expected_fact": "on same day",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "T09",
+      "question": "Must I be reachable by phone on remote days?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Yes, you must be reachable by phone during core hours on remote days.[hb-03-chunk-3]\nSource [hb-03-chunk-3]: \"Core hours from 10:00 to 15:00 apply on remote days, and you must be reachable by chat and phone during core hours.\"\nSource [hb-03-chunk-2]: \"Remote work days can be moved within same week.\"",
+      "citations": [
+        "hb-03-chunk-3",
+        "hb-03-chunk-2"
+      ],
+      "expected_fact": "reachable by chat and phone",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "T10",
+      "question": "Can I swap my remote day to another day in the same week?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Yes, you can swap your remote day to another day in the same week. [hb-03-chunk-2]\nSource [hb-03-chunk-2]: \"Remote work days can be moved within same week.\"\nSource [hb-03-chunk-1]: \"Remote days per week are agreed with your team lead and recorded in your shared team calendar.\"",
+      "citations": [
+        "hb-03-chunk-2",
+        "hb-03-chunk-1"
+      ],
+      "expected_fact": "moved within same week",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "T11",
+      "question": "Who do I agree my remote days with?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "I agree my remote days with my team lead. [hb-03-chunk-1]\nSource [hb-03-chunk-1]: \"Remote days per week are agreed with your team lead and recorded in your shared team calendar.\"\nSource [hb-03-chunk-2]: \"Remote work days can be moved within same week.\"",
+      "citations": [
+        "hb-03-chunk-1",
+        "hb-03-chunk-2"
+      ],
+      "expected_fact": "agreed with your team lead",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "T12",
+      "question": "Who is assigned to help me in my first week?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "A buddy is assigned in your first week. [hb-06-chunk-1]\nSource [hb-06-chunk-1]: \"A buddy is assigned in your first week and helps you get started with tools, people and team habits.\"\nSource [hb-06-chunk-0]: \"New colleagues follow a two-week onboarding plan.\"",
+      "citations": [
+        "hb-06-chunk-1",
+        "hb-06-chunk-0"
+      ],
+      "expected_fact": "a buddy is assigned",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "T13",
+      "question": "Is there a check-in after three months?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Yes. [hb-06-chunk-2]\nSource [hb-06-chunk-2]: \"Your manager schedules a check-in at end of month one and again after three months.\"",
+      "citations": [
+        "hb-06-chunk-2"
+      ],
+      "expected_fact": "after three months",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "T14",
+      "question": "Who sets up my replacement laptop?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "IT staff [hb-01-chunk-1]\nSource [hb-01-chunk-1]: \"After manager approval, a replacement laptop is set up by IT staff with your files, accounts, email and access rights, and handover can take up to 5 business days.\"",
+      "citations": [
+        "hb-01-chunk-1"
+      ],
+      "expected_fact": "set up by it staff",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "T15",
+      "question": "Does a replacement laptop need my manager's approval?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Yes, a replacement laptop needs manager approval. [hb-01-chunk-1]\nSource [hb-01-chunk-1]: \"After manager approval, a replacement laptop is set up by IT staff with your files, accounts, email and access rights, and handover can take up to 5 business days.\"",
+      "citations": [
+        "hb-01-chunk-1"
+      ],
+      "expected_fact": "after manager approval",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "T16",
+      "question": "How can I contact IT support?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "You can contact IT support through the IT portal or by phone. [hb-10-chunk-0]\nSource [hb-10-chunk-0]: \"IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.\"",
+      "citations": [
+        "hb-10-chunk-0"
+      ],
+      "expected_fact": "through it portal or by phone",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "T17",
+      "question": "What time does the IT helpdesk open?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "IT support hours are 08:00 to 18:00. [hb-10-chunk-0]\nSource [hb-10-chunk-0]: \"IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.\"\nSource [hb-10-chunk-1]: \"For a laptop that does not start, bring it to IT desk on floor two. Outside support hours, urgent security incidents go to on-call line.\"",
+      "citations": [
+        "hb-10-chunk-0",
+        "hb-10-chunk-1"
+      ],
+      "expected_fact": "08:00 to 18:00",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "T18",
+      "question": "How many days of paternity leave do fathers get?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    },
+    {
+      "id": "T19",
+      "question": "What is the budget for team-building events?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    },
+    {
+      "id": "T20",
+      "question": "Can I expense a taxi to the airport?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    },
+    {
+      "id": "T21",
+      "question": "How do I reset a forgotten password?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    },
+    {
+      "id": "T22",
+      "question": "What was the company's revenue this year?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    },
+    {
+      "id": "T23",
+      "question": "What will the weather be tomorrow?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    },
+    {
+      "id": "T24",
+      "question": "Is there a canteen in the office?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    }
+  ]
+}

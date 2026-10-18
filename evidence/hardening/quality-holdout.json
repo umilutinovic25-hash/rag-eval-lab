@@ -1,0 +1,741 @@
+{
+  "answer_mode": "llm",
+  "total_questions": 34,
+  "supported_total": 24,
+  "answered_supported": 24,
+  "supported_answer_coverage": 1.0,
+  "false_refusals": 0,
+  "unsupported_answers": 0,
+  "fact_in_answer": 14,
+  "markers_valid": 24,
+  "with_unsupported_words": 3,
+  "fact_in_full_answer": 24,
+  "semantic_correctness": "not_assessed; lexical signals require independent review",
+  "rows_with_review_flags": 3,
+  "rows": [
+    {
+      "id": "H01",
+      "question": "What is the minimum length of a password?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "The minimum length of a password is 12 characters. [hb-05-chunk-0]\nSource [hb-05-chunk-0]: \"Passwords must be changed every 90 days and must contain at least 12 characters.\"",
+      "citations": [
+        "hb-05-chunk-0"
+      ],
+      "expected_fact": "at least 12 characters",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H02",
+      "question": "Do I need two-step login to use the VPN?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Yes, you need multi-factor authentication (MFA) for the VPN. [hb-05-chunk-1]\nSource [hb-05-chunk-1]: \"Multi-factor authentication (MFA) is required for email, VPN and all internal tools.\"",
+      "citations": [
+        "hb-05-chunk-1"
+      ],
+      "expected_fact": "is required for email, vpn",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H03",
+      "question": "Can I tell my password to someone from IT?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "No. [hb-05-chunk-2]\nSource [hb-05-chunk-2]: \"Never share passwords, also not with colleagues from IT.\"",
+      "citations": [
+        "hb-05-chunk-2"
+      ],
+      "expected_fact": "never share passwords",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H04",
+      "question": "How far in advance must I ask for time off?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Two weeks in advance. [hb-07-chunk-0]\nSource [hb-07-chunk-0]: \"Annual leave policy: employees get 22 days of annual leave per calendar year. Leave requests must be made two weeks in advance in HR portal.\"",
+      "citations": [
+        "hb-07-chunk-0"
+      ],
+      "expected_fact": "two weeks in advance",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H05",
+      "question": "Until when can leftover vacation days be used?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Until 31 March. [hb-07-chunk-1]\nSource [hb-07-chunk-1]: \"Under this policy, unused leave can be carried over until 31 March. Sick leave follows a separate policy.\"",
+      "citations": [
+        "hb-07-chunk-1"
+      ],
+      "expected_fact": "31 march",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H06",
+      "question": "Where do I submit a holiday request?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "You must make leave requests in the HR portal. [hb-07-chunk-0]\nSource [hb-07-chunk-0]: \"Annual leave policy: employees get 22 days of annual leave per calendar year. Leave requests must be made two weeks in advance in HR portal.\"",
+      "citations": [
+        "hb-07-chunk-0"
+      ],
+      "expected_fact": "hr portal",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "make"
+      ],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H07",
+      "question": "Can unused training money be moved to the following year?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "No, unused budget does not carry over to next year.[hb-08-chunk-1]\nSource [hb-08-chunk-1]: \"Agree training with your manager before booking. Unused budget does not carry over to next year.\"",
+      "citations": [
+        "hb-08-chunk-1"
+      ],
+      "expected_fact": "does not carry over",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H08",
+      "question": "What can the learning budget be spent on?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "The learning budget can be spent on courses, conferences, and certifications. [hb-08-chunk-0]\nSource [hb-08-chunk-0]: \"Each employee has a training budget of 800 EUR per year for courses, conferences and certifications.\"",
+      "citations": [
+        "hb-08-chunk-0"
+      ],
+      "expected_fact": "courses, conferences and certifications",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H09",
+      "question": "Who do I agree a course with before booking it?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "You agree training with your manager before booking. [hb-08-chunk-1]\nSource [hb-08-chunk-1]: \"Agree training with your manager before booking. Unused budget does not carry over to next year.\"\nSource [hb-04-chunk-0]: \"Business travel must be approved before booking. Travel receipts must be submitted within 30 days of your return, through finance app.\"",
+      "citations": [
+        "hb-08-chunk-1",
+        "hb-04-chunk-0"
+      ],
+      "expected_fact": "agree training with your manager",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H10",
+      "question": "Does a business trip need approval before I book it?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Yes, business travel must be approved before booking. [hb-04-chunk-0]\nSource [hb-04-chunk-0]: \"Business travel must be approved before booking. Travel receipts must be submitted within 30 days of your return, through finance app.\"",
+      "citations": [
+        "hb-04-chunk-0"
+      ],
+      "expected_fact": "approved before booking",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H11",
+      "question": "Which app do I use to hand in travel receipts?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "You use the finance app to submit travel receipts. [hb-04-chunk-0]\nSource [hb-04-chunk-0]: \"Business travel must be approved before booking. Travel receipts must be submitted within 30 days of your return, through finance app.\"",
+      "citations": [
+        "hb-04-chunk-0"
+      ],
+      "expected_fact": "finance app",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "submit"
+      ],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H12",
+      "question": "Should I keep the original hotel receipts?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Yes, you should keep the original receipts for hotels. [hb-04-chunk-1]\nSource [hb-04-chunk-1]: \"Keep original receipts for hotels and flights. Daily allowances follow national rules for each destination.\"",
+      "citations": [
+        "hb-04-chunk-1"
+      ],
+      "expected_fact": "keep original receipts",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H13",
+      "question": "How do I reserve a car space at the office?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Spaces are shared and reserved through the facilities app, first come, first served. [hb-09-chunk-1]\nSource [hb-09-chunk-1]: \"Parking is limited: spaces are shared and reserved through facilities app, first come, first served.\"",
+      "citations": [
+        "hb-09-chunk-1"
+      ],
+      "expected_fact": "facilities app",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H14",
+      "question": "I lost my badge, who do I tell?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Report it to reception on the same day. [hb-09-chunk-0]\nSource [hb-09-chunk-0]: \"Office access requires your personal badge at every entrance. Lost badges must be reported to reception on same day.\"\nSource [hb-01-chunk-2]: \"Report lost or stolen devices to security first. Request a replacement laptop in IT portal under Hardware.\"",
+      "citations": [
+        "hb-09-chunk-0",
+        "hb-01-chunk-2"
+      ],
+      "expected_fact": "reported to reception",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H15",
+      "question": "What are the core hours on days I work from home?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Core hours on days you work from home are from 10:00 to 15:00. [hb-03-chunk-3]\nSource [hb-03-chunk-3]: \"Core hours from 10:00 to 15:00 apply on remote days, and you must be reachable by chat and phone during core hours.\"",
+      "citations": [
+        "hb-03-chunk-3"
+      ],
+      "expected_fact": "10:00 to 15:00",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H16",
+      "question": "Where are my remote days recorded?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "In your shared team calendar. [hb-03-chunk-1]\nSource [hb-03-chunk-1]: \"Remote days per week are agreed with your team lead and recorded in your shared team calendar.\"",
+      "citations": [
+        "hb-03-chunk-1"
+      ],
+      "expected_fact": "shared team calendar",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H17",
+      "question": "Is the remote work limit still 2 days a week?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "No, the remote work limit is up to 3 days a week. [hb-03-chunk-0]\nSource [hb-03-chunk-2]: \"Remote work days can be moved within same week.\"\nSource [hb-03-chunk-0]: \"Remote work: employees can work remotely up to 3 days per week.\"",
+      "citations": [
+        "hb-03-chunk-2",
+        "hb-03-chunk-0"
+      ],
+      "expected_fact": "3 days per week",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": [
+        "negation_mismatch"
+      ]
+    },
+    {
+      "id": "H18",
+      "question": "How long is the onboarding plan for new hires?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "The onboarding plan for new hires is two weeks. [hb-06-chunk-0]\nSource [hb-06-chunk-0]: \"New colleagues follow a two-week onboarding plan.\"",
+      "citations": [
+        "hb-06-chunk-0"
+      ],
+      "expected_fact": "two-week onboarding plan",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H19",
+      "question": "When is my first check-in with my manager?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Your first check-in with your manager is at the end of month one.[hb-06-chunk-2]\nSource [hb-06-chunk-2]: \"Your manager schedules a check-in at end of month one and again after three months.\"",
+      "citations": [
+        "hb-06-chunk-2"
+      ],
+      "expected_fact": "end of month one",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H20",
+      "question": "Where do I order a new headset?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "You order a new headset through the same form used for ordering accessories like a mouse. [hb-01-chunk-3]\nSource [hb-01-chunk-3]: \"Accessories such as mouse or headset are ordered through that same form.\"",
+      "citations": [
+        "hb-01-chunk-3"
+      ],
+      "expected_fact": "ordered through that same form",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [
+        "used",
+        "ordering",
+        "like"
+      ],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H21",
+      "question": "What should I do first if my laptop is stolen?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Report lost or stolen devices to security first. [hb-01-chunk-2]\nSource [hb-01-chunk-2]: \"Report lost or stolen devices to security first. Request a replacement laptop in IT portal under Hardware.\"\nSource [hb-01-chunk-0]: \"Laptop replacement: broken, lost or stolen laptops can be replaced.\"",
+      "citations": [
+        "hb-01-chunk-2",
+        "hb-01-chunk-0"
+      ],
+      "expected_fact": "report lost or stolen devices to security first",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H22",
+      "question": "Where do I take a laptop that won't boot?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "Bring it to the IT desk on floor two. [hb-10-chunk-1]\nSource [hb-10-chunk-1]: \"For a laptop that does not start, bring it to IT desk on floor two. Outside support hours, urgent security incidents go to on-call line.\"",
+      "citations": [
+        "hb-10-chunk-1"
+      ],
+      "expected_fact": "floor two",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": [
+        "negation_mismatch"
+      ]
+    },
+    {
+      "id": "H23",
+      "question": "Is IT support available on weekends?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "No, IT support is not available on weekends.[hb-10-chunk-0]\nSource [hb-10-chunk-0]: \"IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.\"",
+      "citations": [
+        "hb-10-chunk-0"
+      ],
+      "expected_fact": "monday to friday",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": [
+        "negation_mismatch"
+      ]
+    },
+    {
+      "id": "H24",
+      "question": "Who handles urgent security incidents at night?",
+      "expected": "answer",
+      "refused": false,
+      "answer": "On-call line handles urgent security incidents outside support hours. [hb-10-chunk-1]\nSource [hb-10-chunk-1]: \"For a laptop that does not start, bring it to IT desk on floor two. Outside support hours, urgent security incidents go to on-call line.\"",
+      "citations": [
+        "hb-10-chunk-1"
+      ],
+      "expected_fact": "on-call line",
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [],
+      "fact_in_full_answer": true,
+      "review_flags": []
+    },
+    {
+      "id": "H25",
+      "question": "How many sick days do I get per year?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    },
+    {
+      "id": "H26",
+      "question": "What is the salary range for engineers?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    },
+    {
+      "id": "H27",
+      "question": "Does the company offer a pension plan?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    },
+    {
+      "id": "H28",
+      "question": "Can I bring my dog to the office?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    },
+    {
+      "id": "H29",
+      "question": "How much is the mileage reimbursement per kilometre?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    },
+    {
+      "id": "H30",
+      "question": "What is the guest Wi-Fi password?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    },
+    {
+      "id": "H31",
+      "question": "Who is the CEO of the company?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    },
+    {
+      "id": "H32",
+      "question": "How do I bake sourdough bread?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    },
+    {
+      "id": "H33",
+      "question": "What is the maximum hotel price per night on a business trip?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    },
+    {
+      "id": "H34",
+      "question": "Can I work remotely from another country?",
+      "expected": "refuse",
+      "refused": true,
+      "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      "citations": [],
+      "expected_fact": null,
+      "semantic_correctness": "not_assessed",
+      "review_required": true,
+      "generation_fallback_reason": null,
+      "fact_in_answer": false,
+      "markers_valid": false,
+      "unsupported_words": [
+        "enough",
+        "grounded",
+        "evidence",
+        "provided",
+        "corpus",
+        "answer",
+        "question"
+      ],
+      "fact_in_full_answer": false,
+      "review_flags": []
+    }
+  ]
+}
