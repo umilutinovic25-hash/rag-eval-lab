@@ -68,6 +68,45 @@ def claim_risks(answer,passages):
         scored=[(len(terms & words(source))/len(terms),source) for source in source_clauses]
         best=max((score for score,_ in scored),default=0)
         nearest=[source for score,source in scored if score==best]
+        if best >= 0.5 and nearest:
+            for risk in ('scope_conflict', 'bound_conflict', 'modality_conflict'):
+                if all(risk in scope_risks(claim, source) for source in nearest):
+                    risks.append(risk)
         if best>=0.6 and nearest and all(has_negation(claim)!=has_negation(source) and action_roots(claim,has_negation(claim)) & action_roots(source,has_negation(source)) for source in nearest):
             risks.append('negation_conflict')
     return sorted(set(risks))
+
+
+def scope_risks(claim, source):
+    """Flag explicit opposing scope/limits; absence of a flag is not entailment."""
+    def scopes(text):
+        text = text.casefold()
+        found = set()
+        if re.search(r'\b(?:each|every|per)\s+(?:employee|person|individual)\b', text):
+            found.add('individual')
+        if re.search(r'\b(?:each|every|per)\s+(?:team|department|group)\b', text):
+            found.add('group')
+        return found
+    def bounds(text):
+        text = normalise_numbers(text)
+        return {(n, unit.rstrip('s'), 'max' if marker in ('at most', 'up to', 'no more than') else 'min')
+                for marker, n, unit in re.findall(
+                    r'\b(at most|up to|no more than|at least|no fewer than)\s+(\d+)\s+(?:business\s+)?('+UNITS+r')\b', text)}
+    def modality(text):
+        if re.search(r'\b(?:optional|not required)\b', text, re.I):
+            return 'optional'
+        if re.search(r'\b(?:must|mandatory|required)\b', text, re.I):
+            return 'required'
+        if re.search(r'\b(?:can|may|allowed)\b', text, re.I):
+            return 'permitted'
+        return None
+    risks = []
+    claim_scope, source_scope = scopes(claim), scopes(source)
+    if claim_scope and source_scope and claim_scope.isdisjoint(source_scope):
+        risks.append('scope_conflict')
+    if any((n, u, 'min' if bound == 'max' else 'max') in bounds(source)
+           for n, u, bound in bounds(claim)):
+        risks.append('bound_conflict')
+    if (modality(claim), modality(source)) in {('required', 'permitted'), ('optional', 'required')}:
+        risks.append('modality_conflict')
+    return risks
