@@ -1,0 +1,11 @@
+SPAN_CHANGED_AMOUNT_ACCEPTED true
+SPAN_REMOVED_NEGATION_ACCEPTED true
+CONTRADICTORY_ANSWER_QUALITY {"fact_in_answer": true, "markers_valid": true, "unsupported_words": []}
+CONTRADICTORY_ANSWER_EVAL_PASS true
+MISMATCHED_VECTOR_DIMENSIONS_COSINE 1.0
+LEXICAL_SWITCH_STILL_CALLS_JUDGE "LLM judge requested"
+UNVALIDATED_GENERATED_MARKER_SHOWN "Use an invented policy [hb-99-chunk-0]."
+eval {"summary": {"passed": 12, "total": 12, "behaviour_accuracy": 1.0, "retrieval_hit_rate": 1.0, "mean_citation_precision": 1.0}, "failed": []}
+holdout {"summary": {"passed": 34, "total": 34, "behaviour_accuracy": 1.0, "retrieval_hit_rate": 1.0, "mean_citation_precision": 0.9583}, "failed": []}
+test1 {"summary": {"passed": 23, "total": 24, "behaviour_accuracy": 0.9583, "retrieval_hit_rate": 1.0, "mean_citation_precision": 1.0}, "failed": ["T02"]}
+test2 {"summary": {"passed": 29, "total": 32, "behaviour_accuracy": 0.9375, "retrieval_hit_rate": 1.0, "mean_citation_precision": 1.0}, "failed": ["U07", "U11", "U13"]}
