@@ -1,0 +1,13 @@
+Fixed (fail -> pass): none
+Regressed (pass -> fail): none
+Unchanged: T01, T02, T03, T04, T05, T06, T07, T08, T09, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24
+
+Summary:
+  passed: 23 -> 23 (+0)
+  total: 24 -> 24 (+0)
+  behaviour_accuracy: 0.9583 -> 0.9583 (+0.0)
+  retrieval_hit_rate: 1.0 -> 1.0 (+0.0)
+  mean_citation_precision: 1.0 -> 1.0 (+0.0)
+
+Changed settings:
+  ANSWER_QUOTES: None -> True

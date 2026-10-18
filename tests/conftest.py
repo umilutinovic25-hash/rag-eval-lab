@@ -9,6 +9,7 @@ def offline_lexical_defaults(monkeypatch):
     monkeypatch.setattr(config, "RETRIEVAL_MODE", "lexical")
     monkeypatch.setattr(config, "RERANK", None)
     monkeypatch.setattr(config, "ANSWER_MODE", "extractive")
+    monkeypatch.setattr(config, "ANSWER_QUOTES", False)
 
     def no_network(texts):
         raise AssertionError(f"Test tried to call Ollama for {len(texts)} text(s)")
