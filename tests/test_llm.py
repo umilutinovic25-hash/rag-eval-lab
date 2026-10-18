@@ -76,6 +76,7 @@ def test_generate_uses_cache_and_calls_model_once(tmp_path, monkeypatch) -> None
 
 @pytest.mark.parametrize("reply, expected", [("Yes", True), ("yes.", True), ("No.", False), ("", False)])
 def test_passage_answers_parses_reply(monkeypatch, reply, expected) -> None:
+    monkeypatch.setattr(config, "RERANK_JUDGE", "yesno")
     monkeypatch.setattr(llm, "generate", lambda model, prompt, max_tokens: reply)
     assert llm.passage_answers("q", "p") is expected
 
@@ -121,7 +122,7 @@ def test_committed_caches_cover_shipped_config_offline(monkeypatch, which) -> No
     from src.holdout_runner import TEST_SET_PATH
 
     run = {"eval": run_eval, "holdout": run_holdout, "test": lambda: run_holdout(TEST_SET_PATH)}[which]()
-    assert run["summary"]["passed"] == {"eval": 12, "holdout": 33, "test": 22}[which]
+    assert run["summary"]["passed"] == {"eval": 12, "holdout": 34, "test": 21}[which]
 
 
 def test_llm_answer_mode_keeps_citations_and_uses_model_text(rerank_mode, monkeypatch) -> None:

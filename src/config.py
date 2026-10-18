@@ -25,10 +25,10 @@ SEMANTIC_CITATION_MIN_SCORE = 0.65  # cosine scale, used in "semantic" and "hybr
 # Reranking: None, "llm" (a local model judges each candidate; replaces the score thresholds above)
 # or "llm-gray-zone" (the model judges only when the top score is inside RERANK_GRAY_ZONE)
 RERANK = "llm-gray-zone"
-RERANK_MODEL = "gemma3:4b"
+RERANK_MODEL = "qwen2.5:7b"
 RERANK_CANDIDATES = 5
 RERANK_GRAY_ZONE = (0.50, 0.70)  # cosine scale, used only in "llm-gray-zone"
-RERANK_JUDGE = "yesno"  # "yesno" (model answers yes/no) or "span" (model copies the answering words, code checks them)
+RERANK_JUDGE = "span"  # "yesno" (model answers yes/no) or "span" (model copies the answering words, code checks them)
 RERANK_SPAN_PROMPT = (
     "Copy the exact words from the passage that answer the question. "
     "If the passage does not contain the answer, reply NONE.\n\n"

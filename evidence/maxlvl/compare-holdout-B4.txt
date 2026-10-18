@@ -1,0 +1,17 @@
+Fixed (fail -> pass): H13
+Regressed (pass -> fail): none
+Unchanged: H01, H02, H03, H04, H05, H06, H07, H08, H09, H10, H11, H12, H14, H15, H16, H17, H18, H19, H20, H21, H22, H23, H24, H25, H26, H27, H28, H29, H30, H31, H32, H33, H34
+
+Summary:
+  passed: 33 -> 34 (+1)
+  total: 34 -> 34 (+0)
+  behaviour_accuracy: 0.9706 -> 1.0 (+0.0294)
+  retrieval_hit_rate: 1.0 -> 1.0 (+0.0)
+  mean_citation_precision: 0.9565 -> 1.0 (+0.0435)
+
+Changed settings:
+  RERANK_JUDGE: None -> 'span'
+  RERANK_MODEL: 'gemma3:4b' -> 'qwen2.5:7b'
+  RERANK_SPAN_PROMPT: None -> 'Copy the exact words from the passage that answer the question. If the passage does not contain the answer, reply NONE.\n\nPassage: {passage}\nQuestion: {question}\nWords from the passage:'
+
+WARNING: More than one setting changed: the difference may not be attributable to one change.
