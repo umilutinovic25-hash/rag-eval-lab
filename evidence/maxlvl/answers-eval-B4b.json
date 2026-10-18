@@ -1,0 +1,124 @@
+{
+  "answer_mode": "llm",
+  "answered_supported": 9,
+  "fact_in_answer": 9,
+  "markers_valid": 9,
+  "with_unsupported_words": 7,
+  "rows": [
+    {
+      "id": "E01",
+      "answer": "Employees receive 22 days of annual leave per calendar year according to the company's policy. [hb-07-chunk-0]",
+      "citations": [
+        "hb-07-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "receive",
+        "according",
+        "company",
+        "policy"
+      ]
+    },
+    {
+      "id": "E02",
+      "answer": "Passwords must be changed every 90 days. [hb-05-chunk-0]",
+      "citations": [
+        "hb-05-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "E03",
+      "answer": "Each employee receives an annual training budget of 800 EUR for courses, conferences, and certifications. [hb-08-chunk-0]",
+      "citations": [
+        "hb-08-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "receives",
+        "annual"
+      ]
+    },
+    {
+      "id": "E04",
+      "answer": "A laptop replacement takes up to 5 business days for the handover process. [hb-01-chunk-1]",
+      "citations": [
+        "hb-01-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "process"
+      ]
+    },
+    {
+      "id": "E05",
+      "answer": "It typically takes up to 5 business days for IT staff to set up a replacement laptop with your files and information after manager approval. [hb-01-chunk-1]",
+      "citations": [
+        "hb-01-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "typically",
+        "information"
+      ]
+    },
+    {
+      "id": "E06",
+      "answer": "Employees can work remotely up to 3 days per week, and these days can be shifted within the same week. [hb-03-chunk-0], [hb-03-chunk-2]",
+      "citations": [
+        "hb-03-chunk-0",
+        "hb-03-chunk-2"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "these",
+        "shifted"
+      ]
+    },
+    {
+      "id": "E07",
+      "answer": "IT support is available from 08:00 to 18:00, Monday through Friday. [hb-10-chunk-0]",
+      "citations": [
+        "hb-10-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "available"
+      ]
+    },
+    {
+      "id": "E08",
+      "answer": "Travel receipts must be submitted within 30 days of your return, through the finance app. [hb-04-chunk-0]",
+      "citations": [
+        "hb-04-chunk-0",
+        "hb-04-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "E09",
+      "answer": "You can request a replacement laptop through the IT portal under Hardware, and the handover process typically takes up to 5 business days after manager approval. [hb-01-chunk-1], [hb-01-chunk-2]",
+      "citations": [
+        "hb-01-chunk-1",
+        "hb-01-chunk-2"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "through",
+        "process",
+        "typically"
+      ]
+    }
+  ]
+}

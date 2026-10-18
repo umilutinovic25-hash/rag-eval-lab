@@ -155,9 +155,19 @@ def test_answer_quality_scores_fact_and_markers() -> None:
     from src.answer_quality import score_answer
 
     assert score_answer("Up to 5 business days [hb-01-chunk-1].", ["hb-01-chunk-1"], "5 business days") == {
-        "fact_in_answer": True, "markers_valid": True,
+        "fact_in_answer": True, "markers_valid": True, "unsupported_words": ["business", "days"],
     }
     assert score_answer("Five days [hb-09-chunk-0].", ["hb-01-chunk-1"], "5 business days") == {
-        "fact_in_answer": False, "markers_valid": False,
+        "fact_in_answer": False, "markers_valid": False, "unsupported_words": ["five", "days"],
     }
     assert score_answer("Five days.", ["hb-01-chunk-1"], "5 business days")["markers_valid"] is False
+
+
+def test_unsupported_words_flags_only_words_missing_from_sources() -> None:
+    from src.answer_quality import unsupported_words
+
+    sources = ["Business travel must be approved before booking.", "Does a trip need approval?"]
+    assert unsupported_words("Yes, travel must be approved before booking [hb-04-chunk-0].", sources) == []
+    assert unsupported_words("Approval comes from an appropriate authority.", sources) == [
+        "comes", "appropriate", "authority",
+    ]

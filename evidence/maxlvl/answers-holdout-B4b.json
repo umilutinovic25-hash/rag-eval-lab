@@ -1,0 +1,312 @@
+{
+  "answer_mode": "llm",
+  "answered_supported": 24,
+  "fact_in_answer": 14,
+  "markers_valid": 24,
+  "with_unsupported_words": 18,
+  "rows": [
+    {
+      "id": "H01",
+      "answer": "Passwords must contain at least 12 characters. [hb-05-chunk-0]",
+      "citations": [
+        "hb-05-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "H02",
+      "answer": "Yes, multi-factor authentication, which includes two-step login, is required for using the VPN. [hb-05-chunk-1]",
+      "citations": [
+        "hb-05-chunk-1"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [
+        "includes",
+        "using"
+      ]
+    },
+    {
+      "id": "H03",
+      "answer": "No, you should never share your passwords, even with colleagues from IT. [hb-05-chunk-2]",
+      "citations": [
+        "hb-05-chunk-2"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [
+        "even"
+      ]
+    },
+    {
+      "id": "H04",
+      "answer": "You must make leave requests two weeks in advance through the HR portal. [hb-07-chunk-0]",
+      "citations": [
+        "hb-07-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "make",
+        "through"
+      ]
+    },
+    {
+      "id": "H05",
+      "answer": "Unused leave can be carried over until March 31st. [hb-07-chunk-1]",
+      "citations": [
+        "hb-07-chunk-1"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [
+        "31st"
+      ]
+    },
+    {
+      "id": "H06",
+      "answer": "You must submit your holiday request through the HR portal, as stated in the annual leave policy. [hb-07-chunk-0]",
+      "citations": [
+        "hb-07-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "through",
+        "stated",
+        "policy"
+      ]
+    },
+    {
+      "id": "H07",
+      "answer": "No, unused budget does not carry over to the next year. [hb-08-chunk-1]",
+      "citations": [
+        "hb-08-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "H08",
+      "answer": "The learning budget of 800 EUR per year can be used to cover costs associated with courses, conferences, and certifications. [hb-08-chunk-0]",
+      "citations": [
+        "hb-08-chunk-0"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [
+        "used",
+        "cover",
+        "costs",
+        "associated"
+      ]
+    },
+    {
+      "id": "H09",
+      "answer": "You should agree training with your manager before booking it. [hb-08-chunk-1]",
+      "citations": [
+        "hb-08-chunk-1",
+        "hb-04-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "H10",
+      "answer": "Yes, business travel requires approval from an appropriate authority before you book it. [hb-04-chunk-0]",
+      "citations": [
+        "hb-04-chunk-0"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [
+        "requires",
+        "appropriate",
+        "authority"
+      ]
+    },
+    {
+      "id": "H11",
+      "answer": "You should submit your travel receipts through the finance app within 30 days of your return. [hb-04-chunk-0]",
+      "citations": [
+        "hb-04-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "submit"
+      ]
+    },
+    {
+      "id": "H12",
+      "answer": "Yes, you should keep original receipts for hotels. [hb-04-chunk-1]",
+      "citations": [
+        "hb-04-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "H13",
+      "answer": "You can reserve a car space through the facilities app, but it's also on a first-come, first-served basis due to limited parking spaces. [hb-09-chunk-1]",
+      "citations": [
+        "hb-09-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "but",
+        "basis",
+        "due",
+        "limited"
+      ]
+    },
+    {
+      "id": "H14",
+      "answer": "You should report your lost badge to reception on the same day. [hb-09-chunk-0]",
+      "citations": [
+        "hb-09-chunk-0",
+        "hb-01-chunk-2"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "H15",
+      "answer": "Core hours for remote days are from 10:00 to 15:00, and you need to be available via chat and phone during this time. [hb-03-chunk-3]",
+      "citations": [
+        "hb-03-chunk-3"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "need",
+        "available",
+        "via",
+        "time"
+      ]
+    },
+    {
+      "id": "H16",
+      "answer": "Your remote days are recorded in your shared team calendar, as agreed upon with your team lead. [hb-03-chunk-1]",
+      "citations": [
+        "hb-03-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "upon"
+      ]
+    },
+    {
+      "id": "H17",
+      "answer": "No, the remote work limit is currently three days per week according to the provided passages [hb-03-chunk-0], [hb-03-chunk-2].",
+      "citations": [
+        "hb-03-chunk-2",
+        "hb-03-chunk-0"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [
+        "currently",
+        "three",
+        "according",
+        "provided",
+        "passages"
+      ]
+    },
+    {
+      "id": "H18",
+      "answer": "The onboarding plan lasts for two weeks. [hb-06-chunk-0]",
+      "citations": [
+        "hb-06-chunk-0"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [
+        "lasts"
+      ]
+    },
+    {
+      "id": "H19",
+      "answer": "Your first check-in with your manager is scheduled at the end of month one. [hb-06-chunk-2]",
+      "citations": [
+        "hb-06-chunk-2"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "scheduled"
+      ]
+    },
+    {
+      "id": "H20",
+      "answer": "You can order a new headset through the same form used for accessories like a mouse. [hb-01-chunk-3]",
+      "citations": [
+        "hb-01-chunk-3"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [
+        "used",
+        "like"
+      ]
+    },
+    {
+      "id": "H21",
+      "answer": "First, you should report the stolen device to security. [hb-01-chunk-2]",
+      "citations": [
+        "hb-01-chunk-2",
+        "hb-01-chunk-0"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "H22",
+      "answer": "Bring the non-booting laptop to the IT desk on floor two. [hb-10-chunk-1]",
+      "citations": [
+        "hb-10-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "non",
+        "booting"
+      ]
+    },
+    {
+      "id": "H23",
+      "answer": "IT support is not available on weekends as it operates from 08:00 to 18:00, Monday to Friday [hb-10-chunk-0]. \n\n[hb-10-chunk-0]",
+      "citations": [
+        "hb-10-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "operates"
+      ]
+    },
+    {
+      "id": "H24",
+      "answer": "Urgent security incidents should be reported to the on-call line outside of regular business hours. [hb-10-chunk-1]",
+      "citations": [
+        "hb-10-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "reported",
+        "regular",
+        "business"
+      ]
+    }
+  ]
+}
