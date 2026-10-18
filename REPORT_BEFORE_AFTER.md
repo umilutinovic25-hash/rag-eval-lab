@@ -387,6 +387,14 @@ Stvarna lokalna proba bez keša za H20: jedan uspešan embedding poziv i 10 uspe
 
 137 testova prolazi. Podrazumevani rezultati ostaju 12/12, 34/34, 23/24, 29/32 bez novih PASS regresija. Postojeća četiri neuspešna pitanja nisu predstavljena kao rešena. Pogoršanja alternativnih tehnika su sačuvana i objašnjena, a model server pokrenut za ovu probu je nakon rada ugašen.
 
+## 16. Web interfejs — izvor.
+
+Napredni deo sada ima lokalni web radni prostor povezan sa istim Python RAG-om: razgovor, klikabilni citati i originalni odlomci, verzije dokumenata, trag odluke, offline profil i evaluacioni panel. Pokretanje: `./start-web.command`, zatim `http://localhost:8767`. Uputstvo i ograničenja: `docs/frontend/README.md`; koncept i vizuelna provera: `docs/frontend/design-review.md`.
+
+Interfejs jasno razlikuje keširano ponavljanje od novog generisanja. Prikazuje stvarne rezultate 12/12, 34/34, 23/24 i 29/32 i razloge neuspeha; frontend nije unapredio te metrike. Svako pitanje je nezavisno od prethodnog razgovora. Nova pitanja u naprednom režimu zahtevaju lokalne modele; leksički profil radi bez njih, uz slabiji kvalitet.
+
+Provera ovog dodatka: 149 Python testova, 5 frontend testova, 7 browser testova, produkcioni build, provereni launcher i razvojni proxy. Browser testovi uključuju automatizovanu WCAG A/AA proveru početnog ekrana na 1505/1280/390 px i testiranih ekrana razgovora, dokumenata, evaluacije i statusnog dijaloga; to nije potvrda potpune pristupačnosti. Izvorni eval skup, kod metrika, corpus, istorijski keš i M5 arhiva nisu menjani za ovaj dodatak. Prikazani snimci su u `docs/frontend/`, izlazi završnih provera u `evidence/frontend/`.
+
 ## Dokazi
 
 - `evidence/before.json`, `evidence/after.json`: oba eval rezultata (kopije iz `results/`, koji git ignoriše)

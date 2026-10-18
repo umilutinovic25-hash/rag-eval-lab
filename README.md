@@ -4,6 +4,31 @@ A small local question-answering tool over a fictional employee handbook. It ret
 
 This week you will **measure** this system on a fixed eval set, find failures, apply **exactly one** improvement and compare results before and after.
 
+## Web workspace — izvor.
+
+The advanced project includes a Serbian web interface connected to the real Python RAG. It supports independent questions with local history, clickable citations, original source passages, decision traces, versioned document search, four evaluation sets, cached replay, and Markdown/JSON exports. No external font or analytics requests are made.
+
+On macOS, double-click `start-web.command`, or run:
+
+```bash
+./start-web.command
+# Open http://localhost:8767
+```
+
+Requires Python 3.12 and Node.js 22.12+ (Node.js 24 recommended). The launcher installs frontend packages on first use, builds the app, then serves it on loopback only. After building, the Python server needs no new Python dependencies:
+
+```bash
+npm --prefix frontend ci
+npm --prefix frontend run build
+python3 -m src.web                 # optional: --port 8768
+```
+
+**Napredni RAG** uses existing cached answers or local Ollama models (`bge-m3`, `qwen2.5:7b`, `gemma3:4b`). The three starter prompts work from the committed cache without a running model server. **Bez modela** uses lexical retrieval and extracts passages without any model calls; its quality is lower. Type handbook questions in English. Conversation history is for navigation only: each question is processed independently. Local history keeps the latest 10 conversations, up to 30 turns each; export anything you need to retain.
+
+The evaluation dashboard labels saved results and cached replay explicitly. A replay is not fresh generation. It shows all four remaining failures rather than claiming 100% general accuracy. The original M5 deliverable remains separate and unchanged.
+
+Development: run `python -m src.web` and `npm --prefix frontend run dev` in separate terminals. The Vite proxy is configured for the default API port 8767. Runtime and QA details: [frontend guide](docs/frontend/README.md).
+
 ## Setup
 
 Python 3.12.
