@@ -1,0 +1,102 @@
+{
+  "answer_mode": "llm",
+  "answered_supported": 9,
+  "fact_in_answer": 9,
+  "markers_valid": 9,
+  "with_unsupported_words": 0,
+  "rows": [
+    {
+      "id": "E01",
+      "answer": "Employees get 22 days of annual leave per calendar year.[hb-07-chunk-0]",
+      "citations": [
+        "hb-07-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "E02",
+      "answer": "Passwords need to be changed every 90 days.[hb-05-chunk-0]",
+      "citations": [
+        "hb-05-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "E03",
+      "answer": "The yearly training budget per employee is 800 EUR. [hb-08-chunk-0]",
+      "citations": [
+        "hb-08-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "E04",
+      "answer": "Up to 5 business days. [hb-01-chunk-1]",
+      "citations": [
+        "hb-01-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "E05",
+      "answer": "Up to 5 business days. [hb-01-chunk-1]",
+      "citations": [
+        "hb-01-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "E06",
+      "answer": "You can work remotely up to 3 days per week. [hb-03-chunk-0]",
+      "citations": [
+        "hb-03-chunk-0",
+        "hb-03-chunk-2"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "E07",
+      "answer": "IT support hours are from 08:00 to 18:00, Monday to Friday. [hb-10-chunk-0]",
+      "citations": [
+        "hb-10-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "E08",
+      "answer": "Travel receipts must be submitted within 30 days of your return, through finance app. [hb-04-chunk-0]",
+      "citations": [
+        "hb-04-chunk-0",
+        "hb-04-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "E09",
+      "answer": "Request a replacement laptop in the IT portal under Hardware. Handover can take up to 5 business days after manager approval. [hb-01-chunk-1][hb-01-chunk-2]",
+      "citations": [
+        "hb-01-chunk-1",
+        "hb-01-chunk-2"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    }
+  ]
+}

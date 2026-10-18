@@ -1,0 +1,177 @@
+{
+  "answer_mode": "llm",
+  "answered_supported": 16,
+  "fact_in_answer": 5,
+  "markers_valid": 16,
+  "with_unsupported_words": 1,
+  "rows": [
+    {
+      "id": "T01",
+      "answer": "Yes. [hb-05-chunk-1]",
+      "citations": [
+        "hb-05-chunk-1"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T03",
+      "answer": "Unused budget does not carry over to next year. [hb-08-chunk-1]",
+      "citations": [
+        "hb-08-chunk-1",
+        "hb-08-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T04",
+      "answer": "Each employee has a training budget of 800 EUR per year for courses, conferences, and certifications. [hb-08-chunk-0]",
+      "citations": [
+        "hb-08-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T05",
+      "answer": "Daily allowances follow national rules for each destination. [hb-04-chunk-1]",
+      "citations": [
+        "hb-04-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T06",
+      "answer": "No, parking places are not assigned to specific people; they are shared and reserved through the facilities app on a first-come, first-served basis. [hb-09-chunk-1]",
+      "citations": [
+        "hb-09-chunk-1"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [
+        "basis"
+      ]
+    },
+    {
+      "id": "T07",
+      "answer": "Yes, you need your badge at every door. [hb-09-chunk-0]",
+      "citations": [
+        "hb-09-chunk-0"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T08",
+      "answer": "On the same day. [hb-09-chunk-0]",
+      "citations": [
+        "hb-09-chunk-0"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T09",
+      "answer": "Yes, you must be reachable by phone during core hours on remote days.[hb-03-chunk-3]",
+      "citations": [
+        "hb-03-chunk-3",
+        "hb-03-chunk-2"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T10",
+      "answer": "Yes, you can swap your remote day to another day in the same week. [hb-03-chunk-2]",
+      "citations": [
+        "hb-03-chunk-2",
+        "hb-03-chunk-1"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T11",
+      "answer": "I agree my remote days with my team lead. [hb-03-chunk-1]",
+      "citations": [
+        "hb-03-chunk-1",
+        "hb-03-chunk-2"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T12",
+      "answer": "A buddy is assigned in your first week. [hb-06-chunk-1]",
+      "citations": [
+        "hb-06-chunk-1",
+        "hb-06-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T13",
+      "answer": "Yes. [hb-06-chunk-2]",
+      "citations": [
+        "hb-06-chunk-2"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T14",
+      "answer": "IT staff [hb-01-chunk-1]",
+      "citations": [
+        "hb-01-chunk-1"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T15",
+      "answer": "Yes, a replacement laptop needs manager approval. [hb-01-chunk-1]",
+      "citations": [
+        "hb-01-chunk-1"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T16",
+      "answer": "You can contact IT support through the IT portal or by phone. [hb-10-chunk-0]",
+      "citations": [
+        "hb-10-chunk-0"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T17",
+      "answer": "IT support hours are 08:00 to 18:00. [hb-10-chunk-0]",
+      "citations": [
+        "hb-10-chunk-0",
+        "hb-10-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    }
+  ]
+}

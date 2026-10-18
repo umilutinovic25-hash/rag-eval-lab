@@ -44,10 +44,11 @@ RERANK_PROMPT = (
 
 # Answer text: "extractive" (cited chunks joined) or "llm" (a local model writes the answer from the cited chunks)
 ANSWER_MODE = "llm"
-GENERATION_MODEL = "gemma3:4b"
+GENERATION_MODEL = "qwen2.5:7b"
 GENERATION_PROMPT = (
-    "Answer the question using only the passages below. Reply in one or two sentences, "
-    "then list the ids of the passages you used in square brackets, for example [hb-01-chunk-0].\n\n"
+    "Answer the question using only facts stated in the passages below. Do not add conditions, people, steps or details "
+    "that the passages do not state. Reply in one or two short sentences, then list the ids of the passages you used "
+    "in square brackets, for example [hb-01-chunk-0].\n\n"
     "Passages:\n{passages}\n\nQuestion: {question}\nAnswer:"
 )
 
