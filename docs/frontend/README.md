@@ -32,6 +32,7 @@ Preciznost citata u originalnoj metrici meri očekivani dokument, ne dokazuje ta
 - `frontend/src/`: React, TypeScript, lokalni DM Sans, CSS tokeni, Lucide SVG ikone. Sav vidljivi interfejs je HTML/CSS; koncept PNG se ne koristi kao UI.
 - `src/web.py`: standardna Python biblioteka, bez novih runtime paketa. Služi samo frontend build i eksplicitne API putanje, vezan za `127.0.0.1`. Provera Host/Origin, ograničenje veličine JSON-a i pitanja, sprečavanje izlaska iz static direktorijuma, CSP i bez logovanja sadržaja pitanja.
 - `GET /api/status`, `GET /api/documents`, `GET /api/evaluations`.
+- Status računa ukupan broj dokumenata i aktuelnih verzija iz učitanog korpusa, bez fiksnih brojeva.
 - `POST /api/chat`: `{ "question": "...", "profile": "current" | "offline" }`.
 - `POST /api/evaluations/run`: `{}`. Ponavlja sve četiri evaluacije iz keša; rezultat se vraća browseru, istorijski dokaz se ne prepisuje.
 - Profil se primenjuje pod zajedničkim zaključavanjem i konfiguracija se vraća u `finally`, uključujući greške i paralelne zahteve. Pretraga dokumenata i replay koriste isti lock.

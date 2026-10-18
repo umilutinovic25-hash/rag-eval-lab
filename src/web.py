@@ -126,9 +126,11 @@ class Handler(BaseHTTPRequestHandler):
                     online = True
             except (OSError, ValueError, KeyError, TypeError):
                 pass
+            documents = load_corpus()
             return self.reply(200, dict(ollama=online, models=models,
                                       required_models=['bge-m3', 'qwen2.5:7b', 'gemma3:4b'],
-                                      documents=10, current_documents=9))
+                                      documents=len(documents),
+                                      current_documents=sum(doc.status == 'current' for doc in documents)))
         if path == '/api/documents':
             return self.reply(200, {'documents': documents_payload()})
         if path == '/api/evaluations':

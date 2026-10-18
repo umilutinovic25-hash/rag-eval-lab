@@ -95,6 +95,20 @@ def test_http_chat_documents_and_missing_routes(tmp_path):
         assert request(base, '/api/chat', [1, 2])[0] == 400
 
 
+def test_status_counts_loaded_corpus_instead_of_fixed_totals(monkeypatch, tmp_path):
+    documents = web.load_corpus()[:3]
+    monkeypatch.setattr(web, 'load_corpus', lambda: documents)
+    def offline(*args, **kwargs):
+        raise OSError('test: Ollama offline')
+    monkeypatch.setattr(web.urllib.request, 'urlopen', offline)
+    with running_server(tmp_path) as base:
+        status, data = request(base, '/api/status')
+        assert status == 200
+        assert data['documents'] == 3
+        assert data['current_documents'] == 2
+        assert data['ollama'] is False
+
+
 def test_http_rejects_cross_origin_and_dns_rebinding(tmp_path):
     with running_server(tmp_path) as base:
         data = {'question': 'How many days of annual leave do employees get?', 'profile': 'offline'}
