@@ -173,3 +173,19 @@ Proba na eval + holdout + test 1 (test 1 je ovde razvojni; slepi je test 2):
 | Očekivani efekat | Nema golih „Yes.“ ili „No.“ odgovora; „fact in answer“ raste; odgovora sa nepodržanim rečima ostaje oko 4/49; eval i holdout metrike iste. |
 | Rizik regresije | Duži odgovor može ponovo da doda detalje. |
 | Provera | `answer_quality` za eval, holdout i test 1, ručni pregled, metrike identične B5. |
+
+**Rezultat B5b:**
+- Gole „Yes./No.“ odgovore uklanja, ali vraća izmišljanje: E05 dodaje „file transfer ... other necessary configurations“, H12 „as instructed“, a T13 je zbrkan („You; your manager...“).
+- Odgovora sa nepodržanim rečima je 14/49 umesto 4/49.
+- Hipoteza je potvrđena samo za prvi deo, a rizik se ostvario. Upit je vraćen na B5. Odgovori su sačuvani u `evidence/maxlvl/answers-*-B5b.json`.
+
+## B5c: doslovan citat ispod odgovora
+
+| Polje | Sadržaj |
+| --- | --- |
+| Propust | Posle B5: H03, T01 i T13 odgovaraju samo „Yes.“ ili „No.“, T14 samo „IT staff“, a T09 izostavlja „chat“. Duži upit (B5b) vraća izmišljanje. |
+| Hipoteza | Činjenicu ne treba tražiti od modela, jer je već tačno zapisana u citiranom pasusu. Ako se ispod rečenice modela doda doslovan tekst citiranih chunk-ova, svaki odgovor sadrži činjenicu i ne može da sadrži izmišljen citat. |
+| Promena | `ANSWER_QUOTES = True`: ispod rečenice modela dodaje se red `Source [chunk-id]: "<tekst chunk-a>"` za svaki citat. `answer_quality` meri rečenicu modela (bez redova `Source`), a posebno prijavljuje i ceo odgovor. |
+| Očekivani efekat | „fact in answer“ za ceo odgovor: 49/49; rečenica modela ostaje kao u B5 (4/49 sa nepodržanim rečima); eval i holdout metrike iste. |
+| Rizik regresije | Odgovor je duži i delimično ponavlja rečenicu modela. Ako je citiran pogrešan chunk, citat to ne krije, nego pokazuje. |
+| Provera | `pytest`, `answer_quality`, metrike identične B5, CLI za H03. |

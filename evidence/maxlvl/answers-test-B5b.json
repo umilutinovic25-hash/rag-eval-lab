@@ -1,0 +1,184 @@
+{
+  "answer_mode": "llm",
+  "answered_supported": 16,
+  "fact_in_answer": 5,
+  "markers_valid": 16,
+  "with_unsupported_words": 3,
+  "rows": [
+    {
+      "id": "T01",
+      "answer": "Yes, MFA is required for internal tools. [hb-05-chunk-1]",
+      "citations": [
+        "hb-05-chunk-1"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T03",
+      "answer": "Unused budget does not carry over to next year. [hb-08-chunk-1]",
+      "citations": [
+        "hb-08-chunk-1",
+        "hb-08-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T04",
+      "answer": "You can spend up to 800 EUR per year on conferences. [hb-08-chunk-0]",
+      "citations": [
+        "hb-08-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T05",
+      "answer": "Daily allowances are decided according to national rules for each destination. [hb-04-chunk-1]",
+      "citations": [
+        "hb-04-chunk-1"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": [
+        "according"
+      ]
+    },
+    {
+      "id": "T06",
+      "answer": "Parking places are not assigned specifically to individuals; they are shared and reserved through the facilities app on a first-come, first-served basis. [hb-09-chunk-1]",
+      "citations": [
+        "hb-09-chunk-1"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [
+        "specifically",
+        "individuals",
+        "basis"
+      ]
+    },
+    {
+      "id": "T07",
+      "answer": "Yes, you need your badge at every door. [hb-09-chunk-0]",
+      "citations": [
+        "hb-09-chunk-0"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T08",
+      "answer": "A lost badge must be reported on the same day; you are required to report it to reception on the same day as it was lost. [hb-09-chunk-0]",
+      "citations": [
+        "hb-09-chunk-0"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": [
+        "required",
+        "report"
+      ]
+    },
+    {
+      "id": "T09",
+      "answer": "You must be reachable by phone during core hours from 10:00 to 15:00 on remote days. [hb-03-chunk-3]",
+      "citations": [
+        "hb-03-chunk-3",
+        "hb-03-chunk-2"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T10",
+      "answer": "Yes, you can swap your remote day to another day within the same week. [hb-03-chunk-2]",
+      "citations": [
+        "hb-03-chunk-2",
+        "hb-03-chunk-1"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T11",
+      "answer": "You agree your remote days with your team lead. [hb-03-chunk-1]",
+      "citations": [
+        "hb-03-chunk-1",
+        "hb-03-chunk-2"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T12",
+      "answer": "A buddy is assigned in your first week and helps you get started with tools, people and team habits. [hb-06-chunk-1]",
+      "citations": [
+        "hb-06-chunk-1",
+        "hb-06-chunk-0"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T13",
+      "answer": "Yes, there is a check-in after three months. You; your manager schedules a check-in at the end of month one and again after three months. [hb-06-chunk-2]",
+      "citations": [
+        "hb-06-chunk-2"
+      ],
+      "fact_in_answer": true,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T14",
+      "answer": "IT staff set up the replacement laptop with your files, accounts, email, and access rights after manager approval. [hb-01-chunk-1]",
+      "citations": [
+        "hb-01-chunk-1"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T15",
+      "answer": "Yes, a replacement laptop needs your manager's approval. [hb-01-chunk-1]",
+      "citations": [
+        "hb-01-chunk-1"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T16",
+      "answer": "You can contact IT support through the IT portal or by phone. [hb-10-chunk-0]",
+      "citations": [
+        "hb-10-chunk-0"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    },
+    {
+      "id": "T17",
+      "answer": "The IT helpdesk opens at 08:00. [hb-10-chunk-0]",
+      "citations": [
+        "hb-10-chunk-0",
+        "hb-10-chunk-1"
+      ],
+      "fact_in_answer": false,
+      "markers_valid": true,
+      "unsupported_words": []
+    }
+  ]
+}
