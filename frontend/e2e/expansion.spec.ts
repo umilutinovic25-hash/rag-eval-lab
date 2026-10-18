@@ -186,6 +186,8 @@ test("offline reconnect and quota failure preserve a reviewable in-memory answer
 test("configuration comparison retains source filters and quality panels stay accessible", async ({
   page,
 }) => {
+  // The 150ms button background transition makes axe sample blended colors.
+  await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   await page.getByRole("button", { name: "Radionica", exact: true }).click();
   await page.getByRole("tab", { name: "Eksperimenti", exact: true }).click();
