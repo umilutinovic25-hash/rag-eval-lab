@@ -45,16 +45,17 @@ Specs: `docs/maxlvl-specs.md`. Evidence: `evidence/maxlvl/`. Report: section 13.
 
 ```bash
 python -m src.holdout_runner --out results/holdout.json                          # 34 holdout questions
-python -m src.holdout_runner --set eval/test_set.json --out results/test.json   # 24 blind test questions
+python -m src.holdout_runner --set eval/test_set.json --out results/test.json   # test set 1 (24, blind for round 1)
+python -m src.holdout_runner --set eval/test2_set.json --out results/test2.json # test set 2 (32, blind for round 2)
 python -m src.answer_quality --set holdout --out results/answers.json           # answer text quality
 ```
 
 The shipped configuration adds two steps on top of semantic retrieval:
 
-- `RERANK = "llm-gray-zone"`: when the top cosine is between 0.50 and 0.70, `gemma3:4b` judges each of the top 5 candidates ("does the passage contain the answer?") and the system refuses if none passes. Above 0.70 it answers, below 0.50 it refuses.
-- `ANSWER_MODE = "llm"`: `gemma3:4b` writes a one- or two-sentence answer from the cited chunks only, with `[chunk-id]` markers. Citations do not change.
+- `RERANK = "llm-gray-zone"`: when the top cosine is between 0.50 and 0.70, each of the top 5 candidates is judged and the system refuses if none passes. Above 0.70 it answers, below 0.50 it refuses. With `RERANK_JUDGE = "either"` a passage passes if `qwen2.5:7b` copies answering words that are verified to come from the passage, or if `gemma3:4b` says yes.
+- `ANSWER_MODE = "llm"`: `qwen2.5:7b` writes a short answer from the cited chunks only, with `[chunk-id]` markers. With `ANSWER_QUOTES = True` the verbatim text of every cited chunk follows as `Source [id]: "..."`. Citations do not change.
 
-Model replies are cached in `data/llm_cache.json`, so all three sets run offline. New questions need `ollama pull gemma3:4b`. Results: eval 12/12, holdout 33/34, blind test 22/24 (21/24 before these steps). Hybrid retrieval (`RETRIEVAL_MODE = "hybrid"`) is available but made results worse.
+Model replies are cached in `data/llm_cache.json`, so all four sets run offline. New questions need `ollama pull qwen2.5:7b` and `ollama pull gemma3:4b`. Results: eval 12/12, holdout 34/34, test 1 23/24, test 2 29/32 (blind; 28/32 before round 2). Hybrid retrieval (`RETRIEVAL_MODE = "hybrid"`) is available but made results worse.
 
 ## Project layout
 

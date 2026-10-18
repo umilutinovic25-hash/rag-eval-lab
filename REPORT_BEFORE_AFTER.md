@@ -293,12 +293,50 @@ Specifikacije: `docs/maxlvl-specs.md`, svaka commitovana pre svoje izmene. Dokaz
 - Jedna greška je uhvaćena u toku rada: commit B2 je prvo prošao sa 2 pala testa, jer `| tail` sakriva izlazni kod. Ispravljeno je pre sledećeg koraka, a provera se od tada radi sa `pipefail`.
 - B2b je meren na necommitovanom upitu i odmah vraćen. Tačan upit je zabeležen u `config` delu fajla `evidence/maxlvl/eval-B2b.json`.
 
-**Preostala ograničenja posle B koraka:**
+**Ograničenja posle prvog kruga** (H13, T02, T06 i nepodržani detalji H10 i T10) obrađena su u drugom krugu ispod.
 
-1. **Judge od 4B je slaba karika:** H13, T06 i T02 pogrešno odbija. Sledeći korak bio bi veći model ili pravi cross-encoder reranker, ali Ollama ga ne nudi kao standardni model, pa to nije mereno.
-2. **Granice sive zone su izvedene iz holdouta.** Test skup od 24 pitanja je mali, pa je razlika +1 unutar šuma.
-3. **Generisani odgovor može da doda nepodržan detalj** (H10, T10). Citati su tačni, ali tekst se ne proverava automatski prema pasusu.
-4. **Konačno stanje zavisi od dva lokalna modela** za svako novo pitanje. Režimi `RERANK = None` i `ANSWER_MODE = "extractive"` ostaju kao jednostavnija rezerva.
+### Drugi krug: B4–B5c
+
+Test 1 je posle prvog kruga viđen, pa je pre drugog kruga napisan i commitovan novi slepi **test 2** (`eval/test2_set.json`, 32 pitanja, `1982c20`). Varijante judge-a i generisanja birane su samo na eval i holdout skupu, a od B4b i na testu 1. Ukupno je probano 14 konfiguracija; skripte su u `evidence/maxlvl/probes/`, a tabele u `docs/maxlvl-specs.md`.
+
+| Korak | Promena | Commit | eval | holdout | test 1 (viđen) | Ishod |
+| --- | --- | --- | --- | --- | --- | --- |
+| B4 | judge prepisuje reči koje odgovaraju (`qwen2.5:7b`), a kod proverava da su iz pasusa (≥80% reči) | `de5df11` / `0bdf295` | 12/12 | 33 → **34** | 22 → 21 | popravlja H13 i T06, kvari T04 i T07 |
+| B4b | pasus prolazi ako ga prihvati judge sa prepisivanjem **ili** da/ne judge (`gemma3:4b`) | `2e1bbf9` / `57cd2da` | 12/12 | 34/34 | 21 → **23** | zadržano |
+| B5 | strog upit za odgovor i `qwen2.5:7b` | `cae41b5` | 12/12 | 34/34 | 23/24 | odgovora sa nepodržanim rečima 35/49 → **4/49**; H10 je ispravan |
+| B5b | „uvek navedi činjenicu celom rečenicom“ | `f49d92e` | | | | gole „Yes./No.“ nestaju, ali se vraća izmišljanje (14/49), vraćeno |
+| B5c | ispod odgovora doslovan citat pasusa (`Source [id]: "..."`) | `568c116` | 12/12 | 34/34 | 23/24 | činjenica je u **49/49** odgovora |
+
+Primer (H03, CLI):
+
+```
+No. [hb-05-chunk-2]
+Source [hb-05-chunk-2]: "Never share passwords, also not with colleagues from IT."
+```
+
+**Slepi test 2, jedno pokretanje** (`evidence/maxlvl/test2-run.txt`, `compare-test2-B3-vs-final.txt`):
+
+| Stanje | Passed | Behaviour | CitPrec |
+| --- | --- | --- | --- |
+| posle prvog kruga (`4bee77f`) | 28/32 | 0.91 | 1.00 |
+| konačno | **29/32** | 0.94 | 1.00 |
+
+- Popravljeno: U05.
+- Pokvareno: ništa.
+- I dalje padaju U07 „Is the training budget per team or per person?“, U11 „Is parking guaranteed for every employee?“ i U13 „Can I work from home four days a week?“.
+- Sva tri pada su isti, poznat obrazac: da/ne pitanje čiji je odgovor „ne“ ili „nijedno od ponuđenog“, a vrh je u sivoj zoni. Oba judge-a tada kažu da pasus ne odgovara, iako odgovara: „Parking is limited“, „up to 3 days per week“. Kod U07 model piše svoj odgovor („per person“) umesto da prepiše reči iz pasusa.
+
+**Ukupna slika na neviđenim pitanjima:**
+- Svaki slepi skup pokazuje manji dobitak od skupa na kojem je promena birana: test 1 +1/24, a test 2 +1/32.
+- Svih 12 eval pitanja i svih 34 holdout pitanja prolaze, ali na tim skupovima su promene i birane.
+- Na neviđenim pitanjima sistem je oko 91% tačan (22/24 i 29/32). Tvrdnja „sve tačno“ zato važi samo za skupove na kojima je sistem podešavan.
+
+**Preostala ograničenja posle drugog kruga:**
+
+1. **Da/ne pitanja sa negativnim odgovorom u sivoj zoni** (U07, U11, U13, T02) i dalje se pogrešno odbijaju. Nijedan od 5 lokalnih modela, sa 3 vrste judge-a, ne rešava ih bez novih grešaka na drugim pitanjima. Sledeći korak bio bi pravi cross-encoder reranker (na primer `bge-reranker`), koji Ollama ne nudi kao standardni model, ili veći model.
+2. **Granice sive zone (0.50–0.70) i izbor judge-a** birani su na holdoutu i testu 1. Test skupovi od 24 i 32 pitanja su mali, pa je razlika od +1 unutar šuma.
+3. **Rečenica modela je ponekad šturo „Yes.“ ili „No.“**; činjenicu nosi citat ispod. U 4/49 odgovora ima preformulacija („make“, „submit“), ali nijedna nije nepodržana činjenica.
+4. **Zavisnosti:** `bge-m3` (1.2 GB), `qwen2.5:7b` (4.7 GB) i `gemma3:4b` (3.3 GB) za svako novo pitanje. Pitanje u sivoj zoni traži do 10 poziva judge-a i jedan za odgovor. Režimi `RERANK = None` i `ANSWER_MODE = "extractive"` ostaju kao jednostavnija rezerva.
 
 ## Dokazi
 
@@ -309,7 +347,7 @@ Specifikacije: `docs/maxlvl-specs.md`, svaka commitovana pre svoje izmene. Dokaz
 - `evidence/pytest-before.txt`, `evidence/pytest-after.txt`
 - `docs/change-spec.md`: specifikacija, commitovana pre promene
 - Napredni deo: `docs/advanced-specs.md`; `evidence/advanced/` (`adv1.json`, `adv2.json`, `adv3a.json`, `adv3b.json`, `adv4.json`, `compare-*.txt`, CLI izlazi, kontrolna provera)
-- Max nivo: `docs/maxlvl-specs.md`; `eval/holdout_set.json`, `eval/test_set.json`; `evidence/maxlvl/` (`holdout-*.json`, `eval-B*.json`, `test-*.json`, `compare-*.txt`, `answers-*.json`, ručni pregled odgovora, `test-final-run.txt`)
+- Max nivo: `docs/maxlvl-specs.md`; `eval/holdout_set.json`, `eval/test_set.json`, `eval/test2_set.json`; `evidence/maxlvl/probes/`; `evidence/maxlvl/` (`holdout-*.json`, `eval-B*.json`, `test-*.json`, `compare-*.txt`, `answers-*.json`, ručni pregled odgovora, `test-final-run.txt`)
 
 ## Kontrolna lista pre predaje
 

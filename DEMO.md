@@ -67,10 +67,11 @@ Napomenuti: pragovi su kalibrisani na istom skupu, pa je 12/12 optimistično.
 ## Bonus 2: max nivo, generalizacija (ako ima vremena)
 
 ```bash
-python -m src.holdout_runner --out results/demo-holdout.json                         # 33/34
-python -m src.holdout_runner --set eval/test_set.json --out results/demo-test.json  # 22/24
-cat evidence/maxlvl/compare-test-B0-vs-final.txt
+python -m src.holdout_runner --out results/demo-holdout.json                          # 34/34
+python -m src.holdout_runner --set eval/test2_set.json --out results/demo-test2.json # 29/32, slepi test 2
+cat evidence/maxlvl/compare-test2-B3-vs-final.txt
+python -m src.cli --question "Can I tell my password to someone from IT?"           # odgovor + doslovan citat
 python -m src.cli --question "How many days per week can I work remotely?"         # LLM odgovor sa [chunk-id]
 ```
 
-Poruka: na novim pitanjima prag od 0.60 ne radi (klase se preklapaju: 0.540 prema 0.676). Hibrid je štetio, a LLM judge je pomogao tek kao kaskada u sivoj zoni. Na slepom testu dobitak je samo +1/24, što je pošten rezultat (odeljak 13 izveštaja).
+Poruka: na novim pitanjima prag od 0.60 ne radi (klase se preklapaju: 0.540 prema 0.676). Hibrid je štetio, a LLM judge je pomogao tek kao kaskada u sivoj zoni. Svaki slepi test daje manji dobitak nego razvojni skup (+1/24, pa +1/32), a preostali padovi su isti obrazac: da/ne pitanja sa odgovorom „ne“ (odeljak 13 izveštaja).
