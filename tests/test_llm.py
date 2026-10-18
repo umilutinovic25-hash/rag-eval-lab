@@ -99,6 +99,20 @@ def test_span_judge_accepts_only_evidence_copied_from_passage(monkeypatch, span,
     assert llm.passage_answers("How do I reserve a car space?", passage) is accepted
 
 
+@pytest.mark.parametrize(
+    "span_ok, yesno_ok, accepted, yesno_called",
+    [(True, False, True, False), (False, True, True, True), (False, False, False, True)],
+    ids=["span-accepts", "yesno-rescues", "both-reject"],
+)
+def test_either_judge_accepts_if_any_judge_accepts(monkeypatch, span_ok, yesno_ok, accepted, yesno_called) -> None:
+    monkeypatch.setattr(config, "RERANK_JUDGE", "either")
+    monkeypatch.setattr(llm, "span_judge", lambda q, p: span_ok)
+    calls = []
+    monkeypatch.setattr(llm, "yesno_judge", lambda q, p, model: calls.append(model) or yesno_ok)
+    assert llm.passage_answers("q", "p") is accepted
+    assert calls == ([config.RERANK_YESNO_MODEL] if yesno_called else [])
+
+
 def test_uncached_prompt_without_ollama_raises_llm_error(tmp_path, monkeypatch) -> None:
     monkeypatch.setattr(llm, "CACHE_PATH", tmp_path / "llm.json")
     monkeypatch.setattr(llm, "OLLAMA_URL", "http://127.0.0.1:9/api/generate")

@@ -62,13 +62,23 @@ def span_is_in_passage(span: str, passage: str) -> bool:
     return bool(words) and sum(word in passage_words for word in words) / len(words) >= SPAN_MIN_OVERLAP
 
 
-def passage_answers(question: str, passage: str) -> bool:
-    if config.RERANK_JUDGE == "span":
-        span = generate(config.RERANK_MODEL, config.RERANK_SPAN_PROMPT.format(question=question, passage=passage), 40)
-        return span_is_in_passage(span, passage)
-    reply = generate(config.RERANK_MODEL, config.RERANK_PROMPT.format(question=question, passage=passage), 3)
+def span_judge(question: str, passage: str) -> bool:
+    span = generate(config.RERANK_MODEL, config.RERANK_SPAN_PROMPT.format(question=question, passage=passage), 40)
+    return span_is_in_passage(span, passage)
+
+
+def yesno_judge(question: str, passage: str, model: str) -> bool:
+    reply = generate(model, config.RERANK_PROMPT.format(question=question, passage=passage), 3)
     words = reply.lower().split()
     return bool(words) and words[0].strip(".,!:") in ACCEPT_WORDS
+
+
+def passage_answers(question: str, passage: str) -> bool:
+    if config.RERANK_JUDGE == "span":
+        return span_judge(question, passage)
+    if config.RERANK_JUDGE == "either":
+        return span_judge(question, passage) or yesno_judge(question, passage, config.RERANK_YESNO_MODEL)
+    return yesno_judge(question, passage, config.RERANK_MODEL)
 
 
 def write_answer(question: str, passages: list[tuple[str, str]]) -> str:
