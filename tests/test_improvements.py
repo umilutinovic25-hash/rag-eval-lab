@@ -134,3 +134,13 @@ def test_structured_judge_requires_valid_status_and_exact_evidence(monkeypatch,p
     monkeypatch.setattr(config,'RERANK_JUDGE','structured')
     monkeypatch.setattr(llm,'generate',lambda *a:json.dumps(payload))
     assert llm.passage_answers('Can I spend 900 EUR?','Budget is 800 EUR.') is expected
+
+
+def test_reference_context_expands_only_previous_anaphoric_evidence():
+    before=Chunk('a','d','T','v','current','Use IT portal under Hardware.')
+    reference=Chunk('b','d','T','v','current','Headsets use that same form.')
+    after=Chunk('c','d','T','v','current','Unrelated extra information.')
+    selected=rag.expand_context([RetrievalResult(reference,.9)],[before,reference,after],1,'references')
+    assert [c.chunk.chunk_id for c in selected]==['a','b']
+    selected=rag.expand_context([RetrievalResult(before,.9)],[before,reference,after],1,'references')
+    assert [c.chunk.chunk_id for c in selected]==['a']

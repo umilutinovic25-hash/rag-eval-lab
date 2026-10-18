@@ -48,9 +48,11 @@ def extractive_answer(cited: list[RetrievalResult]) -> str:
     )
 
 
-def expand_context(cited: list[RetrievalResult], chunks: list[Chunk], window: int) -> list[RetrievalResult]:
+def expand_context(cited: list[RetrievalResult], chunks: list[Chunk], window: int, policy: str = "all") -> list[RetrievalResult]:
     if window <= 0:
         return cited
+    if policy not in ("all", "references"):
+        raise ValueError("Unknown context policy")
     expanded = {}
     groups = list(dict.fromkeys((r.chunk.doc_id, r.chunk.version, r.chunk.status) for r in cited))
     for group in groups:
@@ -60,7 +62,14 @@ def expand_context(cited: list[RetrievalResult], chunks: list[Chunk], window: in
             if (anchor.chunk.doc_id, anchor.chunk.version, anchor.chunk.status) != group:
                 continue
             index = next(i for i, c in enumerate(siblings) if c.chunk_id == anchor.chunk.chunk_id)
-            for neighbor in siblings[max(0, index-window):index+window+1]:
+            selected[anchor.chunk.chunk_id] = anchor
+            if policy == "references":
+                if not re.search(r"\b(?:same|that|this)\s+(?:form|policy|procedure|process)\b", anchor.chunk.text, re.I):
+                    continue
+                neighbors = siblings[max(0, index-window):index]
+            else:
+                neighbors = siblings[max(0, index-window):index+window+1]
+            for neighbor in neighbors:
                 # Score is inherited for provenance only; neighbors are not reranked.
                 selected[neighbor.chunk_id] = RetrievalResult(neighbor, anchor.score)
         for sibling in siblings:
@@ -140,7 +149,7 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
         cited = select_citations(results)
 
     anchors = [r.chunk.chunk_id for r in cited]
-    cited = expand_context(cited, chunks, config.CONTEXT_NEIGHBORS)
+    cited = expand_context(cited, chunks, config.CONTEXT_NEIGHBORS, config.CONTEXT_POLICY)
     if config.CONTEXT_NEIGHBORS:
         trace.append({"stage": "context", "anchors": anchors, "expanded": [r.chunk.chunk_id for r in cited], "neighbor_scores": "inherited; not retrieval scores"})
     fallback_reason = None
