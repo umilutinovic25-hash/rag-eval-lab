@@ -79,7 +79,12 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
         elif config.RERANK == "llm-gray-zone" and top < low:
             return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=candidates[: config.TOP_K])
         else:
-            results = [item for item in candidates if passage_answers(question, item.chunk.text)][: config.TOP_K]
+            results = []
+            for item in candidates:
+                if passage_answers(question, item.chunk.text):
+                    results.append(item)
+                    if len(results) == config.TOP_K:
+                        break
             if not results:
                 return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=candidates[: config.TOP_K])
             cited = results

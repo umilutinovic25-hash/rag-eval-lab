@@ -48,7 +48,7 @@ def test_rerank_ignores_score_thresholds(rerank_mode, monkeypatch) -> None:
 
 @pytest.mark.parametrize(
     "top, judge_calls, refused",
-    [(0.9, 0, False), (0.6, 3, False), (0.3, 0, True)],
+    [(0.9, 0, False), (0.6, 2, False), (0.3, 0, True)],
     ids=["above-zone-trusts-retrieval", "inside-zone-asks-judge", "below-zone-refuses"],
 )
 def test_gray_zone_calls_judge_only_inside_zone(rerank_mode, monkeypatch, top, judge_calls, refused) -> None:
