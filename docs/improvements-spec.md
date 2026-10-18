@@ -20,3 +20,9 @@ Dodato posle prvih rezultata D4, pre implementacije D4b. D4 zadržava 12/12 eval
 D4b hipoteza: proširenje je potrebno samo kada izabrani pasus izričito upućuje na prethodni (same/that/this form, policy, procedure, process). CONTEXT_POLICY=references dodaje samo do CONTEXT_NEIGHBORS prethodnih pasusa u istoj verziji/dokumentu/statusu. Nema širenja za obične samostalne pasuse ili sledeće pasuse. Ovo nije pravilo za ID H20, nego pravilo za tekstualne reference.
 
 Očekivanje: H20 dobija lokaciju formulara, a H14 nema nove citate. Prihvatiti samo bez novih PASS regresija na četiri skupa i uz lokacione činjenice u model odgovoru ili njegovom jasnom izvoru. Rizici: drugi tipovi anafore nisu obuhvaćeni; prethodni pasus može biti šum. Jedna ova varijanta, bez daljih prompt sweep-ova.
+
+## D5b — strogo parsiranje JSON-a sa opcionim Markdown omotačem
+
+D5 već pokazuje regresije (eval 11/12, holdout 21/34). Sirovi E05 odgovor jeste validan supported JSON sa dokazom, ali je obavijen tačno jednim ```json ... ``` blokom pa ga parser odbacuje. H06/H13 su stvarni insufficient odgovori i ovaj format popravak ih ne može rešiti.
+
+Pre izmene: dozvoliti samo opcioni, ceo Markdown JSON blok oko jednog JSON objekta; sav spoljašnji tekst i neispravna šema ostaju odbačeni. Ne menjati upit/model/status kriterijume niti izmišljati dokaz. Očekivanje je vraćanje E05 bez novih poziva judge-u, koristeći isti sačuvani tekst. Na sva 4 skupa meriti D5b; default uključiti samo uz originalni uslov bez regresija i uz dobitak. Ovo nije novi nezavisni ili slepi test.

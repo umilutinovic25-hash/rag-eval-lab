@@ -1,0 +1,12 @@
+[
+  {
+    "id": "H20",
+    "question": "Where do I order a new headset?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-01"
+    ],
+    "expected_fact": "ordered through that same form"
+  }
+]
