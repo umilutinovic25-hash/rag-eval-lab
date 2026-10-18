@@ -28,6 +28,12 @@ RERANK = "llm-gray-zone"
 RERANK_MODEL = "gemma3:4b"
 RERANK_CANDIDATES = 5
 RERANK_GRAY_ZONE = (0.50, 0.70)  # cosine scale, used only in "llm-gray-zone"
+RERANK_JUDGE = "yesno"  # "yesno" (model answers yes/no) or "span" (model copies the answering words, code checks them)
+RERANK_SPAN_PROMPT = (
+    "Copy the exact words from the passage that answer the question. "
+    "If the passage does not contain the answer, reply NONE.\n\n"
+    "Passage: {passage}\nQuestion: {question}\nWords from the passage:"
+)
 RERANK_PROMPT = (
     "Question: {question}\n"
     "Passage: {passage}\n"

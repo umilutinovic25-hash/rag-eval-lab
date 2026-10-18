@@ -80,6 +80,24 @@ def test_passage_answers_parses_reply(monkeypatch, reply, expected) -> None:
     assert llm.passage_answers("q", "p") is expected
 
 
+@pytest.mark.parametrize(
+    "span, accepted",
+    [
+        ("reserved through facilities app", True),
+        ("Parking is limited: spaces are shared", True),
+        ("NONE", False),
+        ("", False),
+        ("book it with your manager in the HR portal", False),
+    ],
+    ids=["copied", "copied-with-punctuation", "none", "empty", "invented-evidence"],
+)
+def test_span_judge_accepts_only_evidence_copied_from_passage(monkeypatch, span, accepted) -> None:
+    passage = "Parking is limited: spaces are shared and reserved through facilities app, first come, first served."
+    monkeypatch.setattr(config, "RERANK_JUDGE", "span")
+    monkeypatch.setattr(llm, "generate", lambda model, prompt, max_tokens: span)
+    assert llm.passage_answers("How do I reserve a car space?", passage) is accepted
+
+
 def test_uncached_prompt_without_ollama_raises_llm_error(tmp_path, monkeypatch) -> None:
     monkeypatch.setattr(llm, "CACHE_PATH", tmp_path / "llm.json")
     monkeypatch.setattr(llm, "OLLAMA_URL", "http://127.0.0.1:9/api/generate")
