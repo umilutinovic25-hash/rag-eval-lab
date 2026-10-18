@@ -110,3 +110,13 @@ def test_cosine_large_finite_vectors_is_stable():
 ])
 def test_negation_about_a_different_action_does_not_force_fallback(answer,source):
     assert rag.generation_issue(answer,[RetrievalResult(Chunk('a','d','T','v','current',source),.9)]) is None
+
+
+def test_neighbor_context_does_not_mix_versions_or_documents():
+    c0=Chunk('d-0','d','T','v1','current','Location: IT portal under Hardware.')
+    c1=Chunk('d-1','d','T','v1','current','Headsets use the same form.')
+    old=Chunk('old','d','T','v0','superseded','Old location')
+    other=Chunk('other','other','T','v1','current','Different document')
+    result=rag.expand_context([RetrievalResult(c1,.9)],[c0,old,other,c1],1)
+    assert [r.chunk.chunk_id for r in result]==['d-0','d-1']
+    assert rag.expand_context([RetrievalResult(c1,.9)],[c0,c1],0)==[RetrievalResult(c1,.9)]

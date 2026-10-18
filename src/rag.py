@@ -48,6 +48,27 @@ def extractive_answer(cited: list[RetrievalResult]) -> str:
     )
 
 
+def expand_context(cited: list[RetrievalResult], chunks: list[Chunk], window: int) -> list[RetrievalResult]:
+    if window <= 0:
+        return cited
+    expanded = {}
+    groups = list(dict.fromkeys((r.chunk.doc_id, r.chunk.version, r.chunk.status) for r in cited))
+    for group in groups:
+        siblings = [c for c in chunks if (c.doc_id, c.version, c.status) == group]
+        selected = {}
+        for anchor in cited:
+            if (anchor.chunk.doc_id, anchor.chunk.version, anchor.chunk.status) != group:
+                continue
+            index = next(i for i, c in enumerate(siblings) if c.chunk_id == anchor.chunk.chunk_id)
+            for neighbor in siblings[max(0, index-window):index+window+1]:
+                # Score is inherited for provenance only; neighbors are not reranked.
+                selected[neighbor.chunk_id] = RetrievalResult(neighbor, anchor.score)
+        for sibling in siblings:
+            if sibling.chunk_id in selected:
+                expanded[sibling.chunk_id] = selected[sibling.chunk_id]
+    return list(expanded.values())
+
+
 def generation_issue(text: str, cited: list[RetrievalResult]) -> str | None:
     """Structural and numeric checks only; no claim of semantic verification."""
     if getattr(text, "metadata", {}).get("done_reason") == "length":
@@ -118,6 +139,10 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
             return refuse("below_refusal_threshold", results)
         cited = select_citations(results)
 
+    anchors = [r.chunk.chunk_id for r in cited]
+    cited = expand_context(cited, chunks, config.CONTEXT_NEIGHBORS)
+    if config.CONTEXT_NEIGHBORS:
+        trace.append({"stage": "context", "anchors": anchors, "expanded": [r.chunk.chunk_id for r in cited], "neighbor_scores": "inherited; not retrieval scores"})
     fallback_reason = None
     if config.ANSWER_MODE == "llm":
         try:

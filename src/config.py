@@ -12,6 +12,7 @@ CHUNK_OVERLAP = 30
 RETRIEVAL_MODE = "semantic"  # "lexical", "semantic" or "hybrid"
 EMBEDDING_MODEL = "bge-m3"  # local Ollama model, used in "semantic" and "hybrid" mode
 TOP_K = 2
+CONTEXT_NEIGHBORS = 0  # optional expansion after selection, within the same document/version/status
 RETRIEVAL_MIN_SCORE = 0.01
 STOPWORDS_ENABLED = False
 CURRENT_ONLY = True
