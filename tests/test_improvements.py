@@ -69,3 +69,17 @@ def test_cold_records_failed_generation_and_keeps_raw_cache(monkeypatch):
     assert report['runs']['eval']['fallback_count']>0
     assert report['runs']['eval']['answers']
     assert report['cold_cache_snapshots']['embeddings']
+
+
+def test_rubric_does_not_count_same_form_as_a_location():
+    from src.completeness import slot_coverage
+    slots=[{'name':'location','alternatives':['IT portal']},{'name':'section','alternatives':['Hardware']}]
+    assert slot_coverage('Use that same form.',slots)=={'location':False,'section':False}
+    assert slot_coverage('Use IT portal under Hardware.',slots)=={'location':True,'section':True}
+
+
+def test_rubric_is_honestly_marked_as_unreviewed():
+    from src.completeness import RUBRIC_PATH
+    r=json.loads(RUBRIC_PATH.read_text())
+    assert r['status']=='assistant_draft_not_human_approved' and r['reviewer'] is None
+    assert any(i['id']=='T02' for i in r['ambiguous_items'])

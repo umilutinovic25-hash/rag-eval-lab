@@ -1,0 +1,26 @@
+{
+  "status": "assistant_draft_not_human_approved",
+  "reviewer": null,
+  "note": "Additional completeness checks only; original eval and labels are unchanged.",
+  "items": [
+    {"id":"E09","doc_id":"hb-01","slots":[
+      {"name":"request_location","alternatives":["IT portal"]},
+      {"name":"request_section","alternatives":["Hardware"]},
+      {"name":"duration","alternatives":["5 business days","five business days"]}
+    ]},
+    {"id":"H20","doc_id":"hb-01","slots":[
+      {"name":"form_location","alternatives":["IT portal"]},
+      {"name":"form_section","alternatives":["Hardware"]}
+    ]},
+    {"id":"U17","doc_id":"hb-06","slots":[
+      {"name":"first_checkin","alternatives":["end of month one","end of the first month"]},
+      {"name":"second_checkin","alternatives":["after three months","after 3 months"]}
+    ]},
+    {"id":"U13","doc_id":"hb-03","slots":[
+      {"name":"current_limit","alternatives":["3 days per week","3 days a week","three days per week"]}
+    ]}
+  ],
+  "ambiguous_items": [
+    {"id":"T02","reason":"A separate sick-leave policy does not explicitly specify deduction from annual leave. A human must decide whether the reference supports a categorical no."}
+  ]
+}
