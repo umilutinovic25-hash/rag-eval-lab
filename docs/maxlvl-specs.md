@@ -88,3 +88,48 @@ Dodato posle merenja B2, pre izmene. Holdout je ovde razvojni skup, pa je zato z
 ## Završno: test skup (jednom)
 
 `holdout_runner --set eval/test_set.json` za stanje B0 i za konačno stanje, u istom pokretanju i bez daljih izmena posle toga. Rezultat se prijavljuje kakav god da je.
+
+## Drugi krug: B4 i B5
+
+Posle prvog kruga ostali su padovi H13, T02 i T06 (judge pogrešno odbija) i nepodržani detalji u odgovorima H10 i T10. Test skup 1 je sada viđen, pa se ubuduće koristi kao razvojni. Novi slepi skup `eval/test2_set.json` (32 pitanja) napisan je i commitovan (`1982c20`) pre B4 i B5, a pokreće se jednom, na kraju.
+
+**Izbor je rađen samo na eval i holdout skupu** (proba u scratchpad-u, sa privremenim kešom; repo nije menjan):
+
+| Judge u sivoj zoni | eval | holdout | Padovi |
+| --- | --- | --- | --- |
+| gemma3:4b, B2 upit (sadašnje stanje) | 12/12 | 33/34 | H13 |
+| gemma3:4b, upit sa 3 opšta primera | 12/12 | 33/34 | H25 |
+| qwen2.5:7b, B2 upit | 11/12 | 31/34 | E05, H01, H11, H13 |
+| mistral, upit sa primerima | 12/12 | 32/34 | H25, H33 |
+| llama3.2, B2 upit | 11/12 | 33/34 | E11, H25 |
+| gemma3:4b, verovatnoća „yes“ preko logprob, prag 0.5 / 0.2 / 0.05 / 0.01 | 12/12 | 33/34 | H13 (svaki prag) |
+| izvlačenje + provera, gemma3:4b | 11/12 | 34/34 | E11 |
+| **izvlačenje + provera, qwen2.5:7b** | **12/12** | **34/34** | nema |
+| izvlačenje + provera, mistral | 12/12 | 30/34 | H02, H06, H13, H24 |
+| izvlačenje + provera, qwen2.5:7b, ali za **svako** pitanje (bez sive zone) | 11/12 | 31/34 | E09, H03, H17, H23 |
+
+## B4: judge izvlači tačne reči iz pasusa, a kod ih proverava
+
+| Polje | Sadržaj |
+| --- | --- |
+| Propust | H13 „car space“ ↔ „parking“: da/ne judge kaže „no“, iako pasus sadrži odgovor. Tip: pogrešno odbijanje. |
+| Hipoteza | Pitanje „da li pasus sadrži odgovor?“ model rešava površno. Zadatak „prepiši reči koje odgovaraju, ili NONE“ prisiljava ga da pronađe dokaz. Kod zatim proverava da je ono što je model prepisao zaista u pasusu (najmanje 80% reči), pa izmišljen dokaz ne prolazi. Prag 0.8 je izabran unapred, a ne na osnovu rezultata. |
+| Promena | `RERANK_JUDGE = "span"` (`"yesno"` je B2 ponašanje), `RERANK_MODEL = "qwen2.5:7b"`, `RERANK_SPAN_PROMPT` = „Copy the exact words from the passage that answer the question. If the passage does not contain the answer, reply NONE.“ Siva zona 0.50–0.70 se ne menja. |
+| Očekivani efekat | eval 12/12, holdout 34/34 (kao u probi). |
+| Rizik regresije | Model menja `gemma3:4b` (3.3 GB) za `qwen2.5:7b` (4.7 GB), a poziv je duži (do 40 tokena), pa je sporiji. Na da/ne pitanjima sa visokim kosinusom ovaj judge i dalje greši, ali ih siva zona propušta bez provere. |
+| Provera | `pytest` (lažni model; provera da izmišljen dokaz ne prolazi), eval, holdout, test 1 (viđen), `eval_compare`. |
+
+## B5: strog upit za generisanje i isti model
+
+| Polje | Sadržaj |
+| --- | --- |
+| Propust | H10 („from an appropriate authority“) i T10 (dodat uslov) sadrže detalje kojih nema u pasusu. Tip: nepodržan sadržaj u odgovoru. |
+| Hipoteza | Izričita zabrana dodavanja uslova, ljudi, koraka i detalja, uz jači model, smanjuje izmišljanje. Proba na eval i holdout skupu meri udeo odgovora sa sadržajnim rečima kojih nema ni u pasusu ni u pitanju: gemma sa sadašnjim upitom 24/32, gemma sa strogim 12/32, qwen sa strogim 3/32 (sve tri su bezazlene preformulacije: „make“, „submit“, „ordering“). |
+| Promena | `GENERATION_MODEL = "qwen2.5:7b"` i strog `GENERATION_PROMPT`. `answer_quality` dobija i novu meru, `unsupported_words`: sadržajne reči kojih nema u citiranim pasusima ni u pitanju. |
+| Očekivani efekat | Metrike eval i holdout iste kao B4; manje odgovora sa nepodržanim rečima; H10 bez „appropriate authority“. |
+| Rizik regresije | Stroži odgovori su kraći i mogu da izostave koristan kontekst. Mera reči je gruba (sinonim se računa kao nova reč), pa se pregleda ručno. |
+| Provera | `pytest`, eval i holdout metrike identične B4, `answer_quality` za sve skupove, ručni pregled. |
+
+## Završno, drugi krug: test 2 (jednom)
+
+`holdout_runner --set eval/test2_set.json` za stanje posle B3 i za konačno stanje, u istom pokretanju i bez daljih izmena posle toga.
