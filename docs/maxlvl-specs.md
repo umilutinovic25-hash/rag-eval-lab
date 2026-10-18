@@ -156,3 +156,20 @@ Proba na eval + holdout + test 1 (test 1 je ovde razvojni; slepi je test 2):
 | Rizik regresije | Unija je blaža, pa svaka greška prihvatanja bilo kog judge-a prolazi. Dva LLM-a (8 GB ukupno). |
 | Ostaje | **T02** „Does sick leave come out of my annual leave days?“ ↔ „Sick leave follows a separate policy.“ Isti pasus treba prihvatiti za T02, a odbiti za H25 („How many sick days do I get per year?“). Od 5 lokalnih modela tu razliku prave samo izvlačenje sa gemma3:4b (koje na eval-u pogrešno prihvata E11) i da/ne sa llama3.2 (koje pogrešno prihvata E11 i H25). Dodavanje trećeg judge-a samo zbog T02 značilo bi štimovanje sistema na jedno pitanje, pa to nije urađeno. |
 | Provera | `pytest`, eval, holdout, test 1, `eval_compare` u odnosu na B4. |
+
+**Rezultat B5:**
+- Metrike su iste na eval, holdout i testu 1 (12/12, 34/34, 23/24).
+- Odgovora sa rečima kojih nema u pasusima ni u pitanju sada je 4/49 (bilo je 35/49). Sve četiri reči su preformulacije: „make“, „submit“, „ordering/used/like“, „basis“.
+- Ručni pregled svih 49 odgovora: svi su činjenično tačni, a nijedan nema izmišljen detalj. H10 sada kaže „must be approved before booking“.
+- Novi problem su previše šturi odgovori: H03, T01 i T13 („No.“ / „Yes.“) i T14 („IT staff“). T11 je u pogrešnom licu („I agree...“), a T09 izostavlja „chat“.
+
+## B5b: odgovor uvek navodi činjenicu
+
+| Polje | Sadržaj |
+| --- | --- |
+| Propust | H03, T01 i T13 odgovaraju samo „Yes.“ ili „No.“, T14 samo „IT staff“, a T11 je u prvom licu. Tačno je, ali korisnik ne vidi činjenicu. Tip: kvalitet odgovora. |
+| Hipoteza | Strog upit traži „one or two short sentences“, pa model skraćuje do kraja. Izričit zahtev da odgovor bude cela rečenica sa činjenicom iz pasusa, upućena korisniku („you“), uklanja gole „yes/no“ odgovore, a ne vraća izmišljanje. |
+| Promena | Samo `GENERATION_PROMPT`: dodaje se „Always state the supporting fact from the passages in a full sentence addressed to the user as "you"; never reply with only yes or no.“ |
+| Očekivani efekat | Nema golih „Yes.“ ili „No.“ odgovora; „fact in answer“ raste; odgovora sa nepodržanim rečima ostaje oko 4/49; eval i holdout metrike iste. |
+| Rizik regresije | Duži odgovor može ponovo da doda detalje. |
+| Provera | `answer_quality` za eval, holdout i test 1, ručni pregled, metrike identične B5. |
