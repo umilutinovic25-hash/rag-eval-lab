@@ -100,3 +100,18 @@ The replay runner forbids all model requests and records source, corpus, questio
 Optional fresh measurement: `python -m src.experiment_runner --mode cold --out results/cold.json`. This requires already installed models and a running Ollama, uses isolated temporary caches, and records observed local model digests/version. It does not download models or replace committed caches. Cold mode has not been run for C1–C6. Historical cache model digests are unknown; current model identity cannot establish their provenance.
 
 See `docs/hardening-spec.md`, report section 14 and `evidence/hardening/`. The original eval and metrics code remain unchanged. `python scripts/package_minimum.py` builds a separate M5 submission archive from checkpoint 45b8172 plus its evidence; fill the human review/contribution fields before submission.
+
+## D1–D6: evidence context, traces, and completion reliability
+
+The retained configuration uses `CONTEXT_NEIGHBORS = 1`, `CONTEXT_POLICY = "references"`: an explicit "same/that/this form/policy/procedure/process" reference receives preceding context from the same document/version/status. Ordinary candidates are not expanded. H20 now identifies IT portal / Hardware. Expanding all neighbors was tested and rejected because H14 citation precision regressed.
+
+Judge filtering stops after TOP_K accepted candidates. Completion metadata is saved alongside the text cache in `data/llm_cache-metadata.json`; historical entries have unknown completion reasons. Truncated generation uses extractive output. Experiments persist full answers, traces, request successes/failures, fallback counts, and actual cold-cache snapshots instead of deleting the only raw evidence.
+
+Quantity/unit and action-negation guards catch the tested "90 years" / "90 days" and direct obligation reversals, but are conservative lexical heuristics. The optional `structured` judge with JSON support/contradiction status was tested, including strict parsing of an optional JSON fence; it regressed other questions and remains disabled. The shipped judge is still `either`.
+
+```bash
+python -m src.completeness --out results/completeness.json
+python -m src.experiment_runner --mode replay --out results/replay-with-traces.json
+```
+
+`review/completeness-rubric.json` is explicitly an assistant draft, not a human-approved reference or semantic grader. See `docs/improvements-spec.md`, `docs/improvements-results.md`, `evidence/improvements/`. A real empty-cache smoke test for H20 succeeded (1 embedding + 10 LLM requests, no errors/fallback); this is not a fresh generalization test or a cold run of all 102 questions.

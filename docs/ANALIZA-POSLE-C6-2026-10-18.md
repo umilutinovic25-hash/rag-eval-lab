@@ -1,5 +1,7 @@
 # Analiza posle C1–C6: sledeća poboljšanja
 
+**Naknadna implementacija:** D1–D6 i D4b/D5b su izmereni; zadržane i odbačene promene opisane su u `improvements-results.md`. Ovaj dokument i njegove probe ostaju istorijski zapis polaznog stanja.
+
 Datum: 18.10.2026. Polazni commit: `f430863`. Skillovi: `ai-evidence-review` i `llm-evaluation`.
 
 Nisu menjani kod, konfiguracija, zaključani skupovi, keševi ili istorijski rezultati. Ovaj pregled sadrži dijagnozu i predlog eksperimenata, ne tvrdnju da su predložena poboljšanja implementirana. Sve oznake test pitanja sada su viđene; ovaj pregled nije slepo testiranje.

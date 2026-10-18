@@ -7,7 +7,7 @@
 **Datum:** 2026-10-17  
 **Šablon:** `docs/sablon-izvestaj-pre-posle.md` (napravljen prema zahtevima zadatka, jer zvanični šablon nije bio dostavljen)
 
-> Obavezni deo (odeljci 1–11) odnosi se na commit `45b8172`; napredni deo i ispravke C1–C6 su odvojeni u odeljcima 12–14. Posle checkout-a ukloniti postojeći `src/__pycache__`. `PYTHONDONTWRITEBYTECODE=1` sprečava upis novih .pyc fajlova, ali ne sprečava učitavanje postojećeg zastarelog bytecode-a.
+> Obavezni deo (odeljci 1–11) odnosi se na commit `45b8172`; napredni deo i ispravke C1–C6 su odvojeni u odeljcima 12–15. Posle checkout-a ukloniti postojeći `src/__pycache__`. `PYTHONDONTWRITEBYTECODE=1` sprečava upis novih .pyc fajlova, ali ne sprečava učitavanje postojećeg zastarelog bytecode-a.
 
 ## 1. Početna provera
 
@@ -165,7 +165,7 @@ Naš odgovor na komentar: [šta smo promenili ili zašto nismo]
 
 ## 10. Korišćenje AI-ja
 
-Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene testove i eval, izdvoji ocene iz `top_k` radi dijagnoze propusta, napiše nacrt specifikacije i implementira filter sa testom, a u naprednom delu i promene A1–A4, kontrolnu proveru i automatski pregled koda (odeljak 12). AI asistent je takođe pisao i testirao B1–B5c; Codex je uradio analizu i ispravke C1–C6 (odeljak 14). „Ručni pregled“ u naprednim eksperimentima označava pregled asistenta, ne nezavisnu ljudsku proveru. Sve tvrdnje su proverene merenjem, a ne na osnovu reči asistenta: `results/before.json` i `results/after.json` su napravljeni istom komandom, `eval_compare` potvrđuje isti otisak i samo jedno promenjeno podešavanje, a E06 je ručno proveren preko CLI-ja pre i posle (izlazi u `evidence/`). [Dopuniti: šta je svako od nas ručno proverio.]
+Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene testove i eval, izdvoji ocene iz `top_k` radi dijagnoze propusta, napiše nacrt specifikacije i implementira filter sa testom, a u naprednom delu i promene A1–A4, kontrolnu proveru i automatski pregled koda (odeljak 12). AI asistent je takođe pisao i testirao B1–B5c; Codex je uradio analizu i ispravke C1–C6 (odeljak 14), kao i kontrolisane D1–D6 eksperimente (odeljak 15). „Ručni pregled“ u naprednim eksperimentima označava pregled asistenta, ne nezavisnu ljudsku proveru. Sve tvrdnje su proverene merenjem, a ne na osnovu reči asistenta: `results/before.json` i `results/after.json` su napravljeni istom komandom, `eval_compare` potvrđuje isti otisak i samo jedno promenjeno podešavanje, a E06 je ručno proveren preko CLI-ja pre i posle (izlazi u `evidence/`). [Dopuniti: šta je svako od nas ručno proverio.]
 
 ## 11. Doprinos
 
@@ -363,6 +363,30 @@ Važne korekcije ranijih tvrdnji:
 
 Za predaju koristiti izdvojen M5 paket iz `deliverables/`; napredni deo je dodatak. Individualni nedeljni izveštaj, stvarni doprinosi, vođa demonstracije, pregled para i slanje i dalje zahtevaju stvarne ljudske podatke i radnje.
 
+## 15. Dalja poboljšanja posle C6 (D1–D6)
+
+Specifikacije su u `docs/improvements-spec.md`, rezultati u `docs/improvements-results.md`, sirovi dokazi u `evidence/improvements/`. Sve reference su već viđene; ovo nije novo slepo merenje.
+
+Zadržano:
+
+- Judge proverava do dva prihvaćena kandidata pa staje: iste odluke/odgovori na polaznom skupu, 270 → 261 provera pasusa.
+- Potpun trag kandidata, izbora, generisanog teksta, metadata prekida i fallback razloga. Cold merenje trajno čuva sirove snapshotove, uspehe i greške zahteva.
+- Nacrt rubrike za potpunost višedelnih odgovora. Nije nezavisno ljudski odobren i ne tvrdi semantičku tačnost. T02 ostaje posebno označen kao dvosmislen.
+- Kontekst se proširuje prethodnim pasusom samo za izričite reference istog dokumenta/verzije/statusa. H20 sada navodi IT portal / Hardware; pokazana su oba izvora. Precizno pripisivanje svake tvrdnje pojedinačnom markeru i dalje zahteva pregled.
+- Provere jedinica uz konkretan citat, direktnih negacija i prekinutog odgovora; stabilan kosinus bez preliva za testirane ekstremne konačne ulaze. To su heuristike, ne automatski dokaz istinitosti.
+
+| Varijanta | eval | holdout | test1 | test2 | Odluka |
+| --- | --- | --- | --- | --- | --- |
+| pre D | 12/12 | 34/34 | 23/24 | 29/32 | polazno |
+| svi susedi D4 | 12/12 | 33/34 | 23/24 | 30/32 | odbijeno, H14 regresija |
+| samo reference D4b | 12/12 | 34/34 | 23/24 | 29/32 | zadržano, H20 potpuniji |
+| structured D5 | 11/12 | 21/34 | 16/24 | 20/32 | odbijeno |
+| isti structured upit uz JSON omotač D5b | 12/12 | 33/34 | 21/24 | 30/32 | odbijeno, H13/T03/T04 regresije |
+
+Stvarna lokalna proba bez keša za H20: jedan uspešan embedding poziv i 10 uspešnih LLM poziva, nula grešaka i fallback-a. Odgovori, metadata, identitet lokalnih modela, snapshotovi keša i hash-evi su sačuvani u `evidence/improvements/cold-smoke.json`. To je jedna ranije viđena stavka, ne novi test generalizacije i ne cold-run svih skupova.
+
+137 testova prolazi. Podrazumevani rezultati ostaju 12/12, 34/34, 23/24, 29/32 bez novih PASS regresija. Postojeća četiri neuspešna pitanja nisu predstavljena kao rešena. Pogoršanja alternativnih tehnika su sačuvana i objašnjena, a model server pokrenut za ovu probu je nakon rada ugašen.
+
 ## Dokazi
 
 - `evidence/before.json`, `evidence/after.json`: oba eval rezultata (kopije iz `results/`, koji git ignoriše)
@@ -376,9 +400,11 @@ Za predaju koristiti izdvojen M5 paket iz `deliverables/`; napredni deo je dodat
 
 - Ispravke: `docs/hardening-spec.md`, `evidence/hardening/`, `src/experiment_runner.py`.
 
+- D eksperimenti: `docs/improvements-spec.md`, `docs/improvements-results.md`, `review/completeness-rubric.json`, `evidence/improvements/`.
+
 ## Kontrolna lista pre predaje
 
-- [x] `python -m pytest` prolazi posle promene (19 na `45b8172`; 107 posle C1–C6)
+- [x] `python -m pytest` prolazi posle promene (19 na `45b8172`; 107 posle C1–C6; 137 posle D koraka)
 - [x] Eval pokrenut pre i posle istom komandom
 - [x] Poređenje ne prijavljuje različit otisak eval skupa
 - [x] Oba propusta vezana za konkretna eval pitanja (E06, E04/E09, E10/E11, E05)

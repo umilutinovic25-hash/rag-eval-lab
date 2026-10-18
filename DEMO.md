@@ -85,3 +85,13 @@ python -m src.answer_quality --set test2 --out results/demo-quality-test2.json
 ```
 
 Pokazati: nula poziva modelima u replay-u, identitet istorijskog modela unknown, lažna odbijanja u imeniocu i upozorenje da semantička tačnost nije automatski potvrđena. Za obaveznu predaju postoji odvojen M5 paket, bez naprednih modela. Nepostojeće doprinose i komentare para ne popunjavati iz pretpostavke.
+
+## Potpunost i trag odluka (D koraci, opciono)
+
+```bash
+python -m src.completeness --out results/demo-completeness.json
+python -m src.cli --question "Where do I order a new headset?"
+python -m src.experiment_runner --mode replay --out results/demo-traces.json
+```
+
+H20 sada navodi IT portal / Hardware. Rubrika je nacrt asistenta. Pokazati i odbačene varijante: svi susedi i structured judge imaju regresije, pa nisu podrazumevani. Za jednu stvarnu probu bez keša postoji `evidence/improvements/cold-smoke.json`; ne predstavljati je kao novi slepi test.

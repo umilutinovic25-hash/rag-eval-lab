@@ -1,8 +1,8 @@
 {
   "manifest": {
-    "created_at": "2026-10-18T17:06:01.822298+00:00",
+    "created_at": "2026-10-18T17:07:02.514059+00:00",
     "mode": "replay",
-    "git_revision": "823ba6f3f794bde3ae1d474235b4d18ccac6f372",
+    "git_revision": "4e062862aaf599d565c9fc75713ca77af265f524",
     "git_dirty": true,
     "source_identity_note": "Source hashes identify the files actually run; git_revision alone is insufficient when dirty.",
     "config": {
@@ -107,7 +107,7 @@
   "runs": {
     "eval": {
       "run": {
-        "created_at": "2026-10-18T17:06:01+00:00",
+        "created_at": "2026-10-18T17:07:02+00:00",
         "eval_set_sha256": "afe46db1e75a0b85bb5c9a93b6763e3b96e5cd7b289e12da6d2671e4d8650064",
         "config": {
           "CHUNK_STRATEGY": "sentences",
@@ -1207,7 +1207,7 @@
         }
       ],
       "fallback_count": 0,
-      "seconds": 0.13745070800359827,
+      "seconds": 0.136868665998918,
       "requests": {
         "embeddings": 0,
         "llm": 0
@@ -1215,7 +1215,7 @@
     },
     "holdout": {
       "run": {
-        "created_at": "2026-10-18T17:06:02+00:00",
+        "created_at": "2026-10-18T17:07:03+00:00",
         "eval_set_sha256": "37f398d94bbd152edb90bdf8e0d6aaf55860f24fb0eeb45c80261c2c656f0cdc",
         "config": {
           "CHUNK_STRATEGY": "sentences",
@@ -4458,7 +4458,7 @@
         }
       ],
       "fallback_count": 0,
-      "seconds": 0.40955950001080055,
+      "seconds": 0.40367441601119936,
       "requests": {
         "embeddings": 0,
         "llm": 0
@@ -4466,7 +4466,7 @@
     },
     "test1": {
       "run": {
-        "created_at": "2026-10-18T17:06:02+00:00",
+        "created_at": "2026-10-18T17:07:03+00:00",
         "eval_set_sha256": "c93b6c6bd6a5cc1dfa92c762c4f0f1974f0f3ab76ffb7d025428333976a3845d",
         "config": {
           "CHUNK_STRATEGY": "sentences",
@@ -6773,7 +6773,7 @@
         }
       ],
       "fallback_count": 1,
-      "seconds": 0.2844547090062406,
+      "seconds": 0.284631292000995,
       "requests": {
         "embeddings": 0,
         "llm": 0
@@ -6781,7 +6781,7 @@
     },
     "test2": {
       "run": {
-        "created_at": "2026-10-18T17:06:03+00:00",
+        "created_at": "2026-10-18T17:07:03+00:00",
         "eval_set_sha256": "50406535f03a9ce940e4018b586568ae687b7d58602203f7c1c72b3a18c18208",
         "config": {
           "CHUNK_STRATEGY": "sentences",
@@ -9768,7 +9768,7 @@
         }
       ],
       "fallback_count": 0,
-      "seconds": 0.3807849580043694,
+      "seconds": 0.3793712089973269,
       "requests": {
         "embeddings": 0,
         "llm": 0
