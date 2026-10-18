@@ -124,19 +124,24 @@ def test_uncached_prompt_without_ollama_raises_llm_error(tmp_path, monkeypatch) 
 REAL_REQUEST = llm.request_generation  # saved at import, before conftest blocks the network
 
 
-@pytest.mark.parametrize("which", ["eval", "holdout", "test"])
+@pytest.mark.parametrize("which", ["eval", "holdout", "test", "test2"])
 def test_committed_caches_cover_shipped_config_offline(monkeypatch, which) -> None:
-    """The shipped config (semantic + gray-zone judge + LLM answers) must run both sets from the committed caches."""
+    """The shipped config (semantic + gray-zone either-judge + LLM answers with quotes) must run both sets from the committed caches."""
     from src.eval_runner import run_eval
     from src.holdout_runner import run_holdout
 
     monkeypatch.setattr(config, "RETRIEVAL_MODE", "semantic")
     monkeypatch.setattr(config, "RERANK", "llm-gray-zone")
     monkeypatch.setattr(config, "ANSWER_MODE", "llm")
-    from src.holdout_runner import TEST_SET_PATH
+    from src.holdout_runner import TEST2_SET_PATH, TEST_SET_PATH
 
-    run = {"eval": run_eval, "holdout": run_holdout, "test": lambda: run_holdout(TEST_SET_PATH)}[which]()
-    assert run["summary"]["passed"] == {"eval": 12, "holdout": 34, "test": 23}[which]
+    runs = {
+        "eval": run_eval,
+        "holdout": run_holdout,
+        "test": lambda: run_holdout(TEST_SET_PATH),
+        "test2": lambda: run_holdout(TEST2_SET_PATH),
+    }
+    assert runs[which]()["summary"]["passed"] == {"eval": 12, "holdout": 34, "test": 23, "test2": 29}[which]
 
 
 def test_llm_answer_mode_keeps_citations_and_uses_model_text(rerank_mode, monkeypatch) -> None:

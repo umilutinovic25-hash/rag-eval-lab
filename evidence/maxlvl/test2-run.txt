@@ -1,0 +1,87 @@
+=== posle prvog kruga (4bee77f: B2c + B3)
+ID   Category                 Expected Got     Hit  Fact  CitPrec Pass
+----------------------------------------------------------------------
+U01  paraphrase               answer   answer  yes  yes   1.00    PASS
+U02  paraphrase               answer   answer  yes  yes   1.00    PASS
+U03  supported                answer   answer  yes  yes   1.00    PASS
+U04  paraphrase               answer   answer  yes  yes   1.00    PASS
+U05  paraphrase               answer   refuse  yes  no    -       FAIL
+U06  supported                answer   answer  yes  yes   1.00    PASS
+U07  paraphrase               answer   refuse  yes  no    -       FAIL
+U08  paraphrase               answer   answer  yes  yes   1.00    PASS
+U09  supported                answer   answer  yes  yes   1.00    PASS
+U10  paraphrase               answer   answer  yes  yes   1.00    PASS
+U11  paraphrase               answer   refuse  yes  no    -       FAIL
+U12  supported                answer   answer  yes  yes   1.00    PASS
+U13  versioned                answer   answer  yes  no    1.00    FAIL
+U14  versioned                answer   answer  yes  yes   1.00    PASS
+U15  versioned                answer   answer  yes  yes   1.00    PASS
+U16  paraphrase               answer   answer  yes  yes   1.00    PASS
+U17  supported                answer   answer  yes  yes   1.00    PASS
+U18  paraphrase               answer   answer  yes  yes   1.00    PASS
+U19  paraphrase               answer   answer  yes  yes   1.00    PASS
+U20  supported                answer   answer  yes  yes   1.00    PASS
+U21  paraphrase               answer   answer  yes  yes   1.00    PASS
+U22  supported                answer   answer  yes  yes   1.00    PASS
+U23  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+U24  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+U25  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+U26  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+U27  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+U28  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+U29  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+U30  unsupported              refuse   refuse  -    -     -       PASS
+U31  unsupported              refuse   refuse  -    -     -       PASS
+U32  unsupported              refuse   refuse  -    -     -       PASS
+
+Passed: 28/32
+Behaviour accuracy: 0.91
+Retrieval hit rate (supported): 1.00
+Mean citation precision (answered): 1.00
+eval_set_sha256: 50406535f03a9ce940e4018b586568ae687b7d58602203f7c1c72b3a18c18208
+
+Wrote /private/tmp/claude-501/-Users-urosmilutinovic/10ca4134-a676-4965-af27-d86dbe4316f3/scratchpad/test2-B3.json
+
+=== konačno (B4b + B5c)
+ID   Category                 Expected Got     Hit  Fact  CitPrec Pass
+----------------------------------------------------------------------
+U01  paraphrase               answer   answer  yes  yes   1.00    PASS
+U02  paraphrase               answer   answer  yes  yes   1.00    PASS
+U03  supported                answer   answer  yes  yes   1.00    PASS
+U04  paraphrase               answer   answer  yes  yes   1.00    PASS
+U05  paraphrase               answer   answer  yes  yes   1.00    PASS
+U06  supported                answer   answer  yes  yes   1.00    PASS
+U07  paraphrase               answer   refuse  yes  no    -       FAIL
+U08  paraphrase               answer   answer  yes  yes   1.00    PASS
+U09  supported                answer   answer  yes  yes   1.00    PASS
+U10  paraphrase               answer   answer  yes  yes   1.00    PASS
+U11  paraphrase               answer   refuse  yes  no    -       FAIL
+U12  supported                answer   answer  yes  yes   1.00    PASS
+U13  versioned                answer   answer  yes  no    1.00    FAIL
+U14  versioned                answer   answer  yes  yes   1.00    PASS
+U15  versioned                answer   answer  yes  yes   1.00    PASS
+U16  paraphrase               answer   answer  yes  yes   1.00    PASS
+U17  supported                answer   answer  yes  yes   1.00    PASS
+U18  paraphrase               answer   answer  yes  yes   1.00    PASS
+U19  paraphrase               answer   answer  yes  yes   1.00    PASS
+U20  supported                answer   answer  yes  yes   1.00    PASS
+U21  paraphrase               answer   answer  yes  yes   1.00    PASS
+U22  supported                answer   answer  yes  yes   1.00    PASS
+U23  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+U24  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+U25  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+U26  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+U27  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+U28  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+U29  unsupported-near-domain  refuse   refuse  -    -     -       PASS
+U30  unsupported              refuse   refuse  -    -     -       PASS
+U31  unsupported              refuse   refuse  -    -     -       PASS
+U32  unsupported              refuse   refuse  -    -     -       PASS
+
+Passed: 29/32
+Behaviour accuracy: 0.94
+Retrieval hit rate (supported): 1.00
+Mean citation precision (answered): 1.00
+eval_set_sha256: 50406535f03a9ce940e4018b586568ae687b7d58602203f7c1c72b3a18c18208
+
+Wrote evidence/maxlvl/test2-final.json
