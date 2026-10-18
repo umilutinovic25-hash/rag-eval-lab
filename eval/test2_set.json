@@ -1,0 +1,302 @@
+[
+  {
+    "id": "U01",
+    "question": "Is a twelve-character password long enough?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-05"
+    ],
+    "expected_fact": "at least 12 characters"
+  },
+  {
+    "id": "U02",
+    "question": "Am I allowed to give my login to a coworker?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-05"
+    ],
+    "expected_fact": "never share passwords"
+  },
+  {
+    "id": "U03",
+    "question": "Does email require multi-factor authentication?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-05"
+    ],
+    "expected_fact": "required for email"
+  },
+  {
+    "id": "U04",
+    "question": "How many paid days off do I have in a year?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-07"
+    ],
+    "expected_fact": "22 days"
+  },
+  {
+    "id": "U05",
+    "question": "Can I request leave the day before?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-07"
+    ],
+    "expected_fact": "two weeks in advance"
+  },
+  {
+    "id": "U06",
+    "question": "Is there a deadline for using carried-over leave?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-07"
+    ],
+    "expected_fact": "31 march"
+  },
+  {
+    "id": "U07",
+    "question": "Is the training budget per team or per person?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-08"
+    ],
+    "expected_fact": "each employee has a training budget"
+  },
+  {
+    "id": "U08",
+    "question": "Can I use my learning budget for a certification exam?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-08"
+    ],
+    "expected_fact": "certifications"
+  },
+  {
+    "id": "U09",
+    "question": "Do I need to keep the original flight receipt?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-04"
+    ],
+    "expected_fact": "keep original receipts for hotels and flights"
+  },
+  {
+    "id": "U10",
+    "question": "How long after a business trip can I still claim expenses?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-04"
+    ],
+    "expected_fact": "within 30 days"
+  },
+  {
+    "id": "U11",
+    "question": "Is parking guaranteed for every employee?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-09"
+    ],
+    "expected_fact": "parking is limited"
+  },
+  {
+    "id": "U12",
+    "question": "What app is used to reserve parking?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-09"
+    ],
+    "expected_fact": "facilities app"
+  },
+  {
+    "id": "U13",
+    "question": "Can I work from home four days a week?",
+    "category": "versioned",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-03"
+    ],
+    "expected_fact": "up to 3 days per week"
+  },
+  {
+    "id": "U14",
+    "question": "Must I answer chat messages during core hours when remote?",
+    "category": "versioned",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-03"
+    ],
+    "expected_fact": "reachable by chat and phone"
+  },
+  {
+    "id": "U15",
+    "question": "What is the start of core hours on a remote day?",
+    "category": "versioned",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-03"
+    ],
+    "expected_fact": "10:00"
+  },
+  {
+    "id": "U16",
+    "question": "Will someone be my buddy when I join?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-06"
+    ],
+    "expected_fact": "a buddy is assigned"
+  },
+  {
+    "id": "U17",
+    "question": "When are the onboarding check-ins with my manager?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-06"
+    ],
+    "expected_fact": "end of month one"
+  },
+  {
+    "id": "U18",
+    "question": "Do I need my manager's OK before getting a new laptop?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-01"
+    ],
+    "expected_fact": "after manager approval"
+  },
+  {
+    "id": "U19",
+    "question": "Who should I tell first when my laptop gets stolen?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-01"
+    ],
+    "expected_fact": "security first"
+  },
+  {
+    "id": "U20",
+    "question": "Where in the IT portal do I ask for a new laptop?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-01"
+    ],
+    "expected_fact": "under hardware"
+  },
+  {
+    "id": "U21",
+    "question": "Can I call IT support?",
+    "category": "paraphrase",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-10"
+    ],
+    "expected_fact": "by phone"
+  },
+  {
+    "id": "U22",
+    "question": "What floor is the IT desk on?",
+    "category": "supported",
+    "expected_behaviour": "answer",
+    "expected_doc_ids": [
+      "hb-10"
+    ],
+    "expected_fact": "floor two"
+  },
+  {
+    "id": "U23",
+    "question": "How much notice do I have to give when resigning?",
+    "category": "unsupported-near-domain",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "U24",
+    "question": "Is overtime paid extra?",
+    "category": "unsupported-near-domain",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "U25",
+    "question": "How many days of bereavement leave are there?",
+    "category": "unsupported-near-domain",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "U26",
+    "question": "What laptop model will I get?",
+    "category": "unsupported-near-domain",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "U27",
+    "question": "Can I bring a guest into the office?",
+    "category": "unsupported-near-domain",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "U28",
+    "question": "What is the per diem for a trip to Germany in euros?",
+    "category": "unsupported-near-domain",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "U29",
+    "question": "Who is my HR contact person?",
+    "category": "unsupported-near-domain",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "U30",
+    "question": "What is the best programming language?",
+    "category": "unsupported",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "U31",
+    "question": "When was the company founded?",
+    "category": "unsupported",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  },
+  {
+    "id": "U32",
+    "question": "How tall is Mount Everest?",
+    "category": "unsupported",
+    "expected_behaviour": "refuse",
+    "expected_doc_ids": [],
+    "expected_fact": null
+  }
+]

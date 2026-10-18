@@ -3,9 +3,11 @@ from src.corpus import load_corpus
 from src.eval_runner import load_eval_set, normalise
 import pytest
 
-from src.holdout_runner import HOLDOUT_SET_PATH, TEST_SET_PATH
+from src.holdout_runner import HOLDOUT_SET_PATH, TEST2_SET_PATH, TEST_SET_PATH
 
-SETS = pytest.mark.parametrize("path", [HOLDOUT_SET_PATH, TEST_SET_PATH], ids=["holdout", "test"])
+SETS = pytest.mark.parametrize(
+    "path", [HOLDOUT_SET_PATH, TEST_SET_PATH, TEST2_SET_PATH], ids=["holdout", "test", "test2"]
+)
 
 CATEGORIES = {
     "supported", "paraphrase", "versioned", "near-duplicate-trap", "unsupported", "unsupported-near-domain",
@@ -37,3 +39,10 @@ def test_fact_is_inside_one_current_chunk(path) -> None:
 def test_test_set_does_not_repeat_holdout_questions() -> None:
     holdout = {normalise(item["question"]) for item in load_eval_set(HOLDOUT_SET_PATH)}
     assert not holdout & {normalise(item["question"]) for item in load_eval_set(TEST_SET_PATH)}
+
+
+def test_test2_set_repeats_no_earlier_question() -> None:
+    earlier = set()
+    for path in (HOLDOUT_SET_PATH, TEST_SET_PATH):
+        earlier |= {normalise(item["question"]) for item in load_eval_set(path)}
+    assert not earlier & {normalise(item["question"]) for item in load_eval_set(TEST2_SET_PATH)}
