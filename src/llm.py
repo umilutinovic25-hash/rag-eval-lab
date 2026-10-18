@@ -6,7 +6,7 @@ import re
 import urllib.request
 
 from . import config
-from .embeddings import CACHE_PATH as EMBEDDING_CACHE_PATH, load_cache, save_cache
+from .embeddings import CACHE_PATH as EMBEDDING_CACHE_PATH, EmbeddingError, load_cache, save_cache
 
 
 CACHE_PATH = EMBEDDING_CACHE_PATH.with_name("llm_cache.json")
@@ -39,18 +39,24 @@ def request_generation(model: str, prompt: str, max_tokens: int) -> str:
             text = json.load(response)["response"]
     except (OSError, ValueError, KeyError, TypeError) as error:
         raise LLMError(f"Uncached prompt needs Ollama with model {model!r} at {OLLAMA_URL} ({error}).") from error
-    if not isinstance(text, str):
+    if not isinstance(text, str) or not text.strip():
         raise LLMError(f"Ollama returned no text for model {model!r}.")
     return text
 
 
 def generate(model: str, prompt: str, max_tokens: int) -> str:
-    cache = load_cache(CACHE_PATH)
+    try:
+        cache = load_cache(CACHE_PATH)
+    except EmbeddingError as error:
+        raise LLMError(str(error)) from error
     key = cache_key(model, prompt, max_tokens)
     if key not in cache:
         cache[key] = request_generation(model, prompt, max_tokens).strip()
         save_cache(cache, CACHE_PATH)
-    return cache[key]
+    text = cache[key]
+    if not isinstance(text, str) or not text.strip():
+        raise LLMError("Cached LLM response must be nonempty text.")
+    return text
 
 
 def span_is_in_passage(span: str, passage: str) -> bool:

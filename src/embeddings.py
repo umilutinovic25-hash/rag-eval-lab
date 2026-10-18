@@ -4,6 +4,7 @@ import hashlib
 import json
 import math
 import os
+import tempfile
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -24,22 +25,43 @@ def cache_key(text: str, model: str | None = None) -> str:
     return hashlib.sha256(f"{model}\n{text}".encode("utf-8")).hexdigest()
 
 
-def load_cache(path: Path | None = None) -> dict[str, list[float]]:
+def load_cache(path: Path | None = None) -> dict:
     path = CACHE_PATH if path is None else path
     if not path.exists():
         return {}
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
+        cache = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(cache, dict):
+            raise ValueError("cache must be a JSON object")
+        return cache
     except ValueError as error:
-        raise EmbeddingError(f"Embedding cache {path} is not valid JSON ({error}). Delete it to rebuild.") from error
+        raise EmbeddingError(f"Cache {path} is not a valid JSON object ({error}). Delete it to rebuild.") from error
 
 
-def save_cache(cache: dict[str, list[float]], path: Path | None = None) -> None:
+def save_cache(cache: dict, path: Path | None = None) -> None:
     path = CACHE_PATH if path is None else path
     path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(cache, sort_keys=True) + "\n", encoding="utf-8")
-    os.replace(tmp, path)
+    with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent, delete=False) as handle:
+        tmp = Path(handle.name)
+        try:
+            handle.write(json.dumps(cache, sort_keys=True, allow_nan=False) + "\n")
+        except Exception:
+            tmp.unlink(missing_ok=True)
+            raise
+    try:
+        os.replace(tmp, path)
+    finally:
+        tmp.unlink(missing_ok=True)
+
+
+def validate_vector(vector: list[float], dimension: int | None = None) -> int:
+    if not isinstance(vector, list) or not vector:
+        raise EmbeddingError("Embedding must be a nonempty list.")
+    if dimension is not None and len(vector) != dimension:
+        raise EmbeddingError("Embedding dimensions differ.")
+    if any(type(value) not in (int, float) or not math.isfinite(value) for value in vector):
+        raise EmbeddingError("Embedding values must be finite numbers.")
+    return len(vector)
 
 
 def request_embeddings(texts: list[str]) -> list[list[float]]:
@@ -55,6 +77,9 @@ def request_embeddings(texts: list[str]) -> list[list[float]]:
         ) from error
     if not isinstance(vectors, list) or len(vectors) != len(texts):
         raise EmbeddingError(f"Ollama returned {len(vectors) if isinstance(vectors, list) else 'no'} vectors for {len(texts)} text(s).")
+    dimension = None
+    for vector in vectors:
+        dimension = validate_vector(vector, dimension)
     return vectors
 
 
@@ -65,10 +90,16 @@ def embed(texts: list[str]) -> list[list[float]]:
         for text, vector in zip(missing, request_embeddings(missing)):
             cache[cache_key(text)] = [round(value, 6) for value in vector]
         save_cache(cache)
-    return [cache[cache_key(text)] for text in texts]
+    vectors = [cache[cache_key(text)] for text in texts]
+    dimension = None
+    for vector in vectors:
+        dimension = validate_vector(vector, dimension)
+    return vectors
 
 
 def cosine(a: list[float], b: list[float]) -> float:
+    dimension = validate_vector(a)
+    validate_vector(b, dimension)
     norm = math.sqrt(sum(x * x for x in a)) * math.sqrt(sum(y * y for y in b))
     if norm == 0:
         return 0.0

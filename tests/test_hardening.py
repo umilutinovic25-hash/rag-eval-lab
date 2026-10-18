@@ -48,3 +48,35 @@ def test_generation_failure_uses_sources_instead_of_crashing(monkeypatch):
     monkeypatch.setattr(rag, 'write_answer', fail)
     result = rag.build_grounded_answer('Budget?', [c])
     assert c.text in result.answer and result.generation_fallback_reason == 'generation_error'
+
+from src import embeddings
+
+
+@pytest.mark.parametrize('a,b', [([1, 0], [1]), ([float('nan')], [1]), ([float('inf')], [1]), (['x'], [1]), ([True], [1]), ([], [])])
+def test_cosine_rejects_invalid_vectors(a, b):
+    with pytest.raises(embeddings.EmbeddingError):
+        embeddings.cosine(a, b)
+
+
+def test_cache_rejects_valid_json_with_wrong_shape(tmp_path):
+    p = tmp_path / 'cache.json'
+    p.write_text('[]')
+    with pytest.raises(embeddings.EmbeddingError):
+        embeddings.load_cache(p)
+
+
+def test_embed_rejects_bad_cached_vector(tmp_path, monkeypatch):
+    p = tmp_path / 'cache.json'
+    embeddings.save_cache({embeddings.cache_key('q'): ['x']}, p)
+    monkeypatch.setattr(embeddings, 'CACHE_PATH', p)
+    with pytest.raises(embeddings.EmbeddingError):
+        embeddings.embed(['q'])
+
+
+def test_llm_rejects_empty_or_nontext_cache(tmp_path, monkeypatch):
+    p = tmp_path / 'llm.json'
+    monkeypatch.setattr(llm, 'CACHE_PATH', p)
+    for value in ['', '  ', [1, 2]]:
+        embeddings.save_cache({llm.cache_key('m', 'p', 3): value}, p)
+        with pytest.raises(llm.LLMError):
+            llm.generate('m', 'p', 3)
