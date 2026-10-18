@@ -1,0 +1,14 @@
+GOLD_CANDIDATE_T02 [{"rank": 2, "id": "hb-07-chunk-1", "span_reply": "NONE", "yesno_reply": "No."}]
+GOLD_CANDIDATE_U07 [{"rank": 1, "id": "hb-08-chunk-0", "span_reply": "per person", "yesno_reply": "No."}]
+GOLD_CANDIDATE_U11 [{"rank": 1, "id": "hb-09-chunk-1", "span_reply": "NONE", "yesno_reply": "No."}]
+GOLD_CANDIDATE_U13 [{"rank": 2, "id": "hb-03-chunk-0", "span_reply": "NONE", "yesno_reply": "No."}]
+H20_CACHED_ANSWER "You order a new headset through the same form used for ordering accessories like a mouse. [hb-01-chunk-3]\nSource [hb-01-chunk-3]: \"Accessories such as mouse or headset are ordered through that same form.\""
+H20_PREVIOUS_CHUNK "Report lost or stolen devices to security first. Request a replacement laptop in IT portal under Hardware."
+FORMAL_VALIDATION {"answer": "Passwords must be changed every 90 years [a].", "issue": null}
+FORMAL_VALIDATION {"answer": "Do not change passwords every 90 days [a].", "issue": null}
+FORMAL_VALIDATION {"answer": "Passwords must be changed every ninety years [a].", "issue": null}
+EAGER_JUDGE_CALLS {"citations": 2, "calls": 5}
+UNRELATED_NEGATION_REJECTS_VALID_SPAN false
+FINITE_VECTOR_OVERFLOW_COSINE NaN
+TRUNCATION_NOT_FLAGGED {"text": "According to [a], you may", "issue": null}
+SIMULATED_COLD_WITH_FAILED_GENERATION {"requests": {"embeddings": 0, "llm": 4}, "fallbacks": {"eval": "generation_error", "holdout": "generation_error", "test1": "generation_error", "test2": "generation_error"}}
