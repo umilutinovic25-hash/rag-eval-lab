@@ -120,3 +120,17 @@ def test_neighbor_context_does_not_mix_versions_or_documents():
     result=rag.expand_context([RetrievalResult(c1,.9)],[c0,old,other,c1],1)
     assert [r.chunk.chunk_id for r in result]==['d-0','d-1']
     assert rag.expand_context([RetrievalResult(c1,.9)],[c0,c1],0)==[RetrievalResult(c1,.9)]
+
+
+@pytest.mark.parametrize('payload,expected',[
+ ({'status':'supported','evidence':['Budget is 800 EUR.']},True),
+ ({'status':'contradicted','evidence':['Budget is 800 EUR.']},True),
+ ({'status':'insufficient','evidence':[]},False),
+ ({'status':'supported','evidence':['Budget is 900 EUR.']},False),
+ ({'status':'supported','evidence':'Budget is 800 EUR.'},False),
+ ({'status':'maybe','evidence':['Budget is 800 EUR.']},False),
+])
+def test_structured_judge_requires_valid_status_and_exact_evidence(monkeypatch,payload,expected):
+    monkeypatch.setattr(config,'RERANK_JUDGE','structured')
+    monkeypatch.setattr(llm,'generate',lambda *a:json.dumps(payload))
+    assert llm.passage_answers('Can I spend 900 EUR?','Budget is 800 EUR.') is expected

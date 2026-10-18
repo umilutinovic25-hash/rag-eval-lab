@@ -106,7 +106,27 @@ def yesno_judge(question: str, passage: str, model: str) -> bool:
     return bool(words) and words[0].strip(".,!:") in ACCEPT_WORDS
 
 
+def structured_judge(question: str, passage: str) -> bool:
+    response = generate(config.RERANK_MODEL, config.RERANK_STRUCTURED_PROMPT.format(question=question, passage=passage), 160)
+    if getattr(response, "metadata", {}).get("done_reason") == "length":
+        return False
+    try:
+        decision = json.loads(response)
+    except (ValueError, TypeError):
+        return False
+    if not isinstance(decision, dict) or set(decision) != {"status", "evidence"}:
+        return False
+    if decision["status"] not in ("supported", "contradicted"):
+        return False
+    evidence = decision["evidence"]
+    return isinstance(evidence, list) and bool(evidence) and all(
+        isinstance(span, str) and span_is_in_passage(span, passage) for span in evidence
+    )
+
+
 def passage_answers(question: str, passage: str) -> bool:
+    if config.RERANK_JUDGE == "structured":
+        return structured_judge(question, passage)
     if config.RERANK_JUDGE == "span":
         return span_judge(question, passage)
     if config.RERANK_JUDGE == "either":

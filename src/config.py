@@ -43,6 +43,19 @@ RERANK_PROMPT = (
     "Does the passage contain the information needed to answer the question? Answer only yes or no."
 )
 
+RERANK_STRUCTURED_PROMPT = (
+    "You check whether an employee handbook passage can answer a question. "
+    "Return ONLY a JSON object with exactly two keys: status and evidence. "
+    "status is supported if the passage provides the requested fact, contradicted if it directly rules out "
+    "the premise or proposed action in the question, or insufficient if it only shares the topic. "
+    "Both supported and contradicted mean that an answer can be given; a negative answer is not missing evidence. "
+    "For a partial answer to a multipart question, include the fact this passage supplies. "
+    "evidence is a list of complete sentences copied verbatim from the passage, or [] for insufficient. "
+    "Do not infer missing facts or return yes/no.\n\n"
+    "Passage: {passage}\nQuestion: {question}\nJSON:"
+)
+
+
 # Answer text: "extractive" (cited chunks joined) or "llm" (a local model writes the answer from the cited chunks)
 ANSWER_MODE = "llm"
 ANSWER_QUOTES = True  # in "llm" mode, add the verbatim text of every cited chunk under the answer
