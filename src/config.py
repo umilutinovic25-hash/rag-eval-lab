@@ -28,7 +28,7 @@ RERANK = "llm-gray-zone"
 RERANK_MODEL = "qwen2.5:7b"
 RERANK_CANDIDATES = 5
 RERANK_GRAY_ZONE = (0.50, 0.70)  # cosine scale, used only in "llm-gray-zone"
-RERANK_JUDGE = "span"  # "yesno" (model answers yes/no), "span" (model copies the answering words, code checks them)
+RERANK_JUDGE = "either"  # "yesno" (model answers yes/no), "span" (model copies the answering words, code checks them)
 # or "either" (span with RERANK_MODEL, then yes/no with RERANK_YESNO_MODEL if span says no)
 RERANK_YESNO_MODEL = "gemma3:4b"  # used only in "either"
 RERANK_SPAN_PROMPT = (

@@ -136,7 +136,7 @@ def test_committed_caches_cover_shipped_config_offline(monkeypatch, which) -> No
     from src.holdout_runner import TEST_SET_PATH
 
     run = {"eval": run_eval, "holdout": run_holdout, "test": lambda: run_holdout(TEST_SET_PATH)}[which]()
-    assert run["summary"]["passed"] == {"eval": 12, "holdout": 34, "test": 21}[which]
+    assert run["summary"]["passed"] == {"eval": 12, "holdout": 34, "test": 23}[which]
 
 
 def test_llm_answer_mode_keeps_citations_and_uses_model_text(rerank_mode, monkeypatch) -> None:
