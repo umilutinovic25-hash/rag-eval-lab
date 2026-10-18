@@ -80,3 +80,36 @@ def test_llm_rejects_empty_or_nontext_cache(tmp_path, monkeypatch):
         embeddings.save_cache({llm.cache_key('m', 'p', 3): value}, p)
         with pytest.raises(llm.LLMError):
             llm.generate('m', 'p', 3)
+
+
+def test_offline_profile_runs_new_question_without_models(monkeypatch):
+    names = ['RETRIEVAL_MODE', 'RERANK', 'ANSWER_MODE', 'ANSWER_QUOTES']
+    for name in names:
+        monkeypatch.setattr(config, name, getattr(config, name))
+    config.apply_profile('offline')
+    assert config.RETRIEVAL_MODE == 'lexical' and config.RERANK is None
+    c = Chunk('a', 'd', 'T', '2026', 'current', 'Parking is reserved through facilities app.')
+    result = rag.build_grounded_answer('parking reserved facilities', [c])
+    assert not result.refused and c.text in result.answer
+
+
+def test_empty_question_does_not_retrieve_or_generate(monkeypatch):
+    def forbidden(*args, **kwargs):
+        raise AssertionError('Empty questions must not call retrieval')
+    monkeypatch.setattr(rag, 'retrieve_top_k', forbidden)
+    assert rag.build_grounded_answer(' \n ', []).refused
+
+
+def test_gray_zone_rejects_lexical_scale(monkeypatch):
+    monkeypatch.setattr(config, 'RETRIEVAL_MODE', 'lexical')
+    monkeypatch.setattr(config, 'RERANK', 'llm-gray-zone')
+    with pytest.raises(ValueError, match='semantic'):
+        rag.build_grounded_answer('a question', [])
+
+
+def test_offline_cli_profile():
+    import subprocess
+    import sys
+    result = subprocess.run([sys.executable, "-m", "src.cli", "--profile", "offline", "--question", "How many days of annual leave do employees get?"], capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+    assert "22 days" in result.stdout

@@ -1,6 +1,7 @@
 import argparse
 import sys
 
+from . import config
 from .chunking import build_chunks
 from .corpus import load_corpus
 from .embeddings import EmbeddingError
@@ -10,6 +11,7 @@ from .rag import build_grounded_answer
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Week 7 RAG checkpoint")
+    parser.add_argument("--profile", choices=["current", "offline"], default="current", help="offline disables all model calls")
     parser.add_argument("--question", required=True, help="Question to ask over the handbook")
     parser.add_argument("--show-retrieved", action="store_true", help="Also print retrieved chunks and scores")
     return parser.parse_args()
@@ -17,6 +19,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    config.apply_profile(args.profile)
     chunks = build_chunks(load_corpus())
     by_id = {chunk.chunk_id: chunk for chunk in chunks}
     try:

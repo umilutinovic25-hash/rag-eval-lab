@@ -65,6 +65,10 @@ def generation_issue(text: str, cited: list[RetrievalResult]) -> str | None:
 
 
 def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
+    if not question.strip():
+        return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=[])
+    if config.RERANK == "llm-gray-zone" and config.RETRIEVAL_MODE not in ("semantic", "hybrid"):
+        raise ValueError("llm-gray-zone requires semantic or hybrid cosine scores; use the offline profile for lexical.")
     if config.RERANK in ("llm", "llm-gray-zone"):
         candidates = retrieve_top_k(question, chunks, k=config.RERANK_CANDIDATES)
         top = candidates[0].score if candidates else 0.0

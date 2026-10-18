@@ -1,0 +1,13 @@
+Fixed (fail -> pass): none
+Regressed (pass -> fail): none
+Unchanged: U01, U02, U03, U04, U05, U06, U07, U08, U09, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, U24, U25, U26, U27, U28, U29, U30, U31, U32
+
+Summary:
+  passed: 29 -> 29 (+0)
+  total: 32 -> 32 (+0)
+  behaviour_accuracy: 0.9375 -> 0.9375 (+0.0)
+  retrieval_hit_rate: 1.0 -> 1.0 (+0.0)
+  mean_citation_precision: 1.0 -> 1.0 (+0.0)
+
+Changed settings:
+  none

@@ -54,6 +54,19 @@ GENERATION_PROMPT = (
 )
 
 
+def apply_profile(name: str) -> None:
+    """CLI-only profile: change all coupled settings together, within this process."""
+    global RETRIEVAL_MODE, RERANK, ANSWER_MODE, ANSWER_QUOTES
+    if name == "current":
+        return
+    if name != "offline":
+        raise ValueError(f"Unknown profile: {name}")
+    RETRIEVAL_MODE = "lexical"
+    RERANK = None
+    ANSWER_MODE = "extractive"
+    ANSWER_QUOTES = False
+
+
 def snapshot() -> dict:
     """Return the current configuration as a plain dict."""
     return {
