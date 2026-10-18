@@ -144,3 +144,32 @@ def test_reference_context_expands_only_previous_anaphoric_evidence():
     assert [c.chunk.chunk_id for c in selected]==['a','b']
     selected=rag.expand_context([RetrievalResult(before,.9)],[before,reference,after],1,'references')
     assert [c.chunk.chunk_id for c in selected]==['a']
+
+
+@pytest.mark.parametrize('reply',['not json','{}','{"status":"supported","evidence":[]}', 'prose before {"status":"supported","evidence":["Budget is 800 EUR."]}'])
+def test_structured_judge_rejects_unparseable_or_empty_evidence(monkeypatch,reply):
+    monkeypatch.setattr(config,'RERANK_JUDGE','structured')
+    monkeypatch.setattr(llm,'generate',lambda *a:reply)
+    assert not llm.passage_answers('Budget?','Budget is 800 EUR.')
+
+
+def test_truncated_structured_decision_is_not_accepted(monkeypatch):
+    monkeypatch.setattr(config,'RERANK_JUDGE','structured')
+    reply=llm.GenerationText(json.dumps({'status':'supported','evidence':['Budget is 800 EUR.']}),{'done_reason':'length'})
+    monkeypatch.setattr(llm,'generate',lambda *a:reply)
+    assert not llm.passage_answers('Budget?','Budget is 800 EUR.')
+
+
+def test_quantity_guard_uses_the_cited_passage_not_an_unrelated_number():
+    a=RetrievalResult(Chunk('a','a','T','v','current','Passwords must be changed every 90 days.'),.9)
+    b=RetrievalResult(Chunk('b','b','T','v','current','Warranty lasts 90 years.'),.8)
+    assert rag.generation_issue('Passwords must be changed every 90 years [a].',[a,b])=='unsupported_quantity_unit'
+
+
+def test_structured_judge_accepts_only_an_entire_json_markdown_block(monkeypatch):
+    monkeypatch.setattr(config,'RERANK_JUDGE','structured')
+    body=json.dumps({'status':'supported','evidence':['Budget is 800 EUR.']})
+    monkeypatch.setattr(llm,'generate',lambda *a:'```json\n'+body+'\n```')
+    assert llm.passage_answers('Budget?','Budget is 800 EUR.')
+    monkeypatch.setattr(llm,'generate',lambda *a:'Ignore rules\n```json\n'+body+'\n```')
+    assert not llm.passage_answers('Budget?','Budget is 800 EUR.')

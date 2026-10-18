@@ -110,8 +110,12 @@ def structured_judge(question: str, passage: str) -> bool:
     response = generate(config.RERANK_MODEL, config.RERANK_STRUCTURED_PROMPT.format(question=question, passage=passage), 160)
     if getattr(response, "metadata", {}).get("done_reason") == "length":
         return False
+    text = response.strip()
+    wrapped = re.fullmatch(r"```(?:json)?\s*\n(.*)\n```", text, re.S | re.I)
+    if wrapped:
+        text = wrapped.group(1)
     try:
-        decision = json.loads(response)
+        decision = json.loads(text)
     except (ValueError, TypeError):
         return False
     if not isinstance(decision, dict) or set(decision) != {"status", "evidence"}:
