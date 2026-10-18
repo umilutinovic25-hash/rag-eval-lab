@@ -1,0 +1,42 @@
+$ python -m pytest -q
+...................                                                      [100%]
+19 passed in 0.10s
+
+$ python -m src.eval_runner --out results/reproduced-after.json
+ID   Category                 Expected Got     Hit  Fact  CitPrec Pass
+----------------------------------------------------------------------
+E01  supported                answer   answer  yes  yes   0.50    PASS
+E02  supported                answer   answer  yes  yes   0.50    PASS
+E03  supported                answer   answer  yes  yes   0.50    PASS
+E04  chunk-boundary           answer   answer  yes  no    1.00    FAIL
+E05  paraphrase               answer   answer  no   no    0.00    FAIL
+E06  versioned                answer   answer  yes  yes   1.00    PASS
+E07  supported                answer   answer  yes  yes   1.00    PASS
+E08  supported                answer   answer  yes  yes   0.50    PASS
+E09  chunk-boundary           answer   answer  yes  no    1.00    FAIL
+E10  unsupported              refuse   answer  -    -     0.00    FAIL
+E11  unsupported-near-domain  refuse   answer  -    -     0.00    FAIL
+E12  unsupported              refuse   refuse  -    -     -       PASS
+
+Passed: 7/12
+Behaviour accuracy: 0.83
+Retrieval hit rate (supported): 0.89
+Mean citation precision (answered): 0.55
+eval_set_sha256: afe46db1e75a0b85bb5c9a93b6763e3b96e5cd7b289e12da6d2671e4d8650064
+
+Wrote results/reproduced-after.json
+
+$ python -m src.eval_compare evidence/before.json results/reproduced-after.json
+Fixed (fail -> pass): E06
+Regressed (pass -> fail): none
+Unchanged: E01, E02, E03, E04, E05, E07, E08, E09, E10, E11, E12
+
+Summary:
+  passed: 6 -> 7 (+1)
+  total: 12 -> 12 (+0)
+  behaviour_accuracy: 0.8333 -> 0.8333 (+0.0)
+  retrieval_hit_rate: 0.7778 -> 0.8889 (+0.1111)
+  mean_citation_precision: 0.4545 -> 0.5455 (+0.091)
+
+Changed settings:
+  CURRENT_ONLY: False -> True

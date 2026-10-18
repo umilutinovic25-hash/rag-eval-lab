@@ -75,3 +75,13 @@ python -m src.cli --question "How many days per week can I work remotely?"      
 ```
 
 Poruka: na novim pitanjima prag od 0.60 ne radi (klase se preklapaju: 0.540 prema 0.676). Hibrid je štetio, a LLM judge je pomogao tek kao kaskada u sivoj zoni. Svaki slepi test daje manji dobitak nego razvojni skup (+1/24, pa +1/32), a preostali padovi su isti obrazac: da/ne pitanja sa odgovorom „ne“ (odeljak 13 izveštaja).
+
+## Pouzdanost provera (C1–C6, opciono)
+
+```bash
+python -m src.cli --profile offline --question "How many days of annual leave do employees get?"
+python -m src.experiment_runner --mode replay --out results/demo-manifest.json
+python -m src.answer_quality --set test2 --out results/demo-quality-test2.json
+```
+
+Pokazati: nula poziva modelima u replay-u, identitet istorijskog modela unknown, lažna odbijanja u imeniocu i upozorenje da semantička tačnost nije automatski potvrđena. Za obaveznu predaju postoji odvojen M5 paket, bez naprednih modela. Nepostojeće doprinose i komentare para ne popunjavati iz pretpostavke.

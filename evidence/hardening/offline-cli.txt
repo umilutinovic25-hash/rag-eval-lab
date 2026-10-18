@@ -1,0 +1,12 @@
+Question:
+How many days of annual leave do employees get?
+
+Answer:
+Grounded response based on retrieved context:
+[hb-07-chunk-0] Annual leave policy: employees get 22 days of annual leave per calendar year. Leave requests must be made two weeks in advance in HR portal.
+[hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week.
+
+Refused: False
+Citations:
+  hb-07-chunk-0: Annual leave (version 2026, current)
+  hb-03-chunk-0: Remote work policy (version 2026, current)

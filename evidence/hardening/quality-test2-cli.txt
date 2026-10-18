@@ -1,0 +1,36 @@
+U01  fact=no  markers=ok  new=according,passage,minimum,length,required review=  Yes, according to the passage, a twelve-character password is the minimum length required. [hb-05-chunk-0] Sou
+U02  fact=no  markers=ok  review=  No, you are not allowed to give your login to a coworker. [hb-05-chunk-2] Source [hb-05-chunk-2]: "Never share
+U03  fact=no  markers=ok  review=  Yes. [hb-05-chunk-1] Source [hb-05-chunk-1]: "Multi-factor authentication (MFA) is required for email, VPN and
+U04  fact=no  markers=ok  review=  You have 22 paid days off in a year.[hb-07-chunk-0] Source [hb-07-chunk-0]: "Annual leave policy: employees ge
+U05  fact=yes markers=ok  new=cannot review=negation_mismatch  No, you cannot request leave the day before as it must be made two weeks in advance. [hb-07-chunk-0] Source [h
+U06  fact=yes markers=ok  review=  Yes, the deadline for using carried-over leave is 31 March. [hb-07-chunk-1] Source [hb-07-chunk-1]: "Under thi
+U07  fact=no  markers=bad new=enough,grounded,evidence,provided,corpus,answer,question review=false_refusal  I do not have enough grounded evidence in the provided corpus to answer that question.
+U08  fact=no  markers=ok  review=  Yes. [hb-08-chunk-0] Source [hb-08-chunk-0]: "Each employee has a training budget of 800 EUR per year for cour
+U09  fact=no  markers=ok  review=  Yes, you should keep the original receipts for flights. [hb-04-chunk-1] Source [hb-04-chunk-1]: "Keep original
+U10  fact=no  markers=ok  review=  You can still claim expenses up to 30 days after your return. [hb-04-chunk-0] Source [hb-04-chunk-0]: "Busines
+U11  fact=no  markers=bad new=enough,grounded,evidence,provided,corpus,answer,question review=false_refusal  I do not have enough grounded evidence in the provided corpus to answer that question.
+U12  fact=yes markers=ok  review=  The facilities app is used to reserve parking. [hb-09-chunk-1] Source [hb-09-chunk-1]: "Parking is limited: sp
+U13  fact=no  markers=ok  new=passage,states review=  No, the passage states that remote days per week are agreed with your team lead and recorded in your shared te
+U14  fact=no  markers=ok  review=  Yes, you must be reachable by chat during core hours when remote.[hb-03-chunk-3] Source [hb-03-chunk-3]: "Core
+U15  fact=yes markers=ok  review=  The start of core hours on a remote day is 10:00. [hb-03-chunk-3] Source [hb-03-chunk-3]: "Core hours from 10:
+U16  fact=no  markers=ok  review=  Yes, someone will be your buddy when you join. [hb-06-chunk-1] Source [hb-06-chunk-1]: "A buddy is assigned in
+U17  fact=yes markers=ok  new=scheduled review=  The onboarding check-ins with your manager are scheduled at the end of month one and after three months. [hb-0
+U18  fact=no  markers=ok  review=  Yes, you need your manager's OK before getting a new laptop. [hb-01-chunk-1] Source [hb-01-chunk-1]: "After ma
+U19  fact=yes markers=ok  review=  Report lost or stolen devices to security first. [hb-01-chunk-2] Source [hb-01-chunk-2]: "Report lost or stole
+U20  fact=yes markers=ok  review=  Request a replacement laptop in the IT portal under Hardware. [hb-01-chunk-2] Source [hb-01-chunk-2]: "Report 
+U21  fact=no  markers=ok  review=  Yes, you can contact IT support through the phone. [hb-10-chunk-0] Source [hb-10-chunk-0]: "IT support hours a
+U22  fact=yes markers=ok  review=negation_mismatch  Floor two [hb-10-chunk-1]. Source [hb-10-chunk-1]: "For a laptop that does not start, bring it to IT desk on f
+U23  fact=no  markers=bad new=enough,grounded,evidence,provided,corpus,answer,question review=  I do not have enough grounded evidence in the provided corpus to answer that question.
+U24  fact=no  markers=bad new=enough,grounded,evidence,provided,corpus,answer,question review=  I do not have enough grounded evidence in the provided corpus to answer that question.
+U25  fact=no  markers=bad new=enough,grounded,evidence,provided,corpus,answer,question review=  I do not have enough grounded evidence in the provided corpus to answer that question.
+U26  fact=no  markers=bad new=enough,grounded,evidence,provided,corpus,answer,question review=  I do not have enough grounded evidence in the provided corpus to answer that question.
+U27  fact=no  markers=bad new=enough,grounded,evidence,provided,corpus,answer,question review=  I do not have enough grounded evidence in the provided corpus to answer that question.
+U28  fact=no  markers=bad new=enough,grounded,evidence,provided,corpus,answer,question review=  I do not have enough grounded evidence in the provided corpus to answer that question.
+U29  fact=no  markers=bad new=enough,grounded,evidence,provided,corpus,answer,question review=  I do not have enough grounded evidence in the provided corpus to answer that question.
+U30  fact=no  markers=bad new=enough,grounded,evidence,provided,corpus,answer,question review=  I do not have enough grounded evidence in the provided corpus to answer that question.
+U31  fact=no  markers=bad new=enough,grounded,evidence,provided,corpus,answer,question review=  I do not have enough grounded evidence in the provided corpus to answer that question.
+U32  fact=no  markers=bad new=enough,grounded,evidence,provided,corpus,answer,question review=  I do not have enough grounded evidence in the provided corpus to answer that question.
+Coverage: 20/22; false refusals: 2; unsupported answers: 0
+Semantic correctness: NOT ASSESSED. Lexical signals and marker checks are not a truth verdict.
+
+test2 (llm): fact in answer 8/20, valid markers 20/20, with unsupported words 4/20 (model sentence); fact in full answer 19/20

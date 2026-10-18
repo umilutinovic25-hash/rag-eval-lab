@@ -1,6 +1,6 @@
 # Week 7 RAG checkpoint
 
-A small local question-answering tool over a fictional employee handbook. It retrieves chunks, answers with chunk citations and refuses questions the handbook does not cover. It runs offline: no API keys, no network, no paid services.
+A small local question-answering tool over a fictional employee handbook. It retrieves chunks, answers with chunk citations and refuses questions the handbook does not cover. The mandatory M5 checkpoint runs offline. The advanced HEAD uses local models for uncached questions; cached replay needs no model server. No API keys or paid services are used.
 
 This week you will **measure** this system on a fixed eval set, find failures, apply **exactly one** improvement and compare results before and after.
 
@@ -37,7 +37,7 @@ ollama pull bge-m3
 ollama serve
 ```
 
-Without Ollama the CLI prints an error and exits with code 2. Set `RETRIEVAL_MODE = "lexical"` in `src/config.py` to go back to the fully offline lexical retriever. Tests always run in lexical mode and never call Ollama (`tests/conftest.py`).
+Without Ollama the CLI prints an error and exits with code 2. For a fully model-free CLI use `python -m src.cli --profile offline --question "..."`. This sets lexical retrieval, disables reranking, and selects extractive answers together. Changing only RETRIEVAL_MODE is insufficient. Tests always run in lexical mode and never call Ollama (`tests/conftest.py`).
 
 ## Max level: holdout, test set, LLM judge and LLM answers
 
@@ -84,3 +84,19 @@ Model replies are cached in `data/llm_cache.json`, so all four sets run offline.
 4. Compare with `eval_compare` and put both runs and the comparison output in your report.
 
 Result files in `results/` are ignored by git. Copy the printed tables into your report.
+
+## Reliability fixes and reproducibility (C1–C6)
+
+Copied evidence now must be a contiguous token span from a source sentence and must preserve its negation. This checks transcription, not whether the passage answers the question. LLM answers with empty text, unknown/unbalanced citation markers, generated Source lines, or numeric values absent from the cited text fall back to extractive output. The fallback reason is exposed on RagAnswer. These checks do not prove semantic correctness.
+
+```bash
+python -m src.cli --profile offline --question "What is the annual leave allowance?"
+python -m src.answer_quality --set test2 --out results/quality-test2.json
+python -m src.experiment_runner --mode replay --out results/replay.json
+```
+
+The replay runner forbids all model requests and records source, corpus, question-set and cache hashes, settings, timings and call counts. Semantic correctness stays `not_assessed` in answer-quality output; lexical risk flags require review. Refusals remain in the report denominator. All existing question sets are now seen sets; replays are not fresh blind tests.
+
+Optional fresh measurement: `python -m src.experiment_runner --mode cold --out results/cold.json`. This requires already installed models and a running Ollama, uses isolated temporary caches, and records observed local model digests/version. It does not download models or replace committed caches. Cold mode has not been run for C1–C6. Historical cache model digests are unknown; current model identity cannot establish their provenance.
+
+See `docs/hardening-spec.md`, report section 14 and `evidence/hardening/`. The original eval and metrics code remain unchanged. `python scripts/package_minimum.py` builds a separate M5 submission archive from checkpoint 45b8172 plus its evidence; fill the human review/contribution fields before submission.

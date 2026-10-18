@@ -1,0 +1,22 @@
+........................................................................ [ 67%]
+...................................                                      [100%]
+107 passed in 2.38s
+
+eval {'passed': 12, 'total': 12, 'behaviour_accuracy': 1.0, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 1.0} {'embeddings': 0, 'llm': 0}
+holdout {'passed': 34, 'total': 34, 'behaviour_accuracy': 1.0, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 0.9583} {'embeddings': 0, 'llm': 0}
+test1 {'passed': 23, 'total': 24, 'behaviour_accuracy': 0.9583, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 1.0} {'embeddings': 0, 'llm': 0}
+test2 {'passed': 29, 'total': 32, 'behaviour_accuracy': 0.9375, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 1.0} {'embeddings': 0, 'llm': 0}
+Cached replay only; no fresh model generation.
+
+Question:
+How many days of annual leave do employees get?
+
+Answer:
+Grounded response based on retrieved context:
+[hb-07-chunk-0] Annual leave policy: employees get 22 days of annual leave per calendar year. Leave requests must be made two weeks in advance in HR portal.
+[hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week.
+
+Refused: False
+Citations:
+  hb-07-chunk-0: Annual leave (version 2026, current)
+  hb-03-chunk-0: Remote work policy (version 2026, current)

@@ -138,3 +138,23 @@ def test_quality_includes_refusals_in_denominator(tmp_path, monkeypatch):
 
 def test_test2_available_for_answer_quality():
     assert 'test2' in answer_quality.SETS
+
+
+def test_manifest_hashes_corpus_code_and_all_sets():
+    from src.experiment_runner import manifest
+    report = manifest('replay')
+    assert len(report['corpus_sha256']) == 64
+    assert report['source_sha256']['src/rag.py']
+    assert set(report['question_set_sha256']) == {'eval', 'holdout', 'test1', 'test2'}
+    assert report['observed_local_models']['status'] == 'not_checked'
+    assert report['historical_cache_model_digests'].startswith('unknown')
+
+
+def test_replay_forbids_network_and_reports_zero_calls(monkeypatch):
+    from src.experiment_runner import execute
+    monkeypatch.setattr(config, 'RETRIEVAL_MODE', 'semantic')
+    monkeypatch.setattr(config, 'RERANK', 'llm-gray-zone')
+    monkeypatch.setattr(config, 'ANSWER_MODE', 'llm')
+    report = execute('replay')
+    assert report['manifest']['request_totals'] == {'embeddings': 0, 'llm': 0}
+    assert report['runs']['eval']['run']['summary']['passed'] == 12

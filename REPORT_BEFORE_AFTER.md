@@ -5,9 +5,9 @@
 **Promena:** M5, filter važeće verzije (`CURRENT_ONLY = True`)  
 **Commitovi:** `ee583f3` početno stanje → `2ceaced` specifikacija → `45b8172` promena  
 **Datum:** 2026-10-17  
-**Šablon:** `docs/sablon-izvestaj-pre-posle.md` (napravljen prema zahtevima zadatka, jer zvanični šablon nije objavljen)
+**Šablon:** `docs/sablon-izvestaj-pre-posle.md` (napravljen prema zahtevima zadatka, jer zvanični šablon nije bio dostavljen)
 
-> Obavezni deo (odeljci 1–11) odnosi se na commit `45b8172`. Posle njega su odvojeno dodate i izmerene napredne promene A1–A4 (odeljak 12). Za reprodukciju obaveznog dela: `git checkout 45b8172`, zatim obrisati `src/__pycache__` (ili pokrenuti sa `PYTHONDONTWRITEBYTECODE=1`). Promena `0.02` → `0.12` ne menja veličinu fajla, pa Python posle brzog `checkout`-a može da učita stari bytecode i prikaže pogrešan rezultat; to nam se desilo pri proveri.
+> Obavezni deo (odeljci 1–11) odnosi se na commit `45b8172`; napredni deo i ispravke C1–C6 su odvojeni u odeljcima 12–14. Posle checkout-a ukloniti postojeći `src/__pycache__`. `PYTHONDONTWRITEBYTECODE=1` sprečava upis novih .pyc fajlova, ali ne sprečava učitavanje postojećeg zastarelog bytecode-a.
 
 ## 1. Početna provera
 
@@ -165,7 +165,7 @@ Naš odgovor na komentar: [šta smo promenili ili zašto nismo]
 
 ## 10. Korišćenje AI-ja
 
-Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene testove i eval, izdvoji ocene iz `top_k` radi dijagnoze propusta, napiše nacrt specifikacije i implementira filter sa testom, a u naprednom delu i promene A1–A4, kontrolnu proveru i automatski pregled koda (odeljak 12). Sve tvrdnje su proverene merenjem, a ne na osnovu reči asistenta: `results/before.json` i `results/after.json` su napravljeni istom komandom, `eval_compare` potvrđuje isti otisak i samo jedno promenjeno podešavanje, a E06 je ručno proveren preko CLI-ja pre i posle (izlazi u `evidence/`). [Dopuniti: šta je svako od nas ručno proverio.]
+Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene testove i eval, izdvoji ocene iz `top_k` radi dijagnoze propusta, napiše nacrt specifikacije i implementira filter sa testom, a u naprednom delu i promene A1–A4, kontrolnu proveru i automatski pregled koda (odeljak 12). AI asistent je takođe pisao i testirao B1–B5c; Codex je uradio analizu i ispravke C1–C6 (odeljak 14). „Ručni pregled“ u naprednim eksperimentima označava pregled asistenta, ne nezavisnu ljudsku proveru. Sve tvrdnje su proverene merenjem, a ne na osnovu reči asistenta: `results/before.json` i `results/after.json` su napravljeni istom komandom, `eval_compare` potvrđuje isti otisak i samo jedno promenjeno podešavanje, a E06 je ručno proveren preko CLI-ja pre i posle (izlazi u `evidence/`). [Dopuniti: šta je svako od nas ručno proverio.]
 
 ## 11. Doprinos
 
@@ -260,7 +260,7 @@ Specifikacije: `docs/maxlvl-specs.md`, svaka commitovana pre svoje izmene. Dokaz
 
 **Ključni nalaz B0:** na holdoutu najslabije podržano pitanje ima vrh 0.540 (H08), a najjače nepodržano 0.676 (H34). **Nijedan kosinusni prag ne razdvaja skup**; prag 0.60 iz A3 važio je samo na eval skupu.
 
-**Zašto B2 nije bio dovoljan:** `gemma3:4b` kaže „No.“ i za pasus koji sadrži odgovor, kada je odgovor negativan ili implicitan. Primeri su H03 „Never share passwords, also not with colleagues from IT“ i H23 „Monday to Friday“ za pitanje o vikendu. B2b je proverio da li je uzrok mešanje polariteta da/ne: nije. Uzrok je kapacitet modela. Zato je B2c kaskada: pitanja koja je judge popravio imala su kosinus < 0.68, a ona koja je pokvario ≥ 0.72 (osim H13). Granice 0.50 i 0.70 izvedene su iz holdouta, pa je 33/34 na holdoutu optimistično.
+**Zašto B2 nije bio dovoljan:** `gemma3:4b` kaže „No.“ i za pasus koji sadrži odgovor, kada je odgovor negativan ili implicitan. Primeri su H03 „Never share passwords, also not with colleagues from IT“ i H23 „Monday to Friday“ za pitanje o vikendu. B2b je proverio da li je uzrok mešanje polariteta da/ne: nije. Ograničen kapacitet modela je moguća hipoteza, ne dokazan uzrok; nisu isključeni uticaji upita, ograničenja tokena i konteksta. Zato je B2c kaskada: pitanja koja je judge popravio imala su kosinus < 0.68, a ona koja je pokvario ≥ 0.72 (osim H13). Granice 0.50 i 0.70 izvedene su iz holdouta, pa je 33/34 na holdoutu optimistično.
 
 **Slepi test skup, jedno pokretanje** (`evidence/maxlvl/test-final-run.txt`, `compare-test-B0-vs-final.txt`):
 
@@ -329,14 +329,39 @@ Source [hb-05-chunk-2]: "Never share passwords, also not with colleagues from IT
 **Ukupna slika na neviđenim pitanjima:**
 - Svaki slepi skup pokazuje manji dobitak od skupa na kojem je promena birana: test 1 +1/24, a test 2 +1/32.
 - Svih 12 eval pitanja i svih 34 holdout pitanja prolaze, ali na tim skupovima su promene i birane.
-- Na neviđenim pitanjima sistem je oko 91% tačan (22/24 i 29/32). Tvrdnja „sve tačno“ zato važi samo za skupove na kojima je sistem podešavan.
+- Prethodno neizmereni skupovi dali su 22/24 i 29/32 za dve različite istorijske verzije. To nije nezavisna procena budućeg saobraćaja. Ni 100% PASS na razvojnom skupu ne dokazuje semantičku tačnost svakog generisanog odgovora (odeljak 14).
 
 **Preostala ograničenja posle drugog kruga:**
 
-1. **Da/ne pitanja sa negativnim odgovorom u sivoj zoni** (U07, U11, U13, T02) i dalje se pogrešno odbijaju. Nijedan od 5 lokalnih modela, sa 3 vrste judge-a, ne rešava ih bez novih grešaka na drugim pitanjima. Sledeći korak bio bi pravi cross-encoder reranker (na primer `bge-reranker`), koji Ollama ne nudi kao standardni model, ili veći model.
+1. **Da/ne pitanja u sivoj zoni:** U07, U11 i T02 se pogrešno odbijaju. U13 dobija odgovor, ali citati ne sadrže traženu činjenicu; to je pogrešan izbor dokaza, ne odbijanje. Nijedan od 5 lokalnih modela, sa 3 vrste judge-a, ne rešava ih bez novih grešaka na drugim pitanjima. Sledeći korak bio bi pravi cross-encoder reranker (na primer `bge-reranker`), koji Ollama ne nudi kao standardni model, ili veći model.
 2. **Granice sive zone (0.50–0.70) i izbor judge-a** birani su na holdoutu i testu 1. Test skupovi od 24 i 32 pitanja su mali, pa je razlika od +1 unutar šuma.
 3. **Rečenica modela je ponekad šturo „Yes.“ ili „No.“**; činjenicu nosi citat ispod. U 4/49 odgovora ima preformulacija („make“, „submit“), ali nijedna nije nepodržana činjenica.
 4. **Zavisnosti:** `bge-m3` (1.2 GB), `qwen2.5:7b` (4.7 GB) i `gemma3:4b` (3.3 GB) za svako novo pitanje. Pitanje u sivoj zoni traži do 10 poziva judge-a i jedan za odgovor. Režimi `RERANK = None` i `ANSWER_MODE = "extractive"` ostaju kao jednostavnija rezerva.
+
+## 14. Ispravke pouzdanosti posle analize (C1–C6, 18.10.2026.)
+
+Specifikacija je zabeležena u `docs/hardening-spec.md` pre izmena. Polazna verzija analize je `2e24944`. Rezultati pre i posle, originalni izlazi poređenja i detaljan izlaz kvaliteta su u `evidence/hardening/`.
+
+| Korak | Ispravka | Provera |
+| --- | --- | --- |
+| C1 | kontinualan niz tokena i očuvanje negacije izvornog iskaza; nema 80% bag-of-words prihvatanja | menjanje 800 u 900 ili uklanjanje Never ne prolazi |
+| C2 | validacija markera, brojeva i strukture generisanog odgovora; fallback na izvlačenje izvora | nepostojeći marker i izmišljen Source red ne stižu do korisnika |
+| C3 | validacija dimenzija, konačnih brojeva, oblika keša i praznog LLM izlaza | loši ulazi daju jasne greške; validni keševi rade |
+| C4 | jedinstven CLI profil offline i odbijanje praznog pitanja bez modela | lexical + bez reranka + extractive; nema upotrebe kosinusne skale u lexical grani |
+| C5 | svi upiti u izveštaju kvaliteta, pokrivenost, lažna odbijanja i heuristički rizici; test2 CLI | sintetička kontradikcija označena za pregled; semantic_correctness ostaje not_assessed |
+| C6 | manifest i razdvajanje replay/cold, korekcije dokumentacije i paket M5 | hash kodova/korpusa/keša/skupova, konfiguracija, vreme i broj poziva; istorijski digest modela unknown |
+
+Na svakom koraku C1–C4 proverena su sva četiri postojeća skupa iz keša, uz zabranu poziva modelima. PASS rezultati su nepromenjeni: **12/12, 34/34, 23/24, 29/32**; nema novih regresija. Ovo je replay već viđenih pitanja, ne novo slepo merenje ili ponovo generisano ponašanje modela.
+
+Važne korekcije ranijih tvrdnji:
+
+- „49/49 činjenica u celom odgovoru“ potiče od dodavanja izvornog citata. To ne dokazuje istinitost prethodne rečenice modela.
+- Sintetička suprotna tvrdnja može da prođe originalni eval jer on meri citirane pasuse. Kod originalnih metrika nije menjan, po pravilu zadatka. Dodatne heuristike brojeva i negacije služe za pregled, ne predstavljaju potpunu semantičku proveru.
+- Sada su pogrešno odbijena pitanja u imeniocu dodatne mere: eval 9/9 odgovorenih podržanih, holdout 24/24, test1 16/17, test2 20/22. U test2 puna očekivana činjenica je prisutna u 19/22 podržana pitanja zbog preostalog U13.
+- Provere kvaliteta koje je radio asistent nisu nezavisna ljudska revizija. Ne možemo tvrditi da je minimum već predat, da je pregled para obavljen ili da je svaki odgovor tačan.
+- Novi pozivi lokalnim modelima bez istorijskog keša nisu izvršeni u C1–C6. Njihov identitet pri nastanku istorijskih keševa nije zabeležen i ne izmišljamo ga naknadno.
+
+Za predaju koristiti izdvojen M5 paket iz `deliverables/`; napredni deo je dodatak. Individualni nedeljni izveštaj, stvarni doprinosi, vođa demonstracije, pregled para i slanje i dalje zahtevaju stvarne ljudske podatke i radnje.
 
 ## Dokazi
 
@@ -349,16 +374,18 @@ Source [hb-05-chunk-2]: "Never share passwords, also not with colleagues from IT
 - Napredni deo: `docs/advanced-specs.md`; `evidence/advanced/` (`adv1.json`, `adv2.json`, `adv3a.json`, `adv3b.json`, `adv4.json`, `compare-*.txt`, CLI izlazi, kontrolna provera)
 - Max nivo: `docs/maxlvl-specs.md`; `eval/holdout_set.json`, `eval/test_set.json`, `eval/test2_set.json`; `evidence/maxlvl/probes/`; `evidence/maxlvl/` (`holdout-*.json`, `eval-B*.json`, `test-*.json`, `compare-*.txt`, `answers-*.json`, ručni pregled odgovora, `test-final-run.txt`)
 
+- Ispravke: `docs/hardening-spec.md`, `evidence/hardening/`, `src/experiment_runner.py`.
+
 ## Kontrolna lista pre predaje
 
-- [x] `python -m pytest` prolazi posle promene (19 na `45b8172`, 36 na kraju naprednog dela)
+- [x] `python -m pytest` prolazi posle promene (19 na `45b8172`; 107 posle C1–C6)
 - [x] Eval pokrenut pre i posle istom komandom
 - [x] Poređenje ne prijavljuje različit otisak eval skupa
 - [x] Oba propusta vezana za konkretna eval pitanja (E06, E04/E09, E10/E11, E05)
 - [x] Specifikacija napisana pre izmene i promena joj odgovara (`2ceaced` pre `45b8172`)
 - [x] Diff sadrži jednu promenu po nameri (samo `CURRENT_ONLY`)
 - [x] `eval/eval_set.json` i kod metrika nisu menjani
-- [x] Svaka regresija navedena i objašnjena (nema ih; promena dopunskih citata opisana u odeljku 7)
+- [x] Regresije su navedene: za M5 ih nema; napredni eksperimenti sa regresijama opisani su u odeljcima 12–13
 - [x] Navedeno bar jedno preostalo ograničenje
 - [x] Ručna CLI provera jednog promenjenog pitanja (E06)
 - [ ] Komentar para unet
