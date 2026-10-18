@@ -56,7 +56,7 @@ def manifest(mode: str, inspect_models: bool = False) -> dict:
         'question_set_sha256': {name: digest(path) for name, path in SETS.items()},
         'cache_sha256': {'embeddings': digest(embeddings.CACHE_PATH), 'llm': digest(llm.CACHE_PATH)},
         'generation_options': {'temperature': 0, 'seed': 7},
-        'judge_max_tokens': {'span': 40, 'yesno': 3}, 'answer_max_tokens': 80,
+        'judge_max_tokens': {'span': 40, 'yesno': 3, 'structured': 160}, 'answer_max_tokens': 80,
         'historical_cache_model_digests': 'unknown: not recorded when historical caches were made',
         'observed_local_models': model_identity() if inspect_models else {'status': 'not_checked'},
     }

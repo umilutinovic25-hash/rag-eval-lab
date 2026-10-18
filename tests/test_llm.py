@@ -133,6 +133,8 @@ def test_committed_caches_cover_shipped_config_offline(monkeypatch, which) -> No
     monkeypatch.setattr(config, "RETRIEVAL_MODE", "semantic")
     monkeypatch.setattr(config, "RERANK", "llm-gray-zone")
     monkeypatch.setattr(config, "ANSWER_MODE", "llm")
+    monkeypatch.setattr(config, "CONTEXT_NEIGHBORS", 1)
+    monkeypatch.setattr(config, "CONTEXT_POLICY", "references")
     from src.holdout_runner import TEST2_SET_PATH, TEST_SET_PATH
 
     runs = {
