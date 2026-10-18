@@ -1,0 +1,347 @@
+{
+  "D1": {
+    "eval": {
+      "summary": {
+        "passed": 12,
+        "total": 12,
+        "behaviour_accuracy": 1.0,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [],
+      "judge_calls": 10
+    },
+    "holdout": {
+      "summary": {
+        "passed": 34,
+        "total": 34,
+        "behaviour_accuracy": 1.0,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 0.9583
+      },
+      "fixed": [],
+      "regressed": [],
+      "judge_calls": 95
+    },
+    "test1": {
+      "summary": {
+        "passed": 23,
+        "total": 24,
+        "behaviour_accuracy": 0.9583,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [],
+      "judge_calls": 67
+    },
+    "test2": {
+      "summary": {
+        "passed": 29,
+        "total": 32,
+        "behaviour_accuracy": 0.9375,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [],
+      "judge_calls": 89
+    }
+  },
+  "D6": {
+    "eval": {
+      "summary": {
+        "passed": 12,
+        "total": 12,
+        "behaviour_accuracy": 1.0,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [],
+      "judge_calls": 10
+    },
+    "holdout": {
+      "summary": {
+        "passed": 34,
+        "total": 34,
+        "behaviour_accuracy": 1.0,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 0.9583
+      },
+      "fixed": [],
+      "regressed": [],
+      "judge_calls": 95
+    },
+    "test1": {
+      "summary": {
+        "passed": 23,
+        "total": 24,
+        "behaviour_accuracy": 0.9583,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [],
+      "judge_calls": 67
+    },
+    "test2": {
+      "summary": {
+        "passed": 29,
+        "total": 32,
+        "behaviour_accuracy": 0.9375,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [],
+      "judge_calls": 89
+    }
+  },
+  "D4": {
+    "eval": {
+      "summary": {
+        "passed": 12,
+        "total": 12,
+        "behaviour_accuracy": 1.0,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [],
+      "judge_calls": 10
+    },
+    "holdout": {
+      "summary": {
+        "passed": 33,
+        "total": 34,
+        "behaviour_accuracy": 1.0,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 0.9542
+      },
+      "fixed": [],
+      "regressed": [
+        "H14"
+      ],
+      "judge_calls": 95
+    },
+    "test1": {
+      "summary": {
+        "passed": 23,
+        "total": 24,
+        "behaviour_accuracy": 0.9583,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [],
+      "judge_calls": 67
+    },
+    "test2": {
+      "summary": {
+        "passed": 30,
+        "total": 32,
+        "behaviour_accuracy": 0.9375,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [
+        "U13"
+      ],
+      "regressed": [],
+      "judge_calls": 89
+    }
+  },
+  "D4b": {
+    "eval": {
+      "summary": {
+        "passed": 12,
+        "total": 12,
+        "behaviour_accuracy": 1.0,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [],
+      "judge_calls": 10
+    },
+    "holdout": {
+      "summary": {
+        "passed": 34,
+        "total": 34,
+        "behaviour_accuracy": 1.0,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 0.9583
+      },
+      "fixed": [],
+      "regressed": [],
+      "judge_calls": 95
+    },
+    "test1": {
+      "summary": {
+        "passed": 23,
+        "total": 24,
+        "behaviour_accuracy": 0.9583,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [],
+      "judge_calls": 67
+    },
+    "test2": {
+      "summary": {
+        "passed": 29,
+        "total": 32,
+        "behaviour_accuracy": 0.9375,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [],
+      "judge_calls": 89
+    }
+  },
+  "D5": {
+    "eval": {
+      "summary": {
+        "passed": 11,
+        "total": 12,
+        "behaviour_accuracy": 0.9167,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [
+        "E05"
+      ],
+      "judge_calls": 10
+    },
+    "holdout": {
+      "summary": {
+        "passed": 21,
+        "total": 34,
+        "behaviour_accuracy": 0.6176,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [
+        "H01",
+        "H02",
+        "H04",
+        "H05",
+        "H06",
+        "H08",
+        "H09",
+        "H11",
+        "H13",
+        "H14",
+        "H20",
+        "H22",
+        "H24"
+      ],
+      "judge_calls": 100
+    },
+    "test1": {
+      "summary": {
+        "passed": 16,
+        "total": 24,
+        "behaviour_accuracy": 0.6667,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [
+        "T01",
+        "T03",
+        "T04",
+        "T06",
+        "T07",
+        "T08",
+        "T15"
+      ],
+      "judge_calls": 70
+    },
+    "test2": {
+      "summary": {
+        "passed": 20,
+        "total": 32,
+        "behaviour_accuracy": 0.625,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [
+        "U02",
+        "U04",
+        "U05",
+        "U08",
+        "U10",
+        "U12",
+        "U16",
+        "U18",
+        "U22"
+      ],
+      "judge_calls": 90
+    }
+  },
+  "D5b": {
+    "eval": {
+      "summary": {
+        "passed": 12,
+        "total": 12,
+        "behaviour_accuracy": 1.0,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [],
+      "judge_calls": 10
+    },
+    "holdout": {
+      "summary": {
+        "passed": 33,
+        "total": 34,
+        "behaviour_accuracy": 0.9706,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [
+        "H13"
+      ],
+      "judge_calls": 100
+    },
+    "test1": {
+      "summary": {
+        "passed": 21,
+        "total": 24,
+        "behaviour_accuracy": 0.875,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 1.0
+      },
+      "fixed": [],
+      "regressed": [
+        "T03",
+        "T04"
+      ],
+      "judge_calls": 70
+    },
+    "test2": {
+      "summary": {
+        "passed": 30,
+        "total": 32,
+        "behaviour_accuracy": 0.9375,
+        "retrieval_hit_rate": 1.0,
+        "mean_citation_precision": 0.975
+      },
+      "fixed": [
+        "U13"
+      ],
+      "regressed": [],
+      "judge_calls": 88
+    }
+  }
+}

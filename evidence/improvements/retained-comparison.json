@@ -1,0 +1,92 @@
+{
+  "eval": {
+    "baseline": {
+      "passed": 12,
+      "total": 12,
+      "behaviour_accuracy": 1.0,
+      "retrieval_hit_rate": 1.0,
+      "mean_citation_precision": 1.0
+    },
+    "retained": {
+      "passed": 12,
+      "total": 12,
+      "behaviour_accuracy": 1.0,
+      "retrieval_hit_rate": 1.0,
+      "mean_citation_precision": 1.0
+    },
+    "changed_answers": [],
+    "fixed": [],
+    "regressed": []
+  },
+  "holdout": {
+    "baseline": {
+      "passed": 34,
+      "total": 34,
+      "behaviour_accuracy": 1.0,
+      "retrieval_hit_rate": 1.0,
+      "mean_citation_precision": 0.9583
+    },
+    "retained": {
+      "passed": 34,
+      "total": 34,
+      "behaviour_accuracy": 1.0,
+      "retrieval_hit_rate": 1.0,
+      "mean_citation_precision": 0.9583
+    },
+    "changed_answers": [
+      "H05",
+      "H17",
+      "H20",
+      "H21"
+    ],
+    "fixed": [],
+    "regressed": []
+  },
+  "test1": {
+    "baseline": {
+      "passed": 23,
+      "total": 24,
+      "behaviour_accuracy": 0.9583,
+      "retrieval_hit_rate": 1.0,
+      "mean_citation_precision": 1.0
+    },
+    "retained": {
+      "passed": 23,
+      "total": 24,
+      "behaviour_accuracy": 0.9583,
+      "retrieval_hit_rate": 1.0,
+      "mean_citation_precision": 1.0
+    },
+    "changed_answers": [
+      "T03",
+      "T09",
+      "T10",
+      "T12"
+    ],
+    "fixed": [],
+    "regressed": []
+  },
+  "test2": {
+    "baseline": {
+      "passed": 29,
+      "total": 32,
+      "behaviour_accuracy": 0.9375,
+      "retrieval_hit_rate": 1.0,
+      "mean_citation_precision": 1.0
+    },
+    "retained": {
+      "passed": 29,
+      "total": 32,
+      "behaviour_accuracy": 0.9375,
+      "retrieval_hit_rate": 1.0,
+      "mean_citation_precision": 1.0
+    },
+    "changed_answers": [
+      "U06",
+      "U15",
+      "U17"
+    ],
+    "fixed": [],
+    "regressed": []
+  }
+}

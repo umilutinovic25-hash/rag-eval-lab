@@ -1,0 +1,104 @@
+{
+  "rubric_status": "assistant_draft_not_human_approved",
+  "reviewer": null,
+  "semantic_correctness": "not_assessed",
+  "interpretation": "Draft substring coverage; not proof of entailment or an approved reference.",
+  "ambiguous_items": [
+    {
+      "id": "T02",
+      "reason": "A separate sick-leave policy does not explicitly specify deduction from annual leave. A human must decide whether the reference supports a categorical no."
+    }
+  ],
+  "rows": [
+    {
+      "id": "E09",
+      "question": "Where do I request a replacement laptop and how long does it take?",
+      "answer": "Request a replacement laptop in the IT portal under Hardware. Handover can take up to 5 business days after manager approval. [hb-01-chunk-1][hb-01-chunk-2]\nSource [hb-01-chunk-1]: \"After manager approval, a replacement laptop is set up by IT staff with your files, accounts, email and access rights, and handover can take up to 5 business days.\"\nSource [hb-01-chunk-2]: \"Report lost or stolen devices to security first. Request a replacement laptop in IT portal under Hardware.\"",
+      "citations": [
+        "hb-01-chunk-1",
+        "hb-01-chunk-2"
+      ],
+      "refused": false,
+      "model_slots": {
+        "request_location": true,
+        "request_section": true,
+        "duration": true
+      },
+      "source_slots": {
+        "request_location": true,
+        "request_section": true,
+        "duration": true
+      },
+      "full_answer_slots": {
+        "request_location": true,
+        "request_section": true,
+        "duration": true
+      },
+      "human_verdict": null
+    },
+    {
+      "id": "H20",
+      "question": "Where do I order a new headset?",
+      "answer": "You order a new headset through the same form used for ordering accessories like a mouse. [hb-01-chunk-3]\nSource [hb-01-chunk-3]: \"Accessories such as mouse or headset are ordered through that same form.\"",
+      "citations": [
+        "hb-01-chunk-3"
+      ],
+      "refused": false,
+      "model_slots": {
+        "form_location": false,
+        "form_section": false
+      },
+      "source_slots": {
+        "form_location": false,
+        "form_section": false
+      },
+      "full_answer_slots": {
+        "form_location": false,
+        "form_section": false
+      },
+      "human_verdict": null
+    },
+    {
+      "id": "U17",
+      "question": "When are the onboarding check-ins with my manager?",
+      "answer": "The onboarding check-ins with your manager are scheduled at the end of month one and after three months. [hb-06-chunk-2]\nSource [hb-06-chunk-2]: \"Your manager schedules a check-in at end of month one and again after three months.\"\nSource [hb-06-chunk-0]: \"New colleagues follow a two-week onboarding plan.\"",
+      "citations": [
+        "hb-06-chunk-2",
+        "hb-06-chunk-0"
+      ],
+      "refused": false,
+      "model_slots": {
+        "first_checkin": true,
+        "second_checkin": true
+      },
+      "source_slots": {
+        "first_checkin": true,
+        "second_checkin": true
+      },
+      "full_answer_slots": {
+        "first_checkin": true,
+        "second_checkin": true
+      },
+      "human_verdict": null
+    },
+    {
+      "id": "U13",
+      "question": "Can I work from home four days a week?",
+      "answer": "No. [hb-03-chunk-0]\nSource [hb-03-chunk-0]: \"Remote work: employees can work remotely up to 3 days per week.\"",
+      "citations": [
+        "hb-03-chunk-0"
+      ],
+      "refused": false,
+      "model_slots": {
+        "current_limit": false
+      },
+      "source_slots": {
+        "current_limit": true
+      },
+      "full_answer_slots": {
+        "current_limit": true
+      },
+      "human_verdict": null
+    }
+  ]
+}
