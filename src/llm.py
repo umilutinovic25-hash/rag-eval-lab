@@ -6,6 +6,7 @@ import re
 import urllib.request
 
 from . import config
+from .claim_checks import clauses
 from .embeddings import CACHE_PATH as EMBEDDING_CACHE_PATH, EmbeddingError, load_cache, save_cache
 
 
@@ -85,7 +86,7 @@ def span_is_in_passage(span: str, passage: str) -> bool:
     if not words or words[0] == "none":
         return False
     has_negative = lambda tokens: any(t in NEGATIONS or t.endswith("n't") for t in tokens)
-    for sentence in re.split(r"(?<=[.!?])\s+", passage):
+    for sentence in clauses(passage):
         source = WORD_RE.findall(sentence.casefold().replace("’", "'"))
         for start in range(len(source) - len(words) + 1):
             if source[start : start + len(words)] == words:

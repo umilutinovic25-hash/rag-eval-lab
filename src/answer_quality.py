@@ -12,6 +12,7 @@ import re
 from pathlib import Path
 
 from . import config
+from .claim_checks import claim_risks
 from .chunking import build_chunks
 from .corpus import load_corpus
 from .eval_runner import EVAL_SET_PATH, load_eval_set, normalise
@@ -63,7 +64,7 @@ def review_flags(answer: str, passages: list[str], expected_fact: str) -> list[s
                 if expected_fact and normalise(expected_fact) in normalise(sentence)]
     if relevant and all(negative(body) != negative(sentence) for sentence in relevant):
         flags.append("negation_mismatch")
-    return flags
+    return sorted(set(flags + claim_risks(body, passages)))
 
 
 def run(path: Path) -> dict:

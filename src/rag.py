@@ -4,6 +4,7 @@ import re
 from . import config
 from .chunking import Chunk, build_chunks
 from .corpus import load_corpus
+from .claim_checks import claim_risks, clauses
 from .llm import LLMError, passage_answers, write_answer
 from .retrieval import RetrievalResult, retrieve_top_k
 
@@ -64,6 +65,13 @@ def generation_issue(text: str, cited: list[RetrievalResult]) -> str | None:
     source = " ".join(item.chunk.text for item in cited)
     if not set(re.findall(r"\d+(?:[.:]\d+)*", body)) <= set(re.findall(r"\d+(?:[.:]\d+)*", source)):
         return "unsupported_number"
+    by_id = {item.chunk.chunk_id: item.chunk.text for item in cited}
+    for sentence in re.split(r"(?<=[.!?])\s+", text):
+        linked = re.findall(r"\[([^\[\]\n]+)\]", sentence)
+        sources = [by_id[c] for c in linked] if linked else list(by_id.values())
+        risks = claim_risks(sentence, sources)
+        if risks:
+            return risks[0]
     return None
 
 

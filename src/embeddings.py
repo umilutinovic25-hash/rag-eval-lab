@@ -100,7 +100,14 @@ def embed(texts: list[str]) -> list[list[float]]:
 def cosine(a: list[float], b: list[float]) -> float:
     dimension = validate_vector(a)
     validate_vector(b, dimension)
-    norm = math.sqrt(sum(x * x for x in a)) * math.sqrt(sum(y * y for y in b))
-    if norm == 0:
+    # Scaling avoids overflow in squares, products and even the unscaled norm.
+    scale_a, scale_b = max(abs(x) for x in a), max(abs(y) for y in b)
+    if scale_a == 0 or scale_b == 0:
         return 0.0
-    return sum(x * y for x, y in zip(a, b)) / norm
+    scaled_a = [x / scale_a for x in a]
+    scaled_b = [y / scale_b for y in b]
+    norm_a, norm_b = math.hypot(*scaled_a), math.hypot(*scaled_b)
+    score = math.fsum((x / norm_a) * (y / norm_b) for x, y in zip(scaled_a, scaled_b))
+    if not math.isfinite(score):
+        raise EmbeddingError("Cosine result is not finite.")
+    return max(-1.0, min(1.0, score))

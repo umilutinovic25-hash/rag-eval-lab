@@ -1,0 +1,4 @@
+D6 eval {'passed': 12, 'total': 12, 'behaviour_accuracy': 1.0, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 1.0} 10
+D6 holdout {'passed': 34, 'total': 34, 'behaviour_accuracy': 1.0, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 0.9583} 95
+D6 test1 {'passed': 23, 'total': 24, 'behaviour_accuracy': 0.9583, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 1.0} 67
+D6 test2 {'passed': 29, 'total': 32, 'behaviour_accuracy': 0.9375, 'retrieval_hit_rate': 1.0, 'mean_citation_precision': 1.0} 89

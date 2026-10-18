@@ -83,3 +83,30 @@ def test_rubric_is_honestly_marked_as_unreviewed():
     r=json.loads(RUBRIC_PATH.read_text())
     assert r['status']=='assistant_draft_not_human_approved' and r['reviewer'] is None
     assert any(i['id']=='T02' for i in r['ambiguous_items'])
+
+
+@pytest.mark.parametrize('answer',[
+ 'Passwords must be changed every 90 years [a].',
+ 'Passwords must be changed every ninety years [a].',
+ 'Do not change passwords every 90 days [a].',
+])
+def test_units_and_negation_in_generated_claims_are_rejected(answer):
+    c=Chunk('a','d','T','v','current','Passwords must be changed every 90 days.')
+    assert rag.generation_issue(answer,[RetrievalResult(c,.9)]) in ('unsupported_quantity_unit','negation_conflict')
+
+
+def test_valid_positive_clause_not_rejected_due_to_other_clause():
+    assert llm.span_is_in_passage('parking costs 10 EUR','No annual fee applies; parking costs 10 EUR.')
+
+
+def test_cosine_large_finite_vectors_is_stable():
+    from src.embeddings import cosine
+    assert cosine([1e308],[1e308])==pytest.approx(1.0)
+
+
+@pytest.mark.parametrize('answer,source',[
+ ('Bring it to the IT desk on floor two. [a]','For a laptop that does not start, bring it to IT desk on floor two.'),
+ ('No, you cannot request leave the day before as it must be made two weeks in advance. [a]','Leave requests must be made two weeks in advance in HR portal.'),
+])
+def test_negation_about_a_different_action_does_not_force_fallback(answer,source):
+    assert rag.generation_issue(answer,[RetrievalResult(Chunk('a','d','T','v','current',source),.9)]) is None
