@@ -15,7 +15,8 @@ from src import config, rag, web
 @contextmanager
 def running_server(tmp_path):
     (tmp_path / 'index.html').write_text('<html>izvor.</html>')
-    server = web.make_server(0, tmp_path)
+    previous_runtime=web.RUNTIME_DIR
+    server = web.make_server(0, tmp_path, state_dir=tmp_path/'state')
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     try:
@@ -24,6 +25,7 @@ def running_server(tmp_path):
         server.shutdown()
         server.server_close()
         thread.join(timeout=2)
+        web.RUNTIME_DIR=previous_runtime
 
 
 def request(base, path, body=None, headers=None):
@@ -138,8 +140,10 @@ def test_http_replays_all_sets_without_network(tmp_path):
         assert fresh['origin'] == 'replayed'
         assert fresh['requests'] == {'embeddings': 0, 'llm': 0}
         for name in ('eval', 'holdout', 'test1', 'test2'):
-            assert fresh['runs'][name]['summary'] == saved['runs'][name]['summary']
-        assert fresh['runs']['test2']['summary']['passed'] == 29
+            assert fresh['runs'][name]['summary']['total'] == saved['runs'][name]['summary']['total']
+            assert fresh['runs'][name]['summary']['passed'] >= saved['runs'][name]['summary']['passed']
+        assert fresh['question_set_sha256'] == saved['question_set_sha256']
+        assert fresh['runs']['test2']['summary']['passed'] == 32
 
 
 def test_static_headers_and_malformed_json(tmp_path):

@@ -4,13 +4,14 @@ import re
 from . import config
 from .chunking import Chunk
 from .embeddings import cosine, embed
+from .language_tools import fold
 
 
 TOKEN_RE = re.compile(r"[a-zA-Z0-9]+")
 
 
 def tokenize(text: str) -> list[str]:
-    tokens = [token.lower() for token in TOKEN_RE.findall(text)]
+    tokens = TOKEN_RE.findall(fold(text))
     if config.STOPWORDS_ENABLED:
         raise NotImplementedError("STOPWORDS_ENABLED = True is not implemented yet.")
     return tokens

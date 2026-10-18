@@ -1,0 +1,1352 @@
+{
+  "kind": "stability",
+  "created_at": "2026-10-18T22:35:00.170721+00:00",
+  "repeats": 3,
+  "rows": [
+    {
+      "repeat": 1,
+      "question": "How long does laptop replacement take?",
+      "result": {
+        "answer": "Up to 5 business days. [hb-01-chunk-1]\nSource [hb-01-chunk-1]: \"After manager approval, a replacement laptop is set up by IT staff with your files, accounts, email and access rights, and handover can take up to 5 business days.\"",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-01-chunk-1",
+            "doc_id": "hb-01",
+            "title": "Equipment replacement",
+            "version": "2026",
+            "status": "current",
+            "text": "After manager approval, a replacement laptop is set up by IT staff with your files, accounts, email and access rights, and handover can take up to 5 business days."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-01-chunk-1",
+            "doc_id": "hb-01",
+            "title": "Equipment replacement",
+            "version": "2026",
+            "status": "current",
+            "text": "After manager approval, a replacement laptop is set up by IT staff with your files, accounts, email and access rights, and handover can take up to 5 business days.",
+            "score": 0.7260425923060128
+          },
+          {
+            "chunk_id": "hb-01-chunk-0",
+            "doc_id": "hb-01",
+            "title": "Equipment replacement",
+            "version": "2026",
+            "status": "current",
+            "text": "Laptop replacement: broken, lost or stolen laptops can be replaced.",
+            "score": 0.6233198785486164
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-01-chunk-1",
+                "score": 0.7260425923060128
+              },
+              {
+                "chunk_id": "hb-01-chunk-0",
+                "score": 0.6233198785486164
+              },
+              {
+                "chunk_id": "hb-01-chunk-2",
+                "score": 0.5921389020721081
+              },
+              {
+                "chunk_id": "hb-06-chunk-0",
+                "score": 0.5484595738240942
+              },
+              {
+                "chunk_id": "hb-10-chunk-1",
+                "score": 0.53001035452921
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-01-chunk-1"
+            ],
+            "expanded": [
+              "hb-01-chunk-1"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "generation",
+            "text": "Up to 5 business days. [hb-01-chunk-1]",
+            "metadata": {
+              "done_reason": "stop",
+              "done": true,
+              "model": "qwen2.5:7b",
+              "eval_count": 18,
+              "prompt_eval_count": 151,
+              "total_duration": 4266765375
+            }
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-01-chunk-1"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "How long does laptop replacement take?",
+        "profile": "verified",
+        "language": "en",
+        "retrieval_question": "How long does laptop replacement take?",
+        "translation_review_status": null,
+        "seconds": 6.089,
+        "created_at": "2026-10-18T22:34:51.803913+00:00",
+        "quality": {
+          "version": "heuristic-v1",
+          "caveat": "Heuristički pregled; oznaka literal potvrđuje prepisan tekst, ne relevantnost ili semantičku potpunost.",
+          "claims": [
+            {
+              "text": "Up to 5 business days.",
+              "citations": [
+                "hb-01-chunk-1"
+              ],
+              "status": "literal",
+              "reasons": []
+            }
+          ],
+          "risk_count": 0,
+          "review_count": 0,
+          "completeness": [
+            {
+              "part": "duration",
+              "present": true
+            }
+          ]
+        },
+        "usage": {
+          "requests": {
+            "embeddings": 1,
+            "llm": 1
+          },
+          "cache_hits": {
+            "embeddings": 0,
+            "llm": 0
+          },
+          "prompt_tokens": 151,
+          "output_tokens": 18,
+          "unknown_token_calls": 0,
+          "model_seconds": 6.015309125970816,
+          "phases": [
+            {
+              "stage": "retrieval",
+              "seconds": 0.000289
+            },
+            {
+              "stage": "retrieval",
+              "seconds": 1.759653
+            },
+            {
+              "stage": "generation",
+              "seconds": 4.291135
+            }
+          ]
+        },
+        "provenance": {
+          "corpus_sha256": "b36e3dd8d140424ba3889031040c0befa5039e5336e7c9f12cee6ada26f6ca0f",
+          "config_sha256": "c0baad49820e72e282d5161d16c7384c84df1b22f5d06a7fc29d7763365516c2",
+          "config": {
+            "CHUNK_STRATEGY": "sentences",
+            "CHUNK_SIZE": 140,
+            "CHUNK_OVERLAP": 30,
+            "RETRIEVAL_MODE": "semantic",
+            "EMBEDDING_MODEL": "bge-m3",
+            "TOP_K": 2,
+            "CONTEXT_NEIGHBORS": 1,
+            "CONTEXT_POLICY": "references",
+            "RETRIEVAL_MIN_SCORE": 0.01,
+            "STOPWORDS_ENABLED": false,
+            "CURRENT_ONLY": true,
+            "EVIDENCE_RULES_ENABLED": true,
+            "REFUSAL_THRESHOLD": 0.12,
+            "SEMANTIC_REFUSAL_THRESHOLD": 0.6,
+            "CITATION_MIN_SCORE": null,
+            "SEMANTIC_CITATION_MIN_SCORE": 0.65,
+            "RERANK": "llm-gray-zone",
+            "RERANK_MODEL": "qwen2.5:7b",
+            "RERANK_CANDIDATES": 5,
+            "RERANK_GRAY_ZONE": [
+              0.5,
+              0.7
+            ],
+            "RERANK_JUDGE": "either",
+            "RERANK_YESNO_MODEL": "gemma3:4b",
+            "RERANK_SPAN_PROMPT": "Copy the exact words from the passage that answer the question. If the passage does not contain the answer, reply NONE.\n\nPassage: {passage}\nQuestion: {question}\nWords from the passage:",
+            "RERANK_PROMPT": "Question: {question}\nPassage: {passage}\nDoes the passage contain the information needed to answer the question? Answer only yes or no.",
+            "RERANK_STRUCTURED_PROMPT": "You check whether an employee handbook passage can answer a question. Return ONLY a JSON object with exactly two keys: status and evidence. status is supported if the passage provides the requested fact, contradicted if it directly rules out the premise or proposed action in the question, or insufficient if it only shares the topic. Both supported and contradicted mean that an answer can be given; a negative answer is not missing evidence. For a partial answer to a multipart question, include the fact this passage supplies. evidence is a list of complete sentences copied verbatim from the passage, or [] for insufficient. Do not infer missing facts or return yes/no.\n\nPassage: {passage}\nQuestion: {question}\nJSON:",
+            "ANSWER_MODE": "llm",
+            "ANSWER_QUOTES": true,
+            "GENERATION_MODEL": "qwen2.5:7b",
+            "GENERATION_PROMPT": "Answer the question using only facts stated in the passages below. Do not add conditions, people, steps or details that the passages do not state. Reply in one or two short sentences, then list the ids of the passages you used in square brackets, for example [hb-01-chunk-0].\n\nPassages:\n{passages}\n\nQuestion: {question}\nAnswer:"
+          },
+          "model_identity": {
+            "status": "live_observed",
+            "models": {
+              "bge-m3:latest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+              "qwen2.5-coder:7b": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+              "qwen2.5:7b": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+              "gemma3:4b": "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a",
+              "phi3:mini": "4f222292793889a9a40a020799cfd28d53f3e01af25d48e06c5e708610fc47e9",
+              "llama3.2:1b": "baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878",
+              "qwen2.5:1.5b": "65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b",
+              "gemma2:2b": "8ccf136fdd5298f3ffe2d69862750ea7fb56555fa4d5b18c04e3fa4d82ee09d7",
+              "mistral:latest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+              "qwen2.5:3b": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+              "llama3.2:latest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72"
+            }
+          },
+          "filters": {},
+          "cache_policy": "digest_and_options",
+          "language": "en"
+        },
+        "disposition": "answer",
+        "clarification": [],
+        "answer_sha256": "30d5f58bcd134cc96abe4e3dc1317cfb9008362a5eb14d853f2dd3610761c389"
+      }
+    },
+    {
+      "repeat": 1,
+      "question": "What are the IT support hours?",
+      "result": {
+        "answer": "IT support hours are 08:00 to 18:00, Monday to Friday. [hb-10-chunk-0]\nSource [hb-10-chunk-0]: \"IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.\"",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-10-chunk-0",
+            "doc_id": "hb-10",
+            "title": "IT support",
+            "version": "2026",
+            "status": "current",
+            "text": "IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-10-chunk-0",
+            "doc_id": "hb-10",
+            "title": "IT support",
+            "version": "2026",
+            "status": "current",
+            "text": "IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.",
+            "score": 0.7943904574761863
+          },
+          {
+            "chunk_id": "hb-03-chunk-3",
+            "doc_id": "hb-03",
+            "title": "Remote work policy",
+            "version": "2026",
+            "status": "current",
+            "text": "Core hours from 10:00 to 15:00 apply on remote days, and you must be reachable by chat and phone during core hours.",
+            "score": 0.623507862786626
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-10-chunk-0",
+                "score": 0.7943904574761863
+              },
+              {
+                "chunk_id": "hb-03-chunk-3",
+                "score": 0.623507862786626
+              },
+              {
+                "chunk_id": "hb-10-chunk-1",
+                "score": 0.614352667265867
+              },
+              {
+                "chunk_id": "hb-01-chunk-1",
+                "score": 0.595073647097322
+              },
+              {
+                "chunk_id": "hb-03-chunk-2",
+                "score": 0.5225134077534582
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-10-chunk-0"
+            ],
+            "expanded": [
+              "hb-10-chunk-0"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "generation",
+            "text": "IT support hours are 08:00 to 18:00, Monday to Friday. [hb-10-chunk-0]",
+            "metadata": {
+              "done_reason": "stop",
+              "done": true,
+              "model": "qwen2.5:7b",
+              "eval_count": 33,
+              "prompt_eval_count": 146,
+              "total_duration": 1502112042
+            }
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-10-chunk-0"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "What are the IT support hours?",
+        "profile": "verified",
+        "language": "en",
+        "retrieval_question": "What are the IT support hours?",
+        "translation_review_status": null,
+        "seconds": 2.596,
+        "created_at": "2026-10-18T22:34:54.401234+00:00",
+        "quality": {
+          "version": "heuristic-v1",
+          "caveat": "Heuristički pregled; oznaka literal potvrđuje prepisan tekst, ne relevantnost ili semantičku potpunost.",
+          "claims": [
+            {
+              "text": "IT support hours are 08:00 to 18:00, Monday to Friday.",
+              "citations": [
+                "hb-10-chunk-0"
+              ],
+              "status": "literal",
+              "reasons": []
+            }
+          ],
+          "risk_count": 0,
+          "review_count": 0,
+          "completeness": []
+        },
+        "usage": {
+          "requests": {
+            "embeddings": 1,
+            "llm": 1
+          },
+          "cache_hits": {
+            "embeddings": 24,
+            "llm": 0
+          },
+          "prompt_tokens": 146,
+          "output_tokens": 33,
+          "unknown_token_calls": 0,
+          "model_seconds": 2.5689963740005624,
+          "phases": [
+            {
+              "stage": "retrieval",
+              "seconds": 0.000125
+            },
+            {
+              "stage": "retrieval",
+              "seconds": 1.084215
+            },
+            {
+              "stage": "generation",
+              "seconds": 1.508708
+            }
+          ]
+        },
+        "provenance": {
+          "corpus_sha256": "b36e3dd8d140424ba3889031040c0befa5039e5336e7c9f12cee6ada26f6ca0f",
+          "config_sha256": "c0baad49820e72e282d5161d16c7384c84df1b22f5d06a7fc29d7763365516c2",
+          "config": {
+            "CHUNK_STRATEGY": "sentences",
+            "CHUNK_SIZE": 140,
+            "CHUNK_OVERLAP": 30,
+            "RETRIEVAL_MODE": "semantic",
+            "EMBEDDING_MODEL": "bge-m3",
+            "TOP_K": 2,
+            "CONTEXT_NEIGHBORS": 1,
+            "CONTEXT_POLICY": "references",
+            "RETRIEVAL_MIN_SCORE": 0.01,
+            "STOPWORDS_ENABLED": false,
+            "CURRENT_ONLY": true,
+            "EVIDENCE_RULES_ENABLED": true,
+            "REFUSAL_THRESHOLD": 0.12,
+            "SEMANTIC_REFUSAL_THRESHOLD": 0.6,
+            "CITATION_MIN_SCORE": null,
+            "SEMANTIC_CITATION_MIN_SCORE": 0.65,
+            "RERANK": "llm-gray-zone",
+            "RERANK_MODEL": "qwen2.5:7b",
+            "RERANK_CANDIDATES": 5,
+            "RERANK_GRAY_ZONE": [
+              0.5,
+              0.7
+            ],
+            "RERANK_JUDGE": "either",
+            "RERANK_YESNO_MODEL": "gemma3:4b",
+            "RERANK_SPAN_PROMPT": "Copy the exact words from the passage that answer the question. If the passage does not contain the answer, reply NONE.\n\nPassage: {passage}\nQuestion: {question}\nWords from the passage:",
+            "RERANK_PROMPT": "Question: {question}\nPassage: {passage}\nDoes the passage contain the information needed to answer the question? Answer only yes or no.",
+            "RERANK_STRUCTURED_PROMPT": "You check whether an employee handbook passage can answer a question. Return ONLY a JSON object with exactly two keys: status and evidence. status is supported if the passage provides the requested fact, contradicted if it directly rules out the premise or proposed action in the question, or insufficient if it only shares the topic. Both supported and contradicted mean that an answer can be given; a negative answer is not missing evidence. For a partial answer to a multipart question, include the fact this passage supplies. evidence is a list of complete sentences copied verbatim from the passage, or [] for insufficient. Do not infer missing facts or return yes/no.\n\nPassage: {passage}\nQuestion: {question}\nJSON:",
+            "ANSWER_MODE": "llm",
+            "ANSWER_QUOTES": true,
+            "GENERATION_MODEL": "qwen2.5:7b",
+            "GENERATION_PROMPT": "Answer the question using only facts stated in the passages below. Do not add conditions, people, steps or details that the passages do not state. Reply in one or two short sentences, then list the ids of the passages you used in square brackets, for example [hb-01-chunk-0].\n\nPassages:\n{passages}\n\nQuestion: {question}\nAnswer:"
+          },
+          "model_identity": {
+            "status": "live_observed",
+            "models": {
+              "bge-m3:latest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+              "qwen2.5-coder:7b": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+              "qwen2.5:7b": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+              "gemma3:4b": "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a",
+              "phi3:mini": "4f222292793889a9a40a020799cfd28d53f3e01af25d48e06c5e708610fc47e9",
+              "llama3.2:1b": "baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878",
+              "qwen2.5:1.5b": "65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b",
+              "gemma2:2b": "8ccf136fdd5298f3ffe2d69862750ea7fb56555fa4d5b18c04e3fa4d82ee09d7",
+              "mistral:latest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+              "qwen2.5:3b": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+              "llama3.2:latest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72"
+            }
+          },
+          "filters": {},
+          "cache_policy": "digest_and_options",
+          "language": "en"
+        },
+        "disposition": "answer",
+        "clarification": [],
+        "answer_sha256": "7acf5921bf8fc8872cbd1f670d336f23725f836796df2c37c96482f2057094d5"
+      }
+    },
+    {
+      "repeat": 2,
+      "question": "How long does laptop replacement take?",
+      "result": {
+        "answer": "Up to 5 business days. [hb-01-chunk-1]\nSource [hb-01-chunk-1]: \"After manager approval, a replacement laptop is set up by IT staff with your files, accounts, email and access rights, and handover can take up to 5 business days.\"",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-01-chunk-1",
+            "doc_id": "hb-01",
+            "title": "Equipment replacement",
+            "version": "2026",
+            "status": "current",
+            "text": "After manager approval, a replacement laptop is set up by IT staff with your files, accounts, email and access rights, and handover can take up to 5 business days."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-01-chunk-1",
+            "doc_id": "hb-01",
+            "title": "Equipment replacement",
+            "version": "2026",
+            "status": "current",
+            "text": "After manager approval, a replacement laptop is set up by IT staff with your files, accounts, email and access rights, and handover can take up to 5 business days.",
+            "score": 0.7260425923060128
+          },
+          {
+            "chunk_id": "hb-01-chunk-0",
+            "doc_id": "hb-01",
+            "title": "Equipment replacement",
+            "version": "2026",
+            "status": "current",
+            "text": "Laptop replacement: broken, lost or stolen laptops can be replaced.",
+            "score": 0.6233198785486164
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-01-chunk-1",
+                "score": 0.7260425923060128
+              },
+              {
+                "chunk_id": "hb-01-chunk-0",
+                "score": 0.6233198785486164
+              },
+              {
+                "chunk_id": "hb-01-chunk-2",
+                "score": 0.5921389020721081
+              },
+              {
+                "chunk_id": "hb-06-chunk-0",
+                "score": 0.5484595738240942
+              },
+              {
+                "chunk_id": "hb-10-chunk-1",
+                "score": 0.53001035452921
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-01-chunk-1"
+            ],
+            "expanded": [
+              "hb-01-chunk-1"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "generation",
+            "text": "Up to 5 business days. [hb-01-chunk-1]",
+            "metadata": {
+              "done_reason": "stop",
+              "done": true,
+              "model": "qwen2.5:7b",
+              "eval_count": 18,
+              "prompt_eval_count": 151,
+              "total_duration": 854488250
+            }
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-01-chunk-1"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "How long does laptop replacement take?",
+        "profile": "verified",
+        "language": "en",
+        "retrieval_question": "How long does laptop replacement take?",
+        "translation_review_status": null,
+        "seconds": 1.438,
+        "created_at": "2026-10-18T22:34:55.840607+00:00",
+        "quality": {
+          "version": "heuristic-v1",
+          "caveat": "Heuristički pregled; oznaka literal potvrđuje prepisan tekst, ne relevantnost ili semantičku potpunost.",
+          "claims": [
+            {
+              "text": "Up to 5 business days.",
+              "citations": [
+                "hb-01-chunk-1"
+              ],
+              "status": "literal",
+              "reasons": []
+            }
+          ],
+          "risk_count": 0,
+          "review_count": 0,
+          "completeness": [
+            {
+              "part": "duration",
+              "present": true
+            }
+          ]
+        },
+        "usage": {
+          "requests": {
+            "embeddings": 1,
+            "llm": 1
+          },
+          "cache_hits": {
+            "embeddings": 0,
+            "llm": 0
+          },
+          "prompt_tokens": 151,
+          "output_tokens": 18,
+          "unknown_token_calls": 0,
+          "model_seconds": 1.4049962910066824,
+          "phases": [
+            {
+              "stage": "retrieval",
+              "seconds": 0.000126
+            },
+            {
+              "stage": "retrieval",
+              "seconds": 0.56806
+            },
+            {
+              "stage": "generation",
+              "seconds": 0.864077
+            }
+          ]
+        },
+        "provenance": {
+          "corpus_sha256": "b36e3dd8d140424ba3889031040c0befa5039e5336e7c9f12cee6ada26f6ca0f",
+          "config_sha256": "c0baad49820e72e282d5161d16c7384c84df1b22f5d06a7fc29d7763365516c2",
+          "config": {
+            "CHUNK_STRATEGY": "sentences",
+            "CHUNK_SIZE": 140,
+            "CHUNK_OVERLAP": 30,
+            "RETRIEVAL_MODE": "semantic",
+            "EMBEDDING_MODEL": "bge-m3",
+            "TOP_K": 2,
+            "CONTEXT_NEIGHBORS": 1,
+            "CONTEXT_POLICY": "references",
+            "RETRIEVAL_MIN_SCORE": 0.01,
+            "STOPWORDS_ENABLED": false,
+            "CURRENT_ONLY": true,
+            "EVIDENCE_RULES_ENABLED": true,
+            "REFUSAL_THRESHOLD": 0.12,
+            "SEMANTIC_REFUSAL_THRESHOLD": 0.6,
+            "CITATION_MIN_SCORE": null,
+            "SEMANTIC_CITATION_MIN_SCORE": 0.65,
+            "RERANK": "llm-gray-zone",
+            "RERANK_MODEL": "qwen2.5:7b",
+            "RERANK_CANDIDATES": 5,
+            "RERANK_GRAY_ZONE": [
+              0.5,
+              0.7
+            ],
+            "RERANK_JUDGE": "either",
+            "RERANK_YESNO_MODEL": "gemma3:4b",
+            "RERANK_SPAN_PROMPT": "Copy the exact words from the passage that answer the question. If the passage does not contain the answer, reply NONE.\n\nPassage: {passage}\nQuestion: {question}\nWords from the passage:",
+            "RERANK_PROMPT": "Question: {question}\nPassage: {passage}\nDoes the passage contain the information needed to answer the question? Answer only yes or no.",
+            "RERANK_STRUCTURED_PROMPT": "You check whether an employee handbook passage can answer a question. Return ONLY a JSON object with exactly two keys: status and evidence. status is supported if the passage provides the requested fact, contradicted if it directly rules out the premise or proposed action in the question, or insufficient if it only shares the topic. Both supported and contradicted mean that an answer can be given; a negative answer is not missing evidence. For a partial answer to a multipart question, include the fact this passage supplies. evidence is a list of complete sentences copied verbatim from the passage, or [] for insufficient. Do not infer missing facts or return yes/no.\n\nPassage: {passage}\nQuestion: {question}\nJSON:",
+            "ANSWER_MODE": "llm",
+            "ANSWER_QUOTES": true,
+            "GENERATION_MODEL": "qwen2.5:7b",
+            "GENERATION_PROMPT": "Answer the question using only facts stated in the passages below. Do not add conditions, people, steps or details that the passages do not state. Reply in one or two short sentences, then list the ids of the passages you used in square brackets, for example [hb-01-chunk-0].\n\nPassages:\n{passages}\n\nQuestion: {question}\nAnswer:"
+          },
+          "model_identity": {
+            "status": "live_observed",
+            "models": {
+              "bge-m3:latest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+              "qwen2.5-coder:7b": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+              "qwen2.5:7b": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+              "gemma3:4b": "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a",
+              "phi3:mini": "4f222292793889a9a40a020799cfd28d53f3e01af25d48e06c5e708610fc47e9",
+              "llama3.2:1b": "baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878",
+              "qwen2.5:1.5b": "65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b",
+              "gemma2:2b": "8ccf136fdd5298f3ffe2d69862750ea7fb56555fa4d5b18c04e3fa4d82ee09d7",
+              "mistral:latest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+              "qwen2.5:3b": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+              "llama3.2:latest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72"
+            }
+          },
+          "filters": {},
+          "cache_policy": "digest_and_options",
+          "language": "en"
+        },
+        "disposition": "answer",
+        "clarification": [],
+        "answer_sha256": "30d5f58bcd134cc96abe4e3dc1317cfb9008362a5eb14d853f2dd3610761c389"
+      }
+    },
+    {
+      "repeat": 2,
+      "question": "What are the IT support hours?",
+      "result": {
+        "answer": "IT support hours are 08:00 to 18:00, Monday to Friday. [hb-10-chunk-0]\nSource [hb-10-chunk-0]: \"IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.\"",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-10-chunk-0",
+            "doc_id": "hb-10",
+            "title": "IT support",
+            "version": "2026",
+            "status": "current",
+            "text": "IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-10-chunk-0",
+            "doc_id": "hb-10",
+            "title": "IT support",
+            "version": "2026",
+            "status": "current",
+            "text": "IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.",
+            "score": 0.7943904574761863
+          },
+          {
+            "chunk_id": "hb-03-chunk-3",
+            "doc_id": "hb-03",
+            "title": "Remote work policy",
+            "version": "2026",
+            "status": "current",
+            "text": "Core hours from 10:00 to 15:00 apply on remote days, and you must be reachable by chat and phone during core hours.",
+            "score": 0.623507862786626
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-10-chunk-0",
+                "score": 0.7943904574761863
+              },
+              {
+                "chunk_id": "hb-03-chunk-3",
+                "score": 0.623507862786626
+              },
+              {
+                "chunk_id": "hb-10-chunk-1",
+                "score": 0.614352667265867
+              },
+              {
+                "chunk_id": "hb-01-chunk-1",
+                "score": 0.595073647097322
+              },
+              {
+                "chunk_id": "hb-03-chunk-2",
+                "score": 0.5225134077534582
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-10-chunk-0"
+            ],
+            "expanded": [
+              "hb-10-chunk-0"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "generation",
+            "text": "IT support hours are 08:00 to 18:00, Monday to Friday. [hb-10-chunk-0]",
+            "metadata": {
+              "done_reason": "stop",
+              "done": true,
+              "model": "qwen2.5:7b",
+              "eval_count": 33,
+              "prompt_eval_count": 146,
+              "total_duration": 1435252791
+            }
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-10-chunk-0"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "What are the IT support hours?",
+        "profile": "verified",
+        "language": "en",
+        "retrieval_question": "What are the IT support hours?",
+        "translation_review_status": null,
+        "seconds": 1.482,
+        "created_at": "2026-10-18T22:34:57.322665+00:00",
+        "quality": {
+          "version": "heuristic-v1",
+          "caveat": "Heuristički pregled; oznaka literal potvrđuje prepisan tekst, ne relevantnost ili semantičku potpunost.",
+          "claims": [
+            {
+              "text": "IT support hours are 08:00 to 18:00, Monday to Friday.",
+              "citations": [
+                "hb-10-chunk-0"
+              ],
+              "status": "literal",
+              "reasons": []
+            }
+          ],
+          "risk_count": 0,
+          "review_count": 0,
+          "completeness": []
+        },
+        "usage": {
+          "requests": {
+            "embeddings": 1,
+            "llm": 1
+          },
+          "cache_hits": {
+            "embeddings": 24,
+            "llm": 0
+          },
+          "prompt_tokens": 146,
+          "output_tokens": 33,
+          "unknown_token_calls": 0,
+          "model_seconds": 1.4546412499912549,
+          "phases": [
+            {
+              "stage": "retrieval",
+              "seconds": 0.00015
+            },
+            {
+              "stage": "retrieval",
+              "seconds": 0.035769
+            },
+            {
+              "stage": "generation",
+              "seconds": 1.44121
+            }
+          ]
+        },
+        "provenance": {
+          "corpus_sha256": "b36e3dd8d140424ba3889031040c0befa5039e5336e7c9f12cee6ada26f6ca0f",
+          "config_sha256": "c0baad49820e72e282d5161d16c7384c84df1b22f5d06a7fc29d7763365516c2",
+          "config": {
+            "CHUNK_STRATEGY": "sentences",
+            "CHUNK_SIZE": 140,
+            "CHUNK_OVERLAP": 30,
+            "RETRIEVAL_MODE": "semantic",
+            "EMBEDDING_MODEL": "bge-m3",
+            "TOP_K": 2,
+            "CONTEXT_NEIGHBORS": 1,
+            "CONTEXT_POLICY": "references",
+            "RETRIEVAL_MIN_SCORE": 0.01,
+            "STOPWORDS_ENABLED": false,
+            "CURRENT_ONLY": true,
+            "EVIDENCE_RULES_ENABLED": true,
+            "REFUSAL_THRESHOLD": 0.12,
+            "SEMANTIC_REFUSAL_THRESHOLD": 0.6,
+            "CITATION_MIN_SCORE": null,
+            "SEMANTIC_CITATION_MIN_SCORE": 0.65,
+            "RERANK": "llm-gray-zone",
+            "RERANK_MODEL": "qwen2.5:7b",
+            "RERANK_CANDIDATES": 5,
+            "RERANK_GRAY_ZONE": [
+              0.5,
+              0.7
+            ],
+            "RERANK_JUDGE": "either",
+            "RERANK_YESNO_MODEL": "gemma3:4b",
+            "RERANK_SPAN_PROMPT": "Copy the exact words from the passage that answer the question. If the passage does not contain the answer, reply NONE.\n\nPassage: {passage}\nQuestion: {question}\nWords from the passage:",
+            "RERANK_PROMPT": "Question: {question}\nPassage: {passage}\nDoes the passage contain the information needed to answer the question? Answer only yes or no.",
+            "RERANK_STRUCTURED_PROMPT": "You check whether an employee handbook passage can answer a question. Return ONLY a JSON object with exactly two keys: status and evidence. status is supported if the passage provides the requested fact, contradicted if it directly rules out the premise or proposed action in the question, or insufficient if it only shares the topic. Both supported and contradicted mean that an answer can be given; a negative answer is not missing evidence. For a partial answer to a multipart question, include the fact this passage supplies. evidence is a list of complete sentences copied verbatim from the passage, or [] for insufficient. Do not infer missing facts or return yes/no.\n\nPassage: {passage}\nQuestion: {question}\nJSON:",
+            "ANSWER_MODE": "llm",
+            "ANSWER_QUOTES": true,
+            "GENERATION_MODEL": "qwen2.5:7b",
+            "GENERATION_PROMPT": "Answer the question using only facts stated in the passages below. Do not add conditions, people, steps or details that the passages do not state. Reply in one or two short sentences, then list the ids of the passages you used in square brackets, for example [hb-01-chunk-0].\n\nPassages:\n{passages}\n\nQuestion: {question}\nAnswer:"
+          },
+          "model_identity": {
+            "status": "live_observed",
+            "models": {
+              "bge-m3:latest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+              "qwen2.5-coder:7b": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+              "qwen2.5:7b": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+              "gemma3:4b": "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a",
+              "phi3:mini": "4f222292793889a9a40a020799cfd28d53f3e01af25d48e06c5e708610fc47e9",
+              "llama3.2:1b": "baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878",
+              "qwen2.5:1.5b": "65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b",
+              "gemma2:2b": "8ccf136fdd5298f3ffe2d69862750ea7fb56555fa4d5b18c04e3fa4d82ee09d7",
+              "mistral:latest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+              "qwen2.5:3b": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+              "llama3.2:latest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72"
+            }
+          },
+          "filters": {},
+          "cache_policy": "digest_and_options",
+          "language": "en"
+        },
+        "disposition": "answer",
+        "clarification": [],
+        "answer_sha256": "7acf5921bf8fc8872cbd1f670d336f23725f836796df2c37c96482f2057094d5"
+      }
+    },
+    {
+      "repeat": 3,
+      "question": "How long does laptop replacement take?",
+      "result": {
+        "answer": "Up to 5 business days. [hb-01-chunk-1]\nSource [hb-01-chunk-1]: \"After manager approval, a replacement laptop is set up by IT staff with your files, accounts, email and access rights, and handover can take up to 5 business days.\"",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-01-chunk-1",
+            "doc_id": "hb-01",
+            "title": "Equipment replacement",
+            "version": "2026",
+            "status": "current",
+            "text": "After manager approval, a replacement laptop is set up by IT staff with your files, accounts, email and access rights, and handover can take up to 5 business days."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-01-chunk-1",
+            "doc_id": "hb-01",
+            "title": "Equipment replacement",
+            "version": "2026",
+            "status": "current",
+            "text": "After manager approval, a replacement laptop is set up by IT staff with your files, accounts, email and access rights, and handover can take up to 5 business days.",
+            "score": 0.7260425923060128
+          },
+          {
+            "chunk_id": "hb-01-chunk-0",
+            "doc_id": "hb-01",
+            "title": "Equipment replacement",
+            "version": "2026",
+            "status": "current",
+            "text": "Laptop replacement: broken, lost or stolen laptops can be replaced.",
+            "score": 0.6233198785486164
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-01-chunk-1",
+                "score": 0.7260425923060128
+              },
+              {
+                "chunk_id": "hb-01-chunk-0",
+                "score": 0.6233198785486164
+              },
+              {
+                "chunk_id": "hb-01-chunk-2",
+                "score": 0.5921389020721081
+              },
+              {
+                "chunk_id": "hb-06-chunk-0",
+                "score": 0.5484595738240942
+              },
+              {
+                "chunk_id": "hb-10-chunk-1",
+                "score": 0.53001035452921
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-01-chunk-1"
+            ],
+            "expanded": [
+              "hb-01-chunk-1"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "generation",
+            "text": "Up to 5 business days. [hb-01-chunk-1]",
+            "metadata": {
+              "done_reason": "stop",
+              "done": true,
+              "model": "qwen2.5:7b",
+              "eval_count": 18,
+              "prompt_eval_count": 151,
+              "total_duration": 906587917
+            }
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-01-chunk-1"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "How long does laptop replacement take?",
+        "profile": "verified",
+        "language": "en",
+        "retrieval_question": "How long does laptop replacement take?",
+        "translation_review_status": null,
+        "seconds": 1.341,
+        "created_at": "2026-10-18T22:34:58.664286+00:00",
+        "quality": {
+          "version": "heuristic-v1",
+          "caveat": "Heuristički pregled; oznaka literal potvrđuje prepisan tekst, ne relevantnost ili semantičku potpunost.",
+          "claims": [
+            {
+              "text": "Up to 5 business days.",
+              "citations": [
+                "hb-01-chunk-1"
+              ],
+              "status": "literal",
+              "reasons": []
+            }
+          ],
+          "risk_count": 0,
+          "review_count": 0,
+          "completeness": [
+            {
+              "part": "duration",
+              "present": true
+            }
+          ]
+        },
+        "usage": {
+          "requests": {
+            "embeddings": 1,
+            "llm": 1
+          },
+          "cache_hits": {
+            "embeddings": 0,
+            "llm": 0
+          },
+          "prompt_tokens": 151,
+          "output_tokens": 18,
+          "unknown_token_calls": 0,
+          "model_seconds": 1.3159440419985913,
+          "phases": [
+            {
+              "stage": "retrieval",
+              "seconds": 0.000118
+            },
+            {
+              "stage": "retrieval",
+              "seconds": 0.423122
+            },
+            {
+              "stage": "generation",
+              "seconds": 0.91405
+            }
+          ]
+        },
+        "provenance": {
+          "corpus_sha256": "b36e3dd8d140424ba3889031040c0befa5039e5336e7c9f12cee6ada26f6ca0f",
+          "config_sha256": "c0baad49820e72e282d5161d16c7384c84df1b22f5d06a7fc29d7763365516c2",
+          "config": {
+            "CHUNK_STRATEGY": "sentences",
+            "CHUNK_SIZE": 140,
+            "CHUNK_OVERLAP": 30,
+            "RETRIEVAL_MODE": "semantic",
+            "EMBEDDING_MODEL": "bge-m3",
+            "TOP_K": 2,
+            "CONTEXT_NEIGHBORS": 1,
+            "CONTEXT_POLICY": "references",
+            "RETRIEVAL_MIN_SCORE": 0.01,
+            "STOPWORDS_ENABLED": false,
+            "CURRENT_ONLY": true,
+            "EVIDENCE_RULES_ENABLED": true,
+            "REFUSAL_THRESHOLD": 0.12,
+            "SEMANTIC_REFUSAL_THRESHOLD": 0.6,
+            "CITATION_MIN_SCORE": null,
+            "SEMANTIC_CITATION_MIN_SCORE": 0.65,
+            "RERANK": "llm-gray-zone",
+            "RERANK_MODEL": "qwen2.5:7b",
+            "RERANK_CANDIDATES": 5,
+            "RERANK_GRAY_ZONE": [
+              0.5,
+              0.7
+            ],
+            "RERANK_JUDGE": "either",
+            "RERANK_YESNO_MODEL": "gemma3:4b",
+            "RERANK_SPAN_PROMPT": "Copy the exact words from the passage that answer the question. If the passage does not contain the answer, reply NONE.\n\nPassage: {passage}\nQuestion: {question}\nWords from the passage:",
+            "RERANK_PROMPT": "Question: {question}\nPassage: {passage}\nDoes the passage contain the information needed to answer the question? Answer only yes or no.",
+            "RERANK_STRUCTURED_PROMPT": "You check whether an employee handbook passage can answer a question. Return ONLY a JSON object with exactly two keys: status and evidence. status is supported if the passage provides the requested fact, contradicted if it directly rules out the premise or proposed action in the question, or insufficient if it only shares the topic. Both supported and contradicted mean that an answer can be given; a negative answer is not missing evidence. For a partial answer to a multipart question, include the fact this passage supplies. evidence is a list of complete sentences copied verbatim from the passage, or [] for insufficient. Do not infer missing facts or return yes/no.\n\nPassage: {passage}\nQuestion: {question}\nJSON:",
+            "ANSWER_MODE": "llm",
+            "ANSWER_QUOTES": true,
+            "GENERATION_MODEL": "qwen2.5:7b",
+            "GENERATION_PROMPT": "Answer the question using only facts stated in the passages below. Do not add conditions, people, steps or details that the passages do not state. Reply in one or two short sentences, then list the ids of the passages you used in square brackets, for example [hb-01-chunk-0].\n\nPassages:\n{passages}\n\nQuestion: {question}\nAnswer:"
+          },
+          "model_identity": {
+            "status": "live_observed",
+            "models": {
+              "bge-m3:latest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+              "qwen2.5-coder:7b": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+              "qwen2.5:7b": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+              "gemma3:4b": "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a",
+              "phi3:mini": "4f222292793889a9a40a020799cfd28d53f3e01af25d48e06c5e708610fc47e9",
+              "llama3.2:1b": "baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878",
+              "qwen2.5:1.5b": "65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b",
+              "gemma2:2b": "8ccf136fdd5298f3ffe2d69862750ea7fb56555fa4d5b18c04e3fa4d82ee09d7",
+              "mistral:latest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+              "qwen2.5:3b": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+              "llama3.2:latest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72"
+            }
+          },
+          "filters": {},
+          "cache_policy": "digest_and_options",
+          "language": "en"
+        },
+        "disposition": "answer",
+        "clarification": [],
+        "answer_sha256": "30d5f58bcd134cc96abe4e3dc1317cfb9008362a5eb14d853f2dd3610761c389"
+      }
+    },
+    {
+      "repeat": 3,
+      "question": "What are the IT support hours?",
+      "result": {
+        "answer": "IT support hours are 08:00 to 18:00, Monday to Friday. [hb-10-chunk-0]\nSource [hb-10-chunk-0]: \"IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.\"",
+        "refused": false,
+        "citations": [
+          {
+            "chunk_id": "hb-10-chunk-0",
+            "doc_id": "hb-10",
+            "title": "IT support",
+            "version": "2026",
+            "status": "current",
+            "text": "IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone."
+          }
+        ],
+        "retrieved": [
+          {
+            "chunk_id": "hb-10-chunk-0",
+            "doc_id": "hb-10",
+            "title": "IT support",
+            "version": "2026",
+            "status": "current",
+            "text": "IT support hours are 08:00 to 18:00, Monday to Friday. Contact support through IT portal or by phone.",
+            "score": 0.7943904574761863
+          },
+          {
+            "chunk_id": "hb-03-chunk-3",
+            "doc_id": "hb-03",
+            "title": "Remote work policy",
+            "version": "2026",
+            "status": "current",
+            "text": "Core hours from 10:00 to 15:00 apply on remote days, and you must be reachable by chat and phone during core hours.",
+            "score": 0.623507862786626
+          }
+        ],
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "hb-10-chunk-0",
+                "score": 0.7943904574761863
+              },
+              {
+                "chunk_id": "hb-03-chunk-3",
+                "score": 0.623507862786626
+              },
+              {
+                "chunk_id": "hb-10-chunk-1",
+                "score": 0.614352667265867
+              },
+              {
+                "chunk_id": "hb-01-chunk-1",
+                "score": 0.595073647097322
+              },
+              {
+                "chunk_id": "hb-03-chunk-2",
+                "score": 0.5225134077534582
+              }
+            ]
+          },
+          {
+            "stage": "decision",
+            "reason": "above_gray_zone"
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "hb-10-chunk-0"
+            ],
+            "expanded": [
+              "hb-10-chunk-0"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "generation",
+            "text": "IT support hours are 08:00 to 18:00, Monday to Friday. [hb-10-chunk-0]",
+            "metadata": {
+              "done_reason": "stop",
+              "done": true,
+              "model": "qwen2.5:7b",
+              "eval_count": 33,
+              "prompt_eval_count": 146,
+              "total_duration": 1455970458
+            }
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "hb-10-chunk-0"
+            ],
+            "fallback": null
+          }
+        ],
+        "fallback": null,
+        "question": "What are the IT support hours?",
+        "profile": "verified",
+        "language": "en",
+        "retrieval_question": "What are the IT support hours?",
+        "translation_review_status": null,
+        "seconds": 1.506,
+        "created_at": "2026-10-18T22:35:00.170094+00:00",
+        "quality": {
+          "version": "heuristic-v1",
+          "caveat": "Heuristički pregled; oznaka literal potvrđuje prepisan tekst, ne relevantnost ili semantičku potpunost.",
+          "claims": [
+            {
+              "text": "IT support hours are 08:00 to 18:00, Monday to Friday.",
+              "citations": [
+                "hb-10-chunk-0"
+              ],
+              "status": "literal",
+              "reasons": []
+            }
+          ],
+          "risk_count": 0,
+          "review_count": 0,
+          "completeness": []
+        },
+        "usage": {
+          "requests": {
+            "embeddings": 1,
+            "llm": 1
+          },
+          "cache_hits": {
+            "embeddings": 24,
+            "llm": 0
+          },
+          "prompt_tokens": 146,
+          "output_tokens": 33,
+          "unknown_token_calls": 0,
+          "model_seconds": 1.4773667489935178,
+          "phases": [
+            {
+              "stage": "retrieval",
+              "seconds": 0.000101
+            },
+            {
+              "stage": "retrieval",
+              "seconds": 0.032639
+            },
+            {
+              "stage": "generation",
+              "seconds": 1.469377
+            }
+          ]
+        },
+        "provenance": {
+          "corpus_sha256": "b36e3dd8d140424ba3889031040c0befa5039e5336e7c9f12cee6ada26f6ca0f",
+          "config_sha256": "c0baad49820e72e282d5161d16c7384c84df1b22f5d06a7fc29d7763365516c2",
+          "config": {
+            "CHUNK_STRATEGY": "sentences",
+            "CHUNK_SIZE": 140,
+            "CHUNK_OVERLAP": 30,
+            "RETRIEVAL_MODE": "semantic",
+            "EMBEDDING_MODEL": "bge-m3",
+            "TOP_K": 2,
+            "CONTEXT_NEIGHBORS": 1,
+            "CONTEXT_POLICY": "references",
+            "RETRIEVAL_MIN_SCORE": 0.01,
+            "STOPWORDS_ENABLED": false,
+            "CURRENT_ONLY": true,
+            "EVIDENCE_RULES_ENABLED": true,
+            "REFUSAL_THRESHOLD": 0.12,
+            "SEMANTIC_REFUSAL_THRESHOLD": 0.6,
+            "CITATION_MIN_SCORE": null,
+            "SEMANTIC_CITATION_MIN_SCORE": 0.65,
+            "RERANK": "llm-gray-zone",
+            "RERANK_MODEL": "qwen2.5:7b",
+            "RERANK_CANDIDATES": 5,
+            "RERANK_GRAY_ZONE": [
+              0.5,
+              0.7
+            ],
+            "RERANK_JUDGE": "either",
+            "RERANK_YESNO_MODEL": "gemma3:4b",
+            "RERANK_SPAN_PROMPT": "Copy the exact words from the passage that answer the question. If the passage does not contain the answer, reply NONE.\n\nPassage: {passage}\nQuestion: {question}\nWords from the passage:",
+            "RERANK_PROMPT": "Question: {question}\nPassage: {passage}\nDoes the passage contain the information needed to answer the question? Answer only yes or no.",
+            "RERANK_STRUCTURED_PROMPT": "You check whether an employee handbook passage can answer a question. Return ONLY a JSON object with exactly two keys: status and evidence. status is supported if the passage provides the requested fact, contradicted if it directly rules out the premise or proposed action in the question, or insufficient if it only shares the topic. Both supported and contradicted mean that an answer can be given; a negative answer is not missing evidence. For a partial answer to a multipart question, include the fact this passage supplies. evidence is a list of complete sentences copied verbatim from the passage, or [] for insufficient. Do not infer missing facts or return yes/no.\n\nPassage: {passage}\nQuestion: {question}\nJSON:",
+            "ANSWER_MODE": "llm",
+            "ANSWER_QUOTES": true,
+            "GENERATION_MODEL": "qwen2.5:7b",
+            "GENERATION_PROMPT": "Answer the question using only facts stated in the passages below. Do not add conditions, people, steps or details that the passages do not state. Reply in one or two short sentences, then list the ids of the passages you used in square brackets, for example [hb-01-chunk-0].\n\nPassages:\n{passages}\n\nQuestion: {question}\nAnswer:"
+          },
+          "model_identity": {
+            "status": "live_observed",
+            "models": {
+              "bge-m3:latest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+              "qwen2.5-coder:7b": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+              "qwen2.5:7b": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+              "gemma3:4b": "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a",
+              "phi3:mini": "4f222292793889a9a40a020799cfd28d53f3e01af25d48e06c5e708610fc47e9",
+              "llama3.2:1b": "baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878",
+              "qwen2.5:1.5b": "65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b",
+              "gemma2:2b": "8ccf136fdd5298f3ffe2d69862750ea7fb56555fa4d5b18c04e3fa4d82ee09d7",
+              "mistral:latest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+              "qwen2.5:3b": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+              "llama3.2:latest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72"
+            }
+          },
+          "filters": {},
+          "cache_policy": "digest_and_options",
+          "language": "en"
+        },
+        "disposition": "answer",
+        "clarification": [],
+        "answer_sha256": "7acf5921bf8fc8872cbd1f670d336f23725f836796df2c37c96482f2057094d5"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "question": "How long does laptop replacement take?",
+      "distinct_outputs": 1,
+      "stable": true,
+      "seconds": [
+        6.089,
+        1.438,
+        1.341
+      ]
+    },
+    {
+      "question": "What are the IT support hours?",
+      "distinct_outputs": 1,
+      "stable": true,
+      "seconds": [
+        2.596,
+        1.482,
+        1.506
+      ]
+    }
+  ],
+  "requests": {
+    "embeddings": 6,
+    "llm": 6
+  },
+  "source_sha256": {
+    "__init__.py": "da347dee6bd3bb948c5515e7b3f387671889840e5b0778549f7b757ec41eba21",
+    "acceptance_runner.py": "cb7d12f97e5b149d60b1f93d3c19e9f160c4dbc93f2e9c7843e5eb75bf9d57ca",
+    "answer_quality.py": "38f3e9a01fbd23494be9613738bd329d6071d3dc18be2688f3c377d0064bb67a",
+    "chunking.py": "30f3b869d33f895e227ac7778100f5329e44d13a324e8f80f07103a9f6e48fd4",
+    "claim_checks.py": "5cbbe95025cb8ab5bc812e79cb917fe4691a20c506a35bb8efb705176f2d5684",
+    "cli.py": "55a172b46c0f33f6898a11830db9d030984c5f26740e84de387d2a72161243d5",
+    "completeness.py": "20c78746f0ca7471a656560b07d7ff3025689c9e4846e2052c5f673910a7c53c",
+    "config.py": "0af01405f3e406d3c593a9733db1545bd06bdb515d1fa212b2f1f0d6b63fb0db",
+    "corpus.py": "52cceca071e43682705234713d12a4b94bbf3617e9e7c44cfcba1f6f94a6ef78",
+    "embeddings.py": "28d988c750035bcc265f373d4510e3b263cd9e5df2a6cbd4d157a57ddb4c99b6",
+    "eval_compare.py": "c84b246ff3006aa285af2eb2e04addd4fce5264897e0e346ef38f8013b51009c",
+    "eval_runner.py": "cc00aad5d3a997772aab06c95bb57299c87c51b82be080b12608ff17a99bd704",
+    "evidence.py": "5cb7bda6bf328fd147dec61ce4ebabc6238d200d52fd5966905728b557515c3e",
+    "experiment_runner.py": "0ed608e263bc9fb93caacae8bf2c8b2ec8e22402e0469e61977f1d2c9f9de3a7",
+    "holdout_runner.py": "2b52343462a9db029ccf1e63315f14fcb86df3cdebbf5cd9cb45aa93cd523942",
+    "jobs.py": "cf063aed2e900b2f840c9c681e04fdf8c442a32dd86d0ad319725b983f7d0a07",
+    "language_tools.py": "676fd17f7f7aa26c3b4b03ad94977ee1d2a7cabe7e766259e4a194f439c4e060",
+    "library.py": "91ce42b28ce33e095fb85c0191681e94b408db08e6287466bfa517d36bf98b2f",
+    "llm.py": "0d0dda8523253ed4c2da57a9735bb7380b0213b050b8b34b65c7ece62ad87cea",
+    "localization.py": "5463d99a8354104900f58083262b4019a2a886b9d2683888626f0db9e35777ee",
+    "model_identity.py": "cd36df84669b29d1d0169b3026472271e050db4b4afe02335fb6afa2658e2bbe",
+    "operation.py": "c03bbdf85553420bd28b9aae4f4909c8e53c464d0323f75bdeee1cfadbdf04e1",
+    "quality.py": "0c038fc32deda9fffa22d41545daaac415214ddf75b6aff87ecd2ef63a8235ff",
+    "rag.py": "4725813ad9ce357530e05c9e84649d5bd1bcdb95d61c6cb439c4f3ca9c22b635",
+    "reliability.py": "e82d08c82e2046a6a4a102e7771d973631b6de42d6ccb2f0f88aabe759ae98dc",
+    "retrieval.py": "211c42dcb02bb73b71117c66417a80538b28179fcd07942ea63afe5f1c3daeb8",
+    "store.py": "54ee3819b16a403585b2b1715d9d9a6afe88ec4e701a4045a2e547e287de241a",
+    "web.py": "01de1726bb1e8c892c3b0086d758f0b3e5ee8d1af7b5094378cda8d5bf4263c4"
+  },
+  "note": "Keš je prazan na početku svakog ponavljanja, zajednički za dva upita u tom ponavljanju. Ollama može ostati učitana u memoriji. Ovo nije hardverski cold-start niti dokaz opšte tačnosti.",
+  "trace": []
+}

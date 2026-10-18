@@ -39,6 +39,10 @@ import type {
   Turn,
 } from "./types";
 import { EvaluationView } from "./Evaluation";
+import { Workbench, FilterFields } from "./Workbench";
+import { AnswerQuality } from "./Quality";
+import { mergeBackup } from "./backup";
+import type { Filters, LibraryDocument, WorkspaceData } from "./types";
 
 const samples = [
   [
@@ -58,6 +62,7 @@ const pageNames = {
   chat: "Razgovor",
   documents: "Dokumenti",
   evaluation: "Evaluacija",
+  workbench: "Radionica",
 };
 const uid = () => crypto.randomUUID();
 const chunksLabel = (n: number) =>
@@ -73,7 +78,7 @@ export function AnswerText({
   const text = result.answer.split(/\nSource \[/)[0];
   return (
     <p className="answer-text">
-      {text.split(/(\[hb-\d+-chunk-\d+\])/g).map((part, i) => {
+      {text.split(/(\[[^\[\]\n]+\])/g).map((part, i) => {
         const citation = result.citations.find(
           (c) => `[${c.chunk_id}]` === part,
         );
@@ -255,6 +260,8 @@ function SourceInspector({
                         {(
                           {
                             retrieval: "Pretraga priručnika",
+                            evidence: "Izbor doslovnog dokaza",
+                            conflict: "Mogući sukob izvora",
                             decision: "Odluka sistema",
                             context: "Proširenje konteksta",
                             generation: "Formiranje odgovora",
@@ -606,6 +613,8 @@ export default function App() {
   const [draft, setDraft] = useState("");
   const [profile, setProfile] = useState<Profile>("current");
   const [language, setLanguage] = useState("auto");
+  const [filters, setFilters] = useState<Filters>({});
+  const [libraryDocs, setLibraryDocs] = useState<LibraryDocument[]>([]);
   const [jobProgress, setJobProgress] = useState<Job | null>(null);
   const [cancelError, setCancelError] = useState("");
   const activeJob = useRef<string | null>(null);
@@ -660,6 +669,9 @@ export default function App() {
     api<{ documents: Document[] }>("/documents")
       .then((d) => setDocuments(d.documents))
       .catch((e) => setDocumentsError(e.message));
+    api<WorkspaceData>("/workspace")
+      .then((d) => setLibraryDocs(d.documents))
+      .catch(() => {});
   }
   function refreshStatus() {
     api<Status>("/status")
@@ -700,6 +712,7 @@ export default function App() {
   ) {
     setInitialSource(next === "documents" ? source : null);
     setPage(next);
+    if (next === "chat" && page === "workbench") loadDocuments();
     setNavOpen(false);
     setSourcesOpen(false);
   }
@@ -786,7 +799,7 @@ export default function App() {
     setSelectedSource(null);
     try {
       const result = await runChat(
-        { question, profile, language },
+        { question, profile, language, filters },
         (job) => {
           setJobProgress(job);
           if (activeJob.current !== job.id) {
@@ -888,6 +901,7 @@ export default function App() {
               { id: "chat", icon: MessageSquare },
               { id: "documents", icon: FileText },
               { id: "evaluation", icon: ChartNoAxesColumnIncreasing },
+              { id: "workbench", icon: ShieldCheck },
             ] as const
           ).map(({ id, icon: Icon }) => (
             <button
@@ -1065,15 +1079,38 @@ export default function App() {
                                     : "grounded-label"
                                 }
                               >
-                                {turn.result.refused
-                                  ? "Nedovoljno dokaza"
-                                  : "Odgovor sa izvorima"}
+                                {turn.result.disposition === "conflict"
+                                  ? "Sukob izvora"
+                                  : turn.result.disposition === "clarification"
+                                    ? "Potrebno razjašnjenje"
+                                    : turn.result.disposition === "limited"
+                                      ? "Ograničen odgovor"
+                                      : turn.result.refused
+                                        ? "Nedovoljno dokaza"
+                                        : "Odgovor sa izvorima"}
                               </span>
                             </div>
                             <AnswerText
                               result={turn.result}
                               onSource={(id) => selectSource(turn.id, id)}
                             />
+                            {turn.result.disposition === "clarification" && (
+                              <div className="clarification-options">
+                                {turn.result.clarification?.map((topic) => (
+                                  <button
+                                    className="work-button"
+                                    disabled={busy}
+                                    key={topic}
+                                    onClick={() => {
+                                      setDraft(`${topic}: `);
+                                      textareaRef.current?.focus();
+                                    }}
+                                  >
+                                    {topic}
+                                  </button>
+                                ))}
+                              </div>
+                            )}
                             {turn.result.fallback && (
                               <div className="fallback-note">
                                 <Info size={15} />
@@ -1119,6 +1156,7 @@ export default function App() {
                                 )}
                               </button>
                             </div>
+                            <AnswerQuality answer={turn.result} />
                           </div>
                         ) : turn.error || !busy ? (
                           <div className="error-notice" role="alert">
@@ -1247,6 +1285,8 @@ export default function App() {
                       >
                         <option value="current">Napredni RAG</option>
                         <option value="offline">Bez modela</option>
+                        <option value="baseline">Baseline</option>
+                        <option value="verified">Digest proveren</option>
                       </select>
                       <ChevronDown size={14} />
                     </label>
@@ -1280,6 +1320,27 @@ export default function App() {
                       )}
                     </button>
                   </div>
+                  <details className="chat-filters">
+                    <summary>
+                      Filteri izvora
+                      {filters.topic ||
+                      filters.doc_ids?.length ||
+                      filters.sandbox ||
+                      filters.as_of
+                        ? " · aktivni"
+                        : ""}
+                    </summary>
+                    <p>
+                      Lokalni dokumenti se uključuju tek nakon aktivacije u
+                      Radionici. Prevod lokalnih unosa još nije dostupan;
+                      izaberite English.
+                    </p>
+                    <FilterFields
+                      documents={libraryDocs.length ? libraryDocs : documents}
+                      value={filters}
+                      onChange={setFilters}
+                    />
+                  </details>
                 </form>
                 <p className="composer-caption">
                   <Info size={14} />
@@ -1297,6 +1358,13 @@ export default function App() {
               retry={loadDocuments}
               initialSource={initialSource}
               onBack={() => navigate("chat")}
+            />
+          ) : page === "workbench" ? (
+            <Workbench
+              conversations={conversations}
+              onImport={(cs) =>
+                setConversations((existing) => mergeBackup(existing, cs))
+              }
             />
           ) : (
             <EvaluationView />

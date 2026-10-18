@@ -39,11 +39,16 @@ export function EvaluationView() {
   const [busy, setBusy] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  async function load() {
+  async function load(baseline = false) {
     setLoading(true);
     setError("");
     try {
-      setData(await api<Evaluation>("/evaluations"));
+      setData(
+        await api<Evaluation>(
+          baseline ? "/evaluations/baseline" : "/evaluations",
+        ),
+      );
+      setSelected(null);
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -83,6 +88,14 @@ export function EvaluationView() {
     : null;
   return (
     <div className="content-page evaluation-page">
+      <div className="work-tabs">
+        <button disabled={busy || loading} onClick={() => void load()}>
+          Aktuelno merenje
+        </button>
+        <button disabled={busy || loading} onClick={() => void load(true)}>
+          Polazno merenje 98/102
+        </button>
+      </div>
       <div className="page-heading">
         <div>
           <h1>Kvalitet koji može da se proveri.</h1>
@@ -105,7 +118,7 @@ export function EvaluationView() {
         <div className="error-notice" role="alert">
           <CircleAlert size={18} />
           <span>{error}</span>
-          <button onClick={load}>Pokušaj ponovo</button>
+          <button onClick={() => void load()}>Pokušaj ponovo</button>
         </div>
       )}
       {loading ? (
@@ -121,7 +134,9 @@ export function EvaluationView() {
                 <strong>
                   {data.origin === "replayed"
                     ? "Ponovljena evaluacija iz keša"
-                    : "Sačuvana evaluacija iz keša"}
+                    : data.origin === "baseline"
+                      ? "Polazno merenje pre unapređenja"
+                      : "Sačuvana evaluacija iz keša"}
                 </strong>
                 <p>
                   {new Date(data.created_at).toLocaleString("sr-Latn-RS")} ·

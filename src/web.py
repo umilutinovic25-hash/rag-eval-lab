@@ -14,7 +14,11 @@ import time
 from urllib.parse import unquote, urlsplit
 import urllib.request
 
-from . import config, embeddings, llm, rag, localization, operation
+from . import config, embeddings, llm, rag, localization, operation, model_identity
+from .store import Store
+from .library import Library, sha
+from .quality import audit_answer
+from .language_tools import normalise_query, fold
 from .jobs import JobManager, JobCapacityError
 from .chunking import build_chunks
 from .corpus import load_corpus
@@ -23,7 +27,8 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE_CONFIG = config.snapshot()
 PIPELINE_LOCK = threading.RLock()
 RUNTIME_DIR = ROOT / 'data/runtime'
-SAVED_EVALUATION = ROOT / 'evidence/improvements/final-manifest.json'
+SAVED_EVALUATION = ROOT / 'evidence/expansion/final.json'
+BASELINE_EVALUATION = ROOT / 'evidence/expansion/baseline.json'
 
 
 @contextmanager
@@ -42,7 +47,7 @@ def pipeline_lock():
 @contextmanager
 def profile_scope(profile):
     """The CLI pipeline uses globals; serialize requests and always restore them."""
-    if profile not in ('current', 'offline'):
+    if profile not in ('current', 'offline', 'baseline', 'verified'):
         raise ValueError('Nepoznat režim rada.')
     with pipeline_lock():
         previous = config.snapshot()
@@ -80,37 +85,80 @@ def runtime_caches():
         embeddings.CACHE_PATH, llm.CACHE_PATH = previous
 
 
-def chat_payload(question, profile='current', language='auto'):
+def profile_identity(profile):
+    identity = {'status':'historical_alias_cache_unknown_provenance','models':{}}
+    if profile=='verified':
+        identity_file=RUNTIME_DIR/'model-identity.json'
+        try:
+            identity=model_identity.observe()
+            identity_file.parent.mkdir(parents=True,exist_ok=True)
+            embeddings.save_cache(identity,identity_file)
+        except (OSError, ValueError, KeyError, TypeError):
+            if not identity_file.exists():raise ValueError('Provereni režim zahteva prvo opažanje digesta kroz pokrenutu Ollama-u.')
+            identity={**json.loads(identity_file.read_text()),'status':'offline_last_observed'}
+    return identity
+
+
+def chat_payload(question, profile='current', language='auto', filters=None, library=None):
     if not isinstance(question, str) or not question.strip() or len(question) > 2000:
         raise ValueError('Unesite pitanje od 1 do 2000 znakova.')
     started = time.perf_counter()
     language = localization.language_for(question, language)
-    with profile_scope(profile), runtime_caches():
+    with profile_scope(profile), runtime_caches(), model_identity.bind((identity:=profile_identity(profile)) if profile=='verified' else None), operation.measure() as usage:
+        if profile!='verified':identity=profile_identity(profile)
         operation.progress('retrieval', 'Pretražujem izvorne odlomke.')
-        chunks = build_chunks(load_corpus())
+        chunks = library.chunks(filters) if library else build_chunks(load_corpus())
+        selected_docs=library.selected(filters) if library else [asdict(d) for d in load_corpus()]
         by_id = {c.chunk_id: c for c in chunks}
         query, translated = question.strip(), {}
+        normalized=normalise_query(query)
+        if normalized != fold(query):query=normalized
         if language == 'sr':
             chunks = localization.localized_chunks(chunks)
             translated = {c.chunk_id: c.text for c in chunks}
-            query = localization.retrieval_question(question)
+            query = localization.retrieval_question(query)
             config.ANSWER_MODE = 'extractive'
-        result = rag.build_grounded_answer(query, chunks)
+        conflicts=library.conflicts(selected_docs) if library else []
+        meaningful=set(normalise_query(question).split())-{'is','the','a','for','of','what','how','policy','do','i','can'}
+        conflicts=[c for c in conflicts if meaningful & set(normalise_query(c['title']).split())]
+        if conflicts:
+            involved={i for c in conflicts for i in c['documents']}
+            result=rag.RagAnswer('Pronađeni su mogući sukobi važećih politika. Pregledajte oba izvora u Radionici pre odgovora.',[c.chunk_id for c in chunks if c.doc_id in involved],True,[],trace=[{'stage':'conflict','conflicts':conflicts}], disposition='conflict')
+        else:
+            result = rag.build_grounded_answer(query, chunks)
         operation.check()
         answer = result.answer
-        if language == 'sr':
+        if language == 'sr' and result.disposition not in ('clarification','conflict'):
             answer = ('Nemam dovoljno dokaza u dostupnom priručniku da odgovorim na ovo pitanje.' if result.refused else
                       answer.replace('Grounded response based on retrieved context:', 'Odgovor iz prevedenih izvornih odlomaka:', 1))
         def source(chunk_id):
             return dict(asdict(by_id[chunk_id]), **({'translated_text': translated[chunk_id]} if translated else {}))
-        return dict(answer=answer, refused=result.refused,
+        quality=audit_answer(question,answer,[c for c in chunks if c.chunk_id in result.citations])
+        provenance=dict(corpus_sha256=sha(selected_docs),config_sha256=sha(config.snapshot()),config=config.snapshot(),model_identity=identity,
+                        filters=filters or {},cache_policy='digest_and_options' if profile=='verified' else 'legacy_alias',language=language)
+        payload=dict(answer=answer, refused=result.refused,
                     citations=[source(c) for c in result.citations],
                     retrieved=[dict(source(r.chunk.chunk_id), score=r.score) for r in result.retrieved],
                     trace=result.trace, fallback=result.generation_fallback_reason,
                     question=question.strip(), profile=profile, language=language, retrieval_question=query,
                     translation_review_status=localization.REVIEW_STATUS if language == 'sr' else None,
                     seconds=round(time.perf_counter() - started, 3),
-                    created_at=datetime.now(timezone.utc).isoformat())
+                    created_at=datetime.now(timezone.utc).isoformat(),quality=quality,usage=usage,provenance=provenance,
+                    disposition=result.disposition,clarification=result.clarification)
+        payload['answer_sha256']=sha({k:payload[k] for k in ('question','answer','citations','provenance')})
+        return payload
+
+
+def workspace_task(library, kind='chat', **body):
+    if kind=='chat':return chat_payload(**body,library=library)
+    if kind!='comparison':raise ValueError('Nepoznat tip posla.')
+    profiles=body.pop('profiles',None)
+    if not isinstance(profiles,list) or len(profiles)!=2 or profiles[0]==profiles[1] or any(p not in ('baseline','current','offline','verified') for p in profiles):
+        raise ValueError('Izaberite dva različita podržana profila.')
+    results=[chat_payload(**body,profile=p,library=library) for p in profiles]
+    if results[0]['provenance']['corpus_sha256']!=results[1]['provenance']['corpus_sha256']:
+        raise ValueError('Biblioteka se promenila tokom poređenja. Ponovite poređenje.')
+    return dict(kind='comparison',results=results,differences=dict(answer=results[0]['answer']!=results[1]['answer'],citations=[c['chunk_id'] for c in results[0]['citations']]!=[c['chunk_id'] for c in results[1]['citations']],refused=results[0]['refused']!=results[1]['refused']),trace=[])
 
 
 def evaluation_payload(data, origin):
@@ -174,6 +222,10 @@ class Handler(BaseHTTPRequestHandler):
         if path.startswith('/api/jobs/'):
             job = self.server.jobs.get(path.removeprefix('/api/jobs/'))
             return self.reply(200, job) if job else self.reply(404, {'error': 'Posao ne postoji ili je istekao. Pošaljite pitanje ponovo.'})
+        if path == '/api/workspace':
+            probe=ROOT/'evidence/expansion/stability.json'
+            return self.reply(200,{**self.server.library.health(),'feedback':self.server.store.all('feedback'),'jobs':self.server.jobs.list(),
+                'stability':json.loads(probe.read_text()) if probe.exists() else None})
         if path == '/api/status':
             online = False
             models = []
@@ -190,9 +242,10 @@ class Handler(BaseHTTPRequestHandler):
                                       current_documents=sum(doc.status == 'current' for doc in documents)))
         if path == '/api/documents':
             return self.reply(200, {'documents': self.server.documents})
-        if path == '/api/evaluations':
+        if path in ('/api/evaluations','/api/evaluations/baseline'):
             try:
-                return self.reply(200, evaluation_payload(json.loads(SAVED_EVALUATION.read_text()), 'saved'))
+                source=BASELINE_EVALUATION if path.endswith('/baseline') else SAVED_EVALUATION
+                return self.reply(200, evaluation_payload(json.loads(source.read_text()), 'baseline' if path.endswith('/baseline') else 'saved'))
             except (OSError, ValueError, KeyError, TypeError):
                 return self.reply(503, {'error': 'Sačuvana evaluacija nije dostupna. Pokrenite novu proveru.'})
         if path.startswith('/api/'):
@@ -215,11 +268,11 @@ class Handler(BaseHTTPRequestHandler):
             return self.reply(403, {'error': 'Zahtev mora poticati iz lokalnog interfejsa.'})
         path = urlsplit(self.path).path
         cancel_id = path[len('/api/jobs/'):-len('/cancel')] if path.startswith('/api/jobs/') and path.endswith('/cancel') else None
-        if path not in ('/api/chat', '/api/evaluations/run', '/api/jobs') and not cancel_id:
+        if path not in ('/api/chat', '/api/evaluations/run', '/api/jobs', '/api/library/preview', '/api/library/update', '/api/library/compare', '/api/feedback') and not cancel_id:
             return self.reply(404, {'error': 'Nepoznata API putanja.'})
         try:
             length = int(self.headers.get('Content-Length', '0'))
-            if length <= 0 or length > 12000:
+            if length <= 0 or length > (400000 if path in ('/api/library/preview','/api/feedback') else 12000):
                 return self.reply(413, {'error': 'Neispravna veličina zahteva.'})
             if self.headers.get_content_type() != 'application/json':
                 return self.reply(415, {'error': 'Očekivan je JSON zahtev.'})
@@ -229,14 +282,36 @@ class Handler(BaseHTTPRequestHandler):
             if cancel_id:
                 job = self.server.jobs.cancel(cancel_id)
                 return self.reply(200, job) if job else self.reply(404, {'error': 'Posao ne postoji ili je istekao.'})
+            if path=='/api/library/preview':
+                return self.reply(200,{'document':self.server.library.preview(data.get('filename'),data.get('content'),data.get('metadata'))})
+            if path=='/api/library/update':
+                return self.reply(200,{'document':self.server.library.update(data.get('doc_id'),data.get('changes',{}))})
+            if path=='/api/library/compare':
+                return self.reply(200,self.server.library.compare(data.get('left'),data.get('right')))
+            if path=='/api/feedback':
+                label,comment,answer=data.get('label'),data.get('comment',''),data.get('answer')
+                if label not in ('incorrect','incomplete','wrong_citation','reviewed') or not isinstance(comment,str) or len(comment)>4000 or not isinstance(answer,dict) or not isinstance(answer.get('answer'),str) or not isinstance(answer.get('question'),str) or len(json.dumps(answer))>300000:
+                    raise ValueError('Neispravna lokalna ocena odgovora.')
+                import uuid
+                record=dict(id=uuid.uuid4().hex,label=label,comment=comment,answer=answer,answer_sha256=sha(answer),created_at=datetime.now(timezone.utc).isoformat(),review_identity='self_reported_local_user')
+                self.server.store.put('feedback',record['id'],record)
+                return self.reply(200,{'feedback':record})
             if path == '/api/jobs':
                 question, profile, language = data.get('question'), data.get('profile', 'current'), data.get('language', 'auto')
-                if not isinstance(question, str) or not question.strip() or len(question) > 2000 or profile not in ('current', 'offline'):
+                kind=data.get('kind','chat')
+                if kind not in ('chat','comparison') or not isinstance(question, str) or not question.strip() or len(question) > 2000 or profile not in ('current', 'offline','baseline','verified'):
                     raise ValueError('Unesite pitanje od 1 do 2000 znakova i ispravan režim.')
                 localization.language_for(question, language)
-                return self.reply(202, self.server.jobs.submit(dict(question=question, profile=profile, language=language)))
+                self.server.library.selected(data.get('filters'))
+                body=dict(question=question,language=language,filters=data.get('filters'),kind=kind)
+                if kind=='comparison':
+                    profiles=data.get('profiles')
+                    if not isinstance(profiles,list) or len(profiles)!=2 or profiles[0]==profiles[1] or any(p not in ('current','offline','baseline','verified') for p in profiles):raise ValueError('Izaberite dva različita profila.')
+                    body['profiles']=profiles
+                else:body['profile']=profile
+                return self.reply(202, self.server.jobs.submit(body))
             if path == '/api/chat':
-                result = chat_payload(data.get('question'), data.get('profile', 'current'), data.get('language', 'auto'))
+                result = chat_payload(data.get('question'), data.get('profile', 'current'), data.get('language', 'auto'),data.get('filters'),self.server.library)
             else:
                 from .experiment_runner import execute
                 with profile_scope('current'):
@@ -252,19 +327,24 @@ class Handler(BaseHTTPRequestHandler):
             return self.reply(500, {'error': 'Provera nije završena. Pokušajte ponovo ili koristite režim Bez modela.'})
 
 
-def make_server(port=8767, static_dir=None):
+def make_server(port=8767, static_dir=None, state_dir=None):
+    global RUNTIME_DIR
+    if state_dir is not None:RUNTIME_DIR=Path(state_dir)
     documents = documents_payload()
     server = WebServer(('127.0.0.1', port), partial(Handler, static_dir=static_dir))
     server.documents = documents
-    server.jobs = JobManager(chat_payload)
+    server.store=Store(RUNTIME_DIR/'workspace.sqlite')
+    server.library=Library(server.store)
+    server.jobs = JobManager(partial(workspace_task,server.library),store=server.store)
     return server
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--port', type=int, default=8767)
+    parser.add_argument('--state-dir',type=Path,help='Isolated local library, jobs and runtime caches.')
     args = parser.parse_args()
-    server = make_server(args.port)
+    server = make_server(args.port,state_dir=args.state_dir)
     print(f'Izvor je dostupan na http://localhost:{server.server_address[1]}', flush=True)
     try:
         server.serve_forever()

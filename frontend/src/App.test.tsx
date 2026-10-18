@@ -225,6 +225,7 @@ describe("real UI contracts", () => {
           question: "How many days per week can I work remotely?",
           profile: "current",
           language: "en",
+          filters: {},
         }),
       }),
     );

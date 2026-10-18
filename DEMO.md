@@ -95,3 +95,16 @@ python -m src.experiment_runner --mode replay --out results/demo-traces.json
 ```
 
 H20 sada navodi IT portal / Hardware. Rubrika je nacrt asistenta. Pokazati i odbačene varijante: svi susedi i structured judge imaju regresije, pa nisu podrazumevani. Za jednu stvarnu probu bez keša postoji `evidence/improvements/cold-smoke.json`; ne predstavljati je kao novi slepi test.
+
+
+## Opcioni bonus: kompletna lokalna radionica
+
+Na `master` pokrenuti `./start-web.command`, pa u interfejsu pokazati:
+
+- Evaluacija → „Polazno merenje 98/102”, zatim „Aktuelno merenje” 102/102. Ista pitanja/metrike, poznati razvojni skupovi; ne nazivati slepim testom.
+- Radionica → Eksperimenti, podrazumevano pitanje o training budget-u: baseline odbija, current citira „Each employee … 800 EUR”. Oba imaju isti hash korpusa.
+- Razgovor na English: „Does sick leave come out of my annual leave days?” → naveden je zaseban pravilnik, ali nije navedeno da li se dani odbijaju. Bez tvrdnje da je odgovor sigurno „ne”.
+- Biblioteka → Remote work 2024/2026, oba izvora i diff. Novi TXT/MD/JSON unos prvo je neaktivan. Originalni priručnik nije menjan.
+- Kvalitet i poslovi → stvarno merena ponovljivost i postojeće lokalne ocene; prazno stanje znači da niko nije ocenio, ne automatsko odobrenje.
+
+Obavezni M5 tok i arhiva ostaju nezavisni od ovih funkcija.

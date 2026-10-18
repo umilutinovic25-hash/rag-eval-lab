@@ -23,9 +23,13 @@ npm --prefix frontend run build
 python3 -m src.web                 # optional: --port 8768
 ```
 
-**Napredni RAG** uses existing cached answers or local Ollama models (`bge-m3`, `qwen2.5:7b`, `gemma3:4b`). The three starter prompts work from the committed cache without a running model server. **Bez modela** uses lexical retrieval and extracts passages without any model calls; its quality is lower. Type handbook questions in English. Conversation history is for navigation only: each question is processed independently. Local history keeps the latest 10 conversations, up to 30 turns each; export anything you need to retain.
+**Napredni RAG** uses existing cached answers or local Ollama models (`bge-m3`, `qwen2.5:7b`, `gemma3:4b`). The three starter prompts work from the committed cache without a running model server. **Bez modela** uses lexical retrieval and extracts passages without any model calls; its quality is lower. Ask handbook questions in English or Serbian (Latin/Cyrillic); Serbian companion translations remain pending human review. Conversation history is for navigation only: each question is processed independently. Local history keeps the latest 10 conversations, up to 30 turns each; export anything you need to retain.
 
-The evaluation dashboard labels saved results and cached replay explicitly. A replay is not fresh generation. It shows all four remaining failures rather than claiming 100% general accuracy. The original M5 deliverable remains separate and unchanged.
+The evaluation dashboard labels saved results and cached replay explicitly. A replay is not fresh generation. It separates the baseline (98/102) from the current replay (102/102). These are previously seen sets, not a claim of 100% general accuracy. The original M5 deliverable remains separate and unchanged.
+
+The **Radionica** workspace adds explicitly activated TXT/MD/JSON documents, effective-date metadata, source filters, version diffs, possible-conflict warnings, two-profile comparisons, local feedback and checksummed history backups. Jobs survive restart within their original deadline in `data/runtime/workspace.sqlite`. The `verified` profile namespaces cache entries by observed model digest and generation options; legacy replay remains available as `baseline`. Claim audits are explainable heuristics, not semantic proof.
+
+A repeatability probe with empty application caches is available through `python -m src.reliability --repeats 3 --out results/stability.json`. It uses only installed models. The measured probe and supplemental Serbian grader are shown in `evidence/expansion/`; the historical candidate result remains 23/24 and the separate inflection-aware check gives 24/24 on the same saved answers. Neither is independent human approval.
 
 Development: run `python -m src.web` and `npm --prefix frontend run dev` in separate terminals. The Vite proxy is configured for the default API port 8767. Runtime and QA details: [frontend guide](docs/frontend/README.md).
 

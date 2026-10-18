@@ -19,6 +19,7 @@ STOPWORDS_ENABLED = False
 CURRENT_ONLY = True
 
 # Answering
+EVIDENCE_RULES_ENABLED = True
 REFUSAL_THRESHOLD = 0.12
 SEMANTIC_REFUSAL_THRESHOLD = 0.60  # cosine scale, used in "semantic" and "hybrid" mode
 CITATION_MIN_SCORE = None  # None or a float score, used only in "lexical" mode
@@ -71,8 +72,11 @@ GENERATION_PROMPT = (
 
 def apply_profile(name: str) -> None:
     """CLI-only profile: change all coupled settings together, within this process."""
-    global RETRIEVAL_MODE, RERANK, ANSWER_MODE, ANSWER_QUOTES
-    if name == "current":
+    global RETRIEVAL_MODE, RERANK, ANSWER_MODE, ANSWER_QUOTES, EVIDENCE_RULES_ENABLED
+    if name in ("current", "verified"):
+        return
+    if name == "baseline":
+        EVIDENCE_RULES_ENABLED = False
         return
     if name != "offline":
         raise ValueError(f"Unknown profile: {name}")

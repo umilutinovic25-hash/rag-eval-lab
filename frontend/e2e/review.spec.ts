@@ -85,6 +85,9 @@ test("a refused failed question does not claim that nonexistent citations are wr
   await page.getByLabel("Jezik pitanja").selectOption("en");
   await page.getByRole("button", { name: "Evaluacija", exact: true }).click();
   await page
+    .getByRole("button", { name: "Polazno merenje 98/102", exact: true })
+    .click();
+  await page
     .getByRole("tab", { name: "Dodatni test 2 29/32", exact: true })
     .click();
   await page.getByLabel("Detalji U07", { exact: true }).click();

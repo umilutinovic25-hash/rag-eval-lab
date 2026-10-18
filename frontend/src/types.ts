@@ -1,5 +1,78 @@
-export type Profile = "current" | "offline";
-export type Page = "chat" | "documents" | "evaluation";
+export type Profile = "current" | "offline" | "baseline" | "verified";
+export type Page = "chat" | "documents" | "evaluation" | "workbench";
+export interface Filters {
+  topic?: string;
+  doc_ids?: string[];
+  as_of?: string;
+  sandbox?: boolean;
+}
+export interface Quality {
+  version: string;
+  caveat: string;
+  risk_count: number;
+  review_count: number;
+  claims: {
+    text: string;
+    citations: string[];
+    status: string;
+    reasons: string[];
+  }[];
+  completeness: { part: string; present: boolean }[];
+}
+export interface Usage {
+  phases?: { stage: string; seconds: number }[];
+  requests: { embeddings: number; llm: number };
+  cache_hits: { embeddings: number; llm: number };
+  prompt_tokens: number | null;
+  output_tokens: number | null;
+  unknown_token_calls: number;
+  model_seconds: number;
+}
+export interface LibraryDocument extends Omit<Document, "chunks"> {
+  origin: string;
+  active: boolean;
+  quarantined?: boolean;
+  published_on: string | null;
+  effective_from: string | null;
+  effective_until: string | null;
+  source_sha256: string;
+}
+export interface Feedback {
+  id: string;
+  label: string;
+  comment: string;
+  answer: Answer;
+  answer_sha256: string;
+  created_at: string;
+}
+export interface WorkspaceData {
+  stability?: {
+    groups: {
+      question: string;
+      stable: boolean;
+      distinct_outputs: number;
+      seconds: number[];
+    }[];
+    requests: { embeddings: number; llm: number };
+    note: string;
+  } | null;
+  documents: LibraryDocument[];
+  warnings: { doc_id: string; reasons: string[] }[];
+  conflicts: {
+    documents: string[];
+    title: string;
+    reason: string;
+    evidence: string[];
+  }[];
+  note: string;
+  feedback: Feedback[];
+  jobs: Job[];
+}
+export interface Comparison {
+  kind: "comparison";
+  results: Answer[];
+  differences: { answer: boolean; citations: boolean; refused: boolean };
+}
 export interface Chunk {
   chunk_id: string;
   doc_id: string;
@@ -24,6 +97,13 @@ export interface Trace {
   [key: string]: unknown;
 }
 export interface Answer {
+  quality?: Quality;
+  usage?: Usage;
+  provenance?: Record<string, unknown>;
+  answer_sha256?: string;
+  disposition?: string;
+  clarification?: string[];
+  retrieval_question?: string;
   language?: "en" | "sr";
   translation_review_status?: string | null;
   question: string;

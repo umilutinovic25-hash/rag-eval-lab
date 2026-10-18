@@ -4,13 +4,14 @@ import { cleanup } from "@testing-library/react";
 
 afterEach(() => {
   cleanup();
-  localStorage.clear();
+  if (typeof localStorage !== "undefined") localStorage.clear();
 });
-Element.prototype.scrollIntoView = vi.fn();
+if (typeof Element !== "undefined") Element.prototype.scrollIntoView = vi.fn();
 // jsdom has no Web Locks; browser tests exercise real cross-tab locking.
-Object.defineProperty(navigator, "locks", {
-  configurable: true,
-  value: {
-    request: async (_name: string, callback: () => unknown) => callback(),
-  },
-});
+if (typeof navigator !== "undefined")
+  Object.defineProperty(navigator, "locks", {
+    configurable: true,
+    value: {
+      request: async (_name: string, callback: () => unknown) => callback(),
+    },
+  });

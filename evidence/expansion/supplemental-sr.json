@@ -1,0 +1,204 @@
+{
+  "grader": "sr-contiguous-inflection-v1",
+  "historical_answers_sha256": "b2cbc89a0baca356ecaecd5dbc621b3bf8e3bc256bfa13e00ce12a2d3fd7edd8",
+  "historical_summary": {
+    "passed_automatic_checks": 23,
+    "total_language_variants": 24,
+    "underlying_cases": 12
+  },
+  "passed": 24,
+  "total": 24,
+  "rows": [
+    {
+      "id": "V01-en",
+      "historical_pass": true,
+      "facts": {
+        "30 days": true,
+        "finance app": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V01-sr",
+      "historical_pass": true,
+      "facts": {
+        "30 dana": true,
+        "finansijske aplikacije": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V02-en",
+      "historical_pass": true,
+      "facts": {
+        "personal badge": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V02-sr",
+      "historical_pass": false,
+      "facts": {
+        "ličnu karticu": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V03-en",
+      "historical_pass": true,
+      "facts": {
+        "first come, first served": true,
+        "facilities app": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V03-sr",
+      "historical_pass": true,
+      "facts": {
+        "redosledu prijave": true,
+        "aplikacije za prostor": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V04-en",
+      "historical_pass": true,
+      "facts": {
+        "email": true,
+        "VPN": true,
+        "all internal tools": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V04-sr",
+      "historical_pass": true,
+      "facts": {
+        "imejl": true,
+        "VPN": true,
+        "sve interne alate": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V05-en",
+      "historical_pass": true,
+      "facts": {
+        "does not carry over": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V05-sr",
+      "historical_pass": true,
+      "facts": {
+        "ne prenosi": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V06-en",
+      "historical_pass": true,
+      "facts": {
+        "security first": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V06-sr",
+      "historical_pass": true,
+      "facts": {
+        "prvo službi bezbednosti": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V07-en",
+      "historical_pass": true,
+      "facts": {
+        "two weeks": true,
+        "HR portal": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V07-sr",
+      "historical_pass": true,
+      "facts": {
+        "dve nedelje": true,
+        "HR portal": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V08-en",
+      "historical_pass": true,
+      "facts": {
+        "08:00": true,
+        "18:00": true,
+        "Monday to Friday": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V08-sr",
+      "historical_pass": true,
+      "facts": {
+        "08:00": true,
+        "18:00": true,
+        "ponedeljka do petka": true
+      },
+      "supplemental_pass": true
+    },
+    {
+      "id": "V09-en",
+      "historical_pass": true,
+      "facts": {},
+      "supplemental_pass": true
+    },
+    {
+      "id": "V09-sr",
+      "historical_pass": true,
+      "facts": {},
+      "supplemental_pass": true
+    },
+    {
+      "id": "V10-en",
+      "historical_pass": true,
+      "facts": {},
+      "supplemental_pass": true
+    },
+    {
+      "id": "V10-sr",
+      "historical_pass": true,
+      "facts": {},
+      "supplemental_pass": true
+    },
+    {
+      "id": "V11-en",
+      "historical_pass": true,
+      "facts": {},
+      "supplemental_pass": true
+    },
+    {
+      "id": "V11-sr",
+      "historical_pass": true,
+      "facts": {},
+      "supplemental_pass": true
+    },
+    {
+      "id": "V12-en",
+      "historical_pass": true,
+      "facts": {},
+      "supplemental_pass": true
+    },
+    {
+      "id": "V12-sr",
+      "historical_pass": true,
+      "facts": {},
+      "supplemental_pass": true
+    }
+  ],
+  "note": "Dopunska analiza istih istorijskih odgovora. Ne menja zamrznuti skup ni prethodni 23/24 rezultat; nije ljudska ocena."
+}

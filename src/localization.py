@@ -41,6 +41,6 @@ def localized_chunks(chunks):
 
 def retrieval_question(question):
     text = latin(question)
-    text = re.sub(r'\b(?:radim|raditi|radimo|rad)\s+od\s+kuće\b', 'rad na daljinu', text)
+    text = re.sub(r'\b(?:radim|raditi|radimo|rad)\s+od\s+ku[cć]e\b', 'rad na daljinu', text)
     text = re.sub(r'\bzamenim laptop\b', 'zamena laptopa', text)
     return text

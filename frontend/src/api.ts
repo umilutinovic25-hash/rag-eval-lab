@@ -51,7 +51,12 @@ export function download(
 }
 
 export async function runChat(
-  body: { question: string; profile: string; language: string },
+  body: {
+    question: string;
+    profile: string;
+    language: string;
+    filters?: import("./types").Filters;
+  },
   onProgress: (job: import("./types").Job) => void,
   existingId?: string,
 ): Promise<import("./types").Answer> {

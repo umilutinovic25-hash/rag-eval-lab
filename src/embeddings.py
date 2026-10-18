@@ -1,6 +1,7 @@
 """Local embeddings through Ollama, cached on disk so eval runs stay offline."""
 
 import hashlib
+import time
 import json
 import math
 import os
@@ -9,7 +10,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-from . import config, operation
+from . import config, operation, model_identity
 
 
 CACHE_PATH = Path(__file__).resolve().parents[1] / "data" / "embedding_cache.json"
@@ -22,7 +23,8 @@ class EmbeddingError(RuntimeError):
 
 def cache_key(text: str, model: str | None = None) -> str:
     model = config.EMBEDDING_MODEL if model is None else model
-    return hashlib.sha256(f"{model}\n{text}".encode("utf-8")).hexdigest()
+    legacy=hashlib.sha256(f"{model}\n{text}".encode("utf-8")).hexdigest()
+    return model_identity.key(legacy,model,{'endpoint':'embed'})
 
 
 def load_cache(path: Path | None = None) -> dict:
@@ -87,8 +89,17 @@ def request_embeddings(texts: list[str]) -> list[list[float]]:
 def embed(texts: list[str]) -> list[list[float]]:
     cache = load_cache()
     missing = [text for text in dict.fromkeys(texts) if cache_key(text) not in cache]
+    for text in dict.fromkeys(texts):
+        if text not in missing:operation.record('embeddings',cached=True)
     if missing:
-        for text, vector in zip(missing, request_embeddings(missing)):
+        before=model_identity.require_live(config.EMBEDDING_MODEL)
+        started=time.perf_counter()
+        try:
+            fetched=request_embeddings(missing)
+        finally:
+            operation.record('embeddings',seconds=time.perf_counter()-started)
+        model_identity.verify(config.EMBEDDING_MODEL,before)
+        for text, vector in zip(missing, fetched):
             cache[cache_key(text)] = [round(value, 6) for value in vector]
         save_cache(cache)
     vectors = [cache[cache_key(text)] for text in texts]

@@ -90,6 +90,9 @@ test("document versions, saved evaluation failures, and real replay", async ({
   );
   await page.getByRole("button", { name: "Evaluacija", exact: true }).click();
   await page
+    .getByRole("button", { name: "Polazno merenje 98/102", exact: true })
+    .click();
+  await page
     .getByRole("tab", { name: "Dodatni test 2 29/32", exact: true })
     .click();
   await page.getByLabel("Samo neuspešni").check();
@@ -104,7 +107,10 @@ test("document versions, saved evaluation failures, and real replay", async ({
   await expect(
     page.getByText("Ponovljena evaluacija iz keša", { exact: true }),
   ).toBeVisible();
-  await expect(page.locator(".results-table tbody tr")).toHaveCount(3);
+  await expect(page.locator(".results-table tbody tr")).toHaveCount(0);
+  await expect(
+    page.getByRole("tab", { name: "Dodatni test 2 32/32", exact: true }),
+  ).toBeVisible();
 });
 
 test("offline profile works and restores after browser refresh", async ({

@@ -4,8 +4,9 @@ import hashlib
 import json
 import re
 import urllib.request
+import time
 
-from . import config, operation
+from . import config, operation, model_identity
 from .claim_checks import clauses
 from .embeddings import CACHE_PATH as EMBEDDING_CACHE_PATH, EmbeddingError, load_cache, save_cache
 
@@ -34,7 +35,8 @@ def metadata_path():
 
 
 def cache_key(model: str, prompt: str, max_tokens: int) -> str:
-    return hashlib.sha256(f"{model}\n{max_tokens}\n{prompt}".encode("utf-8")).hexdigest()
+    legacy=hashlib.sha256(f"{model}\n{max_tokens}\n{prompt}".encode("utf-8")).hexdigest()
+    return model_identity.key(legacy,model,{'temperature':0,'seed':7,'num_predict':max_tokens})
 
 
 def request_generation(model: str, prompt: str, max_tokens: int) -> str:
@@ -68,11 +70,21 @@ def generate(model: str, prompt: str, max_tokens: int) -> str:
         raise LLMError(str(error)) from error
     key = cache_key(model, prompt, max_tokens)
     if key not in cache:
-        response = request_generation(model, prompt, max_tokens)
+        before=model_identity.require_live(model)
+        started=time.perf_counter()
+        try:
+            response = request_generation(model, prompt, max_tokens)
+        except Exception:
+            operation.record('llm',seconds=time.perf_counter()-started)
+            raise
+        operation.record('llm',metadata=getattr(response,'metadata',{}),seconds=time.perf_counter()-started)
+        model_identity.verify(model,before)
         cache[key] = response.strip()
         metadata[key] = getattr(response, "metadata", {"done_reason": "unknown", "provenance": "unrecorded"})
         save_cache(cache, CACHE_PATH)
         save_cache(metadata, metadata_path())
+    else:
+        operation.record('llm',cached=True)
     text = cache[key]
     if not isinstance(text, str) or not text.strip():
         raise LLMError("Cached LLM response must be nonempty text.")

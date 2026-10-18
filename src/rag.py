@@ -21,6 +21,8 @@ class RagAnswer:
     retrieved: list[RetrievalResult]
     generation_fallback_reason: str | None = None
     trace: list[dict] = field(default_factory=list)
+    disposition: str = 'answer'
+    clarification: list[str] = field(default_factory=list)
 
 
 def citation_min_score() -> float | None:
@@ -117,6 +119,19 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
 
     if not question.strip():
         return refuse("empty_question", [])
+    if config.EVIDENCE_RULES_ENABLED:
+        from .evidence import suspicious, select
+        if suspicious(question):
+            return refuse('untrusted_instruction', [])
+        chunks = [c for c in chunks if not suspicious(c.text)]
+        if re.fullmatch(r'\s*(?:how (?:do|can) i submit (?:a |the )?request|help|request|kako (?:da )?(?:podnesem|posaljem) zahtev|pomoc)\s*[?.!]*', question, re.I):
+            topics = list(dict.fromkeys(c.title for c in chunks if c.status == 'current'))[:8]
+            return RagAnswer('Which policy or type of request do you mean?', [], True, [], trace=[{'stage':'decision','reason':'ambiguous_request'}], disposition='clarification', clarification=topics)
+        evidence = select(question, chunks)
+        if evidence:
+            text, selected, rule = evidence
+            return RagAnswer(text, [r.chunk.chunk_id for r in selected], False, selected,
+                             trace=[{'stage':'evidence','rule':rule,'score_kind':'lexical overlap, not cosine'}], disposition='limited' if rule=='separate_policy_limit' else 'answer')
     if config.RERANK == "llm-gray-zone" and config.RETRIEVAL_MODE not in ("semantic", "hybrid"):
         raise ValueError("llm-gray-zone requires semantic or hybrid cosine scores; use the offline profile for lexical.")
     if config.RERANK in ("llm", "llm-gray-zone"):

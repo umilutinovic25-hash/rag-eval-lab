@@ -11,6 +11,7 @@ def offline_lexical_defaults(monkeypatch):
     monkeypatch.setattr(config, "ANSWER_MODE", "extractive")
     monkeypatch.setattr(config, "ANSWER_QUOTES", False)
     monkeypatch.setattr(config, "CONTEXT_NEIGHBORS", 0)
+    monkeypatch.setattr(config, "EVIDENCE_RULES_ENABLED", False)
 
     def no_network(texts):
         raise AssertionError(f"Test tried to call Ollama for {len(texts)} text(s)")
