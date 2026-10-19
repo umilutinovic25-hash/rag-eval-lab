@@ -427,7 +427,9 @@ Specifikacija `docs/rag-upgrade-spec.md` i rezultati `docs/rag-upgrade-results.m
 
 Tri implicitna da/ne pitanja (X04 „reći lozinku kolegi iz IT-a“, X06 „zahtev za odmor sa tri dana unapred“, X28 „IT podrška nedeljom“) više se ne odbijaju; nema nove regresije. Preostala greška X38 („Šta ako zaboravim bedž kod kuće?“) je lažno prihvaćeno pitanje iz iste porodice kao W38: odgovara se iz pravila o izgubljenom bedžu iako dokument ne pokriva zaboravljen bedž. Njega nisam popravljao jer bi to bilo štimovanje na viđenom skupu.
 
-**Ograničenja:** test 5 je jedna nezavisna proba od 40 pitanja (39/40 ima širok interval poverenja, oko 87–99,6%), a autor pitanja je isti AI koji je gradio sistem; test 3, 4 i 5 su sada viđeni. Preostale poznate greške: W05, W10, W26 (test 4, implicitna da/ne pitanja) i W38, X38 (lažno prihvaćena pitanja blizu domena). Aktuelno stanje: 238 testova prolazi; 12/12, 34/34, 24/24, 32/32, 36/36, 36/40 i slepi 39/40. Dokazi: `evidence/upgrade/test5-shipped.json`, `evidence/upgrade/test5-before.json`.
+**Parni test** (`scripts/paired_test.py`, izlaz `evidence/upgrade/paired-tests.txt`): na test 5 da/ne judge je popravio 3 pitanja i pokvario 0 (egzaktni McNemar p = 0,25). To je konzistentno poboljšanje, ali **nije statistički značajno** na 40 pitanja; 3 pitanja ne mogu da dokažu efekat. Test 3 (2 : 0, p = 0,5) ne računam kao dokaz jer je judge pravljen upravo prema njegovim greškama (V21, V25), pa se ta dva skupa ne sabiraju. Test 4 nema promene (0 : 0).
+
+**Ograničenja:** test 5 je jedna nezavisna proba od 40 pitanja (39/40 ima širok interval poverenja, oko 87–99,6%), a autor pitanja je isti AI koji je gradio sistem; test 3, 4 i 5 su sada viđeni. Preostale poznate greške: W05, W10, W26 (test 4, implicitna da/ne pitanja) i W38, X38 (lažno prihvaćena pitanja blizu domena). Aktuelno stanje: 241 test prolazi; 12/12, 34/34, 24/24, 32/32, 36/36, 36/40 i slepi 39/40. Dokazi: `evidence/upgrade/test5-shipped.json`, `evidence/upgrade/test5-before.json`, `evidence/upgrade/paired-tests.txt`.
 
 ## Dokazi
 
@@ -448,7 +450,7 @@ Tri implicitna da/ne pitanja (X04 „reći lozinku kolegi iz IT-a“, X06 „zah
 
 ## Kontrolna lista pre predaje
 
-- [x] `python -m pytest` prolazi posle promene (19 na `45b8172`; 107 posle C1–C6; 137 posle D koraka; 238 posle runde 2)
+- [x] `python -m pytest` prolazi posle promene (19 na `45b8172`; 107 posle C1–C6; 137 posle D koraka; 241 posle runde 2 i parnog testa)
 - [x] Eval pokrenut pre i posle istom komandom
 - [x] Poređenje ne prijavljuje različit otisak eval skupa
 - [x] Oba propusta vezana za konkretna eval pitanja (E06, E04/E09, E10/E11, E05)
