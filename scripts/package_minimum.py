@@ -18,7 +18,7 @@ def build():
 
 Svi obavezni dokazi su u evidence/. Specifikacija je 2ceaced, implementacija 45b8172.
 Autor, samostalan doprinos, demonstrator i lična potvrda provere su uneti po izjavi Uroša.
-Komentar drugog para nije dostavljen do roka; status je naveden u odeljku 9.
+Projekat je poslat drugom polazniku na pregled; odgovor nije stigao (odeljak 9).
 Individualni izveštaj i nacrt mejla priloženi su kao NEDELJNI_IZVESTAJ_UROS.md i NACRT_MEJLA.md.
 Status slanja nije potvrđen. Ljudske oznake naprednih odgovora nisu dostavljene.
 '''
@@ -38,7 +38,7 @@ Ovaj paket je kod checkpointa 45b8172, a ne napredni HEAD. Nema embeddinga, Olla
 REPORT_BEFORE_AFTER.md je obavezni izveštaj. evidence/ sadrži pre/posle JSON, poređenje,
 diff, testove i CLI provere. docs/change-spec.md prethodi implementaciji u istoriji repoa.
 
-Komentar drugog para nije dostavljen do roka (odeljak 9 izveštaja).
+Projekat je poslat na pregled para; odgovor nije stigao (odeljak 9 izveštaja).
 Autor je Uroš Milutinović, koji je radio samostalno i potvrdio ličnu proveru.
 Slanje nije potvrđeno. Priloženi nacrti nisu poslati.
 Ovo nije zvanični šablon tutora.

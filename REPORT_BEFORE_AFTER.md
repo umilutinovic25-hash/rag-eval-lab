@@ -155,7 +155,7 @@ Hipoteza je potvrđena: E06 je popravljen jer zastarela verzija više ne ulazi u
 
 ## 9. Pregled para
 
-**Status:** komentar drugog para nije dostavljen do roka (ponedeljak, 19. 10. 2026, 20:00). Radio sam samostalno, bez dodeljenog para, pa ni pregled tuđeg izveštaja nije evidentiran. Komentar nije izmišljen niti zamenjen tekstom AI asistenta.
+**Status:** projekat sam 19. 10. 2026. poslao drugom polazniku na pregled, ali odgovor nije stigao do slanja izveštaja. Zato komentar para ovde nije unet; nije izmišljen niti zamenjen tekstom AI asistenta.
 
 Umesto toga, tri pitanja pregleda sam proverio sam, uz ponovljiv dokaz:
 
@@ -581,7 +581,7 @@ HTTP smoke potvrđuje da eksplicitno uključen current profil koristi JEv, basel
 - [x] Regresije su navedene: za M5 ih nema; napredni eksperimenti sa regresijama opisani su u odeljcima 12–13
 - [x] Navedeno bar jedno preostalo ograničenje
 - [x] Ručna CLI provera jednog promenjenog pitanja (E06)
-- [x] Status pregleda para naveden pošteno (komentar nije dostavljen do roka; odeljak 9)
+- [x] Status pregleda para naveden pošteno (projekat poslat na pregled, odgovor nije stigao; odeljak 9)
 - [x] Beleška o AI-ju i lična potvrda autora o proveri (odeljak 10)
 - [x] Autor, samostalan doprinos i demonstrator uneti po Uroševoj izjavi (`evidence/upgrade/human-input-21.json`)
 - [ ] Nedeljni izveštaj poslat tutoru do utorka 20.10.2026. u 12:00 (`[Nedeljni izveštaj] Ime Prezime – Nedelja 7`)
