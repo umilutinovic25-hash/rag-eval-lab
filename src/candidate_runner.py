@@ -31,6 +31,8 @@ CANDIDATES = {
     "yesno3-union": {"YESNO_QUESTION_JUDGE": "answerability"},
     "yesno3-only": {"YESNO_QUESTION_JUDGE": "answerability-only"},
     "yesno3-union-qwen": {"YESNO_QUESTION_JUDGE": "answerability", "YESNO_QUESTION_MODEL": "qwen2.5:7b"},
+    "no-numbers-from-question": {"NUMBERS_FROM_QUESTION": False},
+    "no-polarity-check": {"POLARITY_CHECK": False},
     "no-injection-guards": {"INJECTION_GUARDS": False},
     "no-evidence-rules": {"EVIDENCE_RULES_ENABLED": False},
     "top_k=1": {"TOP_K": 1},

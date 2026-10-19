@@ -27,6 +27,15 @@ CURRENT_ONLY = True
 # overrides) and against answers written in a different language than an English question.
 INJECTION_GUARDS = True
 
+# For yes/no-form questions, a second model of another family reads the cited passages and the answer is replaced by the
+# quoted passages when the two disagree on yes versus no (unknown never triggers it).
+POLARITY_CHECK = True
+POLARITY_MODEL = "gemma3:4b"
+
+# Numbers that the question itself contains may be repeated in the answer ("is shipping free on 60 EUR?") without being
+# flagged as unsupported.
+NUMBERS_FROM_QUESTION = True
+
 # Answering
 EVIDENCE_RULES_ENABLED = True
 REFUSAL_THRESHOLD = 0.12
@@ -114,11 +123,13 @@ GENERATION_JSON_PROMPT = (
 def apply_profile(name: str) -> None:
     """CLI-only profile: change all coupled settings together, within this process."""
     global RETRIEVAL_MODE, RERANK, ANSWER_MODE, ANSWER_QUOTES, EVIDENCE_RULES_ENABLED, CHUNK_HEADERS
+    global INJECTION_GUARDS, POLARITY_CHECK, NUMBERS_FROM_QUESTION
     if name in ("current", "verified"):
         return
     if name == "baseline":
         EVIDENCE_RULES_ENABLED = False
         CHUNK_HEADERS = False  # the historical replay keys embeddings by the bare chunk text
+        INJECTION_GUARDS = POLARITY_CHECK = NUMBERS_FROM_QUESTION = False  # later additions are not part of the historical replay
         return
     if name != "offline":
         raise ValueError(f"Unknown profile: {name}")

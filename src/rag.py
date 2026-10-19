@@ -5,7 +5,7 @@ from . import config, operation
 from .chunking import Chunk, build_chunks
 from .corpus import load_corpus
 from .claim_checks import claim_risks, clauses
-from .llm import LLMError, passage_answers, write_answer
+from .llm import LLMError, is_yes_no_question, passage_answers, passage_verdict, write_answer
 from .retrieval import RetrievalResult, retrieve_top_k
 
 
@@ -80,7 +80,7 @@ def expand_context(cited: list[RetrievalResult], chunks: list[Chunk], window: in
     return list(expanded.values())
 
 
-def generation_issue(text: str, cited: list[RetrievalResult]) -> str | None:
+def generation_issue(text: str, cited: list[RetrievalResult], question: str = "") -> str | None:
     """Structural and numeric checks only; no claim of semantic verification."""
     if getattr(text, "metadata", {}).get("done_reason") == "length":
         return "truncated_answer"
@@ -95,6 +95,8 @@ def generation_issue(text: str, cited: list[RetrievalResult]) -> str | None:
     if not markers or not set(markers) <= {item.chunk.chunk_id for item in cited}:
         return "invalid_marker"
     source = " ".join(item.chunk.text for item in cited)
+    if config.NUMBERS_FROM_QUESTION:
+        source += " " + question
     if not set(re.findall(r"\d+(?:[.:]\d+)*", body)) <= set(re.findall(r"\d+(?:[.:]\d+)*", source)):
         return "unsupported_number"
     by_id = {item.chunk.chunk_id: item.chunk.text for item in cited}
@@ -179,11 +181,15 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
         try:
             answer = write_answer(question, [(item.chunk.chunk_id, item.chunk.text) for item in cited])
             trace.append({"stage": "generation", "text": str(answer), "metadata": getattr(answer, "metadata", {"done_reason": "unknown"})})
-            fallback_reason = generation_issue(answer, cited)
+            fallback_reason = generation_issue(answer, cited, question)
             if not fallback_reason and config.INJECTION_GUARDS:
                 from .evidence import language_mismatch
                 if language_mismatch(question, answer):
                     fallback_reason = "language_mismatch"
+            if not fallback_reason and config.POLARITY_CHECK and is_yes_no_question(question):
+                lead = re.match(r"\s*(yes|no)\b", answer, re.I)
+                if lead and passage_verdict(question, " ".join(item.chunk.text for item in cited)) == {"yes": "no", "no": "yes"}[lead[1].lower()]:
+                    fallback_reason = "polarity_conflict"
         except LLMError:
             fallback_reason = "generation_error"
         if fallback_reason:

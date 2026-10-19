@@ -135,6 +135,7 @@ def test_committed_caches_cover_shipped_config_offline(monkeypatch, which) -> No
     monkeypatch.setattr(config, "ANSWER_MODE", "llm")
     monkeypatch.setattr(config, "CONTEXT_NEIGHBORS", 1)
     monkeypatch.setattr(config, "CONTEXT_POLICY", "references")
+    monkeypatch.setattr(config, "POLARITY_CHECK", False)  # the historical numbers below predate the polarity check
     from src.holdout_runner import TEST2_SET_PATH, TEST_SET_PATH
 
     runs = {

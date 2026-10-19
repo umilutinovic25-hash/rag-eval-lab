@@ -155,6 +155,14 @@ def answerability_judge(question: str, passage: str, model: str | None = None, p
     return bool(words) and words[0].strip(".,!:") in ("yes", "no")
 
 
+def passage_verdict(question: str, passage: str, model: str | None = None) -> str:
+    """yes, no or unknown, from the passage alone (same prompt as the answerability judge)."""
+    reply = generate(model or config.POLARITY_MODEL, config.YESNO_QUESTION_PROMPT.format(question=question, passage=passage), 3)
+    words = reply.lower().split()
+    first = words[0].strip(".,!:") if words else ""
+    return first if first in ("yes", "no") else "unknown"
+
+
 def passage_answers(question: str, passage: str) -> bool:
     if config.YESNO_QUESTION_JUDGE and is_yes_no_question(question):
         if config.YESNO_QUESTION_JUDGE == "answerability-only":

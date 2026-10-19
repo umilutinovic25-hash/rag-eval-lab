@@ -155,6 +155,7 @@ def test_replay_forbids_network_and_reports_zero_calls(monkeypatch):
     monkeypatch.setattr(config, 'RETRIEVAL_MODE', 'semantic')
     monkeypatch.setattr(config, 'RERANK', 'llm-gray-zone')
     monkeypatch.setattr(config, 'ANSWER_MODE', 'llm')
+    monkeypatch.setattr(config, 'POLARITY_CHECK', False)  # the replay manifest predates the polarity check
     report = execute('replay')
     assert report['manifest']['request_totals'] == {'embeddings': 0, 'llm': 0}
     assert report['runs']['eval']['run']['summary']['passed'] == 12
