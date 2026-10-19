@@ -299,6 +299,8 @@ summary {
   border: 0;
 }
 .app-shell {
+  /* Keep absolutely positioned accessible labels inside the clipped app viewport. */
+  position: relative;
   display: flex;
   height: 100dvh;
   overflow: hidden;

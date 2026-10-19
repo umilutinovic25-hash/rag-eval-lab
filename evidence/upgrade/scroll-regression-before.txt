@@ -1,0 +1,113 @@
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:30] "GET / HTTP/1.1" 200 -
+
+Running 2 tests using 1 worker
+
+(node:82274) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:30] "GET / HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:30] "GET /assets/index-BLeUy3p1.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:30] "GET /assets/index-D-RJl2GK.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:30] "GET /assets/dm-sans-latin-500-normal-B9HHJjqV.woff2 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:30] "GET /assets/dm-sans-latin-400-normal-CW0RaeGs.woff2 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:30] "GET /assets/dm-sans-latin-ext-400-normal-BtiwyxMk.woff2 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:30] "GET /assets/dm-sans-latin-ext-500-normal-BJfUCQsA.woff2 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:30] "GET /api/documents HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:30] "GET /api/workspace HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:30] "GET /api/evaluations/extended HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:30] "GET /api/evaluations HTTP/1.1" 200 -
+  ✘  1 e2e/workspace.spec.ts:180:3 › evaluation scroll stays inside the workspace at 1470px (5.5s)
+(node:82283) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:36] "GET / HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:36] "GET /assets/index-D-RJl2GK.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:36] "GET /assets/index-BLeUy3p1.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:36] "GET /assets/dm-sans-latin-400-normal-CW0RaeGs.woff2 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:36] "GET /assets/dm-sans-latin-500-normal-B9HHJjqV.woff2 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:36] "GET /assets/dm-sans-latin-ext-400-normal-BtiwyxMk.woff2 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:36] "GET /api/documents HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:36] "GET /assets/dm-sans-latin-ext-500-normal-BJfUCQsA.woff2 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:36] "GET /api/workspace HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:36] "GET /api/evaluations/extended HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [19/Oct/2026 17:45:36] "GET /api/evaluations HTTP/1.1" 200 -
+  ✘  2 e2e/workspace.spec.ts:180:3 › evaluation scroll stays inside the workspace at 390px (5.6s)
+
+
+  1) e2e/workspace.spec.ts:180:3 › evaluation scroll stays inside the workspace at 1470px ──────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 3
+
+      Object {
+    -   "extraHeight": 0,
+    -   "headerTop": 0,
+    -   "scrollY": 0,
+    +   "extraHeight": 574,
+    +   "headerTop": -574,
+    +   "scrollY": 574,
+      }
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      206 |         })),
+      207 |       )
+    > 208 |       .toEqual({ scrollY: 0, extraHeight: 0, headerTop: 0 });
+          |        ^
+      209 |     await expect(page.locator(".results-table tbody tr").last()).toBeVisible();
+      210 |     if (width > 700) {
+      211 |       expect(
+        at /Users/urosmilutinovic/Downloads/rag-week-7-weak-checkpoint/frontend/e2e/workspace.spec.ts:208:8
+
+    Error Context: ../../../../../var/folders/4z/wtdky7js64d_yk8y4ckn654m0000gn/T/izvor-playwright-results/workspace-evaluation-scrol-4fde4-ide-the-workspace-at-1470px/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../../var/folders/4z/wtdky7js64d_yk8y4ckn654m0000gn/T/izvor-playwright-results/workspace-evaluation-scrol-4fde4-ide-the-workspace-at-1470px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../../var/folders/4z/wtdky7js64d_yk8y4ckn654m0000gn/T/izvor-playwright-results/workspace-evaluation-scrol-4fde4-ide-the-workspace-at-1470px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) e2e/workspace.spec.ts:180:3 › evaluation scroll stays inside the workspace at 390px ───────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 3
+
+      Object {
+    -   "extraHeight": 0,
+    -   "headerTop": 0,
+    -   "scrollY": 0,
+    +   "extraHeight": 1415,
+    +   "headerTop": -1415,
+    +   "scrollY": 1415,
+      }
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      206 |         })),
+      207 |       )
+    > 208 |       .toEqual({ scrollY: 0, extraHeight: 0, headerTop: 0 });
+          |        ^
+      209 |     await expect(page.locator(".results-table tbody tr").last()).toBeVisible();
+      210 |     if (width > 700) {
+      211 |       expect(
+        at /Users/urosmilutinovic/Downloads/rag-week-7-weak-checkpoint/frontend/e2e/workspace.spec.ts:208:8
+
+    Error Context: ../../../../../var/folders/4z/wtdky7js64d_yk8y4ckn654m0000gn/T/izvor-playwright-results/workspace-evaluation-scrol-c68e6-side-the-workspace-at-390px/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../../var/folders/4z/wtdky7js64d_yk8y4ckn654m0000gn/T/izvor-playwright-results/workspace-evaluation-scrol-c68e6-side-the-workspace-at-390px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../../var/folders/4z/wtdky7js64d_yk8y4ckn654m0000gn/T/izvor-playwright-results/workspace-evaluation-scrol-c68e6-side-the-workspace-at-390px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    e2e/workspace.spec.ts:180:3 › evaluation scroll stays inside the workspace at 1470px ───────────
+    e2e/workspace.spec.ts:180:3 › evaluation scroll stays inside the workspace at 390px ────────────

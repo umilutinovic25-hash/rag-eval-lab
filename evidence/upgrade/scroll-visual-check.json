@@ -1,0 +1,42 @@
+{
+  "browserPlugin": "not available; used project Playwright",
+  "flow": "Open evaluation, scroll past last row twice; header/sidebar stay in viewport, no outer page scroll.",
+  "results": [
+    {
+      "url": "http://localhost:8767/",
+      "title": "izvor. — RAG radni prostor",
+      "viewport": {
+        "width": 1470,
+        "height": 876
+      },
+      "metrics": {
+        "documentHeight": 876,
+        "viewportHeight": 876,
+        "windowScrollY": 0,
+        "panelScrollTop": 1404,
+        "headerTop": 0
+      },
+      "consoleErrors": [],
+      "frameworkOverlay": 0,
+      "screenshot": "/tmp/izvor-scroll-fixed-1470.png"
+    },
+    {
+      "url": "http://localhost:8767/",
+      "title": "izvor. — RAG radni prostor",
+      "viewport": {
+        "width": 390,
+        "height": 876
+      },
+      "metrics": {
+        "documentHeight": 876,
+        "viewportHeight": 876,
+        "windowScrollY": 0,
+        "panelScrollTop": 2271,
+        "headerTop": 0
+      },
+      "consoleErrors": [],
+      "frameworkOverlay": 0,
+      "screenshot": "/tmp/izvor-scroll-fixed-390.png"
+    }
+  ]
+}

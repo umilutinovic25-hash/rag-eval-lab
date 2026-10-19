@@ -1,0 +1,25 @@
+
+> izvor-workspace@1.0.0 build
+> tsc -b && vite build
+
+vite v6.4.4 building for production...
+transforming...
+✓ 1590 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                            0.67 kB │ gzip:  0.39 kB
+dist/assets/dm-sans-latin-ext-400-normal-BtiwyxMk.woff2    7.36 kB
+dist/assets/dm-sans-latin-ext-600-normal-4vooXBpG.woff2    7.42 kB
+dist/assets/dm-sans-latin-ext-500-normal-BJfUCQsA.woff2    7.43 kB
+dist/assets/dm-sans-latin-ext-400-normal-BjWJ59Pq.woff     9.98 kB
+dist/assets/dm-sans-latin-ext-600-normal-DRtaDpgU.woff    10.02 kB
+dist/assets/dm-sans-latin-ext-500-normal-DR84L5F-.woff    10.07 kB
+dist/assets/dm-sans-latin-600-normal-Aqo67rzb.woff2       14.14 kB
+dist/assets/dm-sans-latin-400-normal-CW0RaeGs.woff2       14.20 kB
+dist/assets/dm-sans-latin-500-normal-B9HHJjqV.woff2       14.30 kB
+dist/assets/dm-sans-latin-600-normal-BmdmIIQ2.woff        18.32 kB
+dist/assets/dm-sans-latin-400-normal-BwCSEQnW.woff        18.36 kB
+dist/assets/dm-sans-latin-500-normal-Dr3UlScf.woff        18.52 kB
+dist/assets/index-CqRhRGk2.css                            39.70 kB │ gzip:  9.21 kB
+dist/assets/index-DTaqGs15.js                            303.37 kB │ gzip: 92.40 kB
+✓ built in 615ms

@@ -175,3 +175,44 @@ for (const width of [1505, 1280, 390]) {
     });
   });
 }
+
+for (const width of [1470, 390]) {
+  test(`evaluation scroll stays inside the workspace at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 876 });
+    await page.goto("/");
+    if (width <= 700) await page.getByLabel("Otvori navigaciju").click();
+    await page.getByRole("button", { name: "Evaluacija", exact: true }).click();
+    await expect(page.locator(".results-table tbody tr")).toHaveCount(12);
+    const panel = page.locator(".evaluation-page");
+    await expect(panel).toBeVisible();
+    const bounds = await panel.boundingBox();
+    expect(bounds).not.toBeNull();
+    await page.mouse.move(bounds!.x + bounds!.width / 2, 750);
+    await page.mouse.wheel(0, 5000);
+    await expect
+      .poll(() => panel.evaluate((e) => e.scrollTop))
+      .toBeGreaterThan(0);
+    await page.mouse.wheel(0, 5000);
+    await expect
+      .poll(() =>
+        page.evaluate(() => ({
+          scrollY: window.scrollY,
+          extraHeight:
+            document.documentElement.scrollHeight - window.innerHeight,
+          headerTop: document.querySelector(".topbar")!.getBoundingClientRect()
+            .top,
+        })),
+      )
+      .toEqual({ scrollY: 0, extraHeight: 0, headerTop: 0 });
+    await expect(page.locator(".results-table tbody tr").last()).toBeVisible();
+    if (width > 700) {
+      expect(
+        await page
+          .locator(".sidebar")
+          .evaluate((e) => e.getBoundingClientRect().bottom),
+      ).toBe(876);
+    }
+  });
+}
