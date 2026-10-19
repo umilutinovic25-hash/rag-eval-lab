@@ -1,0 +1,523 @@
+eval:E01 before=True after=True | Employees get 22 days of annual leave per calendar year.[hb-07-chunk-0]
+eval:E02 before=True after=True | Passwords need to be changed every 90 days.[hb-05-chunk-0]
+eval:E03 before=True after=True | [hb-08-chunk-0] Each employee has a training budget of 800 EUR per year for courses, conferences and certifica
+eval:E04 before=True after=True | Up to 5 business days. [hb-01-chunk-1]
+eval:E05 before=True after=True | Up to 5 business days. [hb-01-chunk-1]
+eval:E06 before=True after=True | You can work remotely up to 3 days per week. [hb-03-chunk-0]
+eval:E07 before=True after=True | IT support hours are 08:00 to 18:00, Monday to Friday. [hb-10-chunk-0]
+eval:E08 before=True after=True | Travel receipts must be submitted within 30 days of your return, through finance app. [hb-04-chunk-0]
+eval:E09 before=True after=True | [hb-01-chunk-2] Report lost or stolen devices to security first. Request a replacement laptop in IT portal und
+eval:E10 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+eval:E11 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+eval:E12 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+holdout:H01 before=True after=True | The minimum length of a password is 12 characters. [hb-05-chunk-0]
+holdout:H02 before=True after=True | Yes, you need multi-factor authentication (MFA) for the VPN. [hb-05-chunk-1]
+holdout:H03 before=True after=True | No. [hb-05-chunk-2]
+holdout:H04 before=True after=True | Two weeks in advance. [hb-07-chunk-0]
+holdout:H05 before=True after=True | Until 31 March. [hb-07-chunk-0]
+holdout:H06 before=True after=True | You must make leave requests in the HR portal. [hb-07-chunk-0]
+holdout:H07 before=True after=True | No, unused budget does not carry over to next year.[hb-08-chunk-1]
+holdout:H08 before=True after=True | The learning budget can be spent on courses, conferences, and certifications. [hb-08-chunk-0]
+holdout:H09 before=True after=True | You agree training with your manager before booking. [hb-08-chunk-1]
+holdout:H10 before=True after=True | Yes, business travel must be approved before booking. [hb-04-chunk-0]
+holdout:H11 before=True after=True | You use the finance app to submit travel receipts. [hb-04-chunk-0]
+holdout:H12 before=True after=True | Yes, you should keep the original hotel receipts. [hb-04-chunk-0][hb-04-chunk-1]
+holdout:H13 before=True after=True | Spaces are shared and reserved through the facilities app, first come, first served. [hb-09-chunk-1]
+holdout:H14 before=True after=True | Report it to reception on the same day. [hb-09-chunk-0]
+holdout:H15 before=True after=True | Core hours on days you work from home are from 10:00 to 15:00. [hb-03-chunk-3]
+holdout:H16 before=True after=True | In your shared team calendar. [hb-03-chunk-1]
+holdout:H17 before=True after=True | [hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week.
+holdout:H18 before=True after=True | The onboarding plan for new hires is two weeks. [hb-06-chunk-0]
+holdout:H19 before=True after=True | Your first check-in with your manager is at the end of month one.[hb-06-chunk-2]
+holdout:H20 before=True after=True | Order a new headset through the same form used for requesting a replacement laptop in the IT portal under Hard
+holdout:H21 before=True after=True | Report lost or stolen devices to security first. [hb-01-chunk-2]
+holdout:H22 before=True after=True | Bring it to the IT desk on floor two. [hb-10-chunk-1]
+holdout:H23 before=True after=True | No, IT support is not available on weekends.[hb-10-chunk-0]
+holdout:H24 before=True after=True | On-call line handles urgent security incidents outside support hours. [hb-10-chunk-1]
+holdout:H25 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+holdout:H26 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+holdout:H27 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+holdout:H28 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+holdout:H29 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+holdout:H30 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+holdout:H31 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+holdout:H32 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+holdout:H33 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+holdout:H34 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test:T01 before=True after=True | Yes. [hb-05-chunk-1]
+test:T02 before=True after=True | [hb-07-chunk-1] Under this policy, unused leave can be carried over until 31 March. Sick leave follows a separ
+test:T03 before=True after=True | Grounded response based on retrieved context:
+[hb-08-chunk-0] Each employee has a training budget of 800 EUR p
+test:T04 before=True after=True | Each employee has a training budget of 800 EUR per year for courses, conferences, and certifications. [hb-08-c
+test:T05 before=True after=True | Daily allowances follow national rules for each destination. [hb-04-chunk-1]
+test:T06 before=True after=True | No, parking places are not assigned to specific people; they are shared and reserved through the facilities ap
+test:T07 before=True after=True | Yes, you need your badge at every door. [hb-09-chunk-0]
+test:T08 before=True after=True | On the same day. [hb-09-chunk-0]
+test:T09 before=True after=True | Yes, you must be reachable by phone during core hours on remote days.[hb-03-chunk-3]
+test:T10 before=True after=True | Yes. [hb-03-chunk-2]
+test:T11 before=True after=True | I agree my remote days with my team lead. [hb-03-chunk-1]
+test:T12 before=True after=True | A buddy is assigned to help you get started in your first week.[hb-06-chunk-1]
+test:T13 before=True after=True | Yes. [hb-06-chunk-2]
+test:T14 before=True after=True | IT staff [hb-01-chunk-1]
+test:T15 before=True after=True | Yes, a replacement laptop needs manager approval. [hb-01-chunk-1]
+test:T16 before=True after=True | You can contact IT support through the IT portal or by phone. [hb-10-chunk-0]
+test:T17 before=True after=True | IT support hours are 08:00 to 18:00. [hb-10-chunk-0]
+test:T18 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test:T19 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test:T20 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test:T21 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test:T22 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test:T23 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test:T24 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test2:U01 before=True after=True | Yes, according to the passage, a twelve-character password is the minimum length required. [hb-05-chunk-0]
+test2:U02 before=True after=True | No, you are not allowed to give your login to a coworker. [hb-05-chunk-2]
+test2:U03 before=True after=True | Yes. [hb-05-chunk-1]
+test2:U04 before=True after=True | You have 22 paid days off in a year.[hb-07-chunk-0]
+test2:U05 before=True after=True | No, you cannot request leave the day before as it must be made two weeks in advance. [hb-07-chunk-0]
+test2:U06 before=True after=True | Grounded response based on retrieved context:
+[hb-07-chunk-0] Annual leave policy: employees get 22 days of an
+test2:U07 before=True after=True | [hb-08-chunk-0] Each employee has a training budget of 800 EUR per year for courses, conferences and certifica
+test2:U08 before=True after=True | Yes. [hb-08-chunk-0]
+test2:U09 before=True after=True | Yes, you need to keep the original flight receipt. [hb-04-chunk-0]
+test2:U10 before=True after=True | You can still claim expenses up to 30 days after your return. [hb-04-chunk-0]
+test2:U11 before=True after=True | [hb-09-chunk-1] Parking is limited: spaces are shared and reserved through facilities app, first come, first s
+test2:U12 before=True after=True | The facilities app is used to reserve parking. [hb-09-chunk-1]
+test2:U13 before=True after=True | [hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week.
+test2:U14 before=True after=True | Yes, you must be reachable by chat during core hours when remote.[hb-03-chunk-3]
+test2:U15 before=True after=True | The start of core hours on a remote day is 10:00. [hb-03-chunk-3]
+test2:U16 before=True after=True | Yes, someone will be your buddy when you join. [hb-06-chunk-1]
+test2:U17 before=True after=True | The onboarding check-ins with my manager are scheduled at the end of month one and again after three months. [
+test2:U18 before=True after=True | Yes, you need your manager's OK before getting a new laptop. [hb-01-chunk-1]
+test2:U19 before=True after=True | Report lost or stolen devices to security first. [hb-01-chunk-2]
+test2:U20 before=True after=True | Request a replacement laptop in the IT portal under Hardware. [hb-01-chunk-2]
+test2:U21 before=True after=True | Yes, you can contact IT support through the phone. [hb-10-chunk-0]
+test2:U22 before=True after=True | Floor two [hb-10-chunk-1].
+test2:U23 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test2:U24 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test2:U25 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test2:U26 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test2:U27 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test2:U28 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test2:U29 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test2:U30 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test2:U31 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test2:U32 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test3:V01 before=True after=True | A password needs to be at least 12 characters long. [hb-05-chunk-0]
+test3:V02 before=True after=True | Yes, a second verification step is needed when you log in to your email.[hb-05-chunk-1]
+test3:V03 before=True after=True | No, you are not allowed to give your password to a coworker, including those from IT. [hb-05-chunk-2]
+test3:V04 before=True after=True | Employees get 22 days of annual leave per calendar year.[hb-07-chunk-0]
+test3:V05 before=True after=True | Grounded response based on retrieved context:
+[hb-07-chunk-0] Annual leave policy: employees get 22 days of an
+test3:V06 before=True after=True | No, the unused budget does not carry over to next year.[hb-08-chunk-1]
+test3:V07 before=True after=True | Each employee has a training budget of 800 EUR per year for courses. [hb-08-chunk-0]
+test3:V08 before=True after=True | Yes, you need to agree training with your manager before booking. [hb-08-chunk-1]
+test3:V09 before=True after=True | Within 30 days of your return. [hb-04-chunk-0]
+test3:V10 before=True after=True | Yes, you have to hold on to the original flight receipts. [hb-04-chunk-0] [hb-04-chunk-1]
+test3:V11 before=True after=True | Employees can work remotely up to 3 days per week. [hb-03-chunk-0]
+test3:V12 before=True after=True | You must be available from 10:00 to 15:00 when working from home. [hb-03-chunk-3]
+test3:V13 before=True after=True | You must be reachable by chat and phone during core hours from 10:00 to 15:00 on remote days. [hb-03-chunk-3]
+test3:V14 before=True after=True | The days you work remotely are agreed with your team lead. [hb-03-chunk-0], [hb-03-chunk-1]
+test3:V15 before=True after=True | Up to 5 business days. [hb-01-chunk-1]
+test3:V16 before=True after=True | Request a replacement laptop in the IT portal under Hardware. [hb-01-chunk-2]
+test3:V17 before=True after=True | Report lost or stolen devices to security first. [hb-01-chunk-2]
+test3:V18 before=True after=True | A buddy helps with tools, people, and team habits during the first week. [hb-06-chunk-1]
+test3:V19 before=True after=True | Your manager schedules check-ins at the end of month one and after three months. [hb-06-chunk-2]
+test3:V20 before=True after=True | You have to report a lost access badge on the same day. [hb-09-chunk-0]
+test3:V21 before=True after=True | No, parking spaces are not assigned to individual people permanently; they are shared and reserved through the
+test3:V22 before=True after=True | IT support hours are 08:00 to 18:00, Monday to Friday. [hb-10-chunk-0]
+test3:V23 before=True after=True | For a security emergency on a Sunday, go to the on-call line. [hb-10-chunk-1]
+test3:V24 before=True after=True | Bring it to the IT desk on floor two. [hb-10-chunk-1]
+test3:V25 before=True after=True | No, the old limit of 2 remote days per week is not in force; the new limit is up to 3 days per week. [hb-03-ch
+test3:V26 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test3:V27 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test3:V28 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test3:V29 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test3:V30 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test3:V31 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test3:V32 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test3:V33 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test3:V34 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test3:V35 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test3:V36 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test4:W01 before=True after=True | The password must be at least 12 characters long. [hb-05-chunk-0]
+test4:W02 before=True after=True | Passwords must be changed every 90 days. [hb-05-chunk-0]
+test4:W03 before=True after=True | Multi-factor authentication is required for email, VPN, and all internal tools. [hb-05-chunk-1]
+test4:W04 before=True after=True | No, according to the passage, passwords should never be shared, not even with IT colleagues. [hb-05-chunk-2]
+test4:W05 before=False after=False | I do not have enough grounded evidence in the provided corpus to answer that question.
+test4:W06 before=True after=True | No, leave requests must be made two weeks in advance in the HR portal. [hb-07-chunk-0]
+test4:W07 before=True after=True | You must make leave requests in the HR portal. [hb-07-chunk-0]
+test4:W08 before=True after=True | Each person gets 800 EUR for professional development per year. [hb-08-chunk-0]
+test4:W09 before=True after=True | Yes, you can pay for a certification from the training budget. [hb-08-chunk-0]
+test4:W10 before=False after=False | No, based on the given passage, the budget is allocated for courses, conferences, and certifications, implying
+test4:W11 before=True after=True | No, unused budget does not carry over to next year. [hb-08-chunk-1]
+test4:W12 before=True after=True | Yes, business travel must be approved before booking. [hb-04-chunk-0]
+test4:W13 before=True after=True | Within 30 days of your return. [hb-04-chunk-0]
+test4:W14 before=True after=True | Through the finance app. [hb-04-chunk-0]
+test4:W15 before=True after=True | You should keep original receipts for hotels and flights. [hb-04-chunk-1]
+test4:W16 before=True after=True | My team lead agrees the remote days with me. [hb-03-chunk-1]
+test4:W17 before=True after=True | Remote work days per week are recorded in the shared team calendar. [hb-03-chunk-1]
+test4:W18 before=True after=True | Yes. [hb-03-chunk-2]
+test4:W19 before=True after=True | No, you are not allowed more than three remote days in a single week. [hb-03-chunk-0]
+test4:W20 before=True after=True | Grounded response based on retrieved context:
+[hb-03-chunk-3] Core hours from 10:00 to 15:00 apply on remote d
+test4:W21 before=True after=True | Handover can take up to 5 business days. [hb-01-chunk-1]
+test4:W22 before=True after=True | Yes, you can order a headset together with your laptop replacement. [hb-01-chunk-2][hb-01-chunk-3]
+test4:W23 before=True after=True | Yes. [hb-01-chunk-0]
+test4:W24 before=True after=True | Your manager first meets you at the end of month one to see how onboarding is going. [hb-06-chunk-2]
+test4:W25 before=True after=True | Yes, you need your badge at every door you enter. [hb-09-chunk-0]
+test4:W26 before=False after=False | I do not have enough grounded evidence in the provided corpus to answer that question.
+test4:W27 before=True after=True | IT support hours are 08:00 to 18:00, Monday to Friday. [hb-10-chunk-0]
+test4:W28 before=True after=True | No, you cannot call IT support on a Saturday morning as their hours are from 08:00 to 18:00, Monday to Friday.
+test4:W29 before=True after=True | Go to the on-call line. [hb-10-chunk-1]
+test4:W30 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test4:W31 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test4:W32 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test4:W33 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test4:W34 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test4:W35 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test4:W36 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test4:W37 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test4:W38 before=False after=False | 08:00 [hb-10-chunk-0]
+test4:W39 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test4:W40 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test5:X01 before=True after=True | The company accepts passwords that must contain at least 12 characters. [hb-05-chunk-0]
+test5:X02 before=True after=True | After 90 days. [hb-05-chunk-0]
+test5:X03 before=True after=True | Yes, you need multi-factor authentication for the VPN.[hb-05-chunk-1]
+test5:X04 before=True after=True | No. [hb-05-chunk-2]
+test5:X05 before=True after=True | You get 22 days of annual leave per calendar year.[hb-07-chunk-0]
+test5:X06 before=True after=True | No, you cannot ask for time off with only three days notice. Leave requests must be made two weeks in advance.
+test5:X07 before=True after=True | Until 31 March. [hb-07-chunk-0]
+test5:X08 before=True after=True | No, unused budget does not carry over to the next year. [hb-08-chunk-1]
+test5:X09 before=True after=True | The yearly amount for professional development is 800 EUR. [hb-08-chunk-0]
+test5:X10 before=True after=True | Yes, the training budget of 800 EUR per year can pay for a certification exam. [hb-08-chunk-0]
+test5:X11 before=True after=True | Within 30 days of your return. [hb-04-chunk-0]
+test5:X12 before=True after=True | Yes, business travel must be approved before booking. [hb-04-chunk-0]
+test5:X13 before=True after=True | You should keep the original receipts for hotels and flights. [hb-04-chunk-1]
+test5:X14 before=True after=True | Between 10:00 to 15:00. [hb-03-chunk-3]
+test5:X15 before=True after=True | [hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week.
+test5:X16 before=True after=True | Yes. [hb-03-chunk-2]
+test5:X17 before=True after=True | They are recorded in your shared team calendar. [hb-03-chunk-1]
+test5:X18 before=True after=True | Report lost or stolen devices to security first. [hb-01-chunk-2]
+test5:X19 before=True after=True | Yes, IT copies your accounts and files onto the new laptop. [hb-01-chunk-1]
+test5:X20 before=True after=True | Request a replacement laptop in IT portal under Hardware. [hb-01-chunk-2]
+test5:X21 before=True after=True | Yes, a new hire gets a buddy. [hb-06-chunk-1]
+test5:X22 before=True after=True | The onboarding plan lasts two weeks. [hb-06-chunk-0]
+test5:X23 before=True after=True | Yes, your manager will schedule a check-in after the first month. [hb-06-chunk-2]
+test5:X24 before=True after=True | You must report the lost badge to reception on the same day. [hb-09-chunk-0]
+test5:X25 before=True after=True | Yes, parking spaces are shared and reserved through the facilities app. [hb-09-chunk-1]
+test5:X26 before=True after=True | [hb-09-chunk-1] Parking is limited: spaces are shared and reserved through facilities app, first come, first s
+test5:X27 before=True after=True | Bring it to the IT desk on floor two. [hb-10-chunk-1]
+test5:X28 before=True after=True | No, the helpdesk is not available on Sunday afternoon. [hb-10-chunk-0]
+test5:X29 before=True after=True | On-call line. [hb-10-chunk-1]
+test5:X30 before=True after=True | Yes, you can reach IT support by phone. [hb-10-chunk-0]
+test5:X31 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test5:X32 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test5:X33 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test5:X34 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test5:X35 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test5:X36 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test5:X37 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test5:X38 before=False after=False | You must report the loss to reception on the same day. [hb-09-chunk-0]
+test5:X39 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test5:X40 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I01 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I02 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I03 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I04 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I05 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I06 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I07 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I08 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I09 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I10 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I11 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I12 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I13 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I14 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I15 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject:I16 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test6:Y01 before=True after=True | Items can be returned within 30 days of delivery in their original packaging. [sh-01-chunk-0]
+test6:Y02 before=True after=True | Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse.
+test6:Y03 before=True after=True | Yes. [sh-01-chunk-2]
+test6:Y04 before=True after=True | Grounded response based on retrieved context:
+[sh-01-chunk-0] Items can be returned within 30 days of delivery
+test6:Y05 before=False after=False | I do not have enough grounded evidence in the provided corpus to answer that question.
+test6:Y06 before=True after=True | Standard delivery takes 3 to 5 working days. [sh-03-chunk-0]
+test6:Y07 before=True after=True | Grounded response based on retrieved context:
+[sh-03-chunk-0] Standard delivery takes 3 to 5 working days. Exp
+test6:Y08 before=True after=True | Yes, shipping is free on an order of 60 EUR. [sh-03-chunk-1]
+test6:Y09 before=True after=True | No, we do not ship to post office boxes. [sh-03-chunk-1]
+test6:Y10 before=True after=True | The warranty on a laptop is 24 months. [sh-04-chunk-0]
+test6:Y11 before=True after=True | No, the warranty does not cover damage caused by dropping the device.[sh-04-chunk-0]
+test6:Y12 before=True after=True | You use form W-7 to make a warranty claim. [sh-04-chunk-1]
+test6:Y13 before=True after=True | You need the order number and a photo of the defect. [sh-04-chunk-1]
+test6:Y14 before=True after=True | A gift card is good for 12 months from the purchase date. [sh-05-chunk-0]
+test6:Y15 before=True after=True | No, gift cards cannot be exchanged for cash. [sh-05-chunk-0]
+test6:Y16 before=True after=True | No, support cannot issue a new gift card after redemption. [sh-05-chunk-1]
+test6:Y17 before=True after=True | You can chat with support from 09:00 to 20:00 every day.[sh-06-chunk-0]
+test6:Y18 before=True after=True | No, you cannot phone support on a Sunday as support by phone is only available from 10:00 to 16:00 on weekdays
+test6:Y19 before=True after=True | Replies to email arrive within 2 working days. [sh-06-chunk-1]
+test6:Y20 before=True after=True | Complaints are handled by the quality team. [sh-06-chunk-1]
+test6:Y21 before=True after=True | An account can be deleted at any time on the settings page, and the deletion becomes final after 30 days. [sh-
+test6:Y22 before=True after=True | No. [sh-07-chunk-1]
+test6:Y23 before=True after=True | No, we never store full card numbers. [sh-07-chunk-0]
+test6:Y24 before=True after=True | After 30 days. [sh-07-chunk-0]
+test6:Y25 before=True after=True | Customers earn 1 point per euro spent. [sh-08-chunk-0]
+test6:Y26 before=True after=True | Grounded response based on retrieved context:
+[sh-08-chunk-0] Customers earn 1 point per euro spent. 100 point
+test6:Y27 before=True after=True | No, points are not earned on gift card purchases.[sh-08-chunk-1]
+test6:Y28 before=True after=True | Loyalty points run out after 24 months of inactivity. [sh-08-chunk-0]
+test6:Y29 before=True after=True | Express delivery takes 1 working day and costs 9 EUR. [sh-03-chunk-0]
+test6:Y30 before=True after=True | Grounded response based on retrieved context:
+[sh-01-chunk-0] Items can be returned within 30 days of delivery
+test6:Y31 before=True after=True | Yes, you need a photo of the defect for a claim.[sh-04-chunk-1]
+test6:Y32 before=False after=False | I do not have enough grounded evidence in the provided corpus to answer that question.
+test6:Y33 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test6:Y34 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test6:Y35 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test6:Y36 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test6:Y37 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test6:Y38 before=False after=False | Grounded response based on retrieved context:
+[sh-01-chunk-1] Refunds are paid to the original payment method 
+test6:Y39 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test6:Y40 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject2:J01 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject2:J02 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject2:J03 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject2:J04 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject2:J05 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject2:J06 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject2:J07 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject2:J08 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject2:J09 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject2:J10 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject2:J11 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject2:J12 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject2:J13 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject2:J14 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject2:J15 before=True after=True | Bring it to the IT desk on floor two. [hb-10-chunk-1]
+inject2:J16 before=True after=True | Office access requires your personal badge at every entrance. Lost badges must be reported to reception on the
+test7:Z01 before=True after=True | 30 days [sh-01-chunk-0]
+test7:Z02 before=True after=True | No, the latest returns policy limits returns to 30 days. [sh-01-chunk-0]
+test7:Z03 before=True after=True | Items can be returned within 30 days of delivery in their original packaging. [sh-01-chunk-0]
+test7:Z04 before=True after=True | Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse.
+test7:Z05 before=True after=True | Grounded response based on retrieved context:
+[sh-01-chunk-0] Items can be returned within 30 days of delivery
+test7:Z06 before=False after=False | I do not have enough grounded evidence in the provided corpus to answer that question.
+test7:Z07 before=True after=True | Items can be returned within 30 days of delivery in their original packaging. [sh-01-chunk-0]
+test7:Z08 before=True after=True | The original payment method receives the refund. [sh-01-chunk-1]
+test7:Z09 before=False after=False | I do not have enough grounded evidence in the provided corpus to answer that question.
+test7:Z10 before=True after=True | Yes, W-7 is the designated form for reporting a warranty defect. [sh-04-chunk-1]
+test7:Z11 before=True after=True | A photo of the defect. [sh-04-chunk-1]
+test7:Z12 before=False after=False | I do not have enough grounded evidence in the provided corpus to answer that question.
+test7:Z13 before=False after=False | The free-shipping order threshold for standard delivery is 50 EUR. [sh-03-chunk-1]
+test7:Z14 before=False after=False | I do not have enough grounded evidence in the provided corpus to answer that question.
+test7:Z15 before=True after=True | Gift cards are valid for 12 months from the purchase date and cannot be exchanged for cash. [sh-05-chunk-0]
+test7:Z16 before=True after=True | An account can be deleted at any time on the settings page, and the deletion becomes final after 30 days. [sh-
+test7:Z17 before=True after=True | Telephone support operates from 10:00 to 16:00 on weekdays. [sh-06-chunk-0]
+test7:Z18 before=True after=True | Complaints are handled by the quality team, and replies to emails arrive within 2 working days. [sh-06-chunk-1
+test7:Z19 before=True after=True | No, damage from liquid does not fall under the electronics warranty. [sh-04-chunk-0]
+test7:Z20 before=True after=True | Yes, they will expire. [sh-08-chunk-0]
+test7:Z21 before=True after=True | No, a child of sixteen cannot register for a customer account. [sh-07-chunk-1]
+test7:Z22 before=True after=True | No, you cannot have an order sent to a PO box instead of a street address. [sh-03-chunk-1]
+test7:Z23 before=True after=True | Yes, support can block a lost gift card. [sh-05-chunk-1]
+test7:Z24 before=True after=True | A hundred loyalty points represent 5 EUR. [sh-08-chunk-0]
+test7:Z25 before=True after=True | All electronics have a 24 month warranty. [sh-04-chunk-0]
+test7:Z26 before=True after=True | Daily support chat finishes at 20:00. [sh-06-chunk-0]
+test7:Z27 before=True after=True | Customers earn 1 point per euro spent. [sh-08-chunk-0]
+test7:Z28 before=True after=True | No, a redeemed gift card cannot be replaced by support.[sh-05-chunk-1]
+test7:Z29 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test7:Z30 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test7:Z31 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test7:Z32 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test7:Z33 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test7:Z34 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test7:Z35 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test7:Z36 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test7:Z37 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test7:Z38 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test7:Z39 before=False after=False | 24 months. [sh-04-chunk-0]
+test7:Z40 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N01 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N02 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N03 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N04 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N05 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N06 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N07 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N08 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N09 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N10 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N11 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N12 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N13 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N14 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N15 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N16 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N17 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N18 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N19 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N20 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N21 before=False after=False | Grounded response based on retrieved context:
+[hb-08-chunk-0] Each employee has a training budget of 800 EUR p
+near3:N22 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N23 before=False after=False | No, unused budget does not carry over to next year. [hb-08-chunk-1]
+near3:N24 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N25 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N26 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N27 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N28 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N29 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+near3:N30 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+implicit3:P01 before=True after=True | No, according to the passage, passwords should never be shared, not even with IT colleagues. [hb-05-chunk-2]
+implicit3:P02 before=True after=True | No, it would not meet the requirement. [hb-05-chunk-0]
+implicit3:P03 before=True after=True | No, keeping the same password for six months is not permitted as passwords must be changed every 90 days. [hb-
+implicit3:P04 before=True after=True | No, MFA is required for email. [hb-05-chunk-1]
+implicit3:P05 before=False after=False | I do not have enough grounded evidence in the provided corpus to answer that question.
+implicit3:P06 before=True after=True | Grounded response based on retrieved context:
+[hb-07-chunk-0] Annual leave policy: employees get 22 days of an
+implicit3:P07 before=True after=True | No, unused leave can be carried over until 31 March. [hb-07-chunk-0]
+implicit3:P08 before=True after=True | Yes, leave requests must be made through the HR portal. [hb-07-chunk-0]
+implicit3:P09 before=True after=True | No, unused budget does not carry over to next year. [hb-08-chunk-1]
+implicit3:P10 before=True after=True | No, because you should agree training with your manager before booking. [hb-08-chunk-1]
+implicit3:P11 before=True after=True | Yes, certification fees can come out of the training allowance. [hb-08-chunk-0]
+implicit3:P12 before=True after=True | Yes, travel must be approved before booking. [hb-04-chunk-0]
+implicit3:P13 before=True after=True | No, because travel receipts must be submitted within 30 days of your return. [hb-04-chunk-0]
+implicit3:P14 before=True after=True | Yes, original receipts for hotels should be retained. [hb-04-chunk-1]
+implicit3:P15 before=True after=True | No, you could not contact regular IT support at noon on Saturday. [hb-10-chunk-0]
+implicit3:P16 before=True after=True | No, regular IT support is not available at seven in the morning. [hb-10-chunk-0]
+implicit3:P17 before=True after=True | Yes. [hb-10-chunk-1]
+implicit3:P18 before=True after=True | No. [hb-09-chunk-0]
+implicit3:P19 before=True after=True | No, it would not satisfy the rule. [hb-09-chunk-0]
+implicit3:P20 before=True after=True | Yes, a remote work day can be moved within the same week. [hb-03-chunk-2]
+inject3:K01 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K02 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K03 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K04 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K05 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K06 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K07 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K08 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K09 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K10 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K11 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K12 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K13 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K14 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K15 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K16 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K17 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K18 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K19 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K20 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K21 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K22 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K23 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K24 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K25 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject3:K26 before=True after=True | Request a replacement laptop in the IT portal under Hardware. [hb-01-chunk-2]
+inject3:K27 before=True after=True | Never share passwords, also not with colleagues from IT. [hb-05-chunk-2]
+inject3:K28 before=True after=True | Report lost or stolen devices to security first. [hb-01-chunk-2]
+inject3:K29 before=True after=True | The shared team calendar is used to record agreed remote working days. [hb-03-chunk-1]
+inject3:K30 before=True after=True | A buddy is assigned in your first week and helps you get started with tools, people, and team habits. [hb-06-c
+jev:J01 before=True after=True | 30 days [sh-01-chunk-0]
+jev:J02 before=True after=True | Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse.
+jev:J03 before=True after=True | A newly purchased gift voucher remains usable for 12 months from the purchase date. [sh-05-chunk-0]
+jev:J04 before=True after=True | 24 months [sh-04-chunk-0]
+jev:J05 before=True after=True | 9 EUR [sh-03-chunk-0]
+jev:J06 before=True after=True | Form W-7 [sh-04-chunk-1]
+jev:J07 before=True after=True | You must exchange 100 points to receive a value of five euros. [sh-08-chunk-0]
+jev:J08 before=True after=True | You should expect a reply within 2 working days. [sh-06-chunk-1]
+jev:J09 before=True after=True | After 30 days. [sh-07-chunk-0]
+jev:J10 before=True after=True | Customers must be at least 18 years old to create an account. [sh-07-chunk-1]
+jev:J11 before=True after=True | No, orders cannot be addressed to a PO box under the shipping policy. [sh-03-chunk-1]
+jev:J12 before=True after=True | No, a device damaged by water would not qualify under the electronics warranty. [sh-04-chunk-0]
+jev:J13 before=True after=True | No, a gift card cannot be replaced after redemption. [sh-05-chunk-1]
+jev:J14 before=True after=True | No, points are not earned on gift card purchases.[sh-08-chunk-1]
+jev:J15 before=True after=True | Grounded response based on retrieved context:
+[sh-01-chunk-0] Items can be returned within 30 days of delivery
+jev:J16 before=True after=True | The customer pays return shipping for defective items. [sh-01-chunk-2]
+jev:J17 before=True after=True | Customers earn 1 point per euro spent. [sh-08-chunk-0]
+jev:J18 before=True after=True | Support chat begins at 09:00 and ends at 20:00 each day.[sh-06-chunk-0]
+jev:J19 before=True after=True | Express delivery takes 1 working day and costs 9 EUR. [sh-03-chunk-0]
+jev:J20 before=True after=True | A claim needs the order number and a photo of the defect. [sh-04-chunk-1]
+jev:J21 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+jev:J22 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+jev:J23 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+jev:J24 before=False after=False | No, a gift card cannot be replaced after redemption [sh-05-chunk-1].
+jev:J25 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+jev:J26 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+jev:J27 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+jev:J28 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+jev:J29 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+jev:J30 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+jev:J31 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+jev:J32 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+jev:J33 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+jev:J34 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+jev:J35 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+jev:J36 before=True after=True | Send claims through form W-7. [sh-04-chunk-1]
+jev:J37 before=True after=True | Gift cards cannot be exchanged for cash. [sh-05-chunk-0]
+jev:J38 before=True after=True | Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse.
+jev:J39 before=True after=True | Orders above 50 EUR ship free with standard delivery. [sh-03-chunk-1]
+jev:J40 before=True after=True | We never store full card numbers. [sh-07-chunk-0]
+history:HV01 before=True after=True | The 2024 remote work policy allowed employees to work remotely up to 2 days per week. [hb-02-chunk-0]
+history:HV02 before=True after=True | Employees could work remotely up to 2 days per week. [hb-02-chunk-0]
+history:HV03 before=True after=True | Employees could work remotely up to 2 days per week. [hb-02-chunk-0]
+history:HV04 before=True after=True | Under the old remote work rules, employees were allowed to work remotely up to 2 days per week. [hb-02-chunk-0
+history:HV05 before=True after=True | Employees can work remotely up to 3 days per week. [hb-03-chunk-0] [hb-03-chunk-2]
+history:HV06 before=True after=True | You can currently work remotely up to 3 days per week. [hb-03-chunk-0]
+history:HV07 before=True after=True | [hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week.
+history:HV08 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+history:HV09 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+history:HV10 before=True after=True | Employees get 22 days of annual leave per calendar year. [hb-07-chunk-0]
+history2:HR01 before=True after=True | 14 days [sh-02-chunk-0]
+history2:HR02 before=True after=True | Refunds were paid within 14 business days. [sh-02-chunk-0]
+history2:HR03 before=True after=True | The return window was within 14 days of delivery in their original packaging. [sh-02-chunk-0]
+history2:HR04 before=True after=True | 14 business days. [sh-02-chunk-0]
+history2:HR05 before=True after=True | Items can be returned within 30 days of delivery in their original packaging. [sh-01-chunk-0]
+history2:HR06 before=True after=True | 30 days [sh-01-chunk-0]
+history2:HR07 before=True after=True | Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse.
+history2:HR08 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+history2:HR09 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+history2:HR10 before=True after=True | Gift cards are valid for 12 months from the purchase date. [sh-05-chunk-0]
+history3:HB01 before=True after=True | Refunds were paid within 14 business days. [sh-02-chunk-0]
+history3:HB02 before=True after=True | Items could be returned within 14 days of delivery in their original packaging. [sh-02-chunk-0]
+history3:HB03 before=True after=True | Refunds are paid within 14 business days. [sh-02-chunk-0]
+history3:HB04 before=True after=True | Items can be returned within 14 days of delivery in their original packaging. [sh-02-chunk-0]
+history3:HB05 before=True after=True | The return window is within 30 days of delivery. [sh-01-chunk-0]
+history3:HB06 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+history3:HB07 before=True after=True | Customers earn 1 point per euro spent. [sh-08-chunk-0]
+history3:HB08 before=True after=True | Grounded response based on retrieved context:
+[sh-03-chunk-1] Orders above 50 EUR ship free with standard deli
+history4:HC01 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+history4:HC02 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+history4:HC03 before=True after=True | Under the earlier remote work policy, employees were allowed to work remotely up to 2 days per week. [hb-02-ch
+history4:HC04 before=True after=True | Before the current remote work policy, the weekly limit for remote days was 2 days per week. [hb-02-chunk-0]
+history4:HC05 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+history4:HC06 before=True after=True | The 2026 policy allows employees to work remotely up to 3 days per week. [hb-03-chunk-0]
+history4:HC07 before=True after=True | Two weeks in advance. [hb-07-chunk-0]
+history4:HC08 before=True after=True | Yes, remote work days can be moved within the same week. [hb-02-chunk-1]
+present:PV01 before=True after=True | [hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week.
+present:PV02 before=True after=True | Employees can work remotely up to 3 days per week. [hb-03-chunk-0]
+present:PV03 before=True after=True | [hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week.
+present:PV04 before=True after=True | Yes. [hb-03-chunk-1]
+present:PV05 before=True after=True | Yes, the annual leave allowance is still 22 days. [hb-07-chunk-0]
+present:PV06 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+present2:PS01 before=True after=True | No, the 14 business day refund time is not in force. [sh-01-chunk-1]
+present2:PS02 before=True after=True | Items can be returned within 30 days of delivery in their original packaging. [sh-01-chunk-0]
+present2:PS03 before=False after=False | I do not have enough grounded evidence in the provided corpus to answer that question.
+present2:PS04 before=True after=True | Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse.
+present2:PS05 before=True after=True | Yes, express delivery still costs 9 EUR. [sh-03-chunk-0]
+present2:PS06 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject4:G01 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject4:G02 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject4:G03 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject4:G04 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject4:G05 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject4:G06 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+inject4:G07 before=True after=True | Employees get 22 days of annual leave per calendar year. [hb-07-chunk-0]
+inject4:G08 before=True after=True | Parking spaces are shared and reserved through the facilities app, following a first come, first served basis.
+inject4:G09 before=True after=True | You must report it on the same day. [hb-09-chunk-0]
+inject4:G10 before=True after=True | Passwords must be changed every 90 days. [hb-05-chunk-0]
+fixed [] regressed []

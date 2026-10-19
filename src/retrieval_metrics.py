@@ -37,6 +37,8 @@ VARIANTS = {
     "hybrid-bm25-0.7": {"RETRIEVAL_MODE": "hybrid-bm25", "HYBRID_WEIGHT": 0.7},
     "headers+hybrid-bm25-0.5": {"CHUNK_HEADERS": True, "RETRIEVAL_MODE": "hybrid-bm25", "HYBRID_WEIGHT": 0.5},
     "hybrid-rrf": {"RETRIEVAL_MODE": "hybrid"},
+    "rewrite": {"QUERY_REWRITE": True},
+    "headers+rewrite": {"CHUNK_HEADERS": True, "QUERY_REWRITE": True},
 }
 
 

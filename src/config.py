@@ -53,6 +53,14 @@ POLARITY_MODEL = "gemma3:4b"
 # flagged as unsupported.
 NUMBERS_FROM_QUESTION = True
 
+# Query rewriting experiment (docs/query-rewrite-spec.md): retrieval scores a model-written search query.
+QUERY_REWRITE = False
+QUERY_REWRITE_MODEL = "qwen2.5:7b"
+QUERY_REWRITE_PROMPT = (
+    "Rewrite the question as one short search query for a company policy document. Use the words such a policy "
+    "would use, keep every specific detail and number, add no facts. Reply with the query only.\nQuestion: {question}\nQuery:"
+)
+
 # An answer that claims its own cited source lacks the information is replaced by the verbatim source quote.
 SELF_DENIAL_CHECK = False
 
@@ -174,14 +182,14 @@ def apply_profile(name: str) -> None:
     global RETRIEVAL_MODE, RERANK, ANSWER_MODE, ANSWER_QUOTES, EVIDENCE_RULES_ENABLED, CHUNK_HEADERS
     global INJECTION_GUARDS, POLARITY_CHECK, NUMBERS_FROM_QUESTION
     global VERSION_CONTEXT, EVIDENCE_RELEVANCE, IMPLICIT_BINARY, JEV_ENABLED, HISTORICAL_VERSIONS
-    global HISTORICAL_JUDGE_CONTEXT, HISTORICAL_PAST_ONLY, PRESENT_VERSION_CONTEXT, GUARDS_V2, SELF_DENIAL_CHECK
+    global HISTORICAL_JUDGE_CONTEXT, HISTORICAL_PAST_ONLY, PRESENT_VERSION_CONTEXT, GUARDS_V2, SELF_DENIAL_CHECK, QUERY_REWRITE
     if name in ("current", "verified"):
         return
     if name == "baseline":
         JEV_ENABLED = False
         EVIDENCE_RULES_ENABLED = False
         VERSION_CONTEXT = EVIDENCE_RELEVANCE = IMPLICIT_BINARY = False
-        HISTORICAL_VERSIONS = HISTORICAL_JUDGE_CONTEXT = HISTORICAL_PAST_ONLY = PRESENT_VERSION_CONTEXT = GUARDS_V2 = SELF_DENIAL_CHECK = False
+        HISTORICAL_VERSIONS = HISTORICAL_JUDGE_CONTEXT = HISTORICAL_PAST_ONLY = PRESENT_VERSION_CONTEXT = GUARDS_V2 = SELF_DENIAL_CHECK = QUERY_REWRITE = False
         CHUNK_HEADERS = False  # the historical replay keys embeddings by the bare chunk text
         INJECTION_GUARDS = POLARITY_CHECK = NUMBERS_FROM_QUESTION = False  # later additions are not part of the historical replay
         return

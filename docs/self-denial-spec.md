@@ -30,3 +30,17 @@ Odgovor koji ispravno kaže da izvor nema jedan deo višedelnog pitanja, a drugi
 ## Provera
 
 Svi odgovori na svim skupovima iz keša, sa proverom isključenom i uključenom: broj pogođenih odgovora, ručni pregled svakog i pass/fail po skupu pre i posle.
+
+## Rezultat: ostaje isključeno
+
+Na 508 pitanja (svi registrovani skupovi) provera menja tekst samo kod 3 odgovora; pass/fail se ne menja nigde (`evidence/upgrade/selfdenial-all.json`).
+
+| Pitanje | Očekivano | Generisan odgovor | Ocena |
+| --- | --- | --- | --- |
+| Y07 „What does next-day delivery cost?“ | odgovor (9 EUR) | „Next-day delivery is not mentioned“ | generator greši; citat je bolji |
+| Y38 „How long does a refund take for a gift card purchase?“ | odbijanje | „does not specify the refund process for gift card purchases“ | generator je u pravu; sistem je trebalo da odbije |
+| N21 „What happens to training funds when I change teams?“ | odbijanje | „does not provide information about … changes teams“ | generator je u pravu; sistem je trebalo da odbije |
+
+Prikaz citata (po specifikaciji) popravlja Y07, ali kod Y38 i N21 briše tačnu napomenu i ostavlja nebitan citat. Pretvaranje u odbijanje popravilo bi Y38 i N21, ali pokvarilo Y07. Nijedna varijanta nije čista pobeda, pa `SELF_DENIAL_CHECK` ostaje `False`.
+
+**Nalaz.** Kod dva od tri slučaja generator ispravno prepoznaje da odgovora nema. Problem pitanja bliskih domenu je dakle u proveravaču odlomka, koji prihvati srodan odlomak, a ne u generatoru. To je koristan pravac za sledeću nedelju: signal „generator kaže da nema informacije“ kao jedan od ulaza u odluku o odbijanju, uz poseban slepi skup.

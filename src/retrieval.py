@@ -84,7 +84,16 @@ def ranks(scores: list[float]) -> list[int]:
     return rank
 
 
+def rewrite_query(query: str) -> str:
+    """Query rewriting experiment: a local model turns the question into a short search query (cached)."""
+    from .llm import generate
+    rewritten = str(generate(config.QUERY_REWRITE_MODEL, config.QUERY_REWRITE_PROMPT.format(question=query), 40)).strip()
+    return rewritten.splitlines()[0].strip().strip('"') if rewritten else query
+
+
 def score_chunks(query: str, chunks: list[Chunk]) -> list[float]:
+    if config.QUERY_REWRITE:
+        query = rewrite_query(query)
     if config.RETRIEVAL_MODE == "lexical":
         return [lexical_score(query, chunk.text) for chunk in chunks]
     if config.RETRIEVAL_MODE == "bm25":
