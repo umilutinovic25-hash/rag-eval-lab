@@ -155,27 +155,27 @@ Hipoteza je potvrđena: E06 je popravljen jer zastarela verzija više ne ulazi u
 
 ## 9. Pregled para
 
-**Status:** projekat sam 19. 10. 2026. poslao drugom polazniku na pregled; njegov odgovor do slanja izveštaja nije stigao. Tri pitanja pregleda proverio sam i ovako odgovaram, uz ponovljiv dokaz:
+Projekat sam 19. 10. 2026. poslao drugom polazniku na pregled, a njegov odgovor nije stigao do slanja izveštaja. Na tri pitanja pregleda zato odgovaram sam, sa dokazima koje svako može da ponovi:
 
-1. **Da li je promena jedna i odgovara specifikaciji?** Da: diff menja samo `CURRENT_ONLY` i telo `searchable_chunks`, a `eval_compare` prijavljuje jedno promenjeno podešavanje. Specifikacija (`2ceaced`) prethodi promeni (`45b8172`).
-2. **Da li rezultat podržava zaključak?** Da: isti otisak eval skupa, E06 fail → pass, nijedna regresija. Paket je ponovo raspakovan u prazan folder: 19 testova prolazi, eval ponovo daje 7/12, identično sačuvanom `after.json`.
-3. **Da li je izostavljena regresija ili ograničenje?** Promena dopunskog citata za E01–E03 i gubitak istorijskih pitanja navedeni su u odeljcima 7 i 8.
+1. **Da li je promena zaista jedna i da li odgovara specifikaciji?** Jeste. Diff menja samo `CURRENT_ONLY` i telo funkcije `searchable_chunks`, a `eval_compare` prijavljuje jedno promenjeno podešavanje. Specifikacija (`2ceaced`) je commitovana pre promene (`45b8172`).
+2. **Da li rezultat pre/posle podržava zaključak?** Podržava. Otisak eval skupa je isti, E06 je prešao iz fail u pass i nijedno pitanje nije palo. Paket sam raspakovao u prazan folder: 19 testova prolazi, a eval ponovo daje 7/12, isto kao sačuvani `after.json`.
+3. **Da li je neka regresija ili ograničenje izostavljeno?** Nije. Promena drugog citata kod E01 do E03 i gubitak istorijskih pitanja opisani su u odeljcima 7 i 8.
 
-Komentar para, kada stigne, biće dodat ovde.
+Kada komentar para stigne, dodaću ga ovde.
 
-### 9.1. Moj osvrt na sopstveni rad — Uroš Milutinović
+### 9.1. Moj osvrt na sopstveni rad (Uroš Milutinović)
 
-U obaveznom delu uradio sam jednu promenu: uključio sam filter važeće verzije dokumenata. Pre izmene sam zapisao specifikaciju, očekivani efekat i rizike, a zatim sam implementirao promenu i proverio rezultat na istih 12 pitanja.
+U obaveznom delu napravio sam jednu promenu: uključio sam filter koji iz pretrage izbacuje zastarele verzije dokumenata. Pre izmene sam zapisao specifikaciju sa očekivanim efektom i rizicima, a posle izmene ponovo pokrenuo istih 12 pitanja.
 
-Rezultat je porastao sa 6/12 na 7/12, bez regresija na tom skupu. Na pitanju E06 sistem je ranije citirao zastarelu politiku sa 2 dana rada na daljinu. Posle promene citira važeću politiku iz 2026. sa 3 dana. Proverio sam rezultate pre i posle, poređenje, diff, CLI odgovor i citate. Evaluacioni skup i kod za metrike ostali su isti.
+Rezultat je sa 6/12 porastao na 7/12 i nijedno pitanje nije palo. Na E06 sistem je ranije citirao politiku iz 2024. sa 2 dana rada od kuće, a sada citira važeću iz 2026. sa 3 dana. Proverio sam rezultate pre i posle, poređenje, diff, CLI odgovor i citate. Eval skup i kod za metrike su isti kao u početnom checkpointu.
 
-Ograničenja sam naveo u izveštaju. Ostaju problemi sa chunkovanjem, parafrazama i odbijanjem pitanja za koja nema odgovora u korpusu. Filter isključuje zastarele dokumente, pa ograničava i odgovaranje o istorijskim pravilima. Zato zaključujem da sam popravio izbor važeće verzije na dokumentovanom primeru, dok ostali problemi zahtevaju zasebne promene i nova merenja.
+Ograničenja su navedena u odeljku 8. Chunkovanje, parafraze i odbijanje pitanja bez odgovora u korpusu i dalje ne rade dobro. Filter ima i cenu, jer sistem sada ne može da odgovori kakva su bila stara pravila. Zaključak koji mogu da odbranim je da sam popravio izbor važeće verzije na E06, a za ostale probleme trebaju posebne promene i nova merenja.
 
-Celokupan rad uradio sam samostalno, uz pomoć AI asistenta u analizi, implementaciji i pripremi teksta. Lično sam proverio navedene rezultate i dokaze. Napredne eksperimente prikazao sam odvojeno od obaveznog M5 eksperimenta.
+Ceo rad sam uradio sam, uz AI asistenta u analizi, implementaciji i pisanju teksta, i sve rezultate i dokaze sam proverio. Napredne eksperimente sam odvojio od obaveznog M5 dela.
 
 ## 10. Korišćenje AI-ja
 
-Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene testove i eval, izdvoji ocene iz `top_k` radi dijagnoze propusta, napiše nacrt specifikacije i implementira filter sa testom, a u naprednom delu i promene A1–A4 (a kasnije G1–G8, rundu 2 i slepi test 5, odeljak 18), kontrolnu proveru i automatski pregled koda (odeljak 12). AI asistent je takođe pisao i testirao B1–B5c; Codex je uradio analizu i ispravke C1–C6 (odeljak 14), kao i kontrolisane D1–D6 eksperimente (odeljak 15). Sve tvrdnje su proverene merenjem, a ne na osnovu reči asistenta: `results/before.json` i `results/after.json` su napravljeni istom komandom, `eval_compare` potvrđuje isti otisak i samo jedno promenjeno podešavanje, a E06 je ručno proveren preko CLI-ja pre i posle (izlazi u `evidence/`). Lična potvrda autora: ja, Uroš Milutinović, lično sam proverio sve što je navedeno u ovom izveštaju. Moja provera obuhvata dokumentovane propuste, specifikaciju i diff promene, sačuvane rezultate pre/posle i njihovo poređenje, CLI odgovor i citate za E06, kao i navedene regresije i ograničenja.
+Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene testove i eval, izdvoji ocene iz `top_k` radi dijagnoze propusta, napiše nacrt specifikacije i implementira filter sa testom, a u naprednom delu i promene A1–A4 (a kasnije G1–G8, rundu 2 i slepi test 5, odeljak 18), kontrolnu proveru i automatski pregled koda (odeljak 12). AI asistent je takođe pisao i testirao B1–B5c; Codex je uradio analizu i ispravke C1–C6 (odeljak 14), kao i kontrolisane D1–D6 eksperimente (odeljak 15). Sve tvrdnje su proverene merenjem, a ne na osnovu reči asistenta: `results/before.json` i `results/after.json` su napravljeni istom komandom, `eval_compare` potvrđuje isti otisak i samo jedno promenjeno podešavanje, a E06 je ručno proveren preko CLI-ja pre i posle (izlazi u `evidence/`). Lično sam proverio sve što piše u ovom izveštaju: propuste, specifikaciju i diff, rezultate pre i posle i njihovo poređenje, CLI odgovor i citate za E06, regresije i ograničenja.
 
 ## 11. Doprinos
 

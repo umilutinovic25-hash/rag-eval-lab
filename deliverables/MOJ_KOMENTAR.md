@@ -1,11 +1,11 @@
-# Moj komentar — Nedelja 7
+# Moj komentar, Nedelja 7
 
 **Uroš Milutinović**
 
-U obaveznom delu uradio sam jednu promenu: uključio sam filter važeće verzije dokumenata. Pre izmene sam zapisao specifikaciju, očekivani efekat i rizike, a zatim sam implementirao promenu i proverio rezultat na istih 12 pitanja.
+U obaveznom delu napravio sam jednu promenu: uključio sam filter koji iz pretrage izbacuje zastarele verzije dokumenata. Pre izmene sam zapisao specifikaciju sa očekivanim efektom i rizicima, a posle izmene ponovo pokrenuo istih 12 pitanja.
 
-Rezultat je porastao sa 6/12 na 7/12, bez regresija na tom skupu. Na pitanju E06 sistem je ranije citirao zastarelu politiku sa 2 dana rada na daljinu. Posle promene citira važeću politiku iz 2026. sa 3 dana. Proverio sam rezultate pre i posle, poređenje, diff, CLI odgovor i citate. Evaluacioni skup i kod za metrike ostali su isti.
+Rezultat je sa 6/12 porastao na 7/12 i nijedno pitanje nije palo. Na E06 sistem je ranije citirao politiku iz 2024. sa 2 dana rada od kuće, a sada citira važeću iz 2026. sa 3 dana. Proverio sam rezultate pre i posle, poređenje, diff, CLI odgovor i citate. Eval skup i kod za metrike su isti kao u početnom checkpointu.
 
-Ograničenja sam naveo u izveštaju. Ostaju problemi sa chunkovanjem, parafrazama i odbijanjem pitanja za koja nema odgovora u korpusu. Filter isključuje zastarele dokumente, pa ograničava i odgovaranje o istorijskim pravilima. Zato zaključujem da sam popravio izbor važeće verzije na dokumentovanom primeru, dok ostali problemi zahtevaju zasebne promene i nova merenja.
+Ograničenja su navedena u odeljku 8. Chunkovanje, parafraze i odbijanje pitanja bez odgovora u korpusu i dalje ne rade dobro. Filter ima i cenu, jer sistem sada ne može da odgovori kakva su bila stara pravila. Zaključak koji mogu da odbranim je da sam popravio izbor važeće verzije na E06, a za ostale probleme trebaju posebne promene i nova merenja.
 
-Celokupan rad uradio sam samostalno, uz pomoć AI asistenta u analizi, implementaciji i pripremi teksta. Lično sam proverio navedene rezultate i dokaze. Napredne eksperimente prikazao sam odvojeno od obaveznog M5 eksperimenta.
+Ceo rad sam uradio sam, uz AI asistenta u analizi, implementaciji i pisanju teksta, i sve rezultate i dokaze sam proverio. Napredne eksperimente sam odvojio od obaveznog M5 dela.
