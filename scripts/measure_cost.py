@@ -18,7 +18,7 @@ from src.eval_runner import evaluate_item, load_eval_set
 from src.rag import build_grounded_answer
 
 PROFILES = {
-    "M5 offline (lexical, extractive)": {"profile": "offline"},
+    "offline (lexical, extractive)": {"profile": "offline"},
     "semantic retrieval, extractive answer": {"overrides": {"RERANK": None, "ANSWER_MODE": "extractive", "ANSWER_QUOTES": False}},
     "shipped (semantic + LLM judge + LLM answer)": {},
 }

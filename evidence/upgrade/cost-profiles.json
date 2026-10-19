@@ -1,6 +1,6 @@
 [
  {
-  "profile": "M5 offline (lexical, extractive)",
+  "profile": "offline (lexical, extractive)",
   "passed": "10/12",
   "cold_seconds": 0.0,
   "cold_per_question_s": 0.0,
