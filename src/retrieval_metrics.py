@@ -23,7 +23,7 @@ SETS = {"eval": "eval_set.json", "holdout": "holdout_set.json", "test": "test_se
         "test3": "test3_set.json", "test4": "test4_set.json", "test5": "test5_set.json", "inject": "inject_set.json", "test6": "test6_set.json", "inject2": "inject2_set.json"}
 SETS.update({name: f"{name}_set.json" for name in ("test7", "near3", "implicit3", "inject3")})
 SETS["jev"] = "jev_set.json"
-SETS.update({"history": "history_set.json", "history2": "history2_set.json", "history3": "history3_set.json", "history4": "history4_set.json", "present": "present_set.json", "present2": "present2_set.json"})
+SETS.update({"history": "history_set.json", "history2": "history2_set.json", "history3": "history3_set.json", "history4": "history4_set.json", "present": "present_set.json", "present2": "present2_set.json", "inject4": "inject4_set.json"})
 CORPORA = {"test6": "corpus2.json", "test7": "corpus2.json", "jev": "corpus2.json", "history2": "corpus2.json", "history3": "corpus2.json", "present2": "corpus2.json"}  # default: handbook
 SEEN = ("eval", "holdout", "test", "test2", "test3", "test4")  # historical default selection; every registered set is now seen
 KS = (1, 2, 3, 5)
