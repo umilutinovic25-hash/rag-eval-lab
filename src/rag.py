@@ -119,6 +119,10 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
 
     if not question.strip():
         return refuse("empty_question", [])
+    if config.INJECTION_GUARDS:
+        from .evidence import meta_request, suspicious as explicit_injection
+        if meta_request(question) and not (config.EVIDENCE_RULES_ENABLED and explicit_injection(question)):
+            return refuse("assistant_meta_request", [])
     if config.EVIDENCE_RULES_ENABLED:
         from .evidence import suspicious, select
         if suspicious(question):
@@ -176,6 +180,10 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
             answer = write_answer(question, [(item.chunk.chunk_id, item.chunk.text) for item in cited])
             trace.append({"stage": "generation", "text": str(answer), "metadata": getattr(answer, "metadata", {"done_reason": "unknown"})})
             fallback_reason = generation_issue(answer, cited)
+            if not fallback_reason and config.INJECTION_GUARDS:
+                from .evidence import language_mismatch
+                if language_mismatch(question, answer):
+                    fallback_reason = "language_mismatch"
         except LLMError:
             fallback_reason = "generation_error"
         if fallback_reason:

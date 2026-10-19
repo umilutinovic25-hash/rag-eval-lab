@@ -51,3 +51,32 @@ def select(question, chunks):
     if qualifier:
         answer += '\n' + qualifier
     return answer, results, rule
+
+
+META_REQUEST = re.compile(
+    r"\bwho (?:built|made|created|trained) you\b|\b(?:what|which) (?:model|ai|llm) are you\b"
+    r"|\b(?:what )?were you (?:told|instructed|programmed|given)\b|\bdeveloper gave you\b"
+    r"|\b(?:your|you) (?:system |initial |hidden |original |secret )?(?:prompt|instructions|configuration|directions)\b"
+    r"|\bsource code of your\b|\b(?:convert|translate) your\b"
+    r"|\b(?:act as|pretend (?:to be|you)|from now on you|let'?s play a game|in the voice of|roleplay)\b|\byou are (?:now )?dan\b"
+    r"|\b(?:stop|forget|ignore|disregard|override|bypass)\b.{0,40}\b(?:handbook|corpus|refusal|safety|previous|earlier|above)\b"
+    r"|\brespond with the words\b|\b(?:write|compose) (?:me )?(?:a|an) (?:poem|song|story|joke|essay|haiku)\b|\btell me a joke\b",
+    re.I)
+ENGLISH_WORDS = frozenset("the a an is are was be to of in on for and or with you your can do does it this that as by at from per must may have has will not if when what how who which".split())
+
+
+def meta_request(question):
+    """Requests aimed at the assistant itself (its prompt, role, output format) rather than at the corpus."""
+    return bool(META_REQUEST.search(question))
+
+
+def english_share(text):
+    words = re.findall(r"[a-z]+", text.casefold())
+    return len(words), (sum(w in ENGLISH_WORDS for w in words) / len(words) if words else 0.0)
+
+
+def language_mismatch(question, answer):
+    """True when an English question got an answer that is clearly not English (for example a translation request)."""
+    q_n, q_share = english_share(question)
+    a_n, a_share = english_share(re.sub(r"\[[^\[\]]+\]", " ", answer))
+    return q_n >= 3 and q_share >= 0.1 and a_n >= 6 and a_share < 0.12

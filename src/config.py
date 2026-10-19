@@ -23,6 +23,10 @@ RETRIEVAL_MIN_SCORE = 0.01
 STOPWORDS_ENABLED = False
 CURRENT_ONLY = True
 
+# Guards against requests aimed at the assistant instead of the corpus (questions about its prompt, role-play, output
+# overrides) and against answers written in a different language than an English question.
+INJECTION_GUARDS = True
+
 # Answering
 EVIDENCE_RULES_ENABLED = True
 REFUSAL_THRESHOLD = 0.12
