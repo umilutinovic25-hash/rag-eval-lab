@@ -1,0 +1,5 @@
+variant                      n           mrr         ndcg5     doc_hit@1     doc_hit@2 fact_recall@1 fact_recall@2 fact_recall@3 fact_recall@5
+baseline                   174        0.9789        0.9844        0.9943        0.9943        0.9598        0.9943        1.0000        1.0000
+rewrite                    174        0.9670        0.9755        0.9770        0.9943        0.9368        0.9943        0.9943        1.0000
+
+Wrote results/rewrite-metrics.json

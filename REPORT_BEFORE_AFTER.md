@@ -594,6 +594,22 @@ Za preostale greške napravio sam dve nove promene, svaku sa specifikacijom i sl
 
 **Šta ostaje.** Pitanja bliska domenu bez odgovora u korpusu (W38, X38, Y38, Z39, N21, N23, J24), implicitna da/ne pitanja (W05, W10, W26, P05), višedelna pitanja i pitanja o oznaci (Z09, Z12, Z13, Z14) i dva pitanja o važećoj verziji (Y32, Z06). Prve dve grupe već su probane u odeljcima 13–21 i svaka ispravka je kvarila druga pitanja. Dalje štimovanje na viđenim pitanjima bilo bi preprilagođavanje, pa ih navodim kao ograničenja. Testovi: 288 Python, `scripts/check.sh` i 29 Playwright testova prolaze.
 
+## 25. Trošak, query rewriting i odgovori koji poriču sopstveni citat (19.10.2026.)
+
+**Trošak i zavisnosti.** Izmereno na 12 eval pitanja, svaki profil od praznog keša (`scripts/measure_cost.py`, `evidence/upgrade/cost-profiles.json`):
+
+| Profil | Eval | Vreme po pitanju (hladno) | Pozivi LLM-a | Zavisnosti |
+| --- | ---: | ---: | ---: | --- |
+| offline (leksička pretraga, doslovan odgovor) | 10/12 | ~0 s | 0 | ništa |
+| semantička pretraga, doslovan odgovor | 12/12 | 0,15 s | 0 | Ollama, `bge-m3` |
+| pun sistem (proveravač + generisan odgovor) | 12/12 | 4,4 s | 26 | Ollama, `bge-m3`, `qwen2.5:7b`, `gemma3:4b` |
+
+Sve radi lokalno, bez plaćenog API-ja; sa kešom svaki profil traje ispod 0,1 s za ceo skup. Opcioni spoljni JEv sudija je jedini plaćeni deo (procena 0,04 USD za 39 poziva, odeljak 22) i podrazumevano je isključen. Na eval skupu LLM ne dodaje prolaze; njegova korist je na težim skupovima i u čitljivijem odgovoru.
+
+**Query rewriting (odbijeno).** Jedina tehnika sa spiska iz zadatka koja do sada nije bila izmerena. Lokalni model prepiše pitanje u upit za pretragu. Na 174 pitanja MRR pada sa 0.979 na 0.967, a doc_hit@1 sa 0.994 na 0.977; fact_recall@2 je isti. Šest pitanja je rangirano bolje, deset lošije, uz jedan dodatni LLM poziv po pitanju (`docs/query-rewrite-spec.md`). Zajedno sa ranijim merenjima to daje poređenje sve četiri tehnike iz zadatka: embeddings (prihvaćeno, 10 → 12/12), reranking LLM proveravačem u sivoj zoni (prihvaćeno), hibridna pretraga (odbijena, odeljak 13 i 18) i query rewriting (odbijen).
+
+**Odgovor koji poriče sopstveni citat (izmereno, isključeno).** Eval meri citat, ne rečenicu. Na svih 508 pitanja samo 3 odgovora tvrde da izvor nema informaciju, a pass/fail se ne menja ni u jednoj varijanti. Kod Y07 generator greši (cena express dostave postoji), a kod Y38 i N21 je u pravu i sistem je trebalo da odbije. Zamena citatom ili odbijanjem bi svaka pokvarila jednu stranu, pa provera ostaje isključena (`docs/self-denial-spec.md`). Nalaz pokazuje da je problem pitanja bliskih domenu u proveravaču, koji prihvati srodan odlomak, a ne u generatoru.
+
 ## Kontrolna lista pre predaje
 
 - [x] `python -m pytest` prolazi posle promene (19 na `45b8172`; 107 posle C1–C6; 137 posle D koraka; 246 posle odeljka 20)

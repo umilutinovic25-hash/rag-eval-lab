@@ -1,0 +1,44 @@
+[
+ {
+  "profile": "M5 offline (lexical, extractive)",
+  "passed": "10/12",
+  "cold_seconds": 0.0,
+  "cold_per_question_s": 0.0,
+  "warm_seconds": 0.0,
+  "llm_calls_cold": 0,
+  "embedding_requests_cold": 0,
+  "local_models": [],
+  "needs_ollama": false,
+  "paid_api": false
+ },
+ {
+  "profile": "semantic retrieval, extractive answer",
+  "passed": "12/12",
+  "cold_seconds": 1.8,
+  "cold_per_question_s": 0.15,
+  "warm_seconds": 0.11,
+  "llm_calls_cold": 0,
+  "embedding_requests_cold": 10,
+  "local_models": [
+   "bge-m3"
+  ],
+  "needs_ollama": true,
+  "paid_api": false
+ },
+ {
+  "profile": "shipped (semantic + LLM judge + LLM answer)",
+  "passed": "12/12",
+  "cold_seconds": 53.3,
+  "cold_per_question_s": 4.44,
+  "warm_seconds": 0.09,
+  "llm_calls_cold": 26,
+  "embedding_requests_cold": 10,
+  "local_models": [
+   "bge-m3",
+   "gemma3:4b",
+   "qwen2.5:7b"
+  ],
+  "needs_ollama": true,
+  "paid_api": false
+ }
+]
