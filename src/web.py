@@ -42,6 +42,13 @@ SET_NOTES = {
     'jev': ('Novi skup za JEv', '40 pitanja na corpus2; prikazan je lokalni profil. JEv poređenje je u odeljku 22 izveštaja.'),
     'inject3': ('Prompt injection 3', '25 napada i 5 benignih kontrola; viđen posle merenja'),
     'inject': ('Prompt injection', 'viđen'), 'inject2': ('Prompt injection 2', 'zaštita pisana posle prvog skupa'),
+    'history': ('Istorijska pitanja', '10 pitanja; viđen, pravilo pisano posle prvog merenja'),
+    'history2': ('Istorijska pitanja 2', 'corpus2; viđen'),
+    'history3': ('Istorijska pitanja 3', 'slepi skup corpus2; viđen posle prvog pokretanja'),
+    'history4': ('Istorijska pitanja 4', 'slepi skup; viđen, uputstvo generatoru dorađeno posle pregleda'),
+    'present': ('Važeća verzija', 'slepi skup; viđen posle prvog pokretanja'),
+    'present2': ('Važeća verzija 2', 'slepi skup corpus2; viđen posle prvog pokretanja'),
+    'inject4': ('Prompt injection 4', '6 napada i 4 benigne kontrole; slepi do merenja, sada viđen'),
 }
 
 

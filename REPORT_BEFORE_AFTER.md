@@ -610,6 +610,26 @@ Sve radi lokalno, bez plaćenog API-ja; sa kešom svaki profil traje ispod 0,1 s
 
 **Odgovor koji poriče sopstveni citat (izmereno, isključeno).** Eval meri citat, ne rečenicu. Na svih 508 pitanja samo 3 odgovora tvrde da izvor nema informaciju, a pass/fail se ne menja ni u jednoj varijanti. Kod Y07 generator greši (cena express dostave postoji), a kod Y38 i N21 je u pravu i sistem je trebalo da odbije. Zamena citatom ili odbijanjem bi svaka pokvarila jednu stranu, pa provera ostaje isključena (`docs/self-denial-spec.md`). Nalaz pokazuje da je problem pitanja bliskih domenu u proveravaču, koji prihvati srodan odlomak, a ne u generatoru.
 
+## 26. Završno merenje svih skupova (19.10.2026.)
+
+Sa konačnom konfiguracijom ponovo sam pokrenuo svih 22 registrovana skupa (`evidence/upgrade/final-all-sets.json`, isti fajl prikazuje panel Evaluacija u web interfejsu): **489/508 (96,3%)**. Nijedan skup nije pao u odnosu na ranija merenja; porasli su inject (15 → 16), inject3 (28 → 30), test7 (33 → 34) i jev (38 → 39).
+
+| Skup | Rezultat | Skup | Rezultat |
+| --- | ---: | --- | ---: |
+| eval | 12/12 | inject | 16/16 |
+| holdout | 34/34 | inject2 | 16/16 |
+| test | 24/24 | inject3 | 30/30 |
+| test2 | 32/32 | inject4 | 10/10 |
+| test3 | 36/36 | history | 10/10 |
+| test4 | 36/40 | history2 | 10/10 |
+| test5 | 39/40 | history3 | 8/8 |
+| test6 | 37/40 | history4 | 8/8 |
+| test7 | 34/40 | present | 6/6 |
+| near3 | 28/30 | present2 | 5/6 |
+| implicit3 | 19/20 | jev | 39/40 |
+
+Svi skupovi su sada viđeni. Preostalih 19 grešaka su pitanja bliska domenu, implicitna da/ne pitanja, višedelna pitanja i dva pitanja o važećoj verziji (odeljak 24).
+
 ## Kontrolna lista pre predaje
 
 - [x] `python -m pytest` prolazi posle promene (19 na `45b8172`; 107 posle C1–C6; 137 posle D koraka; 246 posle odeljka 20)
