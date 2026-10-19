@@ -1,4 +1,6 @@
-"""Run the accepted defaults and promote only cache keys actually used by supported profiles.
+"""Historical broad-promotion experiment; final production policy uses curate-browser-cache-21.py.
+
+Run the accepted defaults and promote only cache keys actually used by supported profiles.
 
 Run only after selecting an unchanged, pre-registered candidate. Existing cache entries stay intact.
 """

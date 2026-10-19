@@ -1,0 +1,56 @@
+{
+  "initial_commit": "700283a",
+  "unchanged_files": {
+    "eval/corpus2.json": true,
+    "eval/eval_set.json": true,
+    "eval/holdout_set.json": true,
+    "eval/inject2_set.json": true,
+    "eval/inject_set.json": true,
+    "eval/polarity_labels.json": true,
+    "eval/test2_set.json": true,
+    "eval/test3_set.json": true,
+    "eval/test4_set.json": true,
+    "eval/test5_set.json": true,
+    "eval/test6_set.json": true,
+    "eval/test_set.json": true,
+    "src/eval_runner.py": true,
+    "src/eval_compare.py": true,
+    "data/sr-handbook.json": true
+  },
+  "cache_preservation": {
+    "embedding_cache.json": {
+      "old_entries": 226,
+      "added": 0,
+      "removed": [],
+      "changed_existing": []
+    },
+    "llm_cache.json": {
+      "old_entries": 1866,
+      "added": 2,
+      "removed": [],
+      "changed_existing": []
+    },
+    "llm_cache-metadata.json": {
+      "old_entries": 814,
+      "added": 2,
+      "removed": [],
+      "changed_existing": []
+    }
+  },
+  "metric_function_ast_unchanged": {
+    "src/retrieval_metrics.py": {
+      "ranked": true,
+      "item_metrics": true,
+      "run_variant": true,
+      "aggregate": true,
+      "apply_overrides": true,
+      "format_table": true,
+      "main": true
+    },
+    "src/candidate_runner.py": {
+      "corpus_chunks": true,
+      "run_set": true,
+      "main": true
+    }
+  }
+}

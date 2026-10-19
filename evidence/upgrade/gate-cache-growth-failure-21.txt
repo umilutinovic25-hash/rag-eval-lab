@@ -1,0 +1,65 @@
+........................................................................ [ 28%]
+........................................................................ [ 56%]
+........................................................................ [ 84%]
+.....................F...................                                [100%]
+=================================== FAILURES ===================================
+__________________ test_http_replays_all_sets_without_network __________________
+
+tmp_path = PosixPath('/private/var/folders/4z/wtdky7js64d_yk8y4ckn654m0000gn/T/pytest-of-urosmilutinovic/pytest-251/test_http_replays_all_sets_wit0')
+
+    def test_http_replays_all_sets_without_network(tmp_path):
+        with running_server(tmp_path) as base:
+            status, saved = request(base, '/api/evaluations')
+            assert status == 200
+            assert saved['origin'] == 'saved'
+>           status, fresh = request(base, '/api/evaluations/run', {})
+
+tests/test_web.py:138: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_web.py:35: in request
+    response = urlopen(req, timeout=10)
+/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/urllib/request.py:215: in urlopen
+    return opener.open(url, data, timeout)
+/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/urllib/request.py:515: in open
+    response = self._open(req, data)
+/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/urllib/request.py:532: in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/urllib/request.py:492: in _call_chain
+    result = func(*args)
+/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/urllib/request.py:1386: in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/urllib/request.py:1361: in do_open
+    r = h.getresponse()
+/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py:1478: in getresponse
+    response.begin()
+/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py:343: in begin
+    version, status, reason = self._read_status()
+/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py:304: in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <socket.SocketIO object at 0x107d54700>, b = <memory at 0x1061e4940>
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        while True:
+            try:
+>               return self._sock.recv_into(b)
+E               TimeoutError: timed out
+
+/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/socket.py:720: TimeoutError
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [19/Oct/2026 16:24:55] "GET /api/evaluations HTTP/1.1" 200 -
+=========================== short test summary info ============================
+FAILED tests/test_web.py::test_http_replays_all_sets_without_network - Timeou...
+1 failed, 256 passed in 121.39s (0:02:01)
