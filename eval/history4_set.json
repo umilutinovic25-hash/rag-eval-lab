@@ -1,0 +1,76 @@
+[
+ {
+  "id": "HC01",
+  "question": "What was the previous training budget per employee before it changed?",
+  "category": "historical-missing",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "HC02",
+  "question": "How long did the old password rules require between password changes?",
+  "category": "historical-missing",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "HC03",
+  "question": "Under the earlier remote work policy, how many remote days per week were allowed?",
+  "category": "historical",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-02"
+  ],
+  "expected_fact": "2 days per week"
+ },
+ {
+  "id": "HC04",
+  "question": "Before the current remote work policy, what was the weekly limit for remote days?",
+  "category": "historical",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-02"
+  ],
+  "expected_fact": "2 days per week"
+ },
+ {
+  "id": "HC05",
+  "question": "What was the former IT support hours policy?",
+  "category": "historical-missing",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "HC06",
+  "question": "How many remote work days per week does the 2026 policy allow?",
+  "category": "current-control",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-03"
+  ],
+  "expected_fact": "3 days per week"
+ },
+ {
+  "id": "HC07",
+  "question": "How many days in advance must leave requests be made?",
+  "category": "current-control",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-07"
+  ],
+  "expected_fact": "two weeks in advance"
+ },
+ {
+  "id": "HC08",
+  "question": "Did the 2024 remote work policy let employees move remote days within the same week?",
+  "category": "historical",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-02"
+  ],
+  "expected_fact": "moved within same week"
+ }
+]

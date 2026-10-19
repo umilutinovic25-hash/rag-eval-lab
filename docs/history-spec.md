@@ -75,3 +75,15 @@ Dokazi: `evidence/upgrade/history-before.json`, `history-final.json`, `history-f
 | history3 (slepi, jedno pokretanje) | 8/8 | 8/8 | | |
 
 Kontekst verzije popravlja HR03, ali na HV09 („old annual leave allowance“) proveravač prihvata važeću politiku godišnjeg odmora kao odgovor na pitanje o staroj verziji koja ne postoji. Ukupno je izjednačeno, a promena ima regresiju, pa `HISTORICAL_JUDGE_CONTEXT` ostaje `False`. Slepi history3 potvrđuje prihvaćenu prvu promenu: 8/8 na pitanjima koja ranije nisu viđena. Dokazi: `evidence/upgrade/history-judge.json`, `history-judge.log`.
+
+## Treća promena: stara verzija dokumenta koji nema staru verziju
+
+**Propust (HV09, HR09, viđeni):** pitanje traži staru verziju pravila (godišnji odmor, cena dostave) koje u korpusu postoji samo u jednoj verziji. Sistem odgovara iz važeće verzije, iako korpus ne sadrži staro pravilo.
+
+**Promena (`HISTORICAL_PAST_ONLY`):** u istorijskom režimu sa rečju prošlosti (bez godine) pretražuju se samo zastarele verzije. Dokument koji nema staru verziju ne može da odgovori na pitanje o svojoj staroj verziji, pa sistem odbija. Režim sa godinom ostaje isti (HB08: „2024 order above 50 EUR“ i dalje vidi važeću dostavu).
+
+**Kandidati:** `historical-past` (samo ova promena) i `historical-past-judge` (uz kontekst verzije za proveravača, odbijen u drugom krugu zbog HV09).
+
+**Slepi skup:** `eval/history4_set.json` (8 pitanja, handbook), commitovan pre koda, pokreće se jednom.
+
+**Pravilo prihvatanja:** bez regresija na history, history2, history3, eval, holdout; nijedno pitanje van istorijskih skupova ne sme da dobije drugačiju listu kandidata; history4 bez regresija u odnosu na `historical`.
