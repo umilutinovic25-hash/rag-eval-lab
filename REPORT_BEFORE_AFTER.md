@@ -575,7 +575,7 @@ Ograničenje 5 iz odeljka 8 rešio sam posebnom promenom `HISTORICAL_VERSIONS`, 
 | history2 (corpus2) | 4/10 | 8/10 | nema |
 | eval / holdout | 12/12, 34/34 | 12/12, 34/34 | nema |
 
-Prva verzija pravila bi pogrešno reagovala na 10 postojećih pitanja („is used to reserve“, „previous instructions“), pa sam je suzio pre prihvatanja. Posle toga nijedno od 458 postojećih pitanja ne dobija drugačiju listu kandidata, pa njihov rezultat ne može da se promeni. Ručna CLI provera: „How many remote days per week did the 2024 remote work policy allow?“ daje 2 dana sa citatom `hb-02`, a „How many days per week can I work remotely?“ i dalje 3 dana sa `hb-03`. Ostaju HR03 (pretraga bira pogrešan dokument) i HR09 (stara cena koja ne postoji). Testovi: 286 Python, 33 frontend unit i 29 Playwright, `scripts/check.sh` prolazi.
+Prva verzija pravila bi pogrešno reagovala na 10 postojećih pitanja („is used to reserve“, „previous instructions“), pa sam je suzio pre prihvatanja. Posle toga nijedno od 458 postojećih pitanja ne dobija drugačiju listu kandidata, pa njihov rezultat ne može da se promeni. Ručna CLI provera: „How many remote days per week did the 2024 remote work policy allow?“ daje 2 dana sa citatom `hb-02`, a „How many days per week can I work remotely?“ i dalje 3 dana sa `hb-03`. Na novom slepom skupu history3 (8 pitanja, commitovan pre pokretanja) prihvaćena promena daje 8/8. Probao sam i drugu promenu, da proveravač u istorijskom režimu vidi verziju odlomka: popravila je HR03, ali pokvarila HV09, pa je ostala isključena. Ostaju HR03 (proveravač ne zna da je odlomak stara verzija) i HR09 (stara cena koja ne postoji u korpusu). Testovi: 286 Python, 33 frontend unit i 29 Playwright, `scripts/check.sh` prolazi.
 
 ## Kontrolna lista pre predaje
 

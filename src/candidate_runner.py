@@ -22,6 +22,7 @@ CANDIDATES = {
     "shipped": {},
     "jev": {"JEV_ENABLED": True},
     "historical": {"HISTORICAL_VERSIONS": True},
+    "historical-judge": {"HISTORICAL_VERSIONS": True, "HISTORICAL_JUDGE_CONTEXT": True},
     "proposal-21": {"VERSION_CONTEXT": True, "EVIDENCE_RELEVANCE": True, "IMPLICIT_BINARY": True},
     "previous": {"CHUNK_HEADERS": False, "YESNO_QUESTION_JUDGE": None},
     "before-yesno3": {"YESNO_QUESTION_JUDGE": None},

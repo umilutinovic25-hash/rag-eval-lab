@@ -25,6 +25,8 @@ CURRENT_ONLY = True
 # With CURRENT_ONLY, a question that explicitly asks for an older version (a year, or previous/old/former/before)
 # searches that version instead of the current one, for titles that exist in more than one version (docs/history-spec.md).
 HISTORICAL_VERSIONS = True
+# In that historical mode the passage judge also sees each passage's version and status.
+HISTORICAL_JUDGE_CONTEXT = False
 
 # Guards against requests aimed at the assistant instead of the corpus (questions about its prompt, role-play, output
 # overrides) and against answers written in a different language than an English question.
@@ -157,13 +159,14 @@ def apply_profile(name: str) -> None:
     global RETRIEVAL_MODE, RERANK, ANSWER_MODE, ANSWER_QUOTES, EVIDENCE_RULES_ENABLED, CHUNK_HEADERS
     global INJECTION_GUARDS, POLARITY_CHECK, NUMBERS_FROM_QUESTION
     global VERSION_CONTEXT, EVIDENCE_RELEVANCE, IMPLICIT_BINARY, JEV_ENABLED, HISTORICAL_VERSIONS
+    global HISTORICAL_JUDGE_CONTEXT
     if name in ("current", "verified"):
         return
     if name == "baseline":
         JEV_ENABLED = False
         EVIDENCE_RULES_ENABLED = False
         VERSION_CONTEXT = EVIDENCE_RELEVANCE = IMPLICIT_BINARY = False
-        HISTORICAL_VERSIONS = False
+        HISTORICAL_VERSIONS = HISTORICAL_JUDGE_CONTEXT = False
         CHUNK_HEADERS = False  # the historical replay keys embeddings by the bare chunk text
         INJECTION_GUARDS = POLARITY_CHECK = NUMBERS_FROM_QUESTION = False  # later additions are not part of the historical replay
         return

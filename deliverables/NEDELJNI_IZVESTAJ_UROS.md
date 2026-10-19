@@ -28,4 +28,8 @@ AI mi je pomagao u analizi, pisanju nacrta specifikacije i izveštaja, implement
 
 ## Plan demonstracije za Sesiju 2
 
-Počeću od propusta na E06, gde sistem odgovara iz zastarele politike. Onda ću pokazati specifikaciju (`2ceaced`), diff promene (`45b8172`) i rezultate pre i posle na istom skupu, pa CLI izlaz koji sada citira važeću verziju. Na kraju ću objasniti zašto M5 filter gubi istorijska pitanja, kako sam to rešio filterom koji poštuje traženu verziju (9/20 → 18/20) i koji propusti ostaju posle ove jedne promene. Ukratko ću pokazati i kako sam ih rešio u naprednom delu, gde je svaka promena merena posebno: sečenje po rečenicama (7 → 9/12), viši prag odbijanja (9 → 10/12), semantička pretraga (10 → 12/12) i minimalna ocena citata (preciznost citata 1.00).
+Počeću od propusta na E06, gde sistem odgovara iz zastarele politike. Onda ću pokazati specifikaciju (`2ceaced`), diff promene (`45b8172`), rezultate pre i posle na istom skupu (6/12 → 7/12) i CLI izlaz koji sada citira važeću verziju.
+
+Posle toga ću ukratko pokazati napredni deo, gde sam svaki preostali propust rešio posebnom promenom i posebno ga izmerio: sečenje po rečenicama za E04 i E09 (7 → 9/12), viši prag odbijanja za E10 (9 → 10/12), semantička pretraga za E05 i E11 (10 → 12/12) i minimalna ocena citata (preciznost citata 1.00).
+
+Na kraju ću objasniti cenu M5 filtera: sistem više nije mogao da odgovori kakva je bila stara politika. To sam rešio filterom koji poštuje verziju koju pitanje traži. Na dva nova skupa rezultat je porastao sa 9/20 na 18/20, na novom slepom skupu je 8/8, a postojeća pitanja se nisu promenila.

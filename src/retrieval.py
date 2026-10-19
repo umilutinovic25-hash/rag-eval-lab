@@ -138,6 +138,11 @@ def requested_versions(query: str | None, versions: set[str]) -> set[str] | None
     return None
 
 
+def historical_mode(query: str | None, chunks: list[Chunk]) -> bool:
+    versioned = {chunk.title for chunk in chunks if chunk.status == "superseded"}
+    return config.CURRENT_ONLY and requested_versions(query, {c.version for c in chunks if c.title in versioned}) is not None
+
+
 def searchable_chunks(chunks: list[Chunk], query: str | None = None) -> list[Chunk]:
     if not config.CURRENT_ONLY:
         return chunks

@@ -7,7 +7,7 @@ from .chunking import Chunk, build_chunks
 from .corpus import load_corpus
 from .claim_checks import claim_risks, clauses
 from .llm import LLMError, is_yes_no_question, passage_answers, passage_verdict, write_answer
-from .retrieval import RetrievalResult, retrieve_top_k
+from .retrieval import RetrievalResult, historical_mode, retrieve_top_k
 
 
 QUOTE_PREFIX = "Source ["
@@ -122,8 +122,10 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
     def record_retrieval(results):
         trace.append({"stage": "retrieval", "candidates": [{"chunk_id": r.chunk.chunk_id, "score": r.score} for r in results]})
 
+    historical = config.HISTORICAL_JUDGE_CONTEXT and historical_mode(question, chunks)
+
     def version_intent():
-        return config.VERSION_CONTEXT and bool(re.search(
+        return historical or config.VERSION_CONTEXT and bool(re.search(
             r"\b(current|latest|active|superseded|still|now|in force|20\d{2})\b", question, re.I))
 
     def judge_context(chunk):

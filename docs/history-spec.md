@@ -64,3 +64,14 @@ Dokazi: `evidence/upgrade/history-before.json`, `history-final.json`, `history-f
 **Slepi skup:** `eval/history3_set.json` (8 pitanja, corpus2), commitovan pre koda i pokrenut jednom posle implementacije. Uključuje „before the current“ formulacije, jednu nepostojeću godinu i kontrolu sa godinom u drugom značenju (HB08).
 
 **Pravilo prihvatanja:** bez regresija na history, history2, eval, holdout i bez promene liste kandidata van istorijskih skupova; history3 se meri jednom.
+
+### Rezultat druge promene: odbijena
+
+| Skup | `historical` (uključeno) | `historical-judge` | Popravljeno | Regresije |
+| --- | ---: | ---: | --- | --- |
+| eval / holdout | 12/12, 34/34 | 12/12, 34/34 | | nema |
+| history | 10/10 | 9/10 | | HV09 |
+| history2 | 8/10 | 9/10 | HR03 | |
+| history3 (slepi, jedno pokretanje) | 8/8 | 8/8 | | |
+
+Kontekst verzije popravlja HR03, ali na HV09 („old annual leave allowance“) proveravač prihvata važeću politiku godišnjeg odmora kao odgovor na pitanje o staroj verziji koja ne postoji. Ukupno je izjednačeno, a promena ima regresiju, pa `HISTORICAL_JUDGE_CONTEXT` ostaje `False`. Slepi history3 potvrđuje prihvaćenu prvu promenu: 8/8 na pitanjima koja ranije nisu viđena. Dokazi: `evidence/upgrade/history-judge.json`, `history-judge.log`.
