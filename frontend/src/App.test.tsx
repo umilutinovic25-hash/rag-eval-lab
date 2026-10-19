@@ -237,6 +237,75 @@ describe("real UI contracts", () => {
     );
   });
 
+  it("explains why a question was refused and why a generated answer was replaced", async () => {
+    const refused: Answer = {
+      ...answer,
+      refused: true,
+      answer:
+        "I do not have enough grounded evidence in the provided corpus to answer that question.",
+      citations: [],
+      trace: [
+        { stage: "decision", reason: "assistant_meta_request", refused: true },
+      ],
+    };
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string) => ({
+        ok: true,
+        json: async () =>
+          url.endsWith("/status")
+            ? {
+                ollama: false,
+                models: [],
+                required_models: [],
+                documents: 10,
+                current_documents: 9,
+              }
+            : url.endsWith("/documents")
+              ? { documents: [] }
+              : completedJob(refused),
+      })),
+    );
+    render(<App />);
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "Koliko dana mogu da radim od kuće?",
+      }),
+    );
+    expect(await screen.findByText(/odnosi na sam sistem/)).toBeInTheDocument();
+  });
+
+  it("names the failed check when a generated answer was replaced by the source", async () => {
+    const replaced: Answer = { ...answer, fallback: "polarity_conflict" };
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string) => ({
+        ok: true,
+        json: async () =>
+          url.endsWith("/status")
+            ? {
+                ollama: false,
+                models: [],
+                required_models: [],
+                documents: 10,
+                current_documents: 9,
+              }
+            : url.endsWith("/documents")
+              ? { documents: [] }
+              : completedJob(replaced),
+      })),
+    );
+    render(<App />);
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "Koliko dana mogu da radim od kuće?",
+      }),
+    );
+    expect(
+      await screen.findByText(/nije složio sa odgovorom/),
+    ).toBeInTheDocument();
+  });
+
   it("preserves an actionable error and lets the user retry in offline mode", async () => {
     const fetchMock = vi.mocked(fetch);
     fetchMock.mockImplementation(

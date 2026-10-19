@@ -41,6 +41,7 @@ import type {
 import { EvaluationView } from "./Evaluation";
 import { Workbench, FilterFields } from "./Workbench";
 import { AnswerQuality } from "./Quality";
+import { decisionReason, fallbackReason, traceNote } from "./reasons";
 import { mergeBackup } from "./backup";
 import type { Filters, LibraryDocument, WorkspaceData } from "./types";
 
@@ -271,6 +272,9 @@ function SourceInspector({
                           } as Record<string, string>
                         )[step.stage] || step.stage}
                       </h3>
+                      {traceNote(step) && (
+                        <p className="trace-note">{traceNote(step)}</p>
+                      )}
                       <details>
                         <summary>
                           Prikaži detalje <ChevronDown size={13} />
@@ -1087,13 +1091,22 @@ export default function App() {
                                       ? "Ograničen odgovor"
                                       : turn.result.refused
                                         ? "Nedovoljno dokaza"
-                                        : "Odgovor sa izvorima"}
+                                        : turn.result.fallback
+                                          ? "Originalni odlomci"
+                                          : "Odgovor sa izvorima"}
                               </span>
                             </div>
                             <AnswerText
                               result={turn.result}
                               onSource={(id) => selectSource(turn.id, id)}
                             />
+                            {turn.result.refused &&
+                              decisionReason(turn.result.trace) && (
+                                <p className="refusal-reason">
+                                  <Info size={15} />
+                                  {decisionReason(turn.result.trace)}
+                                </p>
+                              )}
                             {turn.result.disposition === "clarification" && (
                               <div className="clarification-options">
                                 {turn.result.clarification?.map((topic) => (
@@ -1114,8 +1127,7 @@ export default function App() {
                             {turn.result.fallback && (
                               <div className="fallback-note">
                                 <Info size={15} />
-                                Prikazan je originalni odlomak: generisani
-                                odgovor nije prošao proveru.
+                                {fallbackReason(turn.result.fallback)}
                               </div>
                             )}
                             {turn.result.language === "sr" && (

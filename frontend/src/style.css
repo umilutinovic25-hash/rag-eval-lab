@@ -1048,8 +1048,8 @@ summary {
 .fallback-note {
   display: flex;
   gap: 7px;
-  color: #776c4d;
-  font-size: 11px;
+  color: #6b6040;
+  font-size: 13px;
   line-height: 1.7;
   padding: 12px 0;
 }
@@ -2717,4 +2717,24 @@ summary {
   .work-card {
     padding: 18px;
   }
+}
+
+.refusal-reason {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 10px 0 0;
+  color: #5b4a2e;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.refusal-reason svg {
+  flex: none;
+  margin-top: 3px;
+}
+.trace-note {
+  margin: 0 0 8px;
+  color: #3f5c4e;
+  font-size: 12px;
+  line-height: 1.6;
 }
