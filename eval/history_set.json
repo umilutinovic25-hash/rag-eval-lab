@@ -1,0 +1,94 @@
+[
+ {
+  "id": "HV01",
+  "question": "How many remote days per week did the 2024 remote work policy allow?",
+  "category": "historical",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-02"
+  ],
+  "expected_fact": "2 days per week"
+ },
+ {
+  "id": "HV02",
+  "question": "What was the previous limit on working remotely each week?",
+  "category": "historical",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-02"
+  ],
+  "expected_fact": "2 days per week"
+ },
+ {
+  "id": "HV03",
+  "question": "Before the 2026 update, how many days a week could employees work from home?",
+  "category": "historical",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-02"
+  ],
+  "expected_fact": "2 days per week"
+ },
+ {
+  "id": "HV04",
+  "question": "Under the old remote work rules, how many days per week were allowed?",
+  "category": "historical",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-02"
+  ],
+  "expected_fact": "2 days per week"
+ },
+ {
+  "id": "HV05",
+  "question": "What does the remote work policy from 2026 allow per week?",
+  "category": "current-year",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-03"
+  ],
+  "expected_fact": "3 days per week"
+ },
+ {
+  "id": "HV06",
+  "question": "How many days per week can I currently work remotely?",
+  "category": "current-control",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-03"
+  ],
+  "expected_fact": "3 days per week"
+ },
+ {
+  "id": "HV07",
+  "question": "Is the remote work limit now 3 days per week?",
+  "category": "current-control",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-03"
+  ],
+  "expected_fact": "3 days per week"
+ },
+ {
+  "id": "HV08",
+  "question": "What was the remote work limit in the 2022 policy?",
+  "category": "historical-missing",
+  "expected_behaviour": "refuse"
+ },
+ {
+  "id": "HV09",
+  "question": "What was the old annual leave allowance before it changed?",
+  "category": "historical-missing",
+  "expected_behaviour": "refuse"
+ },
+ {
+  "id": "HV10",
+  "question": "How many days of annual leave do employees get per calendar year?",
+  "category": "current-control",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-07"
+  ],
+  "expected_fact": "22 days of annual leave"
+ }
+]

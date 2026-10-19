@@ -1,0 +1,94 @@
+[
+ {
+  "id": "HR01",
+  "question": "How many days did customers have to return an item under the 2024 returns policy?",
+  "category": "historical",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-02"
+  ],
+  "expected_fact": "within 14 days of delivery"
+ },
+ {
+  "id": "HR02",
+  "question": "Under the previous returns policy, how quickly were refunds paid?",
+  "category": "historical",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-02"
+  ],
+  "expected_fact": "within 14 business days"
+ },
+ {
+  "id": "HR03",
+  "question": "What was the return window before the current policy?",
+  "category": "historical",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-02"
+  ],
+  "expected_fact": "within 14 days of delivery"
+ },
+ {
+  "id": "HR04",
+  "question": "How long was the refund time in the old returns rules?",
+  "category": "historical",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-02"
+  ],
+  "expected_fact": "within 14 business days"
+ },
+ {
+  "id": "HR05",
+  "question": "What return window does the 2026 returns policy give?",
+  "category": "current-year",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "within 30 days of delivery"
+ },
+ {
+  "id": "HR06",
+  "question": "How many days do I have now to return an item?",
+  "category": "current-control",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "within 30 days of delivery"
+ },
+ {
+  "id": "HR07",
+  "question": "How fast are refunds paid today once the parcel arrives?",
+  "category": "current-control",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "within 7 business days"
+ },
+ {
+  "id": "HR08",
+  "question": "What was the return window in the 2021 returns policy?",
+  "category": "historical-missing",
+  "expected_behaviour": "refuse"
+ },
+ {
+  "id": "HR09",
+  "question": "What was the old express delivery price before it changed?",
+  "category": "historical-missing",
+  "expected_behaviour": "refuse"
+ },
+ {
+  "id": "HR10",
+  "question": "How long are gift cards valid?",
+  "category": "current-control",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-05"
+  ],
+  "expected_fact": "valid for 12 months"
+ }
+]
