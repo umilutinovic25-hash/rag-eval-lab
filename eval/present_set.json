@@ -51,7 +51,7 @@
  },
  {
   "id": "PV06",
-  "question": "What is the current company stock price?",
+  "question": "What is the current price of the company cafeteria lunch?",
   "category": "unsupported",
   "expected_behaviour": "refuse",
   "expected_doc_ids": [],
