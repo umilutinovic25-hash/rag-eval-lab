@@ -1,0 +1,63 @@
+{
+ "note": "Expected yes/no answer for yes/no-form questions, written by the AI assistant from the corpus text (not a human label). X13 is an either/or question and is not labelled.",
+ "labels": {
+  "test3": {
+   "V02": "yes",
+   "V03": "no",
+   "V05": "yes",
+   "V06": "no",
+   "V08": "yes",
+   "V10": "yes",
+   "V21": "no",
+   "V25": "no"
+  },
+  "test4": {
+   "W04": "no",
+   "W05": "no",
+   "W06": "no",
+   "W09": "yes",
+   "W10": "no",
+   "W11": "no",
+   "W12": "yes",
+   "W18": "yes",
+   "W19": "no",
+   "W20": "yes",
+   "W22": "yes",
+   "W23": "yes",
+   "W25": "yes",
+   "W26": "no",
+   "W28": "no"
+  },
+  "test5": {
+   "X03": "yes",
+   "X04": "no",
+   "X06": "no",
+   "X08": "no",
+   "X10": "yes",
+   "X12": "yes",
+   "X15": "no",
+   "X16": "yes",
+   "X19": "yes",
+   "X21": "yes",
+   "X23": "yes",
+   "X25": "yes",
+   "X26": "no",
+   "X28": "no",
+   "X30": "yes"
+  },
+  "test6": {
+   "Y03": "yes",
+   "Y04": "yes",
+   "Y08": "yes",
+   "Y09": "no",
+   "Y11": "no",
+   "Y15": "no",
+   "Y18": "no",
+   "Y22": "no",
+   "Y23": "no",
+   "Y27": "no",
+   "Y31": "yes",
+   "Y32": "no"
+  }
+ }
+}

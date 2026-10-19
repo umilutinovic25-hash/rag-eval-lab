@@ -26,7 +26,9 @@ STOPWORDS = set(
     "not no yes must should will may any there their they we our was were has have had been which what who when "
     "where how than then also into about after before same only".split()
 )
-SETS = {"eval": EVAL_SET_PATH, "holdout": HOLDOUT_SET_PATH, "test": TEST_SET_PATH, "test2": TEST2_SET_PATH}
+SETS = {"eval": EVAL_SET_PATH, "holdout": HOLDOUT_SET_PATH, "test": TEST_SET_PATH, "test2": TEST2_SET_PATH,
+        "test3": TEST2_SET_PATH.with_name("test3_set.json"), "test4": TEST2_SET_PATH.with_name("test4_set.json"),
+        "test5": TEST2_SET_PATH.with_name("test5_set.json")}
 
 
 def model_sentence(answer: str) -> str:
@@ -116,7 +118,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Measure answer text quality (fact present, citation markers valid)")
     parser.add_argument("--set", choices=sorted(SETS), default="eval")
     parser.add_argument("--out", required=True)
+    parser.add_argument("--scratch", help="run against copies of the caches in this directory (committed caches stay untouched)")
     args = parser.parse_args()
+    if args.scratch:
+        from .scratch import use_scratch_caches
+        use_scratch_caches(Path(args.scratch))
     report = run(SETS[args.set])
     for row in report["rows"]:
         flags = f"fact={'yes' if row['fact_in_answer'] else 'no '} markers={'ok ' if row['markers_valid'] else 'bad'}"
