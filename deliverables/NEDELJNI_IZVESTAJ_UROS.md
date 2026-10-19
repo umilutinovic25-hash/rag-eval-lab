@@ -25,12 +25,6 @@ Ostaju problemi sa granicama chunkova, parafrazama, nepodržanim pitanjima i neb
 
 AI je pomagao u analizi, nacrtu specifikacije i izveštaja, implementaciji i pokretanju provera. Tekst ovog izveštaja pripremljen je uz pomoć AI-ja. Zaključke sam proverio prema sačuvanim rezultatima i kodu; moja potvrda nije nezavisni pregled drugog para niti pojedinačno označavanje odgovora na naprednim skupovima.
 
-## Status pregleda i predaje
-
-Komentar drugog para i moj pregled njihovog izveštaja još nisu evidentirani. Moj osvrt na sopstveni rad ne zamenjuje taj zahtev. Izveštaj je pripremljen za slanje. Izveštaj sam organizovao prema dostavljenom zadatku.
-
-Rok za komentar u Discord niti: 19.10.2026. u 20:00. Rok za imejl: 20.10.2026. u 12:00. Demonstracija: 21.10.2026.
-
 ## Plan demonstracije za Sesiju 2
 
 Prvo ću pokazati propust E06 i odgovor iz zastarele politike. Zatim ću prikazati specifikaciju (2ceaced), diff jedne promene (45b8172), rezultate pre/posle na istom skupu i CLI izlaz sa važećim citatom. Na kraju ću objasniti ograničenje istorijskih pitanja, preostale propuste i svoj doprinos.
