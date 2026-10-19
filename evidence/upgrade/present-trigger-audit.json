@@ -1,0 +1,25 @@
+{
+ "questions_checked": 486,
+ "present_mode": [
+  "holdout:H17",
+  "test3:V25",
+  "test5:X39",
+  "test6:Y05",
+  "test6:Y32",
+  "test7:Z01",
+  "test7:Z02",
+  "test7:Z03",
+  "test7:Z04",
+  "test7:Z06",
+  "jev:J02",
+  "history:HV06",
+  "history:HV07",
+  "history2:HR03",
+  "history2:HR06",
+  "history2:HR07",
+  "history3:HB01",
+  "history3:HB02",
+  "history3:HB05",
+  "history4:HC04"
+ ]
+}

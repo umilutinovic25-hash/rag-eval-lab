@@ -65,9 +65,29 @@ META_REQUEST = re.compile(
 ENGLISH_WORDS = frozenset("the a an is are was be to of in on for and or with you your can do does it this that as by at from per must may have has will not if when what how who which".split())
 
 
+IGNORE_ANYTHING = re.compile(r"\b(?:stop|forget|ignore|disregard|override|bypass)\b.{0,40}\b(?:handbook|corpus|refusal|safety|previous|earlier|above)\b", re.I)
+# GUARDS_V2: ignoring is an attack only when instructions or the source are ignored, not an earlier question or guess.
+IGNORE_INSTRUCTIONS = re.compile(
+    r"\b(?:stop|forget|ignore|disregard|override|bypass)\b.{0,40}\b(?:instructions?|directions?|rules you|rules given|guidelines|prompt|"
+    r"handbook|corpus|refusal|safety)\b|\b(?:ignore|disregard|forget) (?:all|everything)\b", re.I)
+FALSE_PREMISE = re.compile(
+    r"\b(?:pretend|imagine|assume|suppose)\b(?: that)? (?:the )?(?:handbook|policy|policies|corpus|documents?|source)\b"
+    r".{0,15}\b(?:says?|said|states?|allows?)\b", re.I)
+HIDDEN_TEXT = re.compile(
+    r"\b(?:hidden|setup|initial|internal|system|preloaded)\s+(?:setup\s+)?(?:text|message|configuration|instructions?)\b"
+    r"|\btext (?:that came |you got )?before (?:the|this|our) (?:user )?(?:conversation|chat|question|message)\b"
+    r"|\bretrieval (?:is )?(?:complete|done|passed)\b|\byou have passed retrieval\b"
+    r"|\b(?:text|instructions?) you were (?:loaded|given|started) with\b", re.I)
+
+
 def meta_request(question):
     """Requests aimed at the assistant itself (its prompt, role, output format) rather than at the corpus."""
-    return bool(META_REQUEST.search(question))
+    from . import config
+    if not config.GUARDS_V2:
+        return bool(META_REQUEST.search(question))
+    without_ignore = META_REQUEST.pattern.replace("|" + IGNORE_ANYTHING.pattern, "")
+    return bool(re.search(without_ignore, question, re.I) or IGNORE_INSTRUCTIONS.search(question)
+                or FALSE_PREMISE.search(question) or HIDDEN_TEXT.search(question))
 
 
 def english_share(text):

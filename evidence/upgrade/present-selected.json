@@ -1,0 +1,386 @@
+[
+ {
+  "set": "present",
+  "id": "PV01",
+  "False": {
+   "pass": true,
+   "answer": "[hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week."
+  },
+  "True": {
+   "pass": true,
+   "answer": "[hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week."
+  }
+ },
+ {
+  "set": "present",
+  "id": "PV02",
+  "False": {
+   "pass": true,
+   "answer": "Employees can work remotely up to 3 days per week. [hb-03-chunk-0]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "Employees can work remotely up to 3 days per week. [hb-03-chunk-0]"
+  }
+ },
+ {
+  "set": "present",
+  "id": "PV03",
+  "False": {
+   "pass": true,
+   "answer": "[hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week."
+  },
+  "True": {
+   "pass": true,
+   "answer": "[hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week."
+  }
+ },
+ {
+  "set": "present",
+  "id": "PV04",
+  "False": {
+   "pass": true,
+   "answer": "Yes. [hb-03-chunk-1]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "Yes. [hb-03-chunk-1]"
+  }
+ },
+ {
+  "set": "present",
+  "id": "PV05",
+  "False": {
+   "pass": true,
+   "answer": "Yes, the annual leave allowance is still 22 days. [hb-07-chunk-0]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "Yes, the annual leave allowance is still 22 days. [hb-07-chunk-0]"
+  }
+ },
+ {
+  "set": "present",
+  "id": "PV06",
+  "False": {
+   "pass": true,
+   "answer": "I do not have enough grounded evidence in the provided corpus to answer that question."
+  },
+  "True": {
+   "pass": true,
+   "answer": "I do not have enough grounded evidence in the provided corpus to answer that question."
+  }
+ },
+ {
+  "set": "present2",
+  "id": "PS01",
+  "False": {
+   "pass": true,
+   "answer": "No, the 14 business day refund time is not in force. [sh-01-chunk-1]"
+  },
+  "True": {
+   "pass": false,
+   "answer": "I do not have enough grounded evidence in the provided corpus to answer that question."
+  }
+ },
+ {
+  "set": "present2",
+  "id": "PS02",
+  "False": {
+   "pass": true,
+   "answer": "Items can be returned within 30 days of delivery in their original packaging. [sh-01-chunk-0]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "Items can be returned within 30 days of delivery in their original packaging. [sh-01-chunk-0]"
+  }
+ },
+ {
+  "set": "present2",
+  "id": "PS03",
+  "False": {
+   "pass": false,
+   "answer": "I do not have enough grounded evidence in the provided corpus to answer that question."
+  },
+  "True": {
+   "pass": false,
+   "answer": "I do not have enough grounded evidence in the provided corpus to answer that question."
+  }
+ },
+ {
+  "set": "present2",
+  "id": "PS04",
+  "False": {
+   "pass": true,
+   "answer": "Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse. [sh-01-chunk-1]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse. [sh-01-chunk-1]"
+  }
+ },
+ {
+  "set": "present2",
+  "id": "PS05",
+  "False": {
+   "pass": true,
+   "answer": "Yes, express delivery still costs 9 EUR. [sh-03-chunk-0]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "Yes, express delivery still costs 9 EUR. [sh-03-chunk-0]"
+  }
+ },
+ {
+  "set": "present2",
+  "id": "PS06",
+  "False": {
+   "pass": true,
+   "answer": "I do not have enough grounded evidence in the provided corpus to answer that question."
+  },
+  "True": {
+   "pass": true,
+   "answer": "I do not have enough grounded evidence in the provided corpus to answer that question."
+  }
+ },
+ {
+  "set": "holdout",
+  "id": "H17",
+  "False": {
+   "pass": true,
+   "answer": "[hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week."
+  },
+  "True": {
+   "pass": true,
+   "answer": "[hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week."
+  }
+ },
+ {
+  "set": "test3",
+  "id": "V25",
+  "False": {
+   "pass": true,
+   "answer": "No, the old limit of 2 remote days per week is not in force; the new limit is up to 3 days per week. [hb-03-chunk-0]"
+  },
+  "True": {
+   "pass": false,
+   "answer": "I do not have enough grounded evidence in the provided corpus to answer that question."
+  }
+ },
+ {
+  "set": "test5",
+  "id": "X39",
+  "False": {
+   "pass": true,
+   "answer": "I do not have enough grounded evidence in the provided corpus to answer that question."
+  },
+  "True": {
+   "pass": true,
+   "answer": "I do not have enough grounded evidence in the provided corpus to answer that question."
+  }
+ },
+ {
+  "set": "test6",
+  "id": "Y05",
+  "False": {
+   "pass": false,
+   "answer": "I do not have enough grounded evidence in the provided corpus to answer that question."
+  },
+  "True": {
+   "pass": true,
+   "answer": "The current return window is within 30 days of delivery. [sh-01-chunk-0]"
+  }
+ },
+ {
+  "set": "test6",
+  "id": "Y32",
+  "False": {
+   "pass": false,
+   "answer": "I do not have enough grounded evidence in the provided corpus to answer that question."
+  },
+  "True": {
+   "pass": false,
+   "answer": "I do not have enough grounded evidence in the provided corpus to answer that question."
+  }
+ },
+ {
+  "set": "test7",
+  "id": "Z01",
+  "False": {
+   "pass": true,
+   "answer": "30 days [sh-01-chunk-0]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "30 days [sh-01-chunk-0]"
+  }
+ },
+ {
+  "set": "test7",
+  "id": "Z02",
+  "False": {
+   "pass": true,
+   "answer": "No, the latest returns policy limits returns to 30 days. [sh-01-chunk-0]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "No, the latest returns policy limits returns to 30 days. [sh-01-chunk-0]"
+  }
+ },
+ {
+  "set": "test7",
+  "id": "Z03",
+  "False": {
+   "pass": true,
+   "answer": "Items can be returned within 30 days of delivery in their original packaging. [sh-01-chunk-0]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "Items can be returned within 30 days of delivery in their original packaging. [sh-01-chunk-0]"
+  }
+ },
+ {
+  "set": "test7",
+  "id": "Z04",
+  "False": {
+   "pass": true,
+   "answer": "Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse. [sh-01-chunk-1]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse. [sh-01-chunk-1]"
+  }
+ },
+ {
+  "set": "test7",
+  "id": "Z06",
+  "False": {
+   "pass": false,
+   "answer": "I do not have enough grounded evidence in the provided corpus to answer that question."
+  },
+  "True": {
+   "pass": false,
+   "answer": "I do not have enough grounded evidence in the provided corpus to answer that question."
+  }
+ },
+ {
+  "set": "jev",
+  "id": "J02",
+  "False": {
+   "pass": true,
+   "answer": "Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse. [sh-01-chunk-1]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse. [sh-01-chunk-1]"
+  }
+ },
+ {
+  "set": "history",
+  "id": "HV06",
+  "False": {
+   "pass": true,
+   "answer": "You can currently work remotely up to 3 days per week. [hb-03-chunk-0]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "You can currently work remotely up to 3 days per week. [hb-03-chunk-0]"
+  }
+ },
+ {
+  "set": "history",
+  "id": "HV07",
+  "False": {
+   "pass": true,
+   "answer": "[hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week."
+  },
+  "True": {
+   "pass": true,
+   "answer": "[hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week."
+  }
+ },
+ {
+  "set": "history2",
+  "id": "HR03",
+  "False": {
+   "pass": true,
+   "answer": "The return window was within 14 days of delivery in their original packaging. [sh-02-chunk-0]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "The return window was within 14 days of delivery in their original packaging. [sh-02-chunk-0]"
+  }
+ },
+ {
+  "set": "history2",
+  "id": "HR06",
+  "False": {
+   "pass": true,
+   "answer": "30 days [sh-01-chunk-0]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "30 days [sh-01-chunk-0]"
+  }
+ },
+ {
+  "set": "history2",
+  "id": "HR07",
+  "False": {
+   "pass": true,
+   "answer": "Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse. [sh-01-chunk-1]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse. [sh-01-chunk-1]"
+  }
+ },
+ {
+  "set": "history3",
+  "id": "HB01",
+  "False": {
+   "pass": true,
+   "answer": "Refunds were paid within 14 business days. [sh-02-chunk-0]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "Refunds were paid within 14 business days. [sh-02-chunk-0]"
+  }
+ },
+ {
+  "set": "history3",
+  "id": "HB02",
+  "False": {
+   "pass": true,
+   "answer": "Items could be returned within 14 days of delivery in their original packaging. [sh-02-chunk-0]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "Items could be returned within 14 days of delivery in their original packaging. [sh-02-chunk-0]"
+  }
+ },
+ {
+  "set": "history3",
+  "id": "HB05",
+  "False": {
+   "pass": true,
+   "answer": "The return window is within 30 days of delivery. [sh-01-chunk-0]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "The return window is within 30 days of delivery. [sh-01-chunk-0]"
+  }
+ },
+ {
+  "set": "history4",
+  "id": "HC04",
+  "False": {
+   "pass": true,
+   "answer": "Before the current remote work policy, the weekly limit for remote days was 2 days per week. [hb-02-chunk-0]"
+  },
+  "True": {
+   "pass": true,
+   "answer": "Before the current remote work policy, the weekly limit for remote days was 2 days per week. [hb-02-chunk-0]"
+  }
+ }
+]

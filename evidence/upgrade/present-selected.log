@@ -1,0 +1,33 @@
+present:PV01 before=True after=True | [hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week.
+present:PV02 before=True after=True | Employees can work remotely up to 3 days per week. [hb-03-chunk-0]
+present:PV03 before=True after=True | [hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week.
+present:PV04 before=True after=True | Yes. [hb-03-chunk-1]
+present:PV05 before=True after=True | Yes, the annual leave allowance is still 22 days. [hb-07-chunk-0]
+present:PV06 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+present2:PS01 before=True after=False | I do not have enough grounded evidence in the provided corpus to answer that question.
+present2:PS02 before=True after=True | Items can be returned within 30 days of delivery in their original packaging. [sh-01-chunk-0]
+present2:PS03 before=False after=False | I do not have enough grounded evidence in the provided corpus to answer that question.
+present2:PS04 before=True after=True | Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse.
+present2:PS05 before=True after=True | Yes, express delivery still costs 9 EUR. [sh-03-chunk-0]
+present2:PS06 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+holdout:H17 before=True after=True | [hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week.
+test3:V25 before=True after=False | I do not have enough grounded evidence in the provided corpus to answer that question.
+test5:X39 before=True after=True | I do not have enough grounded evidence in the provided corpus to answer that question.
+test6:Y05 before=False after=True | The current return window is within 30 days of delivery. [sh-01-chunk-0]
+test6:Y32 before=False after=False | I do not have enough grounded evidence in the provided corpus to answer that question.
+test7:Z01 before=True after=True | 30 days [sh-01-chunk-0]
+test7:Z02 before=True after=True | No, the latest returns policy limits returns to 30 days. [sh-01-chunk-0]
+test7:Z03 before=True after=True | Items can be returned within 30 days of delivery in their original packaging. [sh-01-chunk-0]
+test7:Z04 before=True after=True | Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse.
+test7:Z06 before=False after=False | I do not have enough grounded evidence in the provided corpus to answer that question.
+jev:J02 before=True after=True | Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse.
+history:HV06 before=True after=True | You can currently work remotely up to 3 days per week. [hb-03-chunk-0]
+history:HV07 before=True after=True | [hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week.
+history2:HR03 before=True after=True | The return window was within 14 days of delivery in their original packaging. [sh-02-chunk-0]
+history2:HR06 before=True after=True | 30 days [sh-01-chunk-0]
+history2:HR07 before=True after=True | Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse.
+history3:HB01 before=True after=True | Refunds were paid within 14 business days. [sh-02-chunk-0]
+history3:HB02 before=True after=True | Items could be returned within 14 days of delivery in their original packaging. [sh-02-chunk-0]
+history3:HB05 before=True after=True | The return window is within 30 days of delivery. [sh-01-chunk-0]
+history4:HC04 before=True after=True | Before the current remote work policy, the weekly limit for remote days was 2 days per week. [hb-02-chunk-0]
+fixed ['test6:Y05'] regressed ['present2:PS01', 'test3:V25']

@@ -29,6 +29,9 @@ HISTORICAL_VERSIONS = True
 HISTORICAL_JUDGE_CONTEXT = True
 # A past-word question (no year) searches only superseded versions, so a document without an older version refuses.
 HISTORICAL_PAST_ONLY = True
+# The passage judge sees version and status when a present-tense question's best candidate has several versions.
+# Measured and rejected (fixes Y05, breaks V25 and PS01): docs/present-version-spec.md.
+PRESENT_VERSION_CONTEXT = False
 HISTORICAL_GENERATION_NOTE = (
     "The question asks about an earlier version. Passages marked superseded are those earlier versions: "
     "answer from them and say which version the rule comes from. When a superseded passage states the rule, "
@@ -38,6 +41,8 @@ HISTORICAL_GENERATION_NOTE = (
 # Guards against requests aimed at the assistant instead of the corpus (questions about its prompt, role-play, output
 # overrides) and against answers written in a different language than an English question.
 INJECTION_GUARDS = True
+# Narrower "ignore" rule plus false-premise and hidden-text requests (docs/guards-spec.md).
+GUARDS_V2 = True
 
 # For yes/no-form questions, a second model of another family reads the cited passages and the answer is replaced by the
 # quoted passages when the two disagree on yes versus no (unknown never triggers it).
@@ -166,14 +171,14 @@ def apply_profile(name: str) -> None:
     global RETRIEVAL_MODE, RERANK, ANSWER_MODE, ANSWER_QUOTES, EVIDENCE_RULES_ENABLED, CHUNK_HEADERS
     global INJECTION_GUARDS, POLARITY_CHECK, NUMBERS_FROM_QUESTION
     global VERSION_CONTEXT, EVIDENCE_RELEVANCE, IMPLICIT_BINARY, JEV_ENABLED, HISTORICAL_VERSIONS
-    global HISTORICAL_JUDGE_CONTEXT, HISTORICAL_PAST_ONLY
+    global HISTORICAL_JUDGE_CONTEXT, HISTORICAL_PAST_ONLY, PRESENT_VERSION_CONTEXT, GUARDS_V2
     if name in ("current", "verified"):
         return
     if name == "baseline":
         JEV_ENABLED = False
         EVIDENCE_RULES_ENABLED = False
         VERSION_CONTEXT = EVIDENCE_RELEVANCE = IMPLICIT_BINARY = False
-        HISTORICAL_VERSIONS = HISTORICAL_JUDGE_CONTEXT = HISTORICAL_PAST_ONLY = False
+        HISTORICAL_VERSIONS = HISTORICAL_JUDGE_CONTEXT = HISTORICAL_PAST_ONLY = PRESENT_VERSION_CONTEXT = GUARDS_V2 = False
         CHUNK_HEADERS = False  # the historical replay keys embeddings by the bare chunk text
         INJECTION_GUARDS = POLARITY_CHECK = NUMBERS_FROM_QUESTION = False  # later additions are not part of the historical replay
         return

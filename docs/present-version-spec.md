@@ -26,3 +26,7 @@ Odgovor i generator se ne menjaju.
 ## Pravilo prihvatanja
 
 Bez regresija. Pitanja van ovih skupova koja ulaze u novi režim mere se pojedinačno pre i posle (ostala ne mogu da se promene). Uključuje se samo uz popravke i bez ijedne regresije.
+
+## Rezultat: odbijeno
+
+Novi režim zahvata 20 postojećih pitanja (`evidence/upgrade/present-trigger-audit.json`). Pre i posle (`evidence/upgrade/present-selected.json`): popravljen Y05, pokvareni V25 i PS01 (slepi). Slepi skupovi present/present2 su sa trenutnim sistemom već 11/12. Promena ostaje isključena. Ovo je drugo nezavisno merenje (posle `VERSION_CONTEXT`, odeljak 21) koje pokazuje da kontekst verzije za proveravača kod pitanja o važećoj verziji kvari V25.

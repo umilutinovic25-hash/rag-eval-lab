@@ -7,7 +7,7 @@ from .chunking import Chunk, build_chunks
 from .corpus import load_corpus
 from .claim_checks import claim_risks, clauses
 from .llm import LLMError, is_yes_no_question, passage_answers, passage_verdict, write_answer
-from .retrieval import RetrievalResult, historical_mode, retrieve_top_k
+from .retrieval import PRESENT_VERSION_RE, RetrievalResult, historical_mode, retrieve_top_k
 
 
 QUOTE_PREFIX = "Source ["
@@ -123,9 +123,11 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
         trace.append({"stage": "retrieval", "candidates": [{"chunk_id": r.chunk.chunk_id, "score": r.score} for r in results]})
 
     historical = config.HISTORICAL_JUDGE_CONTEXT and historical_mode(question, chunks)
+    versioned_titles = {c.title for c in chunks if c.status == "superseded"}
+    present = False  # set after retrieval: a present-tense question whose best candidate has several versions
 
     def version_intent():
-        return historical or config.VERSION_CONTEXT and bool(re.search(
+        return historical or present or config.VERSION_CONTEXT and bool(re.search(
             r"\b(current|latest|active|superseded|still|now|in force|20\d{2})\b", question, re.I))
 
     def judge_context(chunk):
@@ -205,6 +207,8 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
     elif config.RERANK in ("llm", "llm-gray-zone"):
         candidates = retrieve_top_k(question, chunks, k=config.RERANK_CANDIDATES)
         record_retrieval(candidates)
+        present = bool(config.PRESENT_VERSION_CONTEXT and candidates and candidates[0].chunk.title in versioned_titles
+                       and PRESENT_VERSION_RE.search(question))
         top = candidates[0].score if candidates else 0.0
         low, high = config.RERANK_GRAY_ZONE
         if config.RERANK == "llm-gray-zone" and top >= high:

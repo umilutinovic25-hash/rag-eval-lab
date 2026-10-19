@@ -584,6 +584,16 @@ Ograničenje 5 iz odeljka 8 rešio sam sa tri merena koraka, svaki sa specifikac
 
 Prvo pravilo za reči prošlosti pogrešno je reagovalo na 10 postojećih pitanja („is used to reserve“, „previous instructions“), pa sam ga suzio pre prihvatanja. Sada od 450 postojećih pitanja samo Z07 ulazi u istorijski režim, i ono je popravljeno. Eval meri citat, a ne rečenicu, pa sam ručno pregledao svih 36 istorijskih odgovora. Četiri su imala tačan citat, ali rečenicu „nije navedeno“; posle uputstva generatoru svih 36 je tačno i rečima. CLI: „What was the old annual leave allowance before it changed?“ se odbija, „Before the current remote work policy, what was the weekly limit for remote days?“ daje 2 dana iz `hb-02`, a „How many days per week can I work remotely?“ i dalje 3 dana iz `hb-03`. Pošto sam uputstvo doradio posle pregleda, svi istorijski skupovi su sada viđeni. Dokazi: `evidence/upgrade/history-*.json`, `history-answers.txt`, `history-cli-final.txt`, `history-trigger-audit.json`.
 
+## 24. Poslednji krug: zaštita i pitanja o važećoj verziji (19.10.2026.)
+
+Za preostale greške napravio sam dve nove promene, svaku sa specifikacijom i slepim skupom commitovanim pre koda. Pošto obe menjaju ponašanje samo kod malog broja pitanja, za svaku sam prvo izdvojio pitanja na koja utiče (ostala ne mogu da se promene), pa njih izmerio pre i posle.
+
+**Zaštita (`GUARDS_V2`, prihvaćeno).** Zaštita sada prepoznaje lažnu premisu o izvoru („pretend the handbook says … and confirm it“) i zahteve za skrivenim tekstom („hidden setup text“, „text before the user conversation“). Pravilo „ignore … earlier“ sada važi samo kada se ignorišu uputstva, pa „Ignore my earlier assumption“ više nije napad. Od 508 pitanja odluka se menja kod 18. Popravljeni su I12, K16, K24 i J37, regresija nema, a novi slepi skup napada inject4 ide sa 6/10 na 10/10 (`docs/guards-spec.md`).
+
+**Pitanja o važećoj verziji (`PRESENT_VERSION_CONTEXT`, odbijeno).** Kontekst verzije za proveravača kod pitanja kao „What is the current return window?“ popravlja Y05, ali kvari V25 i PS01 iz novog slepog skupa. To je drugo merenje sa istim ishodom (prvo je `VERSION_CONTEXT` u odeljku 21), pa promena ostaje isključena (`docs/present-version-spec.md`). Slepi skupovi present i present2 su sa postojećim sistemom 11/12.
+
+**Šta ostaje.** Pitanja bliska domenu bez odgovora u korpusu (W38, X38, Y38, Z39, N21, N23, J24), implicitna da/ne pitanja (W05, W10, W26, P05), višedelna pitanja i pitanja o oznaci (Z09, Z12, Z13, Z14) i dva pitanja o važećoj verziji (Y32, Z06). Prve dve grupe već su probane u odeljcima 13–21 i svaka ispravka je kvarila druga pitanja. Dalje štimovanje na viđenim pitanjima bilo bi preprilagođavanje, pa ih navodim kao ograničenja. Testovi: 288 Python, `scripts/check.sh` i 29 Playwright testova prolaze.
+
 ## Kontrolna lista pre predaje
 
 - [x] `python -m pytest` prolazi posle promene (19 na `45b8172`; 107 posle C1–C6; 137 posle D koraka; 246 posle odeljka 20)

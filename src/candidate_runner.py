@@ -23,6 +23,7 @@ CANDIDATES = {
     "jev": {"JEV_ENABLED": True},
     "historical": {"HISTORICAL_VERSIONS": True},
     "historical-judge": {"HISTORICAL_VERSIONS": True, "HISTORICAL_JUDGE_CONTEXT": True},
+    "present-version": {"PRESENT_VERSION_CONTEXT": True},
     "historical-past": {"HISTORICAL_VERSIONS": True, "HISTORICAL_PAST_ONLY": True},
     "historical-past-judge": {"HISTORICAL_VERSIONS": True, "HISTORICAL_PAST_ONLY": True, "HISTORICAL_JUDGE_CONTEXT": True},
     "proposal-21": {"VERSION_CONTEXT": True, "EVIDENCE_RELEVANCE": True, "IMPLICIT_BINARY": True},

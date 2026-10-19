@@ -118,6 +118,7 @@ PAST_RE = re.compile(
     r"|\bused to (?:be|allow|have|get|give|take|pay)\b",
     re.I,
 )
+PRESENT_VERSION_RE = re.compile(r"\b(current|currently|now|today|still|in force|valid|remained|stayed)\b", re.I)
 BEFORE_PRESENT_RE = re.compile(r"\b(?:before|prior to) (?:the )?(?:current|new|latest)\b", re.I)
 BEFORE_YEAR_RE = re.compile(r"\b(?:before|prior to)\b[^.?]*?\b(20\d{2})\b", re.I)
 PRESENT_RE = re.compile(r"\b(now|currently|current|today|still|anymore|any more|latest)\b", re.I)
