@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 import re
+import time
 
 from . import config, operation
 from .chunking import Chunk, build_chunks
@@ -111,8 +112,10 @@ def generation_issue(text: str, cited: list[RetrievalResult], question: str = ""
 
 def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
     operation.progress('retrieval', 'Pretražujem odlomke priručnika.')
+    started = time.perf_counter()
     trace = []
     def refuse(reason, retrieved):
+        trace.append({"stage": "stage_timing", "total_s": round(time.perf_counter() - started, 3)})
         trace.append({"stage": "decision", "reason": reason, "refused": True})
         return RagAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True, retrieved=retrieved, trace=trace)
 
@@ -171,6 +174,7 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
             return refuse("below_refusal_threshold", results)
         cited = select_citations(results)
 
+    selected_at = time.perf_counter()
     anchors = [r.chunk.chunk_id for r in cited]
     cited = expand_context(cited, chunks, config.CONTEXT_NEIGHBORS, config.CONTEXT_POLICY)
     if config.CONTEXT_NEIGHBORS:
@@ -204,7 +208,9 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
         refused=False,
         retrieved=results,
         generation_fallback_reason=fallback_reason,
-        trace=trace + [{"stage": "decision", "refused": False, "citations": [r.chunk.chunk_id for r in cited], "fallback": fallback_reason}],
+        trace=trace + [{"stage": "stage_timing", "retrieval_and_judging_s": round(selected_at - started, 3),
+                        "generation_s": round(time.perf_counter() - selected_at, 3), "total_s": round(time.perf_counter() - started, 3)},
+                       {"stage": "decision", "refused": False, "citations": [r.chunk.chunk_id for r in cited], "fallback": fallback_reason}],
     )
 
 

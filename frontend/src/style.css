@@ -2738,3 +2738,37 @@ summary {
   font-size: 12px;
   line-height: 1.6;
 }
+
+.extended-results {
+  margin: 0 0 28px;
+}
+.extended-results h2 {
+  font-size: 20px;
+  margin: 0 0 6px;
+}
+.extended-results table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 10px;
+}
+.extended-results th,
+.extended-results td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid #dfe8e3;
+  vertical-align: top;
+}
+.extended-results thead th {
+  color: #3f5c4e;
+  font-weight: 500;
+}
+.extended-results tbody th {
+  font-weight: 500;
+}
+@media (max-width: 640px) {
+  .extended-results table {
+    display: block;
+    overflow-x: auto;
+  }
+}

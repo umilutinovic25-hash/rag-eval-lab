@@ -28,6 +28,27 @@ BASE_CONFIG = config.snapshot()
 PIPELINE_LOCK = threading.RLock()
 RUNTIME_DIR = ROOT / 'data/runtime'
 SAVED_EVALUATION = ROOT / 'evidence/expansion/final.json'
+EXTENDED_EVALUATION = ROOT / 'evidence/upgrade/final-all-sets.json'
+# Honest status of every set: a set stops being blind once it has been run and looked at.
+SET_NOTES = {
+    'eval': ('Obavezni skup', 'viđen'), 'holdout': ('Holdout', 'viđen'), 'test': ('Dodatni test 1', 'viđen'),
+    'test2': ('Dodatni test 2', 'viđen'), 'test3': ('Slepi test 3', 'viđen posle prvog pokretanja'),
+    'test4': ('Slepi test 4', 'viđen posle prvog pokretanja'),
+    'test5': ('Slepi test 5', '36 od 40 pitanja novo; 4 ponovljena iz viđenih skupova'),
+    'test6': ('Nezavisan korpus (test 6)', 'drugi korpus, viđen posle prvog pokretanja'),
+    'inject': ('Prompt injection', 'viđen'), 'inject2': ('Prompt injection 2', 'zaštita pisana posle prvog skupa'),
+}
+
+
+def extended_payload(data):
+    sets = data['candidates']['shipped']['sets']
+    rows = []
+    for name, run in sets.items():
+        label, note = SET_NOTES.get(name, (name, ''))
+        summary = run['summary']
+        rows.append(dict(name=name, label=label, note=note, passed=summary['passed'], total=summary['total'],
+                         failed=run['failed'], citation_precision=summary.get('mean_citation_precision')))
+    return dict(created_at=data.get('created_at'), sets=rows)
 BASELINE_EVALUATION = ROOT / 'evidence/expansion/baseline.json'
 
 
@@ -242,6 +263,11 @@ class Handler(BaseHTTPRequestHandler):
                                       current_documents=sum(doc.status == 'current' for doc in documents)))
         if path == '/api/documents':
             return self.reply(200, {'documents': self.server.documents})
+        if path == '/api/evaluations/extended':
+            try:
+                return self.reply(200, extended_payload(json.loads(EXTENDED_EVALUATION.read_text())))
+            except (OSError, ValueError, KeyError, TypeError):
+                return self.reply(503, {'error': 'Prošireni rezultati nisu dostupni.'})
         if path in ('/api/evaluations','/api/evaluations/baseline'):
             try:
                 source=BASELINE_EVALUATION if path.endswith('/baseline') else SAVED_EVALUATION

@@ -267,6 +267,7 @@ function SourceInspector({
                             context: "Proširenje konteksta",
                             generation: "Formiranje odgovora",
                             timing: "Trajanje obrade",
+                            stage_timing: "Trajanje po fazama",
                             judge: "Provera relevantnosti",
                             rerank: "Provera relevantnosti",
                           } as Record<string, string>

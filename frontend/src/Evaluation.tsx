@@ -10,7 +10,7 @@ import {
   X,
 } from "lucide-react";
 import { api, download } from "./api";
-import type { Evaluation, EvalRow } from "./types";
+import type { Evaluation, EvalRow, ExtendedEvaluation } from "./types";
 
 const labels: Record<string, string> = {
   eval: "Obavezni skup",
@@ -29,6 +29,47 @@ function failureReasons(row: EvalRow) {
       row.citation_precision < 1 &&
       "Citati uključuju dokument koji se ne očekuje.",
   ].filter(Boolean) as string[];
+}
+
+function ExtendedResults() {
+  const [data, setData] = useState<ExtendedEvaluation | null>(null);
+  useEffect(() => {
+    api<ExtendedEvaluation>("/evaluations/extended")
+      .then((d) => setData(Array.isArray(d?.sets) ? d : null))
+      .catch(() => setData(null));
+  }, []);
+  if (!data) return null;
+  return (
+    <section className="extended-results" aria-labelledby="extended-title">
+      <h2 id="extended-title">Svi skupovi pitanja</h2>
+      <p className="muted fine">
+        Stanje isporučene konfiguracije. Skup je slep samo pri prvom pokretanju;
+        pitanja pisao je isti AI koji je gradio sistem, a ne nezavisna osoba.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Skup</th>
+            <th scope="col">Prošlo</th>
+            <th scope="col">Pala pitanja</th>
+            <th scope="col">Napomena</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.sets.map((s) => (
+            <tr key={s.name}>
+              <th scope="row">{s.label}</th>
+              <td>
+                {s.passed}/{s.total}
+              </td>
+              <td>{s.failed.length ? s.failed.join(", ") : "—"}</td>
+              <td>{s.note}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  );
 }
 
 export function EvaluationView() {
@@ -99,7 +140,7 @@ export function EvaluationView() {
       <div className="page-heading">
         <div>
           <h1>Kvalitet koji može da se proveri.</h1>
-          <p>Četiri skupa pitanja. Stvarni rezultati. Vidljive regresije.</p>
+          <p>Svi skupovi pitanja. Stvarni rezultati. Vidljive regresije.</p>
         </div>
         <button
           className="primary-button"
@@ -114,6 +155,7 @@ export function EvaluationView() {
           {busy ? "Provera je u toku…" : "Ponovi iz keša"}
         </button>
       </div>
+      <ExtendedResults />
       {error && (
         <div className="error-notice" role="alert">
           <CircleAlert size={18} />

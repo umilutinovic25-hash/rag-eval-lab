@@ -88,3 +88,13 @@ def test_serbian_reference_expands_to_the_preceding_original_source():
     second=Chunk('b','doc','T','2026','current','Slušalice se naručuju kroz isti taj formular.')
     expanded=rag.expand_context([RetrievalResult(second,.8)],[first,second],1,'references')
     assert [r.chunk.chunk_id for r in expanded]==['a','b']
+
+
+def test_extended_evaluation_lists_every_set_with_an_honest_note(tmp_path):
+    with running_server(tmp_path) as base:
+        status, data = request(base, '/api/evaluations/extended')
+        assert status == 200
+        names = [s['name'] for s in data['sets']]
+        assert {'eval', 'test5', 'test6', 'inject2'} <= set(names)
+        test5 = next(s for s in data['sets'] if s['name'] == 'test5')
+        assert 'ponovljena' in test5['note'] and test5['total'] == 40

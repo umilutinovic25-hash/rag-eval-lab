@@ -191,3 +191,17 @@ export interface Job {
   error: string | null;
   phases: { stage: string; seconds: number }[];
 }
+
+export interface ExtendedSet {
+  name: string;
+  label: string;
+  note: string;
+  passed: number;
+  total: number;
+  failed: string[];
+  citation_precision: number | null;
+}
+export interface ExtendedEvaluation {
+  created_at?: string;
+  sets: ExtendedSet[];
+}
