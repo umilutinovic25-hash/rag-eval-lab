@@ -3,7 +3,8 @@
 **Polaznik:** Uroš Milutinović  
 **Projekat:** izvor. — kontrolisano poboljšanje RAG sistema  
 **Način rada:** samostalan rad  
-**Demonstraciju vodi:** Uroš Milutinović
+**Demonstraciju vodi:** Uroš Milutinović  
+**Pregled para:** komentar drugog para nije dostavljen do roka; status u odeljku 9 izveštaja pre/posle
 
 ## Šta sam uradio
 

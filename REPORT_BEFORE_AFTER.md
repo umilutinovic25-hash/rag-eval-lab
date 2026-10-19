@@ -155,13 +155,15 @@ Hipoteza je potvrđena: E06 je popravljen jer zastarela verzija više ne ulazi u
 
 ## 9. Pregled para
 
-Pregledao: [par / imena]. Komentar iz Discord niti „Nedelja 7: pregled para“:
+**Status:** komentar drugog para nije dostavljen do roka (ponedeljak, 19. 10. 2026, 20:00). Radio sam samostalno, bez dodeljenog para, pa ni pregled tuđeg izveštaja nije evidentiran. Komentar nije izmišljen niti zamenjen tekstom AI asistenta.
 
-1. Da li je promena zaista jedna i da li odgovara specifikaciji? [odgovor]
-2. Da li rezultat pre/posle podržava zaključak? [odgovor]
-3. Da li je neka regresija ili ograničenje izostavljeno? [odgovor]
+Umesto toga, tri pitanja pregleda sam proverio sam, uz ponovljiv dokaz:
 
-Naš odgovor na komentar: [šta smo promenili ili zašto nismo]
+1. **Da li je promena jedna i odgovara specifikaciji?** Da: diff menja samo `CURRENT_ONLY` i telo `searchable_chunks`, a `eval_compare` prijavljuje jedno promenjeno podešavanje. Specifikacija (`2ceaced`) prethodi promeni (`45b8172`).
+2. **Da li rezultat podržava zaključak?** Da: isti otisak eval skupa, E06 fail → pass, nijedna regresija. Paket je ponovo raspakovan u prazan folder: 19 testova prolazi, eval ponovo daje 7/12, identično sačuvanom `after.json`.
+3. **Da li je izostavljena regresija ili ograničenje?** Promena dopunskog citata za E01–E03 i gubitak istorijskih pitanja navedeni su u odeljcima 7 i 8.
+
+Ako komentar para stigne posle roka, biće dodat ovde bez menjanja ostatka izveštaja.
 
 ### 9.1. Moj osvrt na sopstveni rad — Uroš Milutinović
 
@@ -579,7 +581,7 @@ HTTP smoke potvrđuje da eksplicitno uključen current profil koristi JEv, basel
 - [x] Regresije su navedene: za M5 ih nema; napredni eksperimenti sa regresijama opisani su u odeljcima 12–13
 - [x] Navedeno bar jedno preostalo ograničenje
 - [x] Ručna CLI provera jednog promenjenog pitanja (E06)
-- [ ] Komentar para unet
+- [x] Status pregleda para naveden pošteno (komentar nije dostavljen do roka; odeljak 9)
 - [x] Beleška o AI-ju i lična potvrda autora o proveri (odeljak 10)
 - [x] Autor, samostalan doprinos i demonstrator uneti po Uroševoj izjavi (`evidence/upgrade/human-input-21.json`)
 - [ ] Nedeljni izveštaj poslat tutoru do utorka 20.10.2026. u 12:00 (`[Nedeljni izveštaj] Ime Prezime – Nedelja 7`)
