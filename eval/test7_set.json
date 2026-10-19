@@ -1,0 +1,378 @@
+[
+ {
+  "id": "Z01",
+  "question": "Under the policy in force, how many days after delivery are returns accepted?",
+  "category": "versioned",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "30 days"
+ },
+ {
+  "id": "Z02",
+  "question": "Does the latest returns policy still limit returns to a fortnight?",
+  "category": "versioned",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "30 days"
+ },
+ {
+  "id": "Z03",
+  "question": "Which return deadline applies now rather than in the superseded policy?",
+  "category": "versioned",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "30 days"
+ },
+ {
+  "id": "Z04",
+  "question": "According to the current version, when is a refund paid after warehouse receipt?",
+  "category": "versioned",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "7 business days"
+ },
+ {
+  "id": "Z05",
+  "question": "For the active returns rules, what packaging must a customer retain?",
+  "category": "versioned",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "original packaging"
+ },
+ {
+  "id": "Z06",
+  "question": "Has the current refund waiting period remained fourteen business days?",
+  "category": "versioned",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "7 business days"
+ },
+ {
+  "id": "Z07",
+  "question": "What return deadline does the 2026 policy specify?",
+  "category": "versioned",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "30 days"
+ },
+ {
+  "id": "Z08",
+  "question": "Which payment method receives the refund under the latest policy?",
+  "category": "versioned",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "original payment method"
+ },
+ {
+  "id": "Z09",
+  "question": "What claim form identifier is printed in the electronics warranty?",
+  "category": "identifier",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-04"
+  ],
+  "expected_fact": "W-7"
+ },
+ {
+  "id": "Z10",
+  "question": "Is W-7 the designated form for reporting a warranty defect?",
+  "category": "identifier",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-04"
+  ],
+  "expected_fact": "W-7"
+ },
+ {
+  "id": "Z11",
+  "question": "Besides the order number, which image must accompany form W-7?",
+  "category": "identifier",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-04"
+  ],
+  "expected_fact": "photo of the defect"
+ },
+ {
+  "id": "Z12",
+  "question": "What number identifies the warranty claim form, and what purchase identifier is required?",
+  "category": "multipart",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-04"
+  ],
+  "expected_fact": "order number"
+ },
+ {
+  "id": "Z13",
+  "question": "For standard shipping, what is the delivery range and the free-shipping order threshold?",
+  "category": "multipart",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-03"
+  ],
+  "expected_fact": "3 to 5 working days"
+ },
+ {
+  "id": "Z14",
+  "question": "For an unwanted non-defective item, who pays shipping back and what packaging is required?",
+  "category": "multipart",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "customer pays return shipping"
+ },
+ {
+  "id": "Z15",
+  "question": "How long are gift cards valid and may their value be cashed out?",
+  "category": "multipart",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-05"
+  ],
+  "expected_fact": "12 months"
+ },
+ {
+  "id": "Z16",
+  "question": "Where do I delete an account and how long until deletion becomes final?",
+  "category": "multipart",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-07"
+  ],
+  "expected_fact": "settings page"
+ },
+ {
+  "id": "Z17",
+  "question": "What times does telephone support operate, and on which days?",
+  "category": "multipart",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-06"
+  ],
+  "expected_fact": "10:00 to 16:00"
+ },
+ {
+  "id": "Z18",
+  "question": "Which team processes complaints and what is the email response deadline?",
+  "category": "multipart",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-06"
+  ],
+  "expected_fact": "quality team"
+ },
+ {
+  "id": "Z19",
+  "question": "Does damage from liquid fall under the electronics warranty?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-04"
+  ],
+  "expected_fact": "water damage"
+ },
+ {
+  "id": "Z20",
+  "question": "If I stop earning or spending points for two years, will they expire?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-08"
+  ],
+  "expected_fact": "24 months of inactivity"
+ },
+ {
+  "id": "Z21",
+  "question": "May a child of sixteen register for a customer account?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-07"
+  ],
+  "expected_fact": "18 years old"
+ },
+ {
+  "id": "Z22",
+  "question": "Could I have an order sent to a PO box instead of a street address?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-03"
+  ],
+  "expected_fact": "post office boxes"
+ },
+ {
+  "id": "Z23",
+  "question": "Can support disable a gift card that has gone missing?",
+  "category": "yes-no-affirm",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-05"
+  ],
+  "expected_fact": "block a lost gift card"
+ },
+ {
+  "id": "Z24",
+  "question": "How much credit does a hundred loyalty points represent?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-08"
+  ],
+  "expected_fact": "5 EUR"
+ },
+ {
+  "id": "Z25",
+  "question": "What warranty duration applies to an electronic device?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-04"
+  ],
+  "expected_fact": "24 month"
+ },
+ {
+  "id": "Z26",
+  "question": "At what hour does daily support chat finish?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-06"
+  ],
+  "expected_fact": "20:00"
+ },
+ {
+  "id": "Z27",
+  "question": "How many loyalty points accrue for a euro of purchases?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-08"
+  ],
+  "expected_fact": "1 point per euro"
+ },
+ {
+  "id": "Z28",
+  "question": "Can a redeemed gift card be replaced by support?",
+  "category": "yes-no-negative",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-05"
+  ],
+  "expected_fact": "cannot be replaced after redemption"
+ },
+ {
+  "id": "Z29",
+  "question": "How much does gift wrapping cost for an express order?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Z30",
+  "question": "What is the warranty claim processing deadline after submitting W-7?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Z31",
+  "question": "Which courier collects a defective item from my home?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Z32",
+  "question": "Can I transfer a gift card balance to a different customer account?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Z33",
+  "question": "What is the minimum order value for collecting loyalty points?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Z34",
+  "question": "What password is needed to reverse account deletion?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Z35",
+  "question": "When does the warehouse open for in-person returns?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Z36",
+  "question": "Which countries qualify for next-day shipping?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Z37",
+  "question": "How much does it cost to telephone customer support?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Z38",
+  "question": "Can a refund be redirected into loyalty points?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Z39",
+  "question": "How long is a replacement device covered after a warranty claim?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Z40",
+  "question": "What is the maximum number of gift cards allowed on an order?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ }
+]

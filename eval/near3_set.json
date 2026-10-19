@@ -1,0 +1,242 @@
+[
+ {
+  "id": "N01",
+  "question": "Where can a visitor collect a temporary entrance pass?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N02",
+  "question": "What fee is charged to replace a damaged badge?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N03",
+  "question": "Can reception unlock the entrance remotely for an employee?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N04",
+  "question": "What time are the office doors locked in the evening?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N05",
+  "question": "Are parking spaces equipped with electric car chargers?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N06",
+  "question": "How do I cancel a parking reservation?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N07",
+  "question": "Can a guest reserve parking through my account?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N08",
+  "question": "Where is the bicycle storage area?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N09",
+  "question": "How many days does a headset delivery take?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N10",
+  "question": "Which laptop brands can employees request?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N11",
+  "question": "Can IT recover files from a damaged personal computer?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N12",
+  "question": "Who pays for a laptop repair outside warranty?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N13",
+  "question": "What is the daily allowance amount for a trip to Paris?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N14",
+  "question": "Which airline class is allowed on business trips?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N15",
+  "question": "How do I correct a rejected travel expense claim?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N16",
+  "question": "Can I book travel using a personal loyalty account?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N17",
+  "question": "How many paid sick days does each employee receive?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N18",
+  "question": "Which public holidays are excluded from annual leave?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N19",
+  "question": "Who approves an emergency leave exception?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N20",
+  "question": "Is unused annual leave paid out when employment ends?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N21",
+  "question": "What happens to training funds when I change teams?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N22",
+  "question": "Which certification providers are pre-approved?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N23",
+  "question": "Can I split a course fee across two budget years?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N24",
+  "question": "How is an MFA recovery code replaced?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N25",
+  "question": "Which password manager must employees install?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N26",
+  "question": "What is the VPN server address?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N27",
+  "question": "How many hours of onboarding are scheduled on day one?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N28",
+  "question": "Who replaces my buddy while they are on holiday?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N29",
+  "question": "What equipment is supplied for a home office?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "N30",
+  "question": "Are remote workers reimbursed for broadband?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ }
+]

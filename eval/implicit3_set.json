@@ -1,0 +1,202 @@
+[
+ {
+  "id": "P01",
+  "question": "Could an IT technician ask me to disclose my password?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-05"
+  ],
+  "expected_fact": "Never share passwords"
+ },
+ {
+  "id": "P02",
+  "question": "Would a password of ten characters meet the requirement?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-05"
+  ],
+  "expected_fact": "at least 12 characters"
+ },
+ {
+  "id": "P03",
+  "question": "Is keeping the same password for six months permitted?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-05"
+  ],
+  "expected_fact": "90 days"
+ },
+ {
+  "id": "P04",
+  "question": "Could I sign in to company email without MFA?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-05"
+  ],
+  "expected_fact": "MFA"
+ },
+ {
+  "id": "P05",
+  "question": "Would sending a holiday request tomorrow for next Monday satisfy the notice rule?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-07"
+  ],
+  "expected_fact": "two weeks in advance"
+ },
+ {
+  "id": "P06",
+  "question": "Can unused holiday days still be taken in February of the following year?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-07"
+  ],
+  "expected_fact": "31 March"
+ },
+ {
+  "id": "P07",
+  "question": "Would keeping unused holidays into May comply with the policy?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-07"
+  ],
+  "expected_fact": "31 March"
+ },
+ {
+  "id": "P08",
+  "question": "Must the annual holiday request go through the HR portal?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-07"
+  ],
+  "expected_fact": "HR portal"
+ },
+ {
+  "id": "P09",
+  "question": "Could I use unspent training money in the following year?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-08"
+  ],
+  "expected_fact": "does not carry over"
+ },
+ {
+  "id": "P10",
+  "question": "Would booking a course before agreeing it with my manager comply?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-08"
+  ],
+  "expected_fact": "before booking"
+ },
+ {
+  "id": "P11",
+  "question": "Can certification fees come out of the training allowance?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-08"
+  ],
+  "expected_fact": "certifications"
+ },
+ {
+  "id": "P12",
+  "question": "Must travel be approved before I buy the tickets?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-04"
+  ],
+  "expected_fact": "before booking"
+ },
+ {
+  "id": "P13",
+  "question": "Would submitting travel receipts two months after returning meet the deadline?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-04"
+  ],
+  "expected_fact": "30 days"
+ },
+ {
+  "id": "P14",
+  "question": "Do original hotel receipts have to be retained?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-04"
+  ],
+  "expected_fact": "original receipts"
+ },
+ {
+  "id": "P15",
+  "question": "Could I contact regular IT support at noon on Saturday?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-10"
+  ],
+  "expected_fact": "Monday to Friday"
+ },
+ {
+  "id": "P16",
+  "question": "Is regular IT support available at seven in the morning?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-10"
+  ],
+  "expected_fact": "08:00 to 18:00"
+ },
+ {
+  "id": "P17",
+  "question": "Should a late-night urgent security incident go to the on-call line?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-10"
+  ],
+  "expected_fact": "on-call line"
+ },
+ {
+  "id": "P18",
+  "question": "Can I enter without presenting my own badge?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-09"
+  ],
+  "expected_fact": "personal badge"
+ },
+ {
+  "id": "P19",
+  "question": "Would reporting a lost badge the following week satisfy the rule?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-09"
+  ],
+  "expected_fact": "same day"
+ },
+ {
+  "id": "P20",
+  "question": "May a remote day be moved to another day during the same week?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-03"
+  ],
+  "expected_fact": "same week"
+ }
+]
