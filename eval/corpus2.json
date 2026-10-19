@@ -1,0 +1,66 @@
+[
+ {
+  "doc_id": "sh-01",
+  "title": "Returns policy",
+  "section": "Customer service",
+  "version": "2026",
+  "status": "current",
+  "text": "Items can be returned within 30 days of delivery in their original packaging. Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse. Return shipping is free for defective items; otherwise the customer pays return shipping."
+ },
+ {
+  "doc_id": "sh-02",
+  "title": "Returns policy",
+  "section": "Customer service",
+  "version": "2024",
+  "status": "superseded",
+  "text": "Items can be returned within 14 days of delivery in their original packaging. Refunds are paid within 14 business days."
+ },
+ {
+  "doc_id": "sh-03",
+  "title": "Shipping",
+  "section": "Orders",
+  "version": "2026",
+  "status": "current",
+  "text": "Standard delivery takes 3 to 5 working days. Express delivery takes 1 working day and costs 9 EUR. Orders above 50 EUR ship free with standard delivery. We do not ship to post office boxes."
+ },
+ {
+  "doc_id": "sh-04",
+  "title": "Warranty",
+  "section": "Customer service",
+  "version": "2026",
+  "status": "current",
+  "text": "All electronics have a 24 month warranty. The warranty does not cover water damage or damage caused by dropping the device. A claim needs the order number and a photo of the defect. Send claims through form W-7."
+ },
+ {
+  "doc_id": "sh-05",
+  "title": "Gift cards",
+  "section": "Payments",
+  "version": "2026",
+  "status": "current",
+  "text": "Gift cards are valid for 12 months from the purchase date. Gift cards cannot be exchanged for cash. Support can block a lost gift card, but a gift card cannot be replaced after redemption."
+ },
+ {
+  "doc_id": "sh-06",
+  "title": "Customer support",
+  "section": "Customer service",
+  "version": "2026",
+  "status": "current",
+  "text": "Support is available by chat from 09:00 to 20:00 every day and by phone from 10:00 to 16:00 on weekdays. Replies to email arrive within 2 working days. Complaints are handled by the quality team."
+ },
+ {
+  "doc_id": "sh-07",
+  "title": "Accounts and privacy",
+  "section": "Accounts",
+  "version": "2026",
+  "status": "current",
+  "text": "An account can be deleted at any time on the settings page, and the deletion becomes final after 30 days. We never store full card numbers. Customers must be at least 18 years old to create an account."
+ },
+ {
+  "doc_id": "sh-08",
+  "title": "Loyalty points",
+  "section": "Payments",
+  "version": "2026",
+  "status": "current",
+  "text": "Customers earn 1 point per euro spent. 100 points are worth 5 EUR. Points expire after 24 months of inactivity. Points are not earned on gift card purchases."
+ }
+]

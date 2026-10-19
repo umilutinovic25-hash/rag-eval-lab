@@ -12,10 +12,10 @@ from pathlib import Path
 
 from . import config, operation
 from .chunking import build_chunks
-from .corpus import load_corpus
+from .corpus import Document, load_corpus
 from .eval_runner import evaluate_item, load_eval_set, summarise
 from .rag import build_grounded_answer
-from .retrieval_metrics import EVAL_DIR, SEEN, SETS, apply_overrides
+from .retrieval_metrics import CORPORA, EVAL_DIR, SEEN, SETS, apply_overrides
 from .scratch import use_scratch_caches
 
 CANDIDATES = {
@@ -37,7 +37,14 @@ CANDIDATES = {
 }
 
 
+def corpus_chunks(name: str, default):
+    if name not in CORPORA:
+        return default
+    return build_chunks([Document(**doc) for doc in json.loads((EVAL_DIR / CORPORA[name]).read_text())])
+
+
 def run_set(name: str, chunks) -> dict:
+    chunks = corpus_chunks(name, chunks)
     by_id = {chunk.chunk_id: chunk for chunk in chunks}
     rows, fallbacks = [], {}
     started = time.perf_counter()

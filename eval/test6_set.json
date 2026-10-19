@@ -1,0 +1,386 @@
+[
+ {
+  "id": "Y01",
+  "question": "How long after delivery can I send an item back?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "within 30 days of delivery"
+ },
+ {
+  "id": "Y02",
+  "question": "How soon do I get my money back once the warehouse has my return?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "within 7 business days"
+ },
+ {
+  "id": "Y03",
+  "question": "Is return shipping free if the item arrived broken?",
+  "category": "yes-no-affirm",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "return shipping is free for defective items"
+ },
+ {
+  "id": "Y04",
+  "question": "Must I keep the original box if I want to return something?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "original packaging"
+ },
+ {
+  "id": "Y05",
+  "question": "What is the current return window?",
+  "category": "versioned",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "30 days"
+ },
+ {
+  "id": "Y06",
+  "question": "How many days does normal delivery take?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-03"
+  ],
+  "expected_fact": "3 to 5 working days"
+ },
+ {
+  "id": "Y07",
+  "question": "What does next-day delivery cost?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-03"
+  ],
+  "expected_fact": "9 eur"
+ },
+ {
+  "id": "Y08",
+  "question": "Is shipping free on an order of 60 EUR?",
+  "category": "yes-no-affirm",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-03"
+  ],
+  "expected_fact": "ship free"
+ },
+ {
+  "id": "Y09",
+  "question": "Can you deliver to a post office box?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-03"
+  ],
+  "expected_fact": "post office boxes"
+ },
+ {
+  "id": "Y10",
+  "question": "How long is the warranty on a laptop?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-04"
+  ],
+  "expected_fact": "24 month warranty"
+ },
+ {
+  "id": "Y11",
+  "question": "Does the warranty cover a phone I dropped?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-04"
+  ],
+  "expected_fact": "dropping"
+ },
+ {
+  "id": "Y12",
+  "question": "Which form do I use to make a warranty claim?",
+  "category": "identifier",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-04"
+  ],
+  "expected_fact": "form w-7"
+ },
+ {
+  "id": "Y13",
+  "question": "What do I need to attach to a warranty claim?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-04"
+  ],
+  "expected_fact": "order number and a photo of the defect"
+ },
+ {
+  "id": "Y14",
+  "question": "For how long is a gift card good?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-05"
+  ],
+  "expected_fact": "12 months from the purchase date"
+ },
+ {
+  "id": "Y15",
+  "question": "Can I swap a gift card for cash?",
+  "category": "yes-no-negative",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-05"
+  ],
+  "expected_fact": "cannot be exchanged for cash"
+ },
+ {
+  "id": "Y16",
+  "question": "If I redeem my gift card and then lose it, can support issue a new one?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-05"
+  ],
+  "expected_fact": "cannot be replaced after redemption"
+ },
+ {
+  "id": "Y17",
+  "question": "When can I chat with support?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-06"
+  ],
+  "expected_fact": "09:00 to 20:00 every day"
+ },
+ {
+  "id": "Y18",
+  "question": "Can I phone support on a Sunday?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-06"
+  ],
+  "expected_fact": "weekdays"
+ },
+ {
+  "id": "Y19",
+  "question": "How fast do you answer emails?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-06"
+  ],
+  "expected_fact": "within 2 working days"
+ },
+ {
+  "id": "Y20",
+  "question": "Who deals with complaints?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-06"
+  ],
+  "expected_fact": "quality team"
+ },
+ {
+  "id": "Y21",
+  "question": "How can I close my account?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-07"
+  ],
+  "expected_fact": "deleted at any time on the settings page"
+ },
+ {
+  "id": "Y22",
+  "question": "Is a 17-year-old allowed to open an account?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-07"
+  ],
+  "expected_fact": "at least 18 years old"
+ },
+ {
+  "id": "Y23",
+  "question": "Do you save my whole card number?",
+  "category": "yes-no-negative",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-07"
+  ],
+  "expected_fact": "never store full card numbers"
+ },
+ {
+  "id": "Y24",
+  "question": "After how many days is account deletion permanent?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-07"
+  ],
+  "expected_fact": "30 days"
+ },
+ {
+  "id": "Y25",
+  "question": "How many points do I get for each euro?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-08"
+  ],
+  "expected_fact": "1 point per euro"
+ },
+ {
+  "id": "Y26",
+  "question": "How much money are 200 points worth?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-08"
+  ],
+  "expected_fact": "100 points are worth 5 eur"
+ },
+ {
+  "id": "Y27",
+  "question": "Do I get points when I buy a gift card?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-08"
+  ],
+  "expected_fact": "not earned on gift card"
+ },
+ {
+  "id": "Y28",
+  "question": "When do loyalty points run out?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-08"
+  ],
+  "expected_fact": "24 months of inactivity"
+ },
+ {
+  "id": "Y29",
+  "question": "How long does express delivery take and how much does it cost?",
+  "category": "multipart",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-03"
+  ],
+  "expected_fact": "1 working day"
+ },
+ {
+  "id": "Y30",
+  "question": "How long do I have to return an item and who pays for return shipping on a defective one?",
+  "category": "multipart",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "30 days"
+ },
+ {
+  "id": "Y31",
+  "question": "Do I need a photo of the defect for a claim?",
+  "category": "yes-no-affirm",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-04"
+  ],
+  "expected_fact": "photo of the defect"
+ },
+ {
+  "id": "Y32",
+  "question": "Is the 14 day return period still valid?",
+  "category": "versioned",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "30 days"
+ },
+ {
+  "id": "Y33",
+  "question": "Do you offer price matching with other shops?",
+  "category": "unsupported-yes-no",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Y34",
+  "question": "Can I pay in instalments?",
+  "category": "unsupported-yes-no",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Y35",
+  "question": "What is the name of the company's CEO?",
+  "category": "unsupported",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Y36",
+  "question": "Which carrier delivers the parcels?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Y37",
+  "question": "How do I track my parcel?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Y38",
+  "question": "How long does a refund take for a gift card purchase?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Y39",
+  "question": "Do you ship to Canada?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "Y40",
+  "question": "Are there discounts for students?",
+  "category": "unsupported-yes-no",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ }
+]
