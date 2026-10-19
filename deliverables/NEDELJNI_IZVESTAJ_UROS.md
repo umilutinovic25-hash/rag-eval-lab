@@ -18,9 +18,13 @@ U paketu su JSON rezultati pre i posle, izlaz poređenja, diff, specifikacija, i
 
 ## Šta sam proverio i moj komentar
 
-Proverio sam sve što je u izveštaju: propuste, specifikaciju i diff, rezultate pre i posle, poređenje, CLI odgovor i citate za E06 i ograničenja. Po mom mišljenju rezultati pokazuju da filter rešava izbor zastarele politike na E06. Ostale probleme sistema ne rešava.
+Proverio sam sve što je u izveštaju: propuste, specifikaciju i diff, rezultate pre i posle, poređenje, CLI odgovor i citate za E06 i ograničenja. Po mom mišljenju rezultati pokazuju da filter rešava izbor zastarele politike na E06, dok ostale probleme sistema rešavaju posebne promene opisane ispod.
 
-I dalje ostaju problemi sa granicama chunkova, parafrazama, pitanjima na koja korpus nema odgovor i nebitnim drugim citatom. Filter ima i cenu: posle M5 sistem više ne može da odgovori kakva je bila stara politika, a osnovni eval to ne meri. Svaki od ovih problema traži posebnu promenu i novo merenje, pa sam ih rešavao u naprednom delu, odvojeno od M5. Istorijska pitanja sam na kraju rešio filterom koji zavisi od pitanja: na dva nova skupa rezultat je porastao sa 9/20 na 20/20, na dva nova slepa skupa je 16/16, a od postojećih pitanja promenilo se samo jedno, koje je ranije padalo, a sada prolazi. Na kraju sam pojačao zaštitu od napada (lažna premisa o izvoru, zahtevi za skrivenim tekstom): na novom slepom skupu napada rezultat je porastao sa 6/10 na 10/10, bez regresija. Kontekst verzije za pitanja o važećoj verziji sam probao dva puta i oba puta odbio, jer je kvario druga pitanja.
+Posle same M5 promene ostali su problemi sa granicama chunkova, parafrazama, pitanjima na koja korpus nema odgovor i nebitnim drugim citatom. Svaki sam rešio posebnom promenom i posebnim merenjem u naprednom delu, odvojeno od M5, i na zadatom eval skupu sistem sada prolazi svih 12 pitanja, sa preciznošću citata 1.00.
+
+M5 filter je imao i cenu: sistem više nije mogao da odgovori kakva je bila stara politika, a osnovni eval to ne meri. To sam rešio filterom koji zavisi od pitanja. Na dva nova skupa rezultat je porastao sa 9/20 na 20/20, na dva nova slepa skupa je 16/16, a od postojećih pitanja promenilo se samo jedno, koje je ranije padalo, a sada prolazi. Na kraju sam pojačao zaštitu od napada (lažna premisa o izvoru, zahtevi za skrivenim tekstom): na novom slepom skupu napada rezultat je porastao sa 6/10 na 10/10, bez regresija.
+
+Ostaje mali broj teških pitanja na dodatnim skupovima, na primer pitanja bliska domenu na koja korpus nema odgovor i dva pitanja o važećoj verziji. Za ova poslednja sam dva puta probao da proveravaču dam podatak o verziji i oba puta odbio promenu, jer je popravila jedno pitanje, a pokvarila dva. Dalje štimovanje na već viđenim pitanjima bilo bi preprilagođavanje, pa ih navodim kao ograničenje.
 
 ## Korišćenje AI-ja
 
