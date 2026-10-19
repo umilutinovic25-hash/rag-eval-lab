@@ -1,0 +1,6 @@
+no-evidence-rules test3   36/36  cit_prec=0.98  failed=[]  fallbacks=1  588.5s
+no-evidence-rules test4   36/40  cit_prec=0.875  failed=['W05', 'W10', 'W26', 'W38']  fallbacks=0  527.6s
+no-evidence-rules test5   38/40  cit_prec=0.9355  failed=['X15', 'X38']  fallbacks=0  35.3s
+no-evidence-rules holdout 34/34  cit_prec=0.9583  failed=[]  fallbacks=0  15.0s
+no-evidence-rules test2   29/32  cit_prec=1.0  failed=['U07', 'U11', 'U13']  fallbacks=1  15.7s
+Wrote results/ablation-evidence.json
