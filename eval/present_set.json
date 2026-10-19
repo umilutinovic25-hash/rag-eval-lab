@@ -1,0 +1,60 @@
+[
+ {
+  "id": "PV01",
+  "question": "Is the 2 day remote work limit still valid?",
+  "category": "present-version",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-03"
+  ],
+  "expected_fact": "3 days per week"
+ },
+ {
+  "id": "PV02",
+  "question": "What is the remote work limit in force today?",
+  "category": "present-version",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-03"
+  ],
+  "expected_fact": "3 days per week"
+ },
+ {
+  "id": "PV03",
+  "question": "Has the weekly remote work allowance stayed at two days?",
+  "category": "present-version",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-03"
+  ],
+  "expected_fact": "3 days per week"
+ },
+ {
+  "id": "PV04",
+  "question": "Are remote days currently recorded in a shared team calendar?",
+  "category": "present-version",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-03"
+  ],
+  "expected_fact": "shared team calendar"
+ },
+ {
+  "id": "PV05",
+  "question": "Is the annual leave allowance still 22 days?",
+  "category": "current-control",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-07"
+  ],
+  "expected_fact": "22 days of annual leave"
+ },
+ {
+  "id": "PV06",
+  "question": "What is the current company stock price?",
+  "category": "unsupported",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ }
+]

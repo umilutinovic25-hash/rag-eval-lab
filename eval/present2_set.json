@@ -1,0 +1,60 @@
+[
+ {
+  "id": "PS01",
+  "question": "Is the 14 business day refund time still in force?",
+  "category": "present-version",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "within 7 business days"
+ },
+ {
+  "id": "PS02",
+  "question": "What return window applies today?",
+  "category": "present-version",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "within 30 days of delivery"
+ },
+ {
+  "id": "PS03",
+  "question": "Has the return period remained 14 days?",
+  "category": "present-version",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "within 30 days of delivery"
+ },
+ {
+  "id": "PS04",
+  "question": "How quickly are refunds currently paid after the parcel reaches the warehouse?",
+  "category": "present-version",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "within 7 business days"
+ },
+ {
+  "id": "PS05",
+  "question": "Is express delivery still 9 EUR?",
+  "category": "current-control",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-03"
+  ],
+  "expected_fact": "costs 9 EUR"
+ },
+ {
+  "id": "PS06",
+  "question": "What is the current discount code for new customers?",
+  "category": "unsupported",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ }
+]
