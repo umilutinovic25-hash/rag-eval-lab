@@ -149,7 +149,8 @@ def test_committed_caches_cover_shipped_config_offline(monkeypatch, which) -> No
 
 SHIPPED = {name: getattr(config, name) for name in (
     "RETRIEVAL_MODE", "RERANK", "ANSWER_MODE", "ANSWER_QUOTES", "CONTEXT_NEIGHBORS", "CONTEXT_POLICY",
-    "EVIDENCE_RULES_ENABLED", "CHUNK_HEADERS", "RERANK_JUDGE", "ANSWER_FORMAT", "YESNO_QUESTION_JUDGE")}  # captured before conftest patches
+    "EVIDENCE_RULES_ENABLED", "CHUNK_HEADERS", "RERANK_JUDGE", "ANSWER_FORMAT", "YESNO_QUESTION_JUDGE",
+    "VERSION_CONTEXT", "EVIDENCE_RELEVANCE", "IMPLICIT_BINARY")}  # captured before conftest patches
 
 
 @pytest.mark.parametrize("which", ["eval", "holdout", "test", "test2", "test3", "test4"])

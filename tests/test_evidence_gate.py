@@ -9,6 +9,7 @@ from src.retrieval import RetrievalResult
 def test_baseline_disables_new_behavior():
     before = config.snapshot()
     try:
+        config.VERSION_CONTEXT = config.EVIDENCE_RELEVANCE = config.IMPLICIT_BINARY = True
         config.apply_profile('baseline')
         assert not any((config.VERSION_CONTEXT, config.IMPLICIT_BINARY, config.EVIDENCE_RELEVANCE))
     finally:
