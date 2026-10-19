@@ -163,9 +163,17 @@ Pregledao: [par / imena]. Komentar iz Discord niti „Nedelja 7: pregled para“
 
 Naš odgovor na komentar: [šta smo promenili ili zašto nismo]
 
+### 9.1. Moj osvrt na sopstveni rad — Uroš Milutinović
+
+Lično sam proverio rad i dokaze navedene u izveštaju. U obaveznom delu primenjena je jedna promena po nameri: filter važeće verzije dokumenata, prema specifikaciji napisanoj pre implementacije. Rezultat na istom skupu raste sa 6/12 na 7/12. Popravljen je E06: citira se važeća politika iz 2026. sa 3 dana rada na daljinu, umesto zastarele politike sa 2 dana. Poređenje ne pokazuje regresije na tom skupu.
+
+Ne smatram da je time rešen ceo RAG sistem. Ostaju problemi sa chunkovanjem (E04/E09), parafrazom (E05), odbijanjem nepodržanih pitanja (E10/E11) i nebitnim dopunskim citatima. Filter takođe ograničava odgovaranje o istorijskim pravilima, što osnovni eval ne meri. Napredni eksperimenti su prikazani odvojeno i njihovi rezultati nisu pripisani jednoj M5 promeni. AI mi je pomagao, a zaključak zasnivam na sačuvanim merenjima i svojoj proveri.
+
+Ovo je moj osvrt na sopstveni projekat, pripremljen uz pomoć AI-ja; ne zamenjuje komentar drugog para niti predstavlja pregled tuđeg izveštaja.
+
 ## 10. Korišćenje AI-ja
 
-Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene testove i eval, izdvoji ocene iz `top_k` radi dijagnoze propusta, napiše nacrt specifikacije i implementira filter sa testom, a u naprednom delu i promene A1–A4 (a kasnije G1–G8, rundu 2 i slepi test 5, odeljak 18), kontrolnu proveru i automatski pregled koda (odeljak 12). AI asistent je takođe pisao i testirao B1–B5c; Codex je uradio analizu i ispravke C1–C6 (odeljak 14), kao i kontrolisane D1–D6 eksperimente (odeljak 15). „Ručni pregled“ u naprednim eksperimentima označava pregled asistenta, ne nezavisnu ljudsku proveru. Sve tvrdnje su proverene merenjem, a ne na osnovu reči asistenta: `results/before.json` i `results/after.json` su napravljeni istom komandom, `eval_compare` potvrđuje isti otisak i samo jedno promenjeno podešavanje, a E06 je ručno proveren preko CLI-ja pre i posle (izlazi u `evidence/`). [Dopuniti: šta je svako od nas ručno proverio.]
+Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene testove i eval, izdvoji ocene iz `top_k` radi dijagnoze propusta, napiše nacrt specifikacije i implementira filter sa testom, a u naprednom delu i promene A1–A4 (a kasnije G1–G8, rundu 2 i slepi test 5, odeljak 18), kontrolnu proveru i automatski pregled koda (odeljak 12). AI asistent je takođe pisao i testirao B1–B5c; Codex je uradio analizu i ispravke C1–C6 (odeljak 14), kao i kontrolisane D1–D6 eksperimente (odeljak 15). „Ručni pregled“ u naprednim eksperimentima označava pregled asistenta, ne nezavisnu ljudsku proveru. Sve tvrdnje su proverene merenjem, a ne na osnovu reči asistenta: `results/before.json` i `results/after.json` su napravljeni istom komandom, `eval_compare` potvrđuje isti otisak i samo jedno promenjeno podešavanje, a E06 je ručno proveren preko CLI-ja pre i posle (izlazi u `evidence/`). Lična potvrda autora: ja, Uroš Milutinović, lično sam proverio sve što je navedeno u ovom izveštaju. Moja provera obuhvata dokumentovane propuste, specifikaciju i diff promene, sačuvane rezultate pre/posle i njihovo poređenje, CLI odgovor i citate za E06, kao i navedene regresije i ograničenja. Ova potvrda ne predstavlja nezavisni pregled drugog para niti pojedinačne ljudske oznake za napredne skupove.
 
 ## 11. Doprinos
 
@@ -360,7 +368,7 @@ Važne korekcije ranijih tvrdnji:
 - Provere kvaliteta koje je radio asistent nisu nezavisna ljudska revizija. Ne možemo tvrditi da je minimum već predat, da je pregled para obavljen ili da je svaki odgovor tačan.
 - Novi pozivi lokalnim modelima bez istorijskog keša nisu izvršeni u C1–C6. Njihov identitet pri nastanku istorijskih keševa nije zabeležen i ne izmišljamo ga naknadno.
 
-Za predaju koristiti izdvojen M5 paket iz `deliverables/`; napredni deo je dodatak. Individualni nedeljni izveštaj, stvarni doprinosi, vođa demonstracije, pregled para i slanje i dalje zahtevaju stvarne ljudske podatke i radnje.
+Za predaju koristiti izdvojen M5 paket iz `deliverables/`; napredni deo je dodatak. Autor, samostalan doprinos i demonstrator su naknadno uneti po Uroševoj izjavi. Pripremljen je individualni izveštaj `deliverables/NEDELJNI_IZVESTAJ_UROS.md`; nezavisni pregled para i slanje još nisu potvrđeni.
 
 ## 15. Dalja poboljšanja posle C6 (D1–D6)
 
@@ -492,7 +500,7 @@ Broj 29/30 za injection kandidata nije uspešno ojačanje: jedna benigna kontrol
 
 **Završne kapije:** `python -m pytest -q`: **257/257**; `./scripts/check.sh`: **257 testova + sets OK + gate OK**; frontend **32 unit testa**, build i **27/27 Playwright**. Provere su završene serijski nakon model merenja, bez povećavanja timeout-a. Port 8768 je slobodan. Izgrađen frontend i restartovan `python -m src.web` na 8767; endpoint proširene evaluacije vraća svih 14 skupova. Dokazi: `evidence/upgrade/pytest-21.txt`, `gate-21.txt`, `frontend-final-21.txt`, `server-build-21.txt`, `server-restart-21.json`.
 
-**G — ljudski deo.** Po Uroševoj izjavi „unesi sve sam ja uradio unesi moje ime“ upisani su Uroš Milutinović, samostalan doprinos i demonstrator kroz `fill_report_fields.py`, uz uklonjenu praznu partnersku vrstu. Ta izjava nije ljudska ocena odgovora: `human-review.json`, detalji ručne provere i komentar recenzenta nisu dostavljeni, pa slaganje nije izmišljeno niti izračunato. Pregled ostaje u `review/human-review.html`; `review/human-review-answers.json` je pripremljeni materijal bez ljudskih oznaka, a ne popunjena provera. Prevod nije menjan. Izjava i status: `evidence/upgrade/human-input-21.json`, `human-fields-21.txt`.
+**G — ljudski deo.** Po Uroševoj izjavi „unesi sve sam ja uradio unesi moje ime“ upisani su Uroš Milutinović, samostalan doprinos i demonstrator kroz `fill_report_fields.py`, uz uklonjenu praznu partnersku vrstu. Ta izjava nije ljudska ocena odgovora: `human-review.json` i komentar recenzenta nisu dostavljeni, pa slaganje nije izmišljeno niti izračunato. U naknadnoj poruci Uroš je potvrdio da je lično proverio sve; njegova potvrda i osvrt dodati su u odeljke 9.1 i 10, uz zapis `evidence/upgrade/human-confirmation-21.json`. To nije skup pojedinačnih ljudskih oznaka. Pregled ostaje u `review/human-review.html`; `review/human-review-answers.json` je pripremljeni materijal bez ljudskih oznaka, a ne popunjena provera. Prevod nije menjan. Izjava i status: `evidence/upgrade/human-input-21.json`, `human-fields-21.txt`.
 
 **Granice zaključka.** Nema ljudskih oznaka, svi novi skupovi imaju istog AI autora, a relevance judge deli porodicu sa generatorom. Pass meri ponašanje i činjenicu u citatu, ne potpunu semantičku tačnost generisane rečenice. Sva četiri nova skupa sada su viđena; za novu izmenu prompta/ponašanja potreban je nov, unapred commitovan slepi skup. Uspešan rezultat na near3 uz istovremene velike regresije nije dokaz da je sistem popravljen.
 
@@ -526,6 +534,6 @@ Broj 29/30 za injection kandidata nije uspešno ojačanje: jedna benigna kontrol
 - [x] Navedeno bar jedno preostalo ograničenje
 - [x] Ručna CLI provera jednog promenjenog pitanja (E06)
 - [ ] Komentar para unet
-- [x] Beleška o AI-ju (dopuniti šta je svako od nas ručno proverio)
+- [x] Beleška o AI-ju i lična potvrda autora o proveri (odeljak 10)
 - [x] Autor, samostalan doprinos i demonstrator uneti po Uroševoj izjavi (`evidence/upgrade/human-input-21.json`)
 - [ ] Nedeljni izveštaj poslat tutoru do utorka 20.10.2026. u 12:00 (`[Nedeljni izveštaj] Ime Prezime – Nedelja 7`)

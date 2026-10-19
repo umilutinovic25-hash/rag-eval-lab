@@ -1,0 +1,5 @@
+line 158: Pregledao: [par / imena]. Komentar iz Discord niti „Nedelja 7: pregled para“:
+line 160: 1. Da li je promena zaista jedna i da li odgovara specifikaciji? [odgovor]
+line 161: 2. Da li rezultat pre/posle podržava zaključak? [odgovor]
+line 162: 3. Da li je neka regresija ili ograničenje izostavljeno? [odgovor]
+line 164: Naš odgovor na komentar: [šta smo promenili ili zašto nismo]

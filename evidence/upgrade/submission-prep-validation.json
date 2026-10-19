@@ -1,0 +1,38 @@
+{
+  "scope": "Submission documentation, author confirmation, self-comment and archive assembly; no RAG behavior changes.",
+  "gate": {
+    "command": "./scripts/check.sh",
+    "pytest_passed": 257,
+    "sets": "OK",
+    "gate": "OK"
+  },
+  "regression": {
+    "sets": 14,
+    "scratch": "results/scratch-21-offline-final",
+    "output": "results/submission-prep-all-sets.json",
+    "log": "evidence/upgrade/submission-prep-regression.txt",
+    "scores_unchanged": true
+  },
+  "archive": {
+    "path": "deliverables/week07-M5-minimum.zip",
+    "sha256": "4a263f89e89f9938f36719811f025c2a6ca5a59de59f2de64b82d820c0a00fa3",
+    "unique_entries": true,
+    "isolated_pytest_passed": 19,
+    "isolated_eval_passed": 7,
+    "isolated_eval_total": 12,
+    "fixed": [
+      "E06"
+    ],
+    "regressed": [],
+    "changed_settings": [
+      "CURRENT_ONLY"
+    ],
+    "unchanged_eval_sha256": "afe46db1e75a0b85bb5c9a93b6763e3b96e5cd7b289e12da6d2671e4d8650064"
+  },
+  "not_completed": [
+    "external peer review",
+    "reciprocal review",
+    "email submission",
+    "item-level human review labels"
+  ]
+}

@@ -144,7 +144,7 @@ The replay runner forbids all model requests and records source, corpus, questio
 
 Optional fresh measurement: `python -m src.experiment_runner --mode cold --out results/cold.json`. This requires already installed models and a running Ollama, uses isolated temporary caches, and records observed local model digests/version. It does not download models or replace committed caches. Cold mode has not been run for C1–C6. Historical cache model digests are unknown; current model identity cannot establish their provenance.
 
-See `docs/hardening-spec.md`, report section 14 and `evidence/hardening/`. The original eval and metrics code remain unchanged. `python scripts/package_minimum.py` builds a separate M5 submission archive from checkpoint 45b8172 plus its evidence; fill the human review/contribution fields before submission.
+See `docs/hardening-spec.md`, report section 14 and `evidence/hardening/`. The original eval and metrics code remain unchanged. `python scripts/package_minimum.py` builds a separate M5 submission archive from checkpoint 45b8172 plus its evidence; author details and the author’s personal verification statement are filled. The archive includes the individual report and an email draft; obtain actual peer feedback before submission. See `deliverables/NEDELJNI_IZVESTAJ_UROS.md` and `deliverables/NACRT_MEJLA.md`.
 
 ## D1–D6: evidence context, traces, and completion reliability
 

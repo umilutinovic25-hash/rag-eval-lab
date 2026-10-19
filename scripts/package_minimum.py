@@ -17,8 +17,10 @@ def build():
     report += '''\n## Dokazi i status predaje
 
 Svi obavezni dokazi su u evidence/. Specifikacija je 2ceaced, implementacija 45b8172.
-Komentar drugog para, doprinosi, vođa demonstracije i ljudska provera još nisu potvrđeni.
-Popuniti prazna polja pre slanja. Individualni nedeljni izveštaj piše svaki član zasebno.
+Autor, samostalan doprinos, demonstrator i lična potvrda provere su uneti po izjavi Uroša.
+Komentar drugog para i pregled njihovog rada još nisu potvrđeni. Popuniti pre slanja.
+Individualni izveštaj i nacrt mejla priloženi su kao NEDELJNI_IZVESTAJ_UROS.md i NACRT_MEJLA.md.
+Status slanja nije potvrđen. Ljudske oznake naprednih odgovora nisu dostavljene.
 '''
     instructions = '''# Nedelja 7 — obavezni eksperiment M5
 
@@ -36,9 +38,10 @@ Ovaj paket je kod checkpointa 45b8172, a ne napredni HEAD. Nema embeddinga, Olla
 REPORT_BEFORE_AFTER.md je obavezni izveštaj. evidence/ sadrži pre/posle JSON, poređenje,
 diff, testove i CLI provere. docs/change-spec.md prethodi implementaciji u istoriji repoa.
 
-NIJE POTPUNA LJUDSKA PREDAJA: ime para, stvarni doprinosi, vođa demonstracije i komentar
-para moraju biti dopunjeni. Nezavisna provera i slanje nisu potvrđeni. Oba člana šalju
-isti prilog uz svoje individualne nedeljne izveštaje. Ovo nije zvanični šablon tutora.
+PRE SLANJA: dodati stvarni komentar drugog para i potvrditi pregled njihovog izveštaja.
+Uroš je naveo samostalan rad i ličnu proveru; samostalan rad treba usaglasiti sa tutorom
+jer zadatak predviđa rad u paru. Slanje nije potvrđeno. Priloženi nacrti nisu poslati.
+Ovo nije zvanični šablon tutora.
 '''
     TARGET.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(BytesIO(archive)) as source, zipfile.ZipFile(TARGET, 'w', zipfile.ZIP_DEFLATED) as out:
@@ -48,6 +51,9 @@ isti prilog uz svoje individualne nedeljne izveštaje. Ovo nije zvanični šablo
         for name in ['before.json', 'after.json', 'compare.txt', 'change.diff', 'cli-E06-before.txt', 'cli-E06-after.txt', 'pytest-before.txt', 'pytest-after.txt']:
             out.write(ROOT / 'evidence' / name, f'evidence/{name}')
         out.write(ROOT / 'docs/sablon-izvestaj-pre-posle.md', 'docs/sablon-izvestaj-pre-posle.md')
+        for name in ['NEDELJNI_IZVESTAJ_UROS.md', 'NACRT_MEJLA.md']:
+            out.write(ROOT / 'deliverables' / name, name)
+        out.write(ROOT / 'evidence/upgrade/human-confirmation-21.json', 'evidence/human-confirmation-21.json')
         out.writestr('REPORT_BEFORE_AFTER.md', report)
         out.writestr('PRED_PREDAJU.md', instructions)
     print(TARGET)
