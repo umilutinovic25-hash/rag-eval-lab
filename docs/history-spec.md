@@ -54,3 +54,13 @@ Napomena: refuse stavke su dopunjene poljima `expected_doc_ids: []` i `expected_
 **Preostalo.** HR03 („before the current policy“) dobija staru verziju među kandidatima, ali pretraga izabere drugi dokument. HR09 (stara cena koja ne postoji u korpusu) sistem ne može da prepozna. Oba su sada viđena pitanja.
 
 Dokazi: `evidence/upgrade/history-before.json`, `history-final.json`, `history-final.log`, `history-trigger-audit.json`, `history-cli.txt`.
+
+## Druga promena: proveravač vidi verziju odlomka u istorijskom režimu
+
+**Propust (HR03, viđeno):** pretraga stavi `sh-02` na prvo mesto, ali proveravač odlomka ne zna da je to stara verzija i odbije ga jer pitanje traži „before the current policy“. Zatim prihvati nebitan `sh-07`.
+
+**Promena (`HISTORICAL_JUDGE_CONTEXT`):** kada `searchable_chunks` radi u istorijskom režimu, proveravač dobija isti kontekst verzije koji već postoji za `VERSION_CONTEXT` („Document: …; version: …; status: …“). Van istorijskog režima ništa se ne menja.
+
+**Slepi skup:** `eval/history3_set.json` (8 pitanja, corpus2), commitovan pre koda i pokrenut jednom posle implementacije. Uključuje „before the current“ formulacije, jednu nepostojeću godinu i kontrolu sa godinom u drugom značenju (HB08).
+
+**Pravilo prihvatanja:** bez regresija na history, history2, eval, holdout i bez promene liste kandidata van istorijskih skupova; history3 se meri jednom.

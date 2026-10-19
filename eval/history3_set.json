@@ -1,0 +1,80 @@
+[
+ {
+  "id": "HB01",
+  "question": "What refund time did the returns policy promise before the current version?",
+  "category": "historical",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-02"
+  ],
+  "expected_fact": "within 14 business days"
+ },
+ {
+  "id": "HB02",
+  "question": "Before the current returns rules, within how many days of delivery could I send something back?",
+  "category": "historical",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-02"
+  ],
+  "expected_fact": "within 14 days of delivery"
+ },
+ {
+  "id": "HB03",
+  "question": "In the 2024 returns policy, how fast were refunds paid?",
+  "category": "historical",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-02"
+  ],
+  "expected_fact": "within 14 business days"
+ },
+ {
+  "id": "HB04",
+  "question": "Under the former returns policy, what was the return window?",
+  "category": "historical",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-02"
+  ],
+  "expected_fact": "within 14 days of delivery"
+ },
+ {
+  "id": "HB05",
+  "question": "What is the return window under the current returns policy?",
+  "category": "current-control",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-01"
+  ],
+  "expected_fact": "within 30 days of delivery"
+ },
+ {
+  "id": "HB06",
+  "question": "What was the loyalty points rule in the 2023 policy?",
+  "category": "historical-missing",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "HB07",
+  "question": "How many points do customers earn per euro spent?",
+  "category": "current-control",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-08"
+  ],
+  "expected_fact": "1 point per euro"
+ },
+ {
+  "id": "HB08",
+  "question": "Is a 2024 order above 50 EUR shipped for free?",
+  "category": "current-control",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "sh-03"
+  ],
+  "expected_fact": "Orders above 50 EUR ship free"
+ }
+]
