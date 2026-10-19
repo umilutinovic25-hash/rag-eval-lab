@@ -100,7 +100,7 @@ Sve radi lokalno, bez plaćenog API-ja. Sa kešom svaki profil traje ispod 0,1 s
 
 **„Zašto je M5 baš jedna promena, kad diff menja i test?“** Test samo proverava filter u oba položaja i ne menja ponašanje sistema. `eval_compare` prijavljuje jedno promenjeno podešavanje.
 
-**„Da li je 12/12 preprilagođeno?“** Delimično jeste: pragovi su birani na istom skupu. Zato postoje holdout (34/34) i slepi skupovi pokrenuti jednom, na kojima je rezultat oko 90 do 95 odsto, a ne 100.
+**„Da li je 12/12 preprilagođeno?“** Delimično jeste: pragovi su birani na istom skupu. Zato postoje holdout (34/34) i slepi skupovi pokrenuti jednom, a na svih 22 skupa zajedno rezultat je 489/508 (96 odsto), ne 100.
 
 **„Šta i dalje ne radi?“** Pitanja bliska domenu na koja korpus nema odgovor (sistem odgovori iz srodnog odlomka), implicitna da/ne pitanja i neka višedelna pitanja. Probao sam ih rešiti u više krugova i svaka ispravka je kvarila druga pitanja, pa su navedena kao ograničenje.
 
