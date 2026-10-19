@@ -148,7 +148,7 @@ def test_committed_caches_cover_shipped_config_offline(monkeypatch, which) -> No
 
 SHIPPED = {name: getattr(config, name) for name in (
     "RETRIEVAL_MODE", "RERANK", "ANSWER_MODE", "ANSWER_QUOTES", "CONTEXT_NEIGHBORS", "CONTEXT_POLICY",
-    "EVIDENCE_RULES_ENABLED", "CHUNK_HEADERS", "RERANK_JUDGE", "ANSWER_FORMAT")}  # captured before conftest patches
+    "EVIDENCE_RULES_ENABLED", "CHUNK_HEADERS", "RERANK_JUDGE", "ANSWER_FORMAT", "YESNO_QUESTION_JUDGE")}  # captured before conftest patches
 
 
 @pytest.mark.parametrize("which", ["eval", "holdout", "test", "test2", "test3"])
@@ -168,7 +168,7 @@ def test_committed_caches_cover_the_real_shipped_config(monkeypatch, which) -> N
         "test2": lambda: run_holdout(TEST2_SET_PATH),
         "test3": lambda: run_holdout(test3_path),
     }
-    assert runs[which]()["summary"]["passed"] == {"eval": 12, "holdout": 34, "test": 24, "test2": 32, "test3": 34}[which]
+    assert runs[which]()["summary"]["passed"] == {"eval": 12, "holdout": 34, "test": 24, "test2": 32, "test3": 36}[which]
 
 
 def test_llm_answer_mode_keeps_citations_and_uses_model_text(rerank_mode, monkeypatch) -> None:

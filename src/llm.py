@@ -142,7 +142,28 @@ def structured_judge(question: str, passage: str) -> bool:
     )
 
 
+YES_NO_START = re.compile(r"\s*(?:is|are|am|was|were|do|does|did|can|could|may|might|will|would|shall|should|must|have|has|had)\b", re.I)
+
+
+def is_yes_no_question(question: str) -> bool:
+    return bool(YES_NO_START.match(question))
+
+
+def answerability_judge(question: str, passage: str, model: str | None = None, prompt: str | None = None) -> bool:
+    reply = generate(model or config.YESNO_QUESTION_MODEL, (prompt or config.YESNO_QUESTION_PROMPT).format(question=question, passage=passage), 3)
+    words = reply.lower().split()
+    return bool(words) and words[0].strip(".,!:") in ("yes", "no")
+
+
 def passage_answers(question: str, passage: str) -> bool:
+    if config.YESNO_QUESTION_JUDGE and is_yes_no_question(question):
+        if config.YESNO_QUESTION_JUDGE == "answerability-only":
+            return answerability_judge(question, passage)
+        return base_passage_answers(question, passage) or answerability_judge(question, passage)
+    return base_passage_answers(question, passage)
+
+
+def base_passage_answers(question: str, passage: str) -> bool:
     if config.RERANK_JUDGE == "structured":
         return structured_judge(question, passage)
     if config.RERANK_JUDGE == "fewshot":

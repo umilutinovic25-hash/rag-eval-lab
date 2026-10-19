@@ -41,11 +41,32 @@ JUDGES = {
 }
 
 
-def build_pairs(sets=SEEN, depth: int = 5) -> list[dict]:
+def three_way(model: str):
+    return lambda question, passage: llm.answerability_judge(question, passage, model)
+
+
+def either(question, passage):
+    return llm.span_judge(question, passage) or llm.yesno_judge(question, passage, "gemma3:4b")
+
+
+JUDGES.update({
+    "3way-gemma": (three_way("gemma3:4b"), "gemma"),
+    "3way-qwen": (three_way("qwen2.5:7b"), "qwen"),
+    "3way-mistral": (three_way("mistral:latest"), "mistral"),
+    "3way-llama": (three_way("llama3.2:latest"), "llama"),
+    "either+3way-gemma": (lambda q, p: either(q, p) or llm.answerability_judge(q, p, "gemma3:4b"), "qwen+gemma"),
+    "either+3way-mistral": (lambda q, p: either(q, p) or llm.answerability_judge(q, p, "mistral:latest"), "qwen+gemma+mistral"),
+    "either+3way-qwen": (lambda q, p: either(q, p) or llm.answerability_judge(q, p, "qwen2.5:7b"), "qwen+gemma"),
+})
+
+
+def build_pairs(sets=SEEN, depth: int = 5, yes_no_only: bool = False) -> list[dict]:
     chunks = build_chunks(load_corpus())
     pairs = []
     for name in sets:
         for item in load_eval_set(EVAL_DIR / SETS[name]):
+            if yes_no_only and not llm.is_yes_no_question(item["question"]):
+                continue
             candidates = ranked(item["question"], chunks)[:depth]
             cosines = dict(zip(searchable_chunks(chunks), score_chunks(item["question"], searchable_chunks(chunks))))
             top = max(cosines.values())
@@ -84,11 +105,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--judges", nargs="+", default=list(JUDGES), choices=list(JUDGES))
+    parser.add_argument("--yes-no-only", action="store_true", help="only questions in yes/no form")
     parser.add_argument("--scratch", type=Path, default=Path("results/scratch"))
     args = parser.parse_args()
 
     use_scratch_caches(args.scratch)
-    pairs = build_pairs()
+    pairs = build_pairs(yes_no_only=args.yes_no_only)
     report = {"created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "pairs": len(pairs),
               "positives": sum(p["label"] for p in pairs), "generator_family": GENERATOR_FAMILY, "judges": {}}
     for name in args.judges:

@@ -76,6 +76,18 @@ RERANK_FEWSHOT_PROMPT = (
     "Question: {question}\nPassage: {passage}\nAnswer:"
 )
 
+# Optional second chance for yes/no-form questions: the passage may imply the answer without stating it ("3 days a week"
+# answers "is the 2 day limit still in force?"). The model answers yes, no or unknown from the passage alone;
+# yes and no accept the passage. None disables it; "answerability" adds it after RERANK_JUDGE rejects, and
+# "answerability-only" uses it instead of RERANK_JUDGE for those questions.
+YESNO_QUESTION_JUDGE = "answerability-only"  # None, "answerability" or "answerability-only"
+YESNO_QUESTION_MODEL = "gemma3:4b"
+YESNO_QUESTION_PROMPT = (
+    "Read the passage and answer the question using only the passage. Reply with exactly one word: yes, no or "
+    "unknown. Reply unknown when the passage does not say enough to decide the question.\n\n"
+    "Passage: {passage}\nQuestion: {question}\nAnswer:"
+)
+
 # Answer text: "extractive" (cited chunks joined) or "llm" (a local model writes the answer from the cited chunks)
 ANSWER_MODE = "llm"
 ANSWER_FORMAT = "text"  # "text" (free text with [id] markers) or "json" (validated JSON rendered into the same text)

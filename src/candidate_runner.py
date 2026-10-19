@@ -20,13 +20,16 @@ from .scratch import use_scratch_caches
 
 CANDIDATES = {
     "shipped": {},
-    "previous": {"CHUNK_HEADERS": False},
+    "previous": {"CHUNK_HEADERS": False, "YESNO_QUESTION_JUDGE": None},
+    "before-yesno3": {"YESNO_QUESTION_JUDGE": None},
     "headers": {"CHUNK_HEADERS": True},
     "fewshot": {"RERANK_JUDGE": "fewshot"},
     "json": {"ANSWER_FORMAT": "json"},
     "mistral-judge": {"RERANK_JUDGE": "yesno", "RERANK_MODEL": "mistral:latest"},
     "headers+fewshot": {"CHUNK_HEADERS": True, "RERANK_JUDGE": "fewshot"},
     "headers+json": {"CHUNK_HEADERS": True, "ANSWER_FORMAT": "json"},
+    "yesno3-union": {"YESNO_QUESTION_JUDGE": "answerability"},
+    "yesno3-only": {"YESNO_QUESTION_JUDGE": "answerability-only"},
     "top_k=1": {"TOP_K": 1},
     "top_k=3": {"TOP_K": 3},
 }

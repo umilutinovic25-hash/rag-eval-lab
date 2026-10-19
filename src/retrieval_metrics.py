@@ -20,8 +20,8 @@ from .scratch import use_scratch_caches
 
 EVAL_DIR = Path(__file__).resolve().parents[1] / "eval"
 SETS = {"eval": "eval_set.json", "holdout": "holdout_set.json", "test": "test_set.json", "test2": "test2_set.json",
-        "test3": "test3_set.json"}
-SEEN = ("eval", "holdout", "test", "test2")
+        "test3": "test3_set.json", "test4": "test4_set.json"}
+SEEN = ("eval", "holdout", "test", "test2", "test3")  # test4 stays blind until the final run
 KS = (1, 2, 3, 5)
 
 VARIANTS = {

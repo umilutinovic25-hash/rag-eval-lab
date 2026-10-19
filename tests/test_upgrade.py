@@ -141,3 +141,36 @@ def test_scratch_caches_never_touch_committed_files(tmp_path) -> None:
         assert json.loads((tmp_path / "embedding_cache.json").read_text())
     finally:
         embeddings.CACHE_PATH, llm.CACHE_PATH = original
+
+
+@pytest.mark.parametrize("question, expected", [
+    ("Is the old limit of 2 remote days still in force?", True), ("Can I bring a dog?", True),
+    ("  does the company offer a pension plan?", True), ("May I work remotely?", True),
+    ("How many days of leave do I get?", False), ("What is the dress code?", False),
+    ("Where do I order a headset?", False), ("Isolation rules for laptops?", False),
+])
+def test_yes_no_question_detection(question, expected) -> None:
+    assert llm.is_yes_no_question(question) is expected
+
+
+@pytest.mark.parametrize("reply, accepted", [("Yes.", True), ("no", True), ("No, it is not.", True),
+                                              ("Unknown", False), ("unknown.", False), ("I cannot say", False)])
+def test_answerability_judge_accepts_yes_and_no_but_not_unknown(monkeypatch, reply, accepted) -> None:
+    monkeypatch.setattr(llm, "generate", lambda model, prompt, tokens: reply)
+    assert llm.answerability_judge("Is it so?", "It is so.") is accepted
+
+
+def test_yes_no_question_judge_modes(monkeypatch) -> None:
+    calls = []
+    monkeypatch.setattr(llm, "base_passage_answers", lambda q, p: calls.append("base") or False)
+    monkeypatch.setattr(llm, "answerability_judge", lambda q, p: calls.append("3way") or True)
+    assert llm.passage_answers("Is it so?", "p") is False and calls == ["base"]  # disabled (conftest default)
+    calls.clear()
+    monkeypatch.setattr(config, "YESNO_QUESTION_JUDGE", "answerability")
+    assert llm.passage_answers("Is it so?", "p") is True and calls == ["base", "3way"]
+    calls.clear()
+    monkeypatch.setattr(config, "YESNO_QUESTION_JUDGE", "answerability-only")
+    assert llm.passage_answers("Is it so?", "p") is True and calls == ["3way"]
+    calls.clear()
+    assert llm.passage_answers("What is it?", "p") is False and calls == ["base"]  # not a yes/no question
+    assert config.YESNO_QUESTION_MODEL.split(":")[0] not in config.GENERATION_MODEL
