@@ -21,7 +21,7 @@ def test_apply_fills_only_given_fields():
 
 
 def test_contribution_rows_and_answers():
-    out = apply(SAMPLE, {"partner": "Ana", "uros": "RAG kod", "partner_work": "pregled", "q1": "Da."})
+    out = apply(SAMPLE, {"partner": "Ana", "demo": "Uroš", "uros": "RAG kod", "partner_work": "pregled", "q1": "Da."})
     assert "| Uroš Milutinović | RAG kod |" in out and "| Ana | pregled |" in out
     assert "specifikaciji? Da." in out
     assert status(out) == []
