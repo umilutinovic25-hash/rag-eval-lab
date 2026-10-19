@@ -104,3 +104,45 @@ python -m src.holdout_runner --set eval/test3_set.json --out results/test3.json
 ```
 
 All experiment commands use scratch cache copies in `results/scratch*`; the committed caches contain only the shipped configuration.
+
+# Round 2: V21, V25 and blind test 4
+
+Order of work: test 4 (40 questions, `eval/test4_set.json`) was committed first (d5d537d), then the fix was designed on seen data, then test 4 was run once per configuration. Test 4 is a seen set from here on.
+
+## Diagnosis
+
+V21 and V25 are implicit answers: "spaces are shared ... first come, first served" answers "assigned permanently?" and "up to 3 days per week" answers "is the 2 day limit still in force?" without stating it. Every judge (span, yes/no, qwen, gemma) says No to "does the passage contain the information needed", so the question is refused although the right chunk is ranked first.
+
+## Fix: three-way answerability judge for yes/no-form questions
+
+`YESNO_QUESTION_JUDGE`: for questions starting with an auxiliary verb, the model answers `yes`, `no` or `unknown` from the passage alone; yes and no accept the passage. Calibration on the 47 yes/no questions of the seen sets (235 pairs, 37 positive):
+
+| Judge | TPR | TNR |
+| --- | --- | --- |
+| shipped `either` | 0.757 | 0.949 |
+| 3-way gemma3:4b | 0.892 | 0.980 |
+| 3-way qwen2.5:7b (generator family) | 0.919 | 0.985 |
+| 3-way mistral | 0.703 | 0.985 |
+| 3-way llama3.2 | 0.892 | 0.551 |
+| either + 3-way gemma / mistral / qwen | 0.892 / 0.811 / 0.946 | 0.939 / 0.944 / 0.939 |
+
+On the seen sets both variants fix V21 and V25 (test 3: 34/36 → 36/36) with every other set unchanged.
+
+## Blind test 4: the first version did not generalise
+
+| Configuration | Passed | Mean citation precision | Failures |
+| --- | --- | --- | --- |
+| before (no yes/no judge) | 36/40 | 0.875 | W05, W10, W26, W38 |
+| 3-way gemma **replacing** the shipped judge (chosen from calibration, run once) | **34/40** | 0.920 | W05, W10, **W20, W22**, W26, W38 |
+| post-hoc: 3-way gemma **after** the shipped judge (union) | 36/40 | 0.875 | W05, W10, W26, W38 |
+| post-hoc: union with qwen2.5:7b | 38/40 | 0.862 | W05, W38 |
+
+- Replacing the judge was a design error: `gemma3:4b` says `unknown` for clear passages (W20, W22) that the span judge accepts, so two correct answers were lost. Calibration on seen pairs (TPR 0.892) did not predict this.
+- `gemma3:4b` also says `unknown` for the implicit cases W05 (leave does not disappear), W10 (agree before booking) and W26 (no reserved spot, the same situation as V21), so the fix is narrow: it repairs the two questions it was designed on and nothing on test 4.
+- The qwen variant fixes W10 and W26 but is the generator's family and lowers citation precision, so it is not shipped. Its numbers are post-hoc on a seen set.
+
+## Shipped
+
+`YESNO_QUESTION_JUDGE = "answerability"` (union, `gemma3:4b`). A union can only add acceptances, never remove one the shipped judge made. Results on all six sets: 12/12, 34/34, 24/24, 32/32, **36/36**, 36/40 (identical to before on test 4, which is the post-hoc number). Refusal questions in yes/no form (H27, H28, W30–W33, W36 and others) were not newly answered. No independent blind validation of this final configuration exists; a test 5 would be needed.
+
+Remaining known failures on unseen-style questions: W05, W10, W26 (implicit yes/no refused) and W38 ("What time does the office open in the morning?" is answered from the IT support hours). Reproduce: `python -m src.candidate_runner --sets test4 --candidates before-yesno3 shipped yesno3-only` and `python -m src.judge_calibration --yes-no-only`.

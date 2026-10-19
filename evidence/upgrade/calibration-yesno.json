@@ -1,0 +1,372 @@
+{
+  "created_at": "2026-10-18T23:52:53+00:00",
+  "pairs": 235,
+  "positives": 37,
+  "generator_family": "qwen",
+  "judges": {
+    "either (shipped)": {
+      "family": "qwen+gemma",
+      "different_family_from_generator": false,
+      "all_pairs": {
+        "pairs": 235,
+        "tp": 28,
+        "fn": 9,
+        "tn": 188,
+        "fp": 10,
+        "tpr": 0.757,
+        "tpr_ci95": [
+          0.599,
+          0.866
+        ],
+        "tnr": 0.949,
+        "tnr_ci95": [
+          0.91,
+          0.972
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 170,
+        "tp": 19,
+        "fn": 7,
+        "tn": 139,
+        "fp": 5,
+        "tpr": 0.731,
+        "tpr_ci95": [
+          0.539,
+          0.863
+        ],
+        "tnr": 0.965,
+        "tnr_ci95": [
+          0.921,
+          0.985
+        ]
+      },
+      "false_negatives": [
+        "holdout:H03:hb-05-chunk-2",
+        "holdout:H17:hb-03-chunk-0",
+        "holdout:H23:hb-10-chunk-0",
+        "test:T02:hb-07-chunk-1",
+        "test2:U07:hb-08-chunk-0",
+        "test2:U11:hb-09-chunk-1",
+        "test2:U13:hb-03-chunk-0",
+        "test3:V21:hb-09-chunk-1",
+        "test3:V25:hb-03-chunk-0"
+      ]
+    },
+    "3way-gemma": {
+      "family": "gemma",
+      "different_family_from_generator": true,
+      "all_pairs": {
+        "pairs": 235,
+        "tp": 33,
+        "fn": 4,
+        "tn": 194,
+        "fp": 4,
+        "tpr": 0.892,
+        "tpr_ci95": [
+          0.753,
+          0.957
+        ],
+        "tnr": 0.98,
+        "tnr_ci95": [
+          0.949,
+          0.992
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 170,
+        "tp": 22,
+        "fn": 4,
+        "tn": 143,
+        "fp": 1,
+        "tpr": 0.846,
+        "tpr_ci95": [
+          0.665,
+          0.939
+        ],
+        "tnr": 0.993,
+        "tnr_ci95": [
+          0.962,
+          0.999
+        ]
+      },
+      "false_negatives": [
+        "test:T02:hb-07-chunk-1",
+        "test2:U07:hb-08-chunk-0",
+        "test2:U11:hb-09-chunk-1",
+        "test2:U13:hb-03-chunk-0"
+      ]
+    },
+    "3way-qwen": {
+      "family": "qwen",
+      "different_family_from_generator": false,
+      "all_pairs": {
+        "pairs": 235,
+        "tp": 34,
+        "fn": 3,
+        "tn": 195,
+        "fp": 3,
+        "tpr": 0.919,
+        "tpr_ci95": [
+          0.787,
+          0.972
+        ],
+        "tnr": 0.985,
+        "tnr_ci95": [
+          0.956,
+          0.995
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 170,
+        "tp": 24,
+        "fn": 2,
+        "tn": 143,
+        "fp": 1,
+        "tpr": 0.923,
+        "tpr_ci95": [
+          0.759,
+          0.979
+        ],
+        "tnr": 0.993,
+        "tnr_ci95": [
+          0.962,
+          0.999
+        ]
+      },
+      "false_negatives": [
+        "test2:U01:hb-05-chunk-0",
+        "test2:U07:hb-08-chunk-0",
+        "test2:U11:hb-09-chunk-1"
+      ]
+    },
+    "3way-mistral": {
+      "family": "mistral",
+      "different_family_from_generator": true,
+      "all_pairs": {
+        "pairs": 235,
+        "tp": 26,
+        "fn": 11,
+        "tn": 195,
+        "fp": 3,
+        "tpr": 0.703,
+        "tpr_ci95": [
+          0.542,
+          0.825
+        ],
+        "tnr": 0.985,
+        "tnr_ci95": [
+          0.956,
+          0.995
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 170,
+        "tp": 15,
+        "fn": 11,
+        "tn": 143,
+        "fp": 1,
+        "tpr": 0.577,
+        "tpr_ci95": [
+          0.389,
+          0.745
+        ],
+        "tnr": 0.993,
+        "tnr_ci95": [
+          0.962,
+          0.999
+        ]
+      },
+      "false_negatives": [
+        "holdout:H17:hb-03-chunk-0",
+        "test:T02:hb-07-chunk-1",
+        "test:T06:hb-09-chunk-1",
+        "test2:U02:hb-05-chunk-2",
+        "test2:U06:hb-07-chunk-1",
+        "test2:U07:hb-08-chunk-0",
+        "test2:U11:hb-09-chunk-1",
+        "test2:U13:hb-03-chunk-0",
+        "test3:V05:hb-07-chunk-1",
+        "test3:V21:hb-09-chunk-1",
+        "test3:V25:hb-03-chunk-0"
+      ]
+    },
+    "3way-llama": {
+      "family": "llama",
+      "different_family_from_generator": true,
+      "all_pairs": {
+        "pairs": 235,
+        "tp": 33,
+        "fn": 4,
+        "tn": 109,
+        "fp": 89,
+        "tpr": 0.892,
+        "tpr_ci95": [
+          0.753,
+          0.957
+        ],
+        "tnr": 0.551,
+        "tnr_ci95": [
+          0.481,
+          0.618
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 170,
+        "tp": 22,
+        "fn": 4,
+        "tn": 75,
+        "fp": 69,
+        "tpr": 0.846,
+        "tpr_ci95": [
+          0.665,
+          0.939
+        ],
+        "tnr": 0.521,
+        "tnr_ci95": [
+          0.44,
+          0.601
+        ]
+      },
+      "false_negatives": [
+        "holdout:H02:hb-05-chunk-1",
+        "test:T02:hb-07-chunk-1",
+        "test2:U07:hb-08-chunk-0",
+        "test3:V05:hb-07-chunk-1"
+      ]
+    },
+    "either+3way-gemma": {
+      "family": "qwen+gemma",
+      "different_family_from_generator": false,
+      "all_pairs": {
+        "pairs": 235,
+        "tp": 33,
+        "fn": 4,
+        "tn": 186,
+        "fp": 12,
+        "tpr": 0.892,
+        "tpr_ci95": [
+          0.753,
+          0.957
+        ],
+        "tnr": 0.939,
+        "tnr_ci95": [
+          0.897,
+          0.965
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 170,
+        "tp": 22,
+        "fn": 4,
+        "tn": 138,
+        "fp": 6,
+        "tpr": 0.846,
+        "tpr_ci95": [
+          0.665,
+          0.939
+        ],
+        "tnr": 0.958,
+        "tnr_ci95": [
+          0.912,
+          0.981
+        ]
+      },
+      "false_negatives": [
+        "test:T02:hb-07-chunk-1",
+        "test2:U07:hb-08-chunk-0",
+        "test2:U11:hb-09-chunk-1",
+        "test2:U13:hb-03-chunk-0"
+      ]
+    },
+    "either+3way-mistral": {
+      "family": "qwen+gemma+mistral",
+      "different_family_from_generator": false,
+      "all_pairs": {
+        "pairs": 235,
+        "tp": 30,
+        "fn": 7,
+        "tn": 187,
+        "fp": 11,
+        "tpr": 0.811,
+        "tpr_ci95": [
+          0.658,
+          0.905
+        ],
+        "tnr": 0.944,
+        "tnr_ci95": [
+          0.903,
+          0.969
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 170,
+        "tp": 19,
+        "fn": 7,
+        "tn": 138,
+        "fp": 6,
+        "tpr": 0.731,
+        "tpr_ci95": [
+          0.539,
+          0.863
+        ],
+        "tnr": 0.958,
+        "tnr_ci95": [
+          0.912,
+          0.981
+        ]
+      },
+      "false_negatives": [
+        "holdout:H17:hb-03-chunk-0",
+        "test:T02:hb-07-chunk-1",
+        "test2:U07:hb-08-chunk-0",
+        "test2:U11:hb-09-chunk-1",
+        "test2:U13:hb-03-chunk-0",
+        "test3:V21:hb-09-chunk-1",
+        "test3:V25:hb-03-chunk-0"
+      ]
+    },
+    "either+3way-qwen": {
+      "family": "qwen+gemma",
+      "different_family_from_generator": false,
+      "all_pairs": {
+        "pairs": 235,
+        "tp": 35,
+        "fn": 2,
+        "tn": 186,
+        "fp": 12,
+        "tpr": 0.946,
+        "tpr_ci95": [
+          0.823,
+          0.985
+        ],
+        "tnr": 0.939,
+        "tnr_ci95": [
+          0.897,
+          0.965
+        ]
+      },
+      "gray_zone_pairs": {
+        "pairs": 170,
+        "tp": 24,
+        "fn": 2,
+        "tn": 138,
+        "fp": 6,
+        "tpr": 0.923,
+        "tpr_ci95": [
+          0.759,
+          0.979
+        ],
+        "tnr": 0.958,
+        "tnr_ci95": [
+          0.912,
+          0.981
+        ]
+      },
+      "false_negatives": [
+        "test2:U07:hb-08-chunk-0",
+        "test2:U11:hb-09-chunk-1"
+      ]
+    }
+  }
+}

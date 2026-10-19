@@ -80,7 +80,7 @@ RERANK_FEWSHOT_PROMPT = (
 # answers "is the 2 day limit still in force?"). The model answers yes, no or unknown from the passage alone;
 # yes and no accept the passage. None disables it; "answerability" adds it after RERANK_JUDGE rejects, and
 # "answerability-only" uses it instead of RERANK_JUDGE for those questions.
-YESNO_QUESTION_JUDGE = "answerability-only"  # None, "answerability" or "answerability-only"
+YESNO_QUESTION_JUDGE = "answerability"  # None, "answerability" or "answerability-only"
 YESNO_QUESTION_MODEL = "gemma3:4b"
 YESNO_QUESTION_PROMPT = (
     "Read the passage and answer the question using only the passage. Reply with exactly one word: yes, no or "
