@@ -20,7 +20,7 @@ U paketu su JSON rezultati pre i posle, izlaz poređenja, diff, specifikacija, i
 
 Proverio sam sve što je u izveštaju: propuste, specifikaciju i diff, rezultate pre i posle, poređenje, CLI odgovor i citate za E06 i ograničenja. Po mom mišljenju rezultati pokazuju da filter rešava izbor zastarele politike na E06. Ostale probleme sistema ne rešava.
 
-I dalje ostaju problemi sa granicama chunkova, parafrazama, pitanjima na koja korpus nema odgovor i nebitnim drugim citatom. Filter ima i cenu: sistem više ne može da odgovori kakva je bila stara politika, a osnovni eval to ne meri. Svaki od ovih problema traži posebnu promenu i novo merenje.
+I dalje ostaju problemi sa granicama chunkova, parafrazama, pitanjima na koja korpus nema odgovor i nebitnim drugim citatom. Filter ima i cenu: sistem više ne može da odgovori kakva je bila stara politika, a osnovni eval to ne meri. Svaki od ovih problema traži posebnu promenu i novo merenje, pa sam ih rešavao u naprednom delu, odvojeno od M5.
 
 ## Korišćenje AI-ja
 
@@ -28,4 +28,4 @@ AI mi je pomagao u analizi, pisanju nacrta specifikacije i izveštaja, implement
 
 ## Plan demonstracije za Sesiju 2
 
-Počeću od propusta na E06, gde sistem odgovara iz zastarele politike. Onda ću pokazati specifikaciju (`2ceaced`), diff promene (`45b8172`) i rezultate pre i posle na istom skupu, pa CLI izlaz koji sada citira važeću verziju. Na kraju ću objasniti zašto filter gubi istorijska pitanja i šta je još ostalo da se popravi.
+Počeću od propusta na E06, gde sistem odgovara iz zastarele politike. Onda ću pokazati specifikaciju (`2ceaced`), diff promene (`45b8172`) i rezultate pre i posle na istom skupu, pa CLI izlaz koji sada citira važeću verziju. Na kraju ću objasniti zašto filter gubi istorijska pitanja i koji propusti ostaju posle ove jedne promene. Ukratko ću pokazati i kako sam ih rešio u naprednom delu, gde je svaka promena merena posebno: sečenje po rečenicama (7 → 9/12), viši prag odbijanja (9 → 10/12), semantička pretraga (10 → 12/12) i minimalna ocena citata (preciznost citata 1.00).
