@@ -1,0 +1,382 @@
+[
+ {
+  "id": "X01",
+  "question": "What is the shortest password the company accepts?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-05"
+  ],
+  "expected_fact": "at least 12 characters"
+ },
+ {
+  "id": "X02",
+  "question": "After how many days does my password expire?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-05"
+  ],
+  "expected_fact": "every 90 days"
+ },
+ {
+  "id": "X03",
+  "question": "Do I need multi-factor login for the VPN?",
+  "category": "yes-no-affirm",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-05"
+  ],
+  "expected_fact": "multi-factor authentication"
+ },
+ {
+  "id": "X04",
+  "question": "Can I tell my password to a helpdesk colleague who is helping me?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-05"
+  ],
+  "expected_fact": "never share passwords"
+ },
+ {
+  "id": "X05",
+  "question": "How many holiday days do I get per year?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-07"
+  ],
+  "expected_fact": "22 days"
+ },
+ {
+  "id": "X06",
+  "question": "Can I ask for time off with only three days notice?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-07"
+  ],
+  "expected_fact": "two weeks in advance"
+ },
+ {
+  "id": "X07",
+  "question": "Until what date can I still use leave left over from last year?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-07"
+  ],
+  "expected_fact": "31 march"
+ },
+ {
+  "id": "X08",
+  "question": "Is training budget I did not use kept for the following year?",
+  "category": "yes-no-negative",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-08"
+  ],
+  "expected_fact": "does not carry over"
+ },
+ {
+  "id": "X09",
+  "question": "What is the yearly amount for professional development?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-08"
+  ],
+  "expected_fact": "800 eur"
+ },
+ {
+  "id": "X10",
+  "question": "Can the training budget pay for a certification exam?",
+  "category": "yes-no-affirm",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-08"
+  ],
+  "expected_fact": "certifications"
+ },
+ {
+  "id": "X11",
+  "question": "By when do I need to upload my trip receipts?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-04"
+  ],
+  "expected_fact": "within 30 days"
+ },
+ {
+  "id": "X12",
+  "question": "Does a business trip need approval before I book it?",
+  "category": "yes-no-affirm",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-04"
+  ],
+  "expected_fact": "approved before booking"
+ },
+ {
+  "id": "X13",
+  "question": "Is a photo of the hotel invoice enough, or do I keep the paper one?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-04"
+  ],
+  "expected_fact": "keep original receipts"
+ },
+ {
+  "id": "X14",
+  "question": "Between which hours do I have to answer chat on remote days?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-03"
+  ],
+  "expected_fact": "10:00 to 15:00"
+ },
+ {
+  "id": "X15",
+  "question": "Can I work from home four days a week?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-03"
+  ],
+  "expected_fact": "3 days per week"
+ },
+ {
+  "id": "X16",
+  "question": "Can I swap a remote day for another day in the same week?",
+  "category": "yes-no-affirm",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-03"
+  ],
+  "expected_fact": "moved within same week"
+ },
+ {
+  "id": "X17",
+  "question": "Where are the agreed remote days written down?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-03"
+  ],
+  "expected_fact": "shared team calendar"
+ },
+ {
+  "id": "X18",
+  "question": "Whom do I inform first if my work laptop is stolen?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-01"
+  ],
+  "expected_fact": "report lost or stolen devices to security first"
+ },
+ {
+  "id": "X19",
+  "question": "Does IT copy my accounts and files onto the new laptop?",
+  "category": "yes-no-affirm",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-01"
+  ],
+  "expected_fact": "files, accounts, email"
+ },
+ {
+  "id": "X20",
+  "question": "Where in the IT portal do I find the laptop replacement request?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-01"
+  ],
+  "expected_fact": "under hardware"
+ },
+ {
+  "id": "X21",
+  "question": "Does a new hire get a buddy?",
+  "category": "yes-no-affirm",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-06"
+  ],
+  "expected_fact": "buddy is assigned"
+ },
+ {
+  "id": "X22",
+  "question": "How long does the onboarding plan last?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-06"
+  ],
+  "expected_fact": "two-week"
+ },
+ {
+  "id": "X23",
+  "question": "Will my manager talk to me about onboarding again after the first month?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-06"
+  ],
+  "expected_fact": "after three months"
+ },
+ {
+  "id": "X24",
+  "question": "What do I do if I lose my entry card?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-09"
+  ],
+  "expected_fact": "reported to reception on same day"
+ },
+ {
+  "id": "X25",
+  "question": "Do I book parking through an app?",
+  "category": "yes-no-affirm",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-09"
+  ],
+  "expected_fact": "facilities app"
+ },
+ {
+  "id": "X26",
+  "question": "Is there enough parking for everyone who drives?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-09"
+  ],
+  "expected_fact": "parking is limited"
+ },
+ {
+  "id": "X27",
+  "question": "Where should I take a laptop that will not boot?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-10"
+  ],
+  "expected_fact": "it desk on floor two"
+ },
+ {
+  "id": "X28",
+  "question": "Is the helpdesk available on Sunday afternoon?",
+  "category": "yes-no-implicit",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-10"
+  ],
+  "expected_fact": "monday to friday"
+ },
+ {
+  "id": "X29",
+  "question": "What number do I use for a serious security issue after 18:00?",
+  "category": "paraphrase",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-10"
+  ],
+  "expected_fact": "on-call line"
+ },
+ {
+  "id": "X30",
+  "question": "Can I reach IT support by phone?",
+  "category": "yes-no-affirm",
+  "expected_behaviour": "answer",
+  "expected_doc_ids": [
+   "hb-10"
+  ],
+  "expected_fact": "by phone"
+ },
+ {
+  "id": "X31",
+  "question": "Is there a canteen for employees?",
+  "category": "unsupported-yes-no",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "X32",
+  "question": "Can I bring my dog to the office?",
+  "category": "unsupported-yes-no",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "X33",
+  "question": "Does the company pay for a gym membership?",
+  "category": "unsupported-yes-no",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "X34",
+  "question": "Are employees given a company phone?",
+  "category": "unsupported-yes-no",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "X35",
+  "question": "How many sick days are allowed per year?",
+  "category": "unsupported",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "X36",
+  "question": "How much is the daily meal allowance in Spain?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "X37",
+  "question": "How do I register a new visitor at reception?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "X38",
+  "question": "What happens if I forget my badge at home?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "X39",
+  "question": "What is the weather like in Belgrade today?",
+  "category": "unsupported",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ },
+ {
+  "id": "X40",
+  "question": "How many conferences can I attend per year?",
+  "category": "unsupported-near-domain",
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
+ }
+]
