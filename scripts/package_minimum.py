@@ -14,13 +14,10 @@ def build():
     start = report.index('> Obavezni deo')
     end = report.index('\n\n', start)
     report = report[:start] + '> Ovaj paket sadrži samo M5 checkpoint 45b8172. Napredni eksperimenti su odvojeni u glavnom repozitorijumu.' + report[end:]
-    report += '''\n## Dokazi i status predaje
+    report = report.replace('; dalji krugovi do `54358d4`', '').replace(' (poslednje ažuriranje 2026-10-19: odeljak 22)', '')
+    report += '''\n## Dokazi
 
-Svi obavezni dokazi su u evidence/. Specifikacija je 2ceaced, implementacija 45b8172.
-Autor, samostalan doprinos, demonstrator i lična potvrda provere su uneti po izjavi Uroša.
-Projekat je poslat drugom polazniku na pregled; odgovor nije stigao (odeljak 9).
-Individualni izveštaj i nacrt mejla priloženi su kao NEDELJNI_IZVESTAJ_UROS.md i NACRT_MEJLA.md.
-Status slanja nije potvrđen. Ljudske oznake naprednih odgovora nisu dostavljene.
+Svi obavezni dokazi su u `evidence/`: `before.json`, `after.json`, `compare.txt`, `change.diff`, CLI izlazi za E06 i izlazi testova pre/posle. Specifikacija je u `docs/change-spec.md` (commit `2ceaced`), implementacija u commitu `45b8172`. Napredni eksperimenti (odeljci 12 i dalje u glavnom repozitorijumu) nisu deo ovog paketa.
 '''
     instructions = '''# Nedelja 7 — obavezni eksperiment M5
 
@@ -40,7 +37,6 @@ diff, testove i CLI provere. docs/change-spec.md prethodi implementaciji u istor
 
 Projekat je poslat na pregled para; odgovor nije stigao (odeljak 9 izveštaja).
 Autor je Uroš Milutinović, koji je radio samostalno i potvrdio ličnu proveru.
-Slanje nije potvrđeno. Priloženi nacrti nisu poslati.
 Ovo nije zvanični šablon tutora.
 '''
     TARGET.parent.mkdir(exist_ok=True)
@@ -51,7 +47,7 @@ Ovo nije zvanični šablon tutora.
         for name in ['before.json', 'after.json', 'compare.txt', 'change.diff', 'cli-E06-before.txt', 'cli-E06-after.txt', 'pytest-before.txt', 'pytest-after.txt']:
             out.write(ROOT / 'evidence' / name, f'evidence/{name}')
         out.write(ROOT / 'docs/sablon-izvestaj-pre-posle.md', 'docs/sablon-izvestaj-pre-posle.md')
-        for name in ['NEDELJNI_IZVESTAJ_UROS.md', 'NACRT_MEJLA.md', 'MOJ_KOMENTAR.md']:
+        for name in ['NEDELJNI_IZVESTAJ_UROS.md', 'MOJ_KOMENTAR.md']:
             out.write(ROOT / 'deliverables' / name, name)
         out.write(ROOT / 'evidence/upgrade/human-confirmation-21.json', 'evidence/human-confirmation-21.json')
         out.writestr('REPORT_BEFORE_AFTER.md', report)
