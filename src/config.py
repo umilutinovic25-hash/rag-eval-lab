@@ -53,6 +53,9 @@ POLARITY_MODEL = "gemma3:4b"
 # flagged as unsupported.
 NUMBERS_FROM_QUESTION = True
 
+# An answer that claims its own cited source lacks the information is replaced by the verbatim source quote.
+SELF_DENIAL_CHECK = False
+
 # Section 21: measured candidates remain disabled (regressions or no pass gain).
 # Evidence: evidence/upgrade/comparison-21.json. Baseline keeps historical behavior.
 VERSION_CONTEXT = False
@@ -171,14 +174,14 @@ def apply_profile(name: str) -> None:
     global RETRIEVAL_MODE, RERANK, ANSWER_MODE, ANSWER_QUOTES, EVIDENCE_RULES_ENABLED, CHUNK_HEADERS
     global INJECTION_GUARDS, POLARITY_CHECK, NUMBERS_FROM_QUESTION
     global VERSION_CONTEXT, EVIDENCE_RELEVANCE, IMPLICIT_BINARY, JEV_ENABLED, HISTORICAL_VERSIONS
-    global HISTORICAL_JUDGE_CONTEXT, HISTORICAL_PAST_ONLY, PRESENT_VERSION_CONTEXT, GUARDS_V2
+    global HISTORICAL_JUDGE_CONTEXT, HISTORICAL_PAST_ONLY, PRESENT_VERSION_CONTEXT, GUARDS_V2, SELF_DENIAL_CHECK
     if name in ("current", "verified"):
         return
     if name == "baseline":
         JEV_ENABLED = False
         EVIDENCE_RULES_ENABLED = False
         VERSION_CONTEXT = EVIDENCE_RELEVANCE = IMPLICIT_BINARY = False
-        HISTORICAL_VERSIONS = HISTORICAL_JUDGE_CONTEXT = HISTORICAL_PAST_ONLY = PRESENT_VERSION_CONTEXT = GUARDS_V2 = False
+        HISTORICAL_VERSIONS = HISTORICAL_JUDGE_CONTEXT = HISTORICAL_PAST_ONLY = PRESENT_VERSION_CONTEXT = GUARDS_V2 = SELF_DENIAL_CHECK = False
         CHUNK_HEADERS = False  # the historical replay keys embeddings by the bare chunk text
         INJECTION_GUARDS = POLARITY_CHECK = NUMBERS_FROM_QUESTION = False  # later additions are not part of the historical replay
         return

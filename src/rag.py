@@ -81,6 +81,15 @@ def expand_context(cited: list[RetrievalResult], chunks: list[Chunk], window: in
     return list(expanded.values())
 
 
+SELF_DENIAL = re.compile(
+    r"\bdoes not (?:provide|mention|specify|state|contain|include|say)\b"
+    r"|\b(?:is|are) not (?:stated|specified|mentioned|provided|given|included)\b"
+    r"|\bcannot be (?:answered|determined)\b|\bno information\b|\bnot enough information\b"
+    r"|\b(?:doesn't|don't) (?:provide|mention|specify|say)\b",
+    re.I,
+)
+
+
 def generation_issue(text: str, cited: list[RetrievalResult], question: str = "") -> str | None:
     """Structural and numeric checks only; no claim of semantic verification."""
     if getattr(text, "metadata", {}).get("done_reason") == "length":
@@ -100,6 +109,8 @@ def generation_issue(text: str, cited: list[RetrievalResult], question: str = ""
         source += " " + question
     if not set(re.findall(r"\d+(?:[.:]\d+)*", body)) <= set(re.findall(r"\d+(?:[.:]\d+)*", source)):
         return "unsupported_number"
+    if config.SELF_DENIAL_CHECK and SELF_DENIAL.search(body):
+        return "self_denial"
     by_id = {item.chunk.chunk_id: item.chunk.text for item in cited}
     for sentence in re.split(r"(?<=[.!?])\s+", text):
         linked = re.findall(r"\[([^\[\]\n]+)\]", sentence)
