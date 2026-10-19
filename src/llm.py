@@ -210,8 +210,8 @@ def render_json_answer(response: str, passages: list[tuple[str, str]]) -> str:
     return GenerationText(rendered, getattr(response, "metadata", None))
 
 
-def write_answer(question: str, passages: list[tuple[str, str]]) -> str:
-    listed = "\n".join(f"[{chunk_id}] {text}" for chunk_id, text in passages)
+def write_answer(question: str, passages: list[tuple[str, str]], note: str = "") -> str:
+    listed = (note + "\n" if note else "") + "\n".join(f"[{chunk_id}] {text}" for chunk_id, text in passages)
     if config.ANSWER_FORMAT == "json":
         prompt = config.GENERATION_JSON_PROMPT.format(passages=listed, question=question)
         return render_json_answer(generate(config.GENERATION_MODEL, prompt, 160), passages)

@@ -251,7 +251,9 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
     if config.ANSWER_MODE == "llm":
         operation.progress('generation', 'Pripremam odgovor iz odabranih izvora.')
         try:
-            answer = write_answer(question, [(item.chunk.chunk_id, item.chunk.text) for item in cited])
+            passages = [(item.chunk.chunk_id, judge_context(item.chunk) if historical else item.chunk.text) for item in cited]
+            answer = (write_answer(question, passages, config.HISTORICAL_GENERATION_NOTE) if historical
+                      else write_answer(question, passages))
             trace.append({"stage": "generation", "text": str(answer), "metadata": getattr(answer, "metadata", {"done_reason": "unknown"})})
             fallback_reason = generation_issue(answer, cited, question)
             if not fallback_reason and config.INJECTION_GUARDS:

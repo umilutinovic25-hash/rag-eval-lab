@@ -1,0 +1,24 @@
+Question:
+What was the old annual leave allowance before it changed?
+
+Answer:
+I do not have enough grounded evidence in the provided corpus to answer that question.
+
+Refused: True
+---
+Question:
+Before the current remote work policy, what was the weekly limit for remote days?
+
+Answer:
+The passage does not provide information about the weekly limit for remote days before the current policy. [hb-02-chunk-0]
+Source [hb-02-chunk-0]: "Remote work: employees can work remotely up to 2 days per week. Remote days per week are agreed with your team lead."
+
+---
+Question:
+How many days per week can I work remotely?
+
+Answer:
+You can work remotely up to 3 days per week. [hb-03-chunk-0]
+Source [hb-03-chunk-0]: "Remote work: employees can work remotely up to 3 days per week."
+Source [hb-03-chunk-2]: "Remote work days can be moved within same week."
+---

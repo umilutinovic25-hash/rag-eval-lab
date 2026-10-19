@@ -1,0 +1,37 @@
+HV01: The 2024 remote work policy allowed employees to work remotely up to 2 days per week. [hb-02-chunk-0]
+HV02: Employees could work remotely up to 2 days per week. [hb-02-chunk-0]
+HV03: Employees could work remotely up to 2 days per week. [hb-02-chunk-0]
+HV04: Under the old remote work rules, employees were allowed to work remotely up to 2 days per week. [hb-02-chunk-0]
+HV05: Employees can work remotely up to 3 days per week. [hb-03-chunk-0] [hb-03-chunk-2]
+HV06: You can currently work remotely up to 3 days per week. [hb-03-chunk-0]
+HV07: [hb-03-chunk-0] Remote work: employees can work remotely up to 3 days per week.
+HV08: I do not have enough grounded evidence in the provided corpus to answer that question.
+HV09: I do not have enough grounded evidence in the provided corpus to answer that question.
+HV10: Employees get 22 days of annual leave per calendar year. [hb-07-chunk-0]
+HR01: 14 days [sh-02-chunk-0]
+HR02: Refunds were paid within 14 business days. [sh-02-chunk-0]
+HR03: The return window was within 14 days of delivery in their original packaging. [sh-02-chunk-0]
+HR04: 14 business days. [sh-02-chunk-0]
+HR05: Items can be returned within 30 days of delivery in their original packaging. [sh-01-chunk-0]
+HR06: 30 days [sh-01-chunk-0]
+HR07: Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse. [sh-01-chunk-1]
+HR08: I do not have enough grounded evidence in the provided corpus to answer that question.
+HR09: I do not have enough grounded evidence in the provided corpus to answer that question.
+HR10: Gift cards are valid for 12 months from the purchase date. [sh-05-chunk-0]
+HB01: Refunds were paid within 14 business days. [sh-02-chunk-0]
+HB02: Items could be returned within 14 days of delivery in their original packaging. [sh-02-chunk-0]
+HB03: Refunds are paid within 14 business days. [sh-02-chunk-0]
+HB04: Items can be returned within 14 days of delivery in their original packaging. [sh-02-chunk-0]
+HB05: The return window is within 30 days of delivery. [sh-01-chunk-0]
+HB06: I do not have enough grounded evidence in the provided corpus to answer that question.
+HB07: Customers earn 1 point per euro spent. [sh-08-chunk-0]
+HB08: Grounded response based on retrieved context: [sh-03-chunk-1] Orders above 50 EUR ship free with standard delivery. We do not ship to post office boxes.
+HC01: I do not have enough grounded evidence in the provided corpus to answer that question.
+HC02: I do not have enough grounded evidence in the provided corpus to answer that question.
+HC03: Under the earlier remote work policy, employees were allowed to work remotely up to 2 days per week. [hb-02-chunk-0] [hb-02-chunk-1]
+HC04: Before the current remote work policy, the weekly limit for remote days was 2 days per week. [hb-02-chunk-0]
+HC05: I do not have enough grounded evidence in the provided corpus to answer that question.
+HC06: The 2026 policy allows employees to work remotely up to 3 days per week. [hb-03-chunk-0]
+HC07: Two weeks in advance. [hb-07-chunk-0]
+HC08: Yes, remote work days can be moved within the same week. [hb-02-chunk-1]
+pass 36 / 36 self-denial []

@@ -567,15 +567,22 @@ HTTP smoke potvrđuje da eksplicitno uključen current profil koristi JEv, basel
 
 ## 23. Istorijska pitanja: filter verzije zavisi od pitanja (19.10.2026.)
 
-Ograničenje 5 iz odeljka 8 rešio sam posebnom promenom `HISTORICAL_VERSIONS`, sa specifikacijom i dva nova skupa od po 10 pitanja commitovanim pre koda (`docs/history-spec.md`, commit `ad8df42`). Kada pitanje traži staru verziju (godinu, „before the 2026 update“, „previous policy“, „old rules“), pretraga za dokumente sa više verzija koristi traženu verziju umesto važeće. Ako tražena godina ne postoji (npr. 2022), nijedna verzija tog dokumenta ne ulazi u pretragu i sistem odbija. Obična pitanja rade isto kao posle M5.
+Ograničenje 5 iz odeljka 8 rešio sam sa tri merena koraka, svaki sa specifikacijom i skupom pitanja commitovanim pre koda (`docs/history-spec.md`, commiti `ad8df42`, `4f678dc`, `1a4d8f4`):
 
-| Skup | Pre | Posle | Regresije |
+1. **`HISTORICAL_VERSIONS`:** kada pitanje traži staru verziju (godinu, „before the 2026 update“, „previous policy“), pretraga za dokumente sa više verzija koristi traženu verziju. Za nepostojeću godinu (2022) sistem odbija.
+2. **`HISTORICAL_PAST_ONLY`:** pitanje o staroj verziji pravila koje nikad nije imalo staru verziju (godišnji odmor, cena dostave) dobija odbijanje, jer korpus nema to staro pravilo.
+3. **`HISTORICAL_JUDGE_CONTEXT`:** u istorijskom režimu proveravač i generator vide verziju i status odlomka, pa ne odbacuju staru politiku kao nebitnu. Sam, bez koraka 2, ovaj korak je imao regresiju (HV09) i bio odbijen.
+
+| Skup | Pre (posle M5) | Posle | Regresije |
 | --- | ---: | ---: | --- |
 | history (handbook) | 5/10 | 10/10 | nema |
-| history2 (corpus2) | 4/10 | 8/10 | nema |
+| history2 (corpus2) | 4/10 | 10/10 | nema |
+| history3 (slepi) | | 8/8 | nema |
+| history4 (slepi, 5/8 posle koraka 1) | | 8/8 | nema |
 | eval / holdout | 12/12, 34/34 | 12/12, 34/34 | nema |
+| test7 | 33/40 | 34/40 (Z07 popravljen) | nema |
 
-Prva verzija pravila bi pogrešno reagovala na 10 postojećih pitanja („is used to reserve“, „previous instructions“), pa sam je suzio pre prihvatanja. Posle toga nijedno od 458 postojećih pitanja ne dobija drugačiju listu kandidata, pa njihov rezultat ne može da se promeni. Ručna CLI provera: „How many remote days per week did the 2024 remote work policy allow?“ daje 2 dana sa citatom `hb-02`, a „How many days per week can I work remotely?“ i dalje 3 dana sa `hb-03`. Na novom slepom skupu history3 (8 pitanja, commitovan pre pokretanja) prihvaćena promena daje 8/8. Probao sam i drugu promenu, da proveravač u istorijskom režimu vidi verziju odlomka: popravila je HR03, ali pokvarila HV09, pa je ostala isključena. Ostaju HR03 (proveravač ne zna da je odlomak stara verzija) i HR09 (stara cena koja ne postoji u korpusu). Testovi: 286 Python, 33 frontend unit i 29 Playwright, `scripts/check.sh` prolazi.
+Prvo pravilo za reči prošlosti pogrešno je reagovalo na 10 postojećih pitanja („is used to reserve“, „previous instructions“), pa sam ga suzio pre prihvatanja. Sada od 450 postojećih pitanja samo Z07 ulazi u istorijski režim, i ono je popravljeno. Eval meri citat, a ne rečenicu, pa sam ručno pregledao svih 36 istorijskih odgovora. Četiri su imala tačan citat, ali rečenicu „nije navedeno“; posle uputstva generatoru svih 36 je tačno i rečima. CLI: „What was the old annual leave allowance before it changed?“ se odbija, „Before the current remote work policy, what was the weekly limit for remote days?“ daje 2 dana iz `hb-02`, a „How many days per week can I work remotely?“ i dalje 3 dana iz `hb-03`. Pošto sam uputstvo doradio posle pregleda, svi istorijski skupovi su sada viđeni. Dokazi: `evidence/upgrade/history-*.json`, `history-answers.txt`, `history-cli-final.txt`, `history-trigger-audit.json`.
 
 ## Kontrolna lista pre predaje
 

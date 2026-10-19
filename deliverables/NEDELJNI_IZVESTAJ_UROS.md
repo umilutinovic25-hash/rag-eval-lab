@@ -20,7 +20,7 @@ U paketu su JSON rezultati pre i posle, izlaz poređenja, diff, specifikacija, i
 
 Proverio sam sve što je u izveštaju: propuste, specifikaciju i diff, rezultate pre i posle, poređenje, CLI odgovor i citate za E06 i ograničenja. Po mom mišljenju rezultati pokazuju da filter rešava izbor zastarele politike na E06. Ostale probleme sistema ne rešava.
 
-I dalje ostaju problemi sa granicama chunkova, parafrazama, pitanjima na koja korpus nema odgovor i nebitnim drugim citatom. Filter ima i cenu: posle M5 sistem više ne može da odgovori kakva je bila stara politika, a osnovni eval to ne meri. Svaki od ovih problema traži posebnu promenu i novo merenje, pa sam ih rešavao u naprednom delu, odvojeno od M5. Istorijska pitanja sam na kraju rešio filterom koji zavisi od pitanja: na dva nova skupa rezultat je porastao sa 9/20 na 18/20, bez regresija na postojećim pitanjima.
+I dalje ostaju problemi sa granicama chunkova, parafrazama, pitanjima na koja korpus nema odgovor i nebitnim drugim citatom. Filter ima i cenu: posle M5 sistem više ne može da odgovori kakva je bila stara politika, a osnovni eval to ne meri. Svaki od ovih problema traži posebnu promenu i novo merenje, pa sam ih rešavao u naprednom delu, odvojeno od M5. Istorijska pitanja sam na kraju rešio filterom koji zavisi od pitanja: na dva nova skupa rezultat je porastao sa 9/20 na 20/20, na dva nova slepa skupa je 16/16, a od postojećih pitanja promenilo se samo jedno, koje je ranije padalo, a sada prolazi.
 
 ## Korišćenje AI-ja
 
@@ -32,4 +32,4 @@ Počeću od propusta na E06, gde sistem odgovara iz zastarele politike. Onda ću
 
 Posle toga ću ukratko pokazati napredni deo, gde sam svaki preostali propust rešio posebnom promenom i posebno ga izmerio: sečenje po rečenicama za E04 i E09 (7 → 9/12), viši prag odbijanja za E10 (9 → 10/12), semantička pretraga za E05 i E11 (10 → 12/12) i minimalna ocena citata (preciznost citata 1.00).
 
-Na kraju ću objasniti cenu M5 filtera: sistem više nije mogao da odgovori kakva je bila stara politika. To sam rešio filterom koji poštuje verziju koju pitanje traži. Na dva nova skupa rezultat je porastao sa 9/20 na 18/20, na novom slepom skupu je 8/8, a postojeća pitanja se nisu promenila.
+Na kraju ću objasniti cenu M5 filtera: sistem više nije mogao da odgovori kakva je bila stara politika. To sam rešio filterom koji poštuje verziju koju pitanje traži. Na dva nova skupa rezultat je porastao sa 9/20 na 20/20, na dva nova slepa skupa je 16/16, a od postojećih pitanja promenilo se samo jedno, Z07, koje je sa pogrešnog odbijanja prešlo na tačan odgovor.

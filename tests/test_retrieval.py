@@ -55,3 +55,15 @@ def test_historical_versions_follow_the_question(monkeypatch) -> None:
     assert searchable_chunks(chunks, "What was the 2022 limit?") == [other]
     assert searchable_chunks(chunks, "Is the old limit still valid now?") == [new, other]
     assert searchable_chunks(chunks, "How old must customers be?") == [new, other]
+
+
+def test_past_only_mode_excludes_single_version_documents(monkeypatch) -> None:
+    old = Chunk("old", "d-old", "T", "2024", "superseded", "remote work policy")
+    new = Chunk("new", "d-new", "T", "2026", "current", "remote work policy")
+    other = Chunk("o", "d-o", "U", "2026", "current", "annual leave")
+    monkeypatch.setattr(config, "CURRENT_ONLY", True)
+    monkeypatch.setattr(config, "HISTORICAL_VERSIONS", True)
+    monkeypatch.setattr(config, "HISTORICAL_PAST_ONLY", True)
+    assert searchable_chunks([old, new, other], "What was the previous leave policy?") == [old]
+    assert searchable_chunks([old, new, other], "What did the 2024 policy allow?") == [old, other]
+    assert searchable_chunks([old, new, other], "How many leave days do I get?") == [new, other]

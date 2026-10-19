@@ -150,6 +150,9 @@ def searchable_chunks(chunks: list[Chunk], query: str | None = None) -> list[Chu
     wanted = requested_versions(query, {chunk.version for chunk in chunks if chunk.title in versioned})
     if wanted is None:
         return [chunk for chunk in chunks if chunk.status != "superseded"]
+    if wanted == {"superseded"} and config.HISTORICAL_PAST_ONLY:
+        # A document with a single version cannot answer a question about its older version.
+        return [chunk for chunk in chunks if chunk.status == "superseded"]
     keep = []
     for chunk in chunks:
         if chunk.title not in versioned:

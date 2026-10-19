@@ -87,3 +87,19 @@ Kontekst verzije popravlja HR03, ali na HV09 („old annual leave allowance“) 
 **Slepi skup:** `eval/history4_set.json` (8 pitanja, handbook), commitovan pre koda, pokreće se jednom.
 
 **Pravilo prihvatanja:** bez regresija na history, history2, history3, eval, holdout; nijedno pitanje van istorijskih skupova ne sme da dobije drugačiju listu kandidata; history4 bez regresija u odnosu na `historical`.
+
+### Rezultat treće promene: prihvaćena, zajedno sa kontekstom verzije
+
+| Skup | `historical` | `historical-past` | `historical-past-judge` |
+| --- | ---: | ---: | ---: |
+| eval / holdout | 12/12, 34/34 | 12/12, 34/34 | 12/12, 34/34 |
+| history | 10/10 | 10/10 | 10/10 |
+| history2 | 8/10 | 9/10 | **10/10** |
+| history3 | 8/8 | 8/8 | 8/8 |
+| history4 (slepi, prvo pokretanje) | 5/8 | 8/8 | **8/8** |
+
+Uz `HISTORICAL_PAST_ONLY` kontekst verzije za proveravača više ne kvari HV09 (dokument bez stare verzije ne ulazi u pretragu), pa su uključena oba (`HISTORICAL_PAST_ONLY = True`, `HISTORICAL_JUDGE_CONTEXT = True`).
+
+**Tekst odgovora.** Eval meri citat, ne rečenicu. Ručni pregled svih 36 istorijskih odgovora pokazao je 4 odgovora (HV02, HR03, HB02, HC04) sa tačnim citatom i rečenicom „nije navedeno“. U istorijskom režimu generator zato dobija kontekst verzije i kratko uputstvo (`HISTORICAL_GENERATION_NOTE`). Posle toga svih 36 odgovora je tačno i rečima (`evidence/upgrade/history-answers.txt`). Uputstvo je dorađeno jednom posle pregleda HC04, pa su svi istorijski skupovi sada viđeni.
+
+**Uticaj van istorijskih skupova.** Od 450 postojećih pitanja samo Z07 („What return deadline does the 2026 policy specify?“) ulazi u istorijski režim. Ranije je odbijen (fail), sada daje 30 dana iz `sh-01` (pass). Sva ostala pitanja nemaju promenu ni u kandidatima ni u proveri (`evidence/upgrade/history-trigger-audit.json`).
