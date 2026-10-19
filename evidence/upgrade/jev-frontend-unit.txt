@@ -1,0 +1,9 @@
+
+ RUN  v5.0.5 /Users/urosmilutinovic/Downloads/rag-week-7-weak-checkpoint/frontend
+
+
+ Test Files  5 passed (5)
+      Tests  33 passed (33)
+   Start at  17:20:11
+   Duration  1.15s (environment 59%, setup 21%, tests 14%, transform 4%, import 2%)
+

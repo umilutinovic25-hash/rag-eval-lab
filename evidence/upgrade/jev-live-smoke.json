@@ -1,0 +1,30 @@
+{
+  "model": "jev-1.13.0",
+  "key_configured": true,
+  "status": "ok",
+  "decisions": [
+    {
+      "label": "supported",
+      "probability": 0.95,
+      "confidence": 0.92,
+      "model": "jev-1.13.0",
+      "cached": false
+    }
+  ],
+  "usage": {
+    "requests": {
+      "embeddings": 0,
+      "llm": 0,
+      "jev": 1
+    },
+    "cache_hits": {
+      "embeddings": 0,
+      "llm": 0
+    },
+    "prompt_tokens": 593,
+    "output_tokens": 45,
+    "unknown_token_calls": 0,
+    "model_seconds": 0.25984970899298787,
+    "phases": []
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "current": {
+    "refused": false,
+    "jev_trace": true,
+    "decision_reasons": [
+      null
+    ],
+    "usage": {
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      },
+      "cache_hits": {
+        "embeddings": 25,
+        "llm": 1,
+        "jev": 1
+      },
+      "prompt_tokens": null,
+      "output_tokens": null,
+      "unknown_token_calls": 0,
+      "model_seconds": 0,
+      "phases": [
+        {
+          "stage": "retrieval",
+          "seconds": 0.002772
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.032035
+        },
+        {
+          "stage": "judge",
+          "seconds": 0.001658
+        },
+        {
+          "stage": "generation",
+          "seconds": 0.002705
+        }
+      ]
+    }
+  },
+  "offline": {
+    "refused": false,
+    "jev_trace": false,
+    "decision_reasons": [
+      null
+    ],
+    "usage": {
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      },
+      "cache_hits": {
+        "embeddings": 0,
+        "llm": 0
+      },
+      "prompt_tokens": null,
+      "output_tokens": null,
+      "unknown_token_calls": 0,
+      "model_seconds": 0,
+      "phases": [
+        {
+          "stage": "retrieval",
+          "seconds": 0.002024
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.00055
+        }
+      ]
+    }
+  },
+  "baseline": {
+    "refused": false,
+    "jev_trace": false,
+    "decision_reasons": [
+      "above_gray_zone",
+      null
+    ],
+    "usage": {
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      },
+      "cache_hits": {
+        "embeddings": 25,
+        "llm": 1
+      },
+      "prompt_tokens": null,
+      "output_tokens": null,
+      "unknown_token_calls": 0,
+      "model_seconds": 0,
+      "phases": [
+        {
+          "stage": "retrieval",
+          "seconds": 0.00183
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.029858
+        },
+        {
+          "stage": "generation",
+          "seconds": 0.002183
+        }
+      ]
+    }
+  },
+  "evaluation_sets": 15
+}

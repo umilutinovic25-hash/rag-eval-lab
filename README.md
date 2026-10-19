@@ -224,3 +224,21 @@ python scripts/compare_cold_challenges.py evidence/upgrade/cold-21-1.json eviden
 ```
 
 Both cold repeats independently began with empty JSON caches: all 120 pass flags and ordered citation lists match (33/40, 28/30, 19/20, 28/30 in each run; `evidence/upgrade/cold-comparison-21.json`). Requests are grouped by model before evaluation. Per-set replay timings exclude that preparation and are not cold latency measurements. Uroš's name and solo contribution are filled from his statement; actual human review labels and agreement remain pending.
+
+
+## Optional TypeSafe JEv integration (section 22)
+
+JEv is available as an external evidence judge, disabled by default. The frozen 40-question corpus2 set was committed in `7d97e9f` before implementation; the candidate was locked in `d201ebc` before live results. On this new set, shipped and Jev both score **38/40** (one fix, one regression), with benign controls **4/5** in both. Jev improves some seen sets but regresses others (eval 12→10, test5 39→36, implicit3 19→17), so it is not accepted as the default. No prompt or threshold was tuned after seeing these results. The new set is now seen.
+
+```sh
+source .venv/bin/activate
+python -m src.cli --jev --scratch results/scratch-jev-cli --question "How many days per week can I work remotely?" --show-retrieved
+# Optional external judge for current web profiles; baseline/offline still disable it:
+python -m src.web --jev
+```
+
+Credentials: `TYPESAFE_API_KEY` in the server environment or private ignored `.env.jev` (0600). The optional mode sends the question and retrieved text/metadata to TypeSafe; normal startup stays local. There are no new Python dependencies. See [integration and provider contract](docs/jev-integration.md), [selection evidence](evidence/upgrade/jev-selection.json), [all-set results](evidence/upgrade/jev-all-sets.json) and report section 22. JEv probabilities and type-safe output do not prove that its decisions are correct. The mandatory M5 submission package is unchanged.
+
+Two fresh empty-cache JEv repeats score 38/40 each, with zero pass/ordered-citation differences on 40 questions. See `evidence/upgrade/jev-cold-comparison.json`. One original P16 provider response was not cached; a separate live diagnostic succeeds, while the original score remains unchanged in the comparison. See report section 22 for this availability limitation and the measured API token cost.
+
+Validation after integration: **285 pytest**, frozen-set gate green, **33 frontend unit tests**, production build and **27 Playwright tests** pass. The server was restarted on 8767 with local defaults; 8768 is free. Evidence: `evidence/upgrade/jev-final-*`, `jev-server-restart.json`, `jev-integrity.json`.

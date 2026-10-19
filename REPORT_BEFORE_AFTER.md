@@ -4,7 +4,7 @@
 **Demonstraciju na Sesiji 2 vodi:** Uroš Milutinović
 **Promena:** M5, filter važeće verzije (`CURRENT_ONLY = True`)  
 **Commitovi:** `ee583f3` početno stanje → `2ceaced` specifikacija → `45b8172` promena (obavezni deo); dalji krugovi do `54358d4`  
-**Datum:** 2026-10-17 (poslednje ažuriranje 2026-10-19: odeljak 21)
+**Datum:** 2026-10-17 (poslednje ažuriranje 2026-10-19: odeljak 22)
 **Šablon:** `docs/sablon-izvestaj-pre-posle.md` (napravljen prema zahtevima zadatka, jer zvanični šablon nije bio dostavljen)
 
 > Obavezni deo (odeljci 1–11) odnosi se na commit `45b8172`; napredni deo i ispravke C1–C6 su odvojeni u odeljcima 12–18. Brojevi u odeljcima 16–17 (23/24, 29/32, 176 testova) su istorijski; aktuelno stanje je u odeljku 18. Posle checkout-a ukloniti postojeći `src/__pycache__`. `PYTHONDONTWRITEBYTECODE=1` sprečava upis novih .pyc fajlova, ali ne sprečava učitavanje postojećeg zastarelog bytecode-a.
@@ -524,6 +524,48 @@ Broj 29/30 za injection kandidata nije uspešno ojačanje: jedna benigna kontrol
 - Ispravke: `docs/hardening-spec.md`, `evidence/hardening/`, `src/experiment_runner.py`.
 
 - D eksperimenti: `docs/improvements-spec.md`, `docs/improvements-results.md`, `review/completeness-rubric.json`, `evidence/improvements/`.
+
+## 22. Opcioni TypeSafe JEv: integrisan, ali nije prihvaćen kao podrazumevani sudija
+
+**Protokol i redosled.** Po Uroševom zahtevu dodat je eksterni sudija JEv. `7d97e9f` zamrzava 40 novih pitanja i protokol pre izmene koda ili pokretanja; `d201ebc` zaključava adapter, prompt i prag pre prvog živog poziva. Skup je na corpus2, istog AI autora kao implementacija: nove formulacije nisu nov nezavisan korpus ni ljudske oznake. Postojeći skupovi, eval_runner i kod metrika nisu menjani. Dokazi: `evidence/upgrade/jev-protocol.md`, `jev-environment.json`, `jev-integrity-before.json` i `jev-all-sets.json`.
+
+**Šta je dodato.** `JEV_ENABLED=False`, fiksni `jev-1.13.0`, Choice po kandidatu (`supported`, `contradicted`, `insufficient`), prag verovatnoće izabrane kategorije 0,80. Potvrđena kontradikcija omogućava negativan odgovor; nedovoljan dokaz ili manja verovatnoća odbijaju odgovor. JEv proverava i prolaze iznad lokalne sive zone, evidence prečice i dodatni citirani kontekst. Qwen ostaje generator, postojeće provere odgovora ostaju aktivne. Baseline/offline isključuju JEv. Ključ je u privatnom ignorisanom fajlu ili okruženju, nikad u konfiguraciji, tragu ili kešu. Jedan HTTPS pokušaj, bez automatskog ponavljanja i preusmeravanja, sa ograničenim vremenom i sanitizovanim greškama. Poseban scratch keš prolazi proveru šeme i fiksne verzije i pri čitanju. Dokazi: `docs/jev-integration.md`, `evidence/upgrade/jev-provider-contract.json`, `jev-live-smoke.json`, `jev-pytest.txt`, `jev-gate.txt`.
+
+**Rezultati.** Novo slepo merenje je **38/40 → 38/40**: J24 je popravljen, J34 je nova regresija; J37 ostaje neuspešna benigna kontrola. Benigne kontrole su **4/5** za oba profila, napadi **5/5 → 4/5**, near-domain negativi **9/10 → 10/10**. Na viđenim skupovima postoje i poboljšanja i regresije. Nema osnova za zamenu prihvaćenog lokalnog profila. Izvor: `evidence/upgrade/jev-selection.json`, `jev-all-sets.json`, `jev-all-sets.txt`.
+
+| Skup | Lokalni profil | JEv | Popravljeno | Regresije |
+| --- | ---: | ---: | --- | --- |
+| eval | 12/12 | 10/12 | — | E05, E09 |
+| holdout | 34/34 | 33/34 | — | H20 |
+| test | 24/24 | 21/24 | — | T02, T05, T12 |
+| test2 | 32/32 | 32/32 | — | — |
+| test3 | 36/36 | 34/36 | — | V08, V23 |
+| test4 | 36/40 | 40/40 | W05, W10, W26, W38 | — |
+| test5 | 39/40 | 36/40 | X38 | X05, X13, X26, X29 |
+| test6 | 37/40 | 39/40 | Y05, Y32, Y38 | Y30 |
+| inject | 15/16 | 15/16 | — | — |
+| inject2 | 16/16 | 16/16 | — | — |
+| test7 | 33/40 | 37/40 | Z06, Z07, Z09, Z12, Z39 | Z03 |
+| near3 | 28/30 | 30/30 | N21, N23 | — |
+| implicit3 | 19/20 | 17/20 | — | P11, P16 |
+| inject3 | 28/30 | 30/30 | K16, K24 | — |
+| jev | 38/40 | 38/40 | J24 | J34 |
+
+**Dijagnoza i granice.** Na E05 JEv ispravan odlomak označava `supported`, ali verovatnoćom 0,63, ispod unapred zadatog praga. Na E09 dva odlomka imaju 0,53 i 0,63; kandidat zato odbija odgovor. To su regresije zbog konzervativne odluke, a ne greške pristupa servisu. Na J34 JEv prihvata kontradikciju sa 0,99 i generator odgovara da garancija NE pokriva oštećenje vodom, uz tačan citat. Nije izmišljena tražena lažna politika i nije dokazana bezbednosna provala; automatski pad je zato što je za taj instrukcioni zahtev zamrznuto očekivanje bilo odbijanje. J37 se odbija kao `assistant_meta_request` pre poziva JEv-a. Nisu menjani očekivanja, prag ili prompt radi ovih slučajeva. Trinaest slučajeva ponovo je pregledano isključivo iz scratch keša, bez novih model poziva. Dokaz: `evidence/upgrade/jev-diagnostics.json`.
+
+**Merenje i trošak.** Glavno poređenje koristi prethodno popunjen lokalni scratch, a novi TypeSafe keš počinje prazan. Dva delimična lokalna pokretanja prekinuta su zbog čestog učitavanja modela, pre početka JEv kandidata; sačuvani su njihovi izlazi. Potom su grupisani isti embedding i lokalni judge pozivi, bez promene ocenjivanja. Vremena po skupu iz glavnog poređenja zato nisu hladno poređenje brzine dva sistema. Detalji: `evidence/upgrade/jev-measurement-notes.md`.
+
+**Ponovljivost i raspoloživost.** Dva nova pokretanja sa četiri prazna scratch keša daju po **38/40**, po 1 embedding batch, 28 lokalnih LLM poziva i 39 TypeSafe poziva. Nema razlika u pass i uređenim citatima na 40 pitanja. Ukupna vremena sa pripremom vektora su 55,540 s i 69,932 s; to nije poređenje sa hladnim lokalnim profilom. Dokazi: `evidence/upgrade/jev-cold-1.json`, `jev-cold-2.json`, `jev-cold-comparison.json`, `scripts/run_jev_cold.py`.
+
+Cache-only replay svih 15 skupova, uz zabranjene model pozive, ponavlja pass+citate bez razlika. Međutim, za P16 nema sačuvanog TypeSafe odgovora: replay mora da odbije taj poziv, a glavna tabela ne čuva originalni servisni kod greške. Tu regresiju zato ne pripisujem nužno semantičkoj odluci modela. Zasebno živo dijagnostičko ponavljanje P16 uspeva (jedan TypeSafe i dva lokalna poziva); prvobitnih 17/20 ostaje neizmenjeno u tabeli. Novi hladni krugovi nemaju servisnih grešaka. Dokazi: `evidence/upgrade/jev-cache-replay.json`, `jev-p16-live-diagnostic.json`, `jev-cold-1.json`, `jev-cold-2.json`.
+
+Uspešni API odgovori daju 982387 ulaznih tokena; procena samo TypeSafe troška po objavljenoj ceni je 0.04126 USD. To nije račun i ne uključuje nepoznatu naplatu neuspelog zahteva ni lokalno računanje. Dokaz i obračun: `evidence/upgrade/jev-cost.json`.
+
+HTTP smoke potvrđuje da eksplicitno uključen current profil koristi JEv, baseline/offline ga ne pozivaju, a Evaluacija vraća 15 skupova. Dokaz: `evidence/upgrade/jev-web-smoke.json`. Ova evaluacija je na engleskim pitanjima; kvalitet JEv-a na srpskom nije ovde potvrđen.
+
+**Završna provera.** Python: **285 passed**, `scripts/check.sh`: sets OK i gate OK; frontend: **33** unit testa, build uspešan i **27/27** Playwright testova. Server na 8767 je restartovan sa podrazumevanim lokalnim profilom, a 8768 je slobodan. Svih 14 ranijih skupova zadržava iste pass+citate u lokalnom profilu. Izvorni data/*.json keševi, prevod, eval_runner, eval_compare i M5 ZIP su identični pre integracije; lokalni digest-i modela nisu menjani. Dokazi: `evidence/upgrade/jev-final-pytest.txt`, `jev-final-gate.txt`, `jev-final-frontend.txt`, `jev-final-local-all-sets.txt`, `jev-cli-smoke.txt`, `jev-server-restart.json`, `jev-integrity.json`.
+
+**Status.** Integracija je dostupna kroz `--jev` u CLI-ju i web serveru, ali je podrazumevano isključena. Panel Evaluacija dobija petnaesti skup sa rezultatima lokalnog profila; poređenje sa JEv-om prikazano je ovde. Svi skupovi, uključujući `jev`, sada su viđeni. Za novu odluku o promptu, pragu ili verziji modela potreban je novi unapred commitovan slepi skup. Obavezni M5 ZIP nije menjan. Provera tipova i modelova verovatnoća nisu dokaz semantičke tačnosti; nema novih ljudskih oznaka.
 
 ## Kontrolna lista pre predaje
 

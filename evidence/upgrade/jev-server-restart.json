@@ -1,0 +1,46 @@
+{
+  "previous_pids": [
+    76636
+  ],
+  "pid": 81688,
+  "port": 8767,
+  "default_jev_enabled": false,
+  "evaluation_sets": 15,
+  "current_smoke": {
+    "refused": false,
+    "citations": [
+      "hb-03-chunk-0",
+      "hb-03-chunk-2"
+    ],
+    "usage": {
+      "requests": {
+        "embeddings": 0,
+        "llm": 0
+      },
+      "cache_hits": {
+        "embeddings": 25,
+        "llm": 1
+      },
+      "prompt_tokens": null,
+      "output_tokens": null,
+      "unknown_token_calls": 0,
+      "model_seconds": 0,
+      "phases": [
+        {
+          "stage": "retrieval",
+          "seconds": 0.00244
+        },
+        {
+          "stage": "retrieval",
+          "seconds": 0.020641
+        },
+        {
+          "stage": "generation",
+          "seconds": 0.002077
+        }
+      ]
+    }
+  },
+  "port_8768_free": true,
+  "log": "results/web-jev.log"
+}

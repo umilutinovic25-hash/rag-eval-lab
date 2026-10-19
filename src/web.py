@@ -39,7 +39,7 @@ SET_NOTES = {
     'test7': ('Nezavisan korpus (test 7)', '40 novih pitanja; viđen posle merenja, isti AI autor'),
     'near3': ('Bliska domena 3', '30 novih pitanja; viđen posle merenja'),
     'implicit3': ('Implicitna da/ne 3', '20 novih pitanja; viđen posle merenja'),
-    'jev': ('JEv provera', '40 novih pitanja na corpus2; rezultati i status u odeljku 22 izveštaja'),
+    'jev': ('Novi skup za JEv', '40 pitanja na corpus2; prikazan je lokalni profil. JEv poređenje je u odeljku 22 izveštaja.'),
     'inject3': ('Prompt injection 3', '25 napada i 5 benignih kontrola; viđen posle merenja'),
     'inject': ('Prompt injection', 'viđen'), 'inject2': ('Prompt injection 2', 'zaštita pisana posle prvog skupa'),
 }

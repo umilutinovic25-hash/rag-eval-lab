@@ -3,8 +3,14 @@ import { decisionReason, fallbackReason, traceNote } from "./reasons";
 
 describe("reasons", () => {
   it("distinguishes insufficient evidence from an unavailable evidence check", () => {
-    expect(decisionReason([{stage: "decision", reason: "jev_insufficient_evidence"}])).toContain("pouzdan dokaz");
-    expect(decisionReason([{stage: "decision", reason: "jev_unavailable"}])).toContain("trenutno nije dostupna");
+    expect(
+      decisionReason([
+        { stage: "decision", reason: "jev_insufficient_evidence" },
+      ]),
+    ).toContain("pouzdan dokaz");
+    expect(
+      decisionReason([{ stage: "decision", reason: "jev_unavailable" }]),
+    ).toContain("trenutno nije dostupna");
   });
   it("explains the last decision step", () => {
     const trace = [
@@ -17,7 +23,11 @@ describe("reasons", () => {
   });
 
   it("explains missing subject evidence", () => {
-    expect(decisionReason([{stage: "decision", reason: "evidence_missing_subject"}])).toContain("okolnosti");
+    expect(
+      decisionReason([
+        { stage: "decision", reason: "evidence_missing_subject" },
+      ]),
+    ).toContain("okolnosti");
   });
 
   it("returns null for unknown or missing decisions", () => {

@@ -1,0 +1,165 @@
+{
+  "note": "Separate live diagnostic repeat; does not replace the original main-comparison result or change thresholds/prompts. Original failure code was not saved by candidate_runner.",
+  "result": {
+    "id": "P16",
+    "category": "yes-no-implicit",
+    "expected": "answer",
+    "got": "answer",
+    "behaviour_correct": true,
+    "retrieval_hit": true,
+    "fact_in_citations": true,
+    "citation_precision": 1.0,
+    "cited_chunk_ids": [
+      "hb-10-chunk-0"
+    ],
+    "top_k": [
+      {
+        "chunk_id": "hb-10-chunk-0",
+        "score": 0.70518
+      }
+    ],
+    "pass": true
+  },
+  "trace": [
+    {
+      "stage": "retrieval",
+      "candidates": [
+        {
+          "chunk_id": "hb-10-chunk-0",
+          "score": 0.7051799321323082
+        },
+        {
+          "chunk_id": "hb-10-chunk-1",
+          "score": 0.6546111277198425
+        },
+        {
+          "chunk_id": "hb-03-chunk-3",
+          "score": 0.5571020000306581
+        },
+        {
+          "chunk_id": "hb-01-chunk-1",
+          "score": 0.5517886478616029
+        },
+        {
+          "chunk_id": "hb-01-chunk-2",
+          "score": 0.5183801620395118
+        }
+      ]
+    },
+    {
+      "stage": "jev",
+      "chunk_id": "hb-10-chunk-0",
+      "model": "jev-1.13.0",
+      "label": "contradicted",
+      "probability": 0.99,
+      "confidence": 0.98,
+      "accepted": true,
+      "cached": false
+    },
+    {
+      "stage": "jev",
+      "chunk_id": "hb-10-chunk-1",
+      "model": "jev-1.13.0",
+      "label": "insufficient",
+      "probability": 0.83,
+      "confidence": 0.74,
+      "accepted": false,
+      "cached": false
+    },
+    {
+      "stage": "jev",
+      "chunk_id": "hb-03-chunk-3",
+      "model": "jev-1.13.0",
+      "label": "insufficient",
+      "probability": 0.99,
+      "confidence": 0.98,
+      "accepted": false,
+      "cached": false
+    },
+    {
+      "stage": "jev",
+      "chunk_id": "hb-01-chunk-1",
+      "model": "jev-1.13.0",
+      "label": "insufficient",
+      "probability": 1.0,
+      "confidence": 1.0,
+      "accepted": false,
+      "cached": false
+    },
+    {
+      "stage": "jev",
+      "chunk_id": "hb-01-chunk-2",
+      "model": "jev-1.13.0",
+      "label": "insufficient",
+      "probability": 1.0,
+      "confidence": 1.0,
+      "accepted": false,
+      "cached": false
+    },
+    {
+      "stage": "context",
+      "anchors": [
+        "hb-10-chunk-0"
+      ],
+      "expanded": [
+        "hb-10-chunk-0"
+      ],
+      "neighbor_scores": "inherited; not retrieval scores"
+    },
+    {
+      "stage": "generation",
+      "text": "No, regular IT support is not available at seven in the morning. [hb-10-chunk-0]",
+      "metadata": {
+        "done_reason": "stop",
+        "done": true,
+        "model": "qwen2.5:7b",
+        "eval_count": 25,
+        "prompt_eval_count": 150,
+        "total_duration": 1167142000
+      }
+    },
+    {
+      "stage": "stage_timing",
+      "retrieval_and_judging_s": 0.362,
+      "generation_s": 4.354,
+      "total_s": 4.716
+    },
+    {
+      "stage": "decision",
+      "refused": false,
+      "citations": [
+        "hb-10-chunk-0"
+      ],
+      "fallback": null
+    }
+  ],
+  "usage": {
+    "requests": {
+      "embeddings": 0,
+      "llm": 2,
+      "jev": 1
+    },
+    "cache_hits": {
+      "embeddings": 25,
+      "llm": 0
+    },
+    "prompt_tokens": 2274,
+    "output_tokens": 256,
+    "unknown_token_calls": 0,
+    "model_seconds": 4.654977208032506,
+    "phases": [
+      {
+        "stage": "retrieval",
+        "seconds": 0.034551
+      },
+      {
+        "stage": "judge",
+        "seconds": 0.327306
+      },
+      {
+        "stage": "generation",
+        "seconds": 4.353986
+      }
+    ]
+  }
+}

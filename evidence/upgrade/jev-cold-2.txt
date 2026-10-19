@@ -1,0 +1,1 @@
+repeat 2: 38/40; requests={'embeddings': 1, 'llm': 28, 'jev': 39}; total=69.932s

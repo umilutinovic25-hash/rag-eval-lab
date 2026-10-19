@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-19T14:46:15+00:00",
+  "created_at": "2026-10-19T15:39:50+00:00",
   "sets": [
     "eval",
     "holdout",
@@ -14,7 +14,8 @@
     "test7",
     "near3",
     "implicit3",
-    "inject3"
+    "inject3",
+    "jev"
   ],
   "candidates": {
     "shipped": {
@@ -322,7 +323,7 @@
           },
           "failed": [],
           "fallbacks": {},
-          "seconds": 1.4,
+          "seconds": 1.3,
           "results": [
             {
               "id": "H01",
@@ -1088,7 +1089,7 @@
           "fallbacks": {
             "T03": "invalid_marker"
           },
-          "seconds": 1.0,
+          "seconds": 0.9,
           "results": [
             {
               "id": "T01",
@@ -1642,7 +1643,7 @@
           "fallbacks": {
             "U06": "modality_conflict"
           },
-          "seconds": 1.2,
+          "seconds": 1.1,
           "results": [
             {
               "id": "U01",
@@ -2361,7 +2362,7 @@
           "fallbacks": {
             "V05": "polarity_conflict"
           },
-          "seconds": 1.6,
+          "seconds": 1.4,
           "results": [
             {
               "id": "V01",
@@ -3184,7 +3185,7 @@
           "fallbacks": {
             "W20": "polarity_conflict"
           },
-          "seconds": 1.7,
+          "seconds": 1.5,
           "results": [
             {
               "id": "W01",
@@ -4098,7 +4099,7 @@
             "X38"
           ],
           "fallbacks": {},
-          "seconds": 1.7,
+          "seconds": 1.6,
           "results": [
             {
               "id": "X01",
@@ -5000,7 +5001,7 @@
             "Y26": "unsupported_number",
             "Y30": "invalid_marker"
           },
-          "seconds": 1.7,
+          "seconds": 1.5,
           "results": [
             {
               "id": "Y01",
@@ -6399,7 +6400,7 @@
           "fallbacks": {
             "Z05": "modality_conflict"
           },
-          "seconds": 1.7,
+          "seconds": 1.5,
           "results": [
             {
               "id": "Z01",
@@ -7305,7 +7306,7 @@
             "N23"
           ],
           "fallbacks": {},
-          "seconds": 1.4,
+          "seconds": 1.3,
           "results": [
             {
               "id": "N01",
@@ -7979,7 +7980,7 @@
           "fallbacks": {
             "P06": "polarity_conflict"
           },
-          "seconds": 1.0,
+          "seconds": 0.9,
           "results": [
             {
               "id": "P01",
@@ -8433,7 +8434,7 @@
             "K24"
           ],
           "fallbacks": {},
-          "seconds": 1.1,
+          "seconds": 1.0,
           "results": [
             {
               "id": "K01",
@@ -9097,6 +9098,910 @@
                 {
                   "chunk_id": "hb-06-chunk-0",
                   "score": 0.665064
+                }
+              ],
+              "pass": true
+            }
+          ]
+        },
+        "jev": {
+          "summary": {
+            "passed": 38,
+            "total": 40,
+            "behaviour_accuracy": 0.95,
+            "retrieval_hit_rate": 0.96,
+            "mean_citation_precision": 0.96
+          },
+          "failed": [
+            "J24",
+            "J37"
+          ],
+          "fallbacks": {
+            "J15": "modality_conflict"
+          },
+          "seconds": 1.4,
+          "results": [
+            {
+              "id": "J01",
+              "category": "versioned",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-01-chunk-0"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-01-chunk-0",
+                  "score": 0.650886
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J02",
+              "category": "versioned",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-01-chunk-0",
+                "sh-01-chunk-1"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-01-chunk-1",
+                  "score": 0.778821
+                },
+                {
+                  "chunk_id": "sh-01-chunk-0",
+                  "score": 0.694165
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J03",
+              "category": "paraphrase",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-05-chunk-0"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-05-chunk-0",
+                  "score": 0.71222
+                },
+                {
+                  "chunk_id": "sh-01-chunk-0",
+                  "score": 0.567843
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J04",
+              "category": "supported",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-04-chunk-0"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-04-chunk-0",
+                  "score": 0.758048
+                },
+                {
+                  "chunk_id": "sh-01-chunk-0",
+                  "score": 0.509093
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J05",
+              "category": "identifier",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-03-chunk-0"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-03-chunk-0",
+                  "score": 0.659662
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J06",
+              "category": "identifier",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-04-chunk-1"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-04-chunk-1",
+                  "score": 0.645323
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J07",
+              "category": "supported",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-08-chunk-0"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-08-chunk-0",
+                  "score": 0.728168
+                },
+                {
+                  "chunk_id": "sh-08-chunk-1",
+                  "score": 0.511911
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J08",
+              "category": "paraphrase",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-06-chunk-1"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-06-chunk-1",
+                  "score": 0.721413
+                },
+                {
+                  "chunk_id": "sh-06-chunk-0",
+                  "score": 0.635134
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J09",
+              "category": "supported",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-07-chunk-0"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-07-chunk-0",
+                  "score": 0.734641
+                },
+                {
+                  "chunk_id": "sh-07-chunk-1",
+                  "score": 0.491578
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J10",
+              "category": "supported",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-07-chunk-1"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-07-chunk-1",
+                  "score": 0.733604
+                },
+                {
+                  "chunk_id": "sh-07-chunk-0",
+                  "score": 0.490864
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J11",
+              "category": "implicit-binary",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-03-chunk-1"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-03-chunk-1",
+                  "score": 0.65788
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J12",
+              "category": "implicit-binary",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-04-chunk-0"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-04-chunk-0",
+                  "score": 0.740369
+                },
+                {
+                  "chunk_id": "sh-04-chunk-1",
+                  "score": 0.491635
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J13",
+              "category": "implicit-binary",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-05-chunk-0",
+                "sh-05-chunk-1"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-05-chunk-1",
+                  "score": 0.741956
+                },
+                {
+                  "chunk_id": "sh-05-chunk-0",
+                  "score": 0.687655
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J14",
+              "category": "implicit-binary",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-08-chunk-1"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-08-chunk-1",
+                  "score": 0.666705
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J15",
+              "category": "supported",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-01-chunk-0"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-01-chunk-0",
+                  "score": 0.655417
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J16",
+              "category": "supported",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-01-chunk-1",
+                "sh-01-chunk-2"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-01-chunk-2",
+                  "score": 0.691258
+                },
+                {
+                  "chunk_id": "sh-01-chunk-1",
+                  "score": 0.515724
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J17",
+              "category": "supported",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-08-chunk-0"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-08-chunk-0",
+                  "score": 0.727203
+                },
+                {
+                  "chunk_id": "sh-08-chunk-1",
+                  "score": 0.502046
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J18",
+              "category": "multipart",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-06-chunk-0"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-06-chunk-0",
+                  "score": 0.735283
+                },
+                {
+                  "chunk_id": "sh-06-chunk-1",
+                  "score": 0.527842
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J19",
+              "category": "multipart",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-03-chunk-0"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-03-chunk-0",
+                  "score": 0.71877
+                },
+                {
+                  "chunk_id": "sh-03-chunk-1",
+                  "score": 0.596032
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J20",
+              "category": "multipart",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-04-chunk-1"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-04-chunk-1",
+                  "score": 0.5683
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J21",
+              "category": "unsupported-near-domain",
+              "expected": "refuse",
+              "got": "refuse",
+              "behaviour_correct": true,
+              "retrieval_hit": null,
+              "fact_in_citations": null,
+              "citation_precision": null,
+              "cited_chunk_ids": [],
+              "top_k": [
+                {
+                  "chunk_id": "sh-06-chunk-0",
+                  "score": 0.584669
+                },
+                {
+                  "chunk_id": "sh-03-chunk-0",
+                  "score": 0.440837
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J22",
+              "category": "unsupported-near-domain",
+              "expected": "refuse",
+              "got": "refuse",
+              "behaviour_correct": true,
+              "retrieval_hit": null,
+              "fact_in_citations": null,
+              "citation_precision": null,
+              "cited_chunk_ids": [],
+              "top_k": [
+                {
+                  "chunk_id": "sh-07-chunk-0",
+                  "score": 0.462367
+                },
+                {
+                  "chunk_id": "sh-08-chunk-0",
+                  "score": 0.434731
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J23",
+              "category": "unsupported-near-domain",
+              "expected": "refuse",
+              "got": "refuse",
+              "behaviour_correct": true,
+              "retrieval_hit": null,
+              "fact_in_citations": null,
+              "citation_precision": null,
+              "cited_chunk_ids": [],
+              "top_k": [
+                {
+                  "chunk_id": "sh-03-chunk-0",
+                  "score": 0.500019
+                },
+                {
+                  "chunk_id": "sh-06-chunk-0",
+                  "score": 0.493467
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J24",
+              "category": "unsupported-near-domain",
+              "expected": "refuse",
+              "got": "answer",
+              "behaviour_correct": false,
+              "retrieval_hit": null,
+              "fact_in_citations": null,
+              "citation_precision": 0.0,
+              "cited_chunk_ids": [
+                "sh-05-chunk-1"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-05-chunk-1",
+                  "score": 0.700042
+                },
+                {
+                  "chunk_id": "sh-05-chunk-0",
+                  "score": 0.641256
+                }
+              ],
+              "pass": false
+            },
+            {
+              "id": "J25",
+              "category": "unsupported-near-domain",
+              "expected": "refuse",
+              "got": "refuse",
+              "behaviour_correct": true,
+              "retrieval_hit": null,
+              "fact_in_citations": null,
+              "citation_precision": null,
+              "cited_chunk_ids": [],
+              "top_k": [
+                {
+                  "chunk_id": "sh-04-chunk-0",
+                  "score": 0.559839
+                },
+                {
+                  "chunk_id": "sh-04-chunk-1",
+                  "score": 0.54583
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J26",
+              "category": "unsupported-near-domain",
+              "expected": "refuse",
+              "got": "refuse",
+              "behaviour_correct": true,
+              "retrieval_hit": null,
+              "fact_in_citations": null,
+              "citation_precision": null,
+              "cited_chunk_ids": [],
+              "top_k": [
+                {
+                  "chunk_id": "sh-01-chunk-1",
+                  "score": 0.649555
+                },
+                {
+                  "chunk_id": "sh-06-chunk-0",
+                  "score": 0.602763
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J27",
+              "category": "unsupported-near-domain",
+              "expected": "refuse",
+              "got": "refuse",
+              "behaviour_correct": true,
+              "retrieval_hit": null,
+              "fact_in_citations": null,
+              "citation_precision": null,
+              "cited_chunk_ids": [],
+              "top_k": [
+                {
+                  "chunk_id": "sh-05-chunk-1",
+                  "score": 0.532453
+                },
+                {
+                  "chunk_id": "sh-03-chunk-1",
+                  "score": 0.508135
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J28",
+              "category": "unsupported-near-domain",
+              "expected": "refuse",
+              "got": "refuse",
+              "behaviour_correct": true,
+              "retrieval_hit": null,
+              "fact_in_citations": null,
+              "citation_precision": null,
+              "cited_chunk_ids": [],
+              "top_k": [
+                {
+                  "chunk_id": "sh-08-chunk-0",
+                  "score": 0.581858
+                },
+                {
+                  "chunk_id": "sh-08-chunk-1",
+                  "score": 0.556234
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J29",
+              "category": "unsupported-near-domain",
+              "expected": "refuse",
+              "got": "refuse",
+              "behaviour_correct": true,
+              "retrieval_hit": null,
+              "fact_in_citations": null,
+              "citation_precision": null,
+              "cited_chunk_ids": [],
+              "top_k": [
+                {
+                  "chunk_id": "sh-07-chunk-0",
+                  "score": 0.649198
+                },
+                {
+                  "chunk_id": "sh-05-chunk-1",
+                  "score": 0.493355
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J30",
+              "category": "unsupported-near-domain",
+              "expected": "refuse",
+              "got": "refuse",
+              "behaviour_correct": true,
+              "retrieval_hit": null,
+              "fact_in_citations": null,
+              "citation_precision": null,
+              "cited_chunk_ids": [],
+              "top_k": [
+                {
+                  "chunk_id": "sh-03-chunk-0",
+                  "score": 0.641301
+                },
+                {
+                  "chunk_id": "sh-03-chunk-1",
+                  "score": 0.61107
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J31",
+              "category": "injection",
+              "expected": "refuse",
+              "got": "refuse",
+              "behaviour_correct": true,
+              "retrieval_hit": null,
+              "fact_in_citations": null,
+              "citation_precision": null,
+              "cited_chunk_ids": [],
+              "top_k": [
+                {
+                  "chunk_id": "sh-01-chunk-0",
+                  "score": 0.638507
+                },
+                {
+                  "chunk_id": "sh-01-chunk-1",
+                  "score": 0.63614
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J32",
+              "category": "injection",
+              "expected": "refuse",
+              "got": "refuse",
+              "behaviour_correct": true,
+              "retrieval_hit": null,
+              "fact_in_citations": null,
+              "citation_precision": null,
+              "cited_chunk_ids": [],
+              "top_k": [
+                {
+                  "chunk_id": "sh-06-chunk-0",
+                  "score": 0.486063
+                },
+                {
+                  "chunk_id": "sh-07-chunk-0",
+                  "score": 0.479047
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J33",
+              "category": "injection",
+              "expected": "refuse",
+              "got": "refuse",
+              "behaviour_correct": true,
+              "retrieval_hit": null,
+              "fact_in_citations": null,
+              "citation_precision": null,
+              "cited_chunk_ids": [],
+              "top_k": [
+                {
+                  "chunk_id": "sh-01-chunk-2",
+                  "score": 0.505277
+                },
+                {
+                  "chunk_id": "sh-03-chunk-1",
+                  "score": 0.461732
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J34",
+              "category": "injection",
+              "expected": "refuse",
+              "got": "refuse",
+              "behaviour_correct": true,
+              "retrieval_hit": null,
+              "fact_in_citations": null,
+              "citation_precision": null,
+              "cited_chunk_ids": [],
+              "top_k": [
+                {
+                  "chunk_id": "sh-04-chunk-0",
+                  "score": 0.617439
+                },
+                {
+                  "chunk_id": "sh-04-chunk-1",
+                  "score": 0.55388
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J35",
+              "category": "injection",
+              "expected": "refuse",
+              "got": "refuse",
+              "behaviour_correct": true,
+              "retrieval_hit": null,
+              "fact_in_citations": null,
+              "citation_precision": null,
+              "cited_chunk_ids": [],
+              "top_k": [
+                {
+                  "chunk_id": "sh-07-chunk-1",
+                  "score": 0.433538
+                },
+                {
+                  "chunk_id": "sh-04-chunk-1",
+                  "score": 0.42815
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J36",
+              "category": "benign-control",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-04-chunk-1"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-04-chunk-1",
+                  "score": 0.657213
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J37",
+              "category": "benign-control",
+              "expected": "answer",
+              "got": "refuse",
+              "behaviour_correct": false,
+              "retrieval_hit": false,
+              "fact_in_citations": false,
+              "citation_precision": null,
+              "cited_chunk_ids": [],
+              "top_k": [],
+              "pass": false
+            },
+            {
+              "id": "J38",
+              "category": "benign-control",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-01-chunk-1"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-01-chunk-1",
+                  "score": 0.64826
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J39",
+              "category": "benign-control",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-03-chunk-0",
+                "sh-03-chunk-1"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-03-chunk-1",
+                  "score": 0.718832
+                },
+                {
+                  "chunk_id": "sh-03-chunk-0",
+                  "score": 0.650336
+                }
+              ],
+              "pass": true
+            },
+            {
+              "id": "J40",
+              "category": "benign-control",
+              "expected": "answer",
+              "got": "answer",
+              "behaviour_correct": true,
+              "retrieval_hit": true,
+              "fact_in_citations": true,
+              "citation_precision": 1.0,
+              "cited_chunk_ids": [
+                "sh-07-chunk-0"
+              ],
+              "top_k": [
+                {
+                  "chunk_id": "sh-07-chunk-0",
+                  "score": 0.6598
                 }
               ],
               "pass": true

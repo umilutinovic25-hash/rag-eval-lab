@@ -1,0 +1,43 @@
+{
+  "provider": "TypeSafe",
+  "model": "jev-1.13.0",
+  "endpoint": "https://api.typesafe.ai/v1/systemone",
+  "request": "Question plus candidate passage text/metadata; Choice supported/contradicted/insufficient per passage; no gold labels.",
+  "credentials": "Server environment or private ignored .env.jev; never projected into browser/config/cache.",
+  "decision_policy": {
+    "supported_or_contradicted_min_probability": 0.8,
+    "uncertain": "refuse",
+    "provider_error": "refuse with jev_unavailable",
+    "fallback_to_other_judge": false
+  },
+  "resilience": {
+    "attempts": 1,
+    "timeout_s": 15,
+    "operation_deadline_applies": true,
+    "redirects": false,
+    "input_bytes_limit": 128000,
+    "response_bytes_limit": 1048576,
+    "cancellation": "Before and after blocking I/O, timeout bounds in-flight I/O."
+  },
+  "observability": [
+    "model",
+    "label",
+    "probability",
+    "confidence",
+    "cache flag",
+    "sanitized failure code",
+    "request counts",
+    "provider usage tokens"
+  ],
+  "verification": {
+    "fake_transport": "tests/test_jev.py",
+    "live_smoke": "evidence/upgrade/jev-live-smoke.json",
+    "frozen_questions": "eval/jev_set.json",
+    "protocol": "evidence/upgrade/jev-protocol.md"
+  },
+  "sources": [
+    "https://docs.typesafe.ai/api",
+    "https://docs.typesafe.ai/models",
+    "https://docs.typesafe.ai/confidence"
+  ]
+}

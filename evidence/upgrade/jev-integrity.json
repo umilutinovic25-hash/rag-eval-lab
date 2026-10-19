@@ -1,0 +1,20 @@
+{
+  "protected_files": {
+    "data/embedding_cache.json": "7d23e6460e89249fc993ba5406b957d6742f69d465482d1ef075f5d0dfe0eab2",
+    "data/llm_cache-metadata.json": "f8977d73fc1f818f0dd7c2be4295f248104bcd5942d44faf94ffc5447e495170",
+    "data/llm_cache.json": "b2b18ae388d220b67fb021d32d6c0a826dd05cddb5ffb16c4a77464ceb5b8b1a",
+    "data/sr-handbook.json": "cfc7b12388d0e73b1b0ca2ca4cd23aabbf67fd54053f58a0a147752e9426b212",
+    "src/eval_runner.py": "cc00aad5d3a997772aab06c95bb57299c87c51b82be080b12608ff17a99bd704",
+    "src/eval_compare.py": "c84b246ff3006aa285af2eb2e04addd4fce5264897e0e346ef38f8013b51009c",
+    "deliverables/week07-M5-minimum.zip": "1725292e90f584dac24f7675f07b05283227a6bd235f67c29c0ea1f10a1fe188"
+  },
+  "changed_protected_files": [],
+  "old_local_sets": 14,
+  "old_local_pass_citation_differences": [],
+  "final_local_sets": 15,
+  "local_model_identity_unchanged": true,
+  "credential_ignored": true,
+  "credential_permissions": "0600",
+  "credential_in_tracked_files": false,
+  "main_provider_cache_matches_cost_manifest": true
+}

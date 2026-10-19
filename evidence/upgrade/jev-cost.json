@@ -1,0 +1,40 @@
+{
+  "parts": {
+    "main_successful": {
+      "successful_requests": 425,
+      "input_tokens": 824766,
+      "output_tokens": 93786
+    },
+    "cold_1": {
+      "successful_requests": 39,
+      "input_tokens": 77502,
+      "output_tokens": 8832
+    },
+    "cold_2": {
+      "successful_requests": 39,
+      "input_tokens": 77502,
+      "output_tokens": 8832
+    },
+    "synthetic_smoke": {
+      "successful_requests": 1,
+      "input_tokens": 593,
+      "output_tokens": 45
+    },
+    "additional_diagnostic": {
+      "successful_requests": 1,
+      "input_tokens": 2024,
+      "output_tokens": 228
+    },
+    "additional_http_smoke": {
+      "successful_requests": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  "reported_successful_input_tokens": 982387,
+  "published_usd_per_million_input_tokens": 0.042,
+  "estimated_successful_request_cost_usd": 0.04126,
+  "price_source": "https://docs.typesafe.ai/models",
+  "excludes": "Unrecorded failed request billing, taxes and local computation. Estimate, not an invoice.",
+  "main_provider_cache_sha256": "b2c171811ad3f5d7561aa43670db67fbfa906328282ad05ba6c07f86587333b4"
+}

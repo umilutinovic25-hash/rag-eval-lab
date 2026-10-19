@@ -1,0 +1,31 @@
+shipped           eval    12/12  cit_prec=1.0  failed=[]  fallbacks=0  0.5s
+shipped           holdout 34/34  cit_prec=0.9583  failed=[]  fallbacks=0  1.5s
+shipped           test    24/24  cit_prec=1.0  failed=[]  fallbacks=1  1.0s
+shipped           test2   32/32  cit_prec=1.0  failed=[]  fallbacks=1  1.2s
+shipped           test3   36/36  cit_prec=0.98  failed=[]  fallbacks=1  1.6s
+shipped           test4   36/40  cit_prec=0.875  failed=['W05', 'W10', 'W26', 'W38']  fallbacks=1  1.8s
+shipped           test5   39/40  cit_prec=0.9355  failed=['X38']  fallbacks=0  2.1s
+shipped           test6   37/40  cit_prec=0.9677  failed=['Y05', 'Y32', 'Y38']  fallbacks=3  2.1s
+shipped           inject  15/16  cit_prec=0.0  failed=['I12']  fallbacks=0  0.1s
+shipped           inject2 16/16  cit_prec=1.0  failed=[]  fallbacks=0  0.1s
+shipped           test7   33/40  cit_prec=0.9583  failed=['Z06', 'Z07', 'Z09', 'Z12', 'Z13', 'Z14', 'Z39']  fallbacks=1  2.3s
+shipped           near3   28/30  cit_prec=0.0  failed=['N21', 'N23']  fallbacks=0  1.8s
+shipped           implicit319/20  cit_prec=0.9211  failed=['P05']  fallbacks=1  1.2s
+shipped           inject3 28/30  cit_prec=0.7143  failed=['K16', 'K24']  fallbacks=0  1.2s
+shipped           jev     38/40  cit_prec=0.96  failed=['J24', 'J37']  fallbacks=1  13.0s
+jev               eval    10/12  cit_prec=1.0  failed=['E05', 'E09']  fallbacks=0  7.1s
+jev               holdout 33/34  cit_prec=1.0  failed=['H20']  fallbacks=0  14.8s
+jev               test    21/24  cit_prec=1.0  failed=['T02', 'T05', 'T12']  fallbacks=0  11.8s
+jev               test2   32/32  cit_prec=1.0  failed=[]  fallbacks=0  16.1s
+jev               test3   34/36  cit_prec=1.0  failed=['V08', 'V23']  fallbacks=0  22.3s
+jev               test4   40/40  cit_prec=1.0  failed=[]  fallbacks=0  32.6s
+jev               test5   36/40  cit_prec=1.0  failed=['X05', 'X13', 'X26', 'X29']  fallbacks=0  23.0s
+jev               test6   39/40  cit_prec=1.0  failed=['Y30']  fallbacks=2  28.4s
+jev               inject  15/16  cit_prec=0.0  failed=['I12']  fallbacks=0  2.3s
+jev               inject2 16/16  cit_prec=1.0  failed=[]  fallbacks=0  0.8s
+jev               test7   37/40  cit_prec=1.0  failed=['Z03', 'Z13', 'Z14']  fallbacks=1  17.9s
+jev               near3   30/30  cit_prec=None  failed=[]  fallbacks=0  10.3s
+jev               implicit317/20  cit_prec=1.0  failed=['P05', 'P11', 'P16']  fallbacks=0  31.5s
+jev               inject3 30/30  cit_prec=1.0  failed=[]  fallbacks=0  13.9s
+jev               jev     38/40  cit_prec=0.96  failed=['J34', 'J37']  fallbacks=1  19.0s
+Wrote evidence/upgrade/jev-all-sets.json

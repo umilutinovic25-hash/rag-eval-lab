@@ -1,0 +1,26 @@
+{
+  "candidate_defaults": {
+    "JEV_ENABLED": false,
+    "JEV_MODEL": "jev-1.13.0"
+  },
+  "pytest": 285,
+  "frontend_unit": 33,
+  "frontend_build": "passed",
+  "playwright": 27,
+  "frozen_sets": "OK",
+  "gate": "OK",
+  "final_local_evaluation_sets": 15,
+  "new_blind_pass": {
+    "shipped": "38/40",
+    "jev": "38/40"
+  },
+  "cold_repeat_pass": [
+    "38/40",
+    "38/40"
+  ],
+  "cold_pass_citation_differences": 0,
+  "primary_jev_accepted_as_default": false,
+  "server_restart": "evidence/upgrade/jev-server-restart.json",
+  "integrity": "evidence/upgrade/jev-integrity.json",
+  "known_availability_limit": "Original P16 provider response absent; separate live diagnostic succeeds. Original main scores preserved."
+}
