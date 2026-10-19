@@ -194,6 +194,7 @@ Spec `docs/rag-upgrade-spec.md`, results `docs/rag-upgrade-results.md`, data `ev
 - **Judge calibration** (510 labelled pairs from seen sets): shipped `either` TPR 0.903 / TNR 0.952, but its span step uses the generator's model family, so it stays advisory.
 - **Blind test 3** (`eval/test3_set.json`, 36 assistant-authored questions, committed before any experiment): 34/36 now, 33/36 before. The two failures are false refusals of answerable yes/no questions, so the seen-set 102/102 overstates generalisation. Test 3 is now a seen set.
 - **Round 2** (`docs/rag-upgrade-results.md`): `YESNO_QUESTION_JUDGE = "answerability"` adds a yes/no/unknown check (`gemma3:4b`) for yes/no-form questions after the normal judge; fixes V21 and V25 (test 3 36/36). Blind test 4 (40 questions) showed the first, replacing version regressed (34/40 vs 36/40), so it is a union; test 4 stays at 36/40 and W05, W10, W26 (implicit yes/no) remain refused. Test 4 is now a seen set.
+- **Blind test 5** (`eval/test5_set.json`, 40 questions, committed before the run, shipped configuration run once, no tuning): **39/40** vs 36/40 without the yes/no judge (X04, X06, X28 fixed, no regression). Remaining failure X38 (forgotten badge answered from the lost-badge rule). Evidence: `evidence/upgrade/test5-*.json`. Test 5 is now a seen set; author is the same AI that built the system.
 - Not done: vector database/ANN index (26 chunks), cross-encoder reranker (none installed locally), human labelling.
 
 ```bash

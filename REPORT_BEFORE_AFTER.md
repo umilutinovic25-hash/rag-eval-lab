@@ -3,11 +3,11 @@
 **Par:** Uroš Milutinović i [drugi član para]  
 **Demonstraciju na Sesiji 2 vodi:** [ime]  
 **Promena:** M5, filter važeće verzije (`CURRENT_ONLY = True`)  
-**Commitovi:** `ee583f3` početno stanje → `2ceaced` specifikacija → `45b8172` promena  
-**Datum:** 2026-10-17  
+**Commitovi:** `ee583f3` početno stanje → `2ceaced` specifikacija → `45b8172` promena (obavezni deo); dalji krugovi do `54358d4`  
+**Datum:** 2026-10-17 (poslednje ažuriranje 2026-10-19: odeljak 18)  
 **Šablon:** `docs/sablon-izvestaj-pre-posle.md` (napravljen prema zahtevima zadatka, jer zvanični šablon nije bio dostavljen)
 
-> Obavezni deo (odeljci 1–11) odnosi se na commit `45b8172`; napredni deo i ispravke C1–C6 su odvojeni u odeljcima 12–15. Posle checkout-a ukloniti postojeći `src/__pycache__`. `PYTHONDONTWRITEBYTECODE=1` sprečava upis novih .pyc fajlova, ali ne sprečava učitavanje postojećeg zastarelog bytecode-a.
+> Obavezni deo (odeljci 1–11) odnosi se na commit `45b8172`; napredni deo i ispravke C1–C6 su odvojeni u odeljcima 12–18. Brojevi u odeljcima 16–17 (23/24, 29/32, 176 testova) su istorijski; aktuelno stanje je u odeljku 18. Posle checkout-a ukloniti postojeći `src/__pycache__`. `PYTHONDONTWRITEBYTECODE=1` sprečava upis novih .pyc fajlova, ali ne sprečava učitavanje postojećeg zastarelog bytecode-a.
 
 ## 1. Početna provera
 
@@ -165,7 +165,7 @@ Naš odgovor na komentar: [šta smo promenili ili zašto nismo]
 
 ## 10. Korišćenje AI-ja
 
-Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene testove i eval, izdvoji ocene iz `top_k` radi dijagnoze propusta, napiše nacrt specifikacije i implementira filter sa testom, a u naprednom delu i promene A1–A4, kontrolnu proveru i automatski pregled koda (odeljak 12). AI asistent je takođe pisao i testirao B1–B5c; Codex je uradio analizu i ispravke C1–C6 (odeljak 14), kao i kontrolisane D1–D6 eksperimente (odeljak 15). „Ručni pregled“ u naprednim eksperimentima označava pregled asistenta, ne nezavisnu ljudsku proveru. Sve tvrdnje su proverene merenjem, a ne na osnovu reči asistenta: `results/before.json` i `results/after.json` su napravljeni istom komandom, `eval_compare` potvrđuje isti otisak i samo jedno promenjeno podešavanje, a E06 je ručno proveren preko CLI-ja pre i posle (izlazi u `evidence/`). [Dopuniti: šta je svako od nas ručno proverio.]
+Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene testove i eval, izdvoji ocene iz `top_k` radi dijagnoze propusta, napiše nacrt specifikacije i implementira filter sa testom, a u naprednom delu i promene A1–A4 (a kasnije G1–G8, rundu 2 i slepi test 5, odeljak 18), kontrolnu proveru i automatski pregled koda (odeljak 12). AI asistent je takođe pisao i testirao B1–B5c; Codex je uradio analizu i ispravke C1–C6 (odeljak 14), kao i kontrolisane D1–D6 eksperimente (odeljak 15). „Ručni pregled“ u naprednim eksperimentima označava pregled asistenta, ne nezavisnu ljudsku proveru. Sve tvrdnje su proverene merenjem, a ne na osnovu reči asistenta: `results/before.json` i `results/after.json` su napravljeni istom komandom, `eval_compare` potvrđuje isti otisak i samo jedno promenjeno podešavanje, a E06 je ručno proveren preko CLI-ja pre i posle (izlazi u `evidence/`). [Dopuniti: šta je svako od nas ručno proverio.]
 
 ## 11. Doprinos
 
@@ -409,6 +409,26 @@ Provera: 176 Python testova, 24 frontend testa, 22 browser scenarija, formatiran
 
 Dokazi: `evidence/next/baseline.json`, `claims.json`, `final.json`, `comparison.json`, `candidate-offline.json`, `candidate-live.json`, `candidate-replay.json`. Sirovi live izlaz nije prepisan; `live-source.zip` odgovara svim njegovim source hash-evima, a `live-artifacts.json` vezuje dodatni keš i arhivu. Šablon `review/acceptance-v2-review-template.json` vezan je za konkretan skup i konkretne odgovore; stvarni recenzent tek treba da unese svoje ime, odluke i komentare. Alat odbija nepotpune ili nepovezane ocene i ne proverava stvarni identitet osobe. Uputstvo i API ugovori: `docs/frontend/README.md`.
 
+## 18. G1–G8, runda 2 i slepi test 5 (19.10.2026.)
+
+Specifikacija `docs/rag-upgrade-spec.md` i rezultati `docs/rag-upgrade-results.md` (commiti `3e68f63`..`10a061c`, test 5 `54358d4`). Svaki novi skup pitanja je commitovan pre bilo kog eksperimenta ili pokretanja. Pitanja pišu AI asistent, a ne nezavisna osoba; ocena je automatska, bez ljudske provere.
+
+- **Prihvaćeno:** `CHUNK_HEADERS = True` (naslov dokumenta u tekstu za embedding, citirani tekst nepromenjen). Fact recall@1 0,944 → 1,000 na 72 viđena pitanja; skupovi 12/12, 34/34, 24/24, 32/32 nepromenjeni.
+- **Odbačeno i isključeno:** BM25 hibrid (lošiji od semantike pri svim težinama), few-shot judge (holdout 30/34), mistral judge (31/34), JSON odgovori, `TOP_K` 1 i 3.
+- **Slepi test 3** (36 pitanja): 33/36 pre, 34/36 posle zaglavlja; dve greške (V21, V25) su lažna odbijanja implicitnih da/ne pitanja.
+- **Runda 2:** trosmerni (yes/no/unknown) judge za da/ne pitanja. Prva verzija (zamena postojećeg judge-a) je na slepom testu 4 **pogoršala** rezultat 36 → 34/40, jer `gemma3:4b` kaže „unknown“ za jasne pasuse (W20, W22). Isporučena je kao unija iza postojećeg judge-a: test 3 36/36, test 4 36/40. Lekcija: kalibracija na viđenim parovima (TPR 0,89) nije predvidela slepi rezultat.
+- **Slepi test 5** (40 pitanja, `eval/test5_set.json`, commit `54358d4` pre pokretanja): finalna konfiguracija pokrenuta jednom, bez podešavanja posle rezultata.
+
+| Konfiguracija | test 5 | Pali |
+| --- | --- | --- |
+| bez zaglavlja i bez da/ne judge-a (`previous`) | 36/40 | X04, X06, X28, X38 |
+| sa zaglavljima, bez da/ne judge-a (`before-yesno3`) | 36/40 | X04, X06, X28, X38 |
+| **isporučena (unija)** | **39/40** (CitPrec 0,936) | X38 |
+
+Tri implicitna da/ne pitanja (X04 „reći lozinku kolegi iz IT-a“, X06 „zahtev za odmor sa tri dana unapred“, X28 „IT podrška nedeljom“) više se ne odbijaju; nema nove regresije. Preostala greška X38 („Šta ako zaboravim bedž kod kuće?“) je lažno prihvaćeno pitanje iz iste porodice kao W38: odgovara se iz pravila o izgubljenom bedžu iako dokument ne pokriva zaboravljen bedž. Njega nisam popravljao jer bi to bilo štimovanje na viđenom skupu.
+
+**Ograničenja:** test 5 je jedna nezavisna proba od 40 pitanja (39/40 ima širok interval poverenja, oko 87–99,6%), a autor pitanja je isti AI koji je gradio sistem; test 3, 4 i 5 su sada viđeni. Preostale poznate greške: W05, W10, W26 (test 4, implicitna da/ne pitanja) i W38, X38 (lažno prihvaćena pitanja blizu domena). Aktuelno stanje: 238 testova prolazi; 12/12, 34/34, 24/24, 32/32, 36/36, 36/40 i slepi 39/40. Dokazi: `evidence/upgrade/test5-shipped.json`, `evidence/upgrade/test5-before.json`.
+
 ## Dokazi
 
 - `evidence/before.json`, `evidence/after.json`: oba eval rezultata (kopije iz `results/`, koji git ignoriše)
@@ -420,13 +440,15 @@ Dokazi: `evidence/next/baseline.json`, `claims.json`, `final.json`, `comparison.
 - Napredni deo: `docs/advanced-specs.md`; `evidence/advanced/` (`adv1.json`, `adv2.json`, `adv3a.json`, `adv3b.json`, `adv4.json`, `compare-*.txt`, CLI izlazi, kontrolna provera)
 - Max nivo: `docs/maxlvl-specs.md`; `eval/holdout_set.json`, `eval/test_set.json`, `eval/test2_set.json`; `evidence/maxlvl/probes/`; `evidence/maxlvl/` (`holdout-*.json`, `eval-B*.json`, `test-*.json`, `compare-*.txt`, `answers-*.json`, ručni pregled odgovora, `test-final-run.txt`)
 
+- G1–G8, runda 2, test 5: `docs/rag-upgrade-spec.md`, `docs/rag-upgrade-results.md`, `evidence/upgrade/`.
+
 - Ispravke: `docs/hardening-spec.md`, `evidence/hardening/`, `src/experiment_runner.py`.
 
 - D eksperimenti: `docs/improvements-spec.md`, `docs/improvements-results.md`, `review/completeness-rubric.json`, `evidence/improvements/`.
 
 ## Kontrolna lista pre predaje
 
-- [x] `python -m pytest` prolazi posle promene (19 na `45b8172`; 107 posle C1–C6; 137 posle D koraka)
+- [x] `python -m pytest` prolazi posle promene (19 na `45b8172`; 107 posle C1–C6; 137 posle D koraka; 238 posle runde 2)
 - [x] Eval pokrenut pre i posle istom komandom
 - [x] Poređenje ne prijavljuje različit otisak eval skupa
 - [x] Oba propusta vezana za konkretna eval pitanja (E06, E04/E09, E10/E11, E05)
