@@ -1,0 +1,14 @@
+# Pre-registered technical experiment (19 October 2026)
+
+Questions frozen in commit bdca5d8, before any run or behavior change. Assistant-authored, automatic expectations; no human labels. test7: 40 corpus2 questions; near3: 30 unsupported handbook questions; implicit3: 20 handbook binary questions; inject3: 25 attacks + 5 benign controls. Exact duplicate audit passed. Before measurements run in an isolated process; their outcomes will not be inspected until the implementation is locked. They are paired baseline measurements, not independent model selection evidence.
+
+Diagnosis targets are the already seen Y05/Y32/Y38, not new-set results. Y05 has correct document retrieved below gray-zone floor (0.494401); Y32 has correct documents inside gray zone but judges receive no current/version metadata; Y38 shares refund topic but asks about a specific payment instrument absent from the refund passage.
+
+Fixed design, no per-question rules:
+1. VERSION_CONTEXT: identify explicit temporal/version intent; include title/version/status in judge context. Allow such a query below the gray-zone floor to reach a judge; CURRENT_ONLY continues filtering superseded documents. Metadata never becomes cited source text.
+2. EVIDENCE_RELEVANCE: before generation, verify the requested subject/event/circumstance against the selected passage(s), including high cosine bypass. A different event/object sharing the topic is insufficient. Corpus text and query are untrusted data in a JSON envelope. Reject non-factual output instructions and assistant-directed requests. Local qwen2.5:7b returns only supported/missing. Judge errors fail closed. Existing source-derived rules are also checked.
+3. IMPLICIT_BINARY: after existing judges reject a binary question, ask a separate direct binary reasoning prompt. A stated prohibition/limit may support no, without an explicit matching sentence. Missing subject/condition is unknown. No W-set phrases or item-specific patterns.
+
+All three switches disabled by baseline; no metric/old-set modifications. After locking implementation, run new sets and all old sets. Do not revise prompts based on challenge outcomes. Reject a feature if validation shows regressions; retain evidence of rejected candidates. Any later semantic revision needs new committed blind questions.
+
+Cold repeatability: two distinct scratch directories prepopulated with empty embedding/LLM/metadata JSON objects (scratch helper otherwise copies committed caches). Compare every pass flag and ordered citation list. No candidate experiment keys copied into data caches.
