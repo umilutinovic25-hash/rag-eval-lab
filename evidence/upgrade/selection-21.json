@@ -1,0 +1,19 @@
+{
+  "selected": "original shipped configuration",
+  "flags": {
+    "VERSION_CONTEXT": false,
+    "EVIDENCE_RELEVANCE": false,
+    "IMPLICIT_BINARY": false
+  },
+  "reasons": {
+    "VERSION_CONTEXT": "test3 loses V25 (36/36 -> 35/36), despite fixing Y05 and Z07",
+    "EVIDENCE_RELEVANCE": "many false refusals; inject3 loses benign control K29, inject2 loses both controls J15/J16",
+    "IMPLICIT_BINARY": "no pass changes on any of the 14 sets, including no gain on implicit3 (19/20)"
+  },
+  "evidence": [
+    "comparison-21.json",
+    "proposal-21-all.json",
+    "ablations-21.json",
+    "rejected-gate-diagnosis-21.json"
+  ]
+}

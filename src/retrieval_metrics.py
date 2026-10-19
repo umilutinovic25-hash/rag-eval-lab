@@ -23,7 +23,7 @@ SETS = {"eval": "eval_set.json", "holdout": "holdout_set.json", "test": "test_se
         "test3": "test3_set.json", "test4": "test4_set.json", "test5": "test5_set.json", "inject": "inject_set.json", "test6": "test6_set.json", "inject2": "inject2_set.json"}
 SETS.update({name: f"{name}_set.json" for name in ("test7", "near3", "implicit3", "inject3")})
 CORPORA = {"test6": "corpus2.json", "test7": "corpus2.json"}  # sets that run on a second, independent corpus (default: the handbook)
-SEEN = ("eval", "holdout", "test", "test2", "test3", "test4")  # test5 stays blind until the final run
+SEEN = ("eval", "holdout", "test", "test2", "test3", "test4")  # historical default selection; every registered set is now seen
 KS = (1, 2, 3, 5)
 
 VARIANTS = {

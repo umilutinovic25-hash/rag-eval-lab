@@ -36,7 +36,8 @@ POLARITY_MODEL = "gemma3:4b"
 # flagged as unsupported.
 NUMBERS_FROM_QUESTION = True
 
-# Section 21: independently switchable evidence checks; baseline keeps historical behavior.
+# Section 21: measured candidates remain disabled (regressions or no pass gain).
+# Evidence: evidence/upgrade/comparison-21.json. Baseline keeps historical behavior.
 VERSION_CONTEXT = False
 EVIDENCE_RELEVANCE = False
 IMPLICIT_BINARY = False

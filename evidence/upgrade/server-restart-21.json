@@ -1,0 +1,105 @@
+{
+  "earlier_restart": {
+    "old_pids": [
+      62085
+    ],
+    "new_pid": 76520
+  },
+  "old_pids": [
+    76520
+  ],
+  "new_pid": 76636,
+  "port": 8767,
+  "set_count": 14,
+  "runtime_cache_sync": {
+    "llm_cache.json": {
+      "added": [
+        "3f550dcfbdd4c4f4434ce7b5eac67dc4cda4979d992abd719f3e16025db8d23c",
+        "6cc0821a2d472e449413424858dcb54d3d8f860ce40ef0deec7c7e9f5cddfdd6"
+      ],
+      "existing_values_preserved": true,
+      "sha256": "d617dd99f21b5ed5574c47f0d5233ccc42459f24db8467c4a7862f3373d94bcf"
+    },
+    "llm_cache-metadata.json": {
+      "added": [
+        "3f550dcfbdd4c4f4434ce7b5eac67dc4cda4979d992abd719f3e16025db8d23c",
+        "6cc0821a2d472e449413424858dcb54d3d8f860ce40ef0deec7c7e9f5cddfdd6"
+      ],
+      "existing_values_preserved": true,
+      "sha256": "edd3250b8cfa106569cffc2be821818a8e7dfed8d30705771d8fcd9cf35065fa"
+    }
+  },
+  "sets": [
+    {
+      "name": "eval",
+      "passed": 12,
+      "total": 12
+    },
+    {
+      "name": "holdout",
+      "passed": 34,
+      "total": 34
+    },
+    {
+      "name": "test",
+      "passed": 24,
+      "total": 24
+    },
+    {
+      "name": "test2",
+      "passed": 32,
+      "total": 32
+    },
+    {
+      "name": "test3",
+      "passed": 36,
+      "total": 36
+    },
+    {
+      "name": "test4",
+      "passed": 36,
+      "total": 40
+    },
+    {
+      "name": "test5",
+      "passed": 39,
+      "total": 40
+    },
+    {
+      "name": "test6",
+      "passed": 37,
+      "total": 40
+    },
+    {
+      "name": "inject",
+      "passed": 15,
+      "total": 16
+    },
+    {
+      "name": "inject2",
+      "passed": 16,
+      "total": 16
+    },
+    {
+      "name": "test7",
+      "passed": 33,
+      "total": 40
+    },
+    {
+      "name": "near3",
+      "passed": 28,
+      "total": 30
+    },
+    {
+      "name": "implicit3",
+      "passed": 19,
+      "total": 20
+    },
+    {
+      "name": "inject3",
+      "passed": 28,
+      "total": 30
+    }
+  ],
+  "test_port_8768_free": true
+}

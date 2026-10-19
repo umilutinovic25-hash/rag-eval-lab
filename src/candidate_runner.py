@@ -1,4 +1,4 @@
-"""Run whole-pipeline candidates on the seen sets (and optionally the blind test 3) with scratch caches.
+"""Run whole-pipeline candidates on selected frozen sets with scratch caches.
 
 Reports pass counts, mean citation precision, generation fallbacks and request counts per set, so a candidate can be
 checked against the acceptance rule in docs/rag-upgrade-spec.md.

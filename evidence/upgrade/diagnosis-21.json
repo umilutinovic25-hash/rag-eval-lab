@@ -1,0 +1,339 @@
+{
+  "config": {
+    "CHUNK_STRATEGY": "sentences",
+    "CHUNK_SIZE": 140,
+    "CHUNK_OVERLAP": 30,
+    "RETRIEVAL_MODE": "semantic",
+    "COSINE_MODES": [
+      "semantic",
+      "hybrid",
+      "hybrid-bm25"
+    ],
+    "CHUNK_HEADERS": true,
+    "BM25_K1": 1.5,
+    "BM25_B": 0.75,
+    "HYBRID_WEIGHT": 0.5,
+    "EMBEDDING_MODEL": "bge-m3",
+    "TOP_K": 2,
+    "CONTEXT_NEIGHBORS": 1,
+    "CONTEXT_POLICY": "references",
+    "RETRIEVAL_MIN_SCORE": 0.01,
+    "STOPWORDS_ENABLED": false,
+    "CURRENT_ONLY": true,
+    "INJECTION_GUARDS": true,
+    "POLARITY_CHECK": true,
+    "POLARITY_MODEL": "gemma3:4b",
+    "NUMBERS_FROM_QUESTION": true,
+    "EVIDENCE_RULES_ENABLED": true,
+    "REFUSAL_THRESHOLD": 0.12,
+    "SEMANTIC_REFUSAL_THRESHOLD": 0.6,
+    "CITATION_MIN_SCORE": null,
+    "SEMANTIC_CITATION_MIN_SCORE": 0.65,
+    "RERANK": "llm-gray-zone",
+    "RERANK_MODEL": "qwen2.5:7b",
+    "RERANK_CANDIDATES": 5,
+    "RERANK_GRAY_ZONE": [
+      0.5,
+      0.7
+    ],
+    "RERANK_JUDGE": "either",
+    "RERANK_YESNO_MODEL": "gemma3:4b",
+    "RERANK_SPAN_PROMPT": "Copy the exact words from the passage that answer the question. If the passage does not contain the answer, reply NONE.\n\nPassage: {passage}\nQuestion: {question}\nWords from the passage:",
+    "RERANK_PROMPT": "Question: {question}\nPassage: {passage}\nDoes the passage contain the information needed to answer the question? Answer only yes or no.",
+    "RERANK_STRUCTURED_PROMPT": "You check whether an employee handbook passage can answer a question. Return ONLY a JSON object with exactly two keys: status and evidence. status is supported if the passage provides the requested fact, contradicted if it directly rules out the premise or proposed action in the question, or insufficient if it only shares the topic. Both supported and contradicted mean that an answer can be given; a negative answer is not missing evidence. For a partial answer to a multipart question, include the fact this passage supplies. evidence is a list of complete sentences copied verbatim from the passage, or [] for insufficient. Do not infer missing facts or return yes/no.\n\nPassage: {passage}\nQuestion: {question}\nJSON:",
+    "RERANK_FEWSHOT_MODEL": "gemma3:4b",
+    "RERANK_FEWSHOT_PROMPT": "You check whether an employee handbook passage can answer a question. The passage answers the question when it states the fact that was asked for, also when that fact is a rule that forbids, denies or limits something: a 'no' answer is still an answer. The passage does not answer the question when it only mentions the same topic. Reply with yes or no only.\n\nQuestion: Can contractors use the staff kitchen?\nPassage: Contractors must not use the staff kitchen.\nAnswer: yes\n\nQuestion: How many days of paternity leave are given?\nPassage: Parental leave follows a separate policy.\nAnswer: no\n\nQuestion: Is the gym open on Sunday?\nPassage: The gym is open Monday to Saturday.\nAnswer: yes\n\nQuestion: Where do I hand in expense reports?\nPassage: Lockers are assigned by facilities.\nAnswer: no\n\nQuestion: {question}\nPassage: {passage}\nAnswer:",
+    "YESNO_QUESTION_JUDGE": "answerability",
+    "YESNO_QUESTION_MODEL": "gemma3:4b",
+    "YESNO_QUESTION_PROMPT": "Read the passage and answer the question using only the passage. Reply with exactly one word: yes, no or unknown. Reply unknown when the passage does not say enough to decide the question.\n\nPassage: {passage}\nQuestion: {question}\nAnswer:",
+    "ANSWER_MODE": "llm",
+    "ANSWER_FORMAT": "text",
+    "ANSWER_QUOTES": true,
+    "GENERATION_MODEL": "qwen2.5:7b",
+    "GENERATION_PROMPT": "Answer the question using only facts stated in the passages below. Do not add conditions, people, steps or details that the passages do not state. Reply in one or two short sentences, then list the ids of the passages you used in square brackets, for example [hb-01-chunk-0].\n\nPassages:\n{passages}\n\nQuestion: {question}\nAnswer:",
+    "GENERATION_JSON_PROMPT": "Answer the question using only facts stated in the passages below. Do not add conditions, people, steps or details that the passages do not state. Reply with ONLY a JSON object with two keys: answer (one or two short sentences) and sources (the ids of the passages you used, for example [\"hb-01-chunk-0\"]).\n\nPassages:\n{passages}\n\nQuestion: {question}\nJSON:"
+  },
+  "cases": {
+    "Y05": {
+      "question": "What is the current return window?",
+      "answer": {
+        "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+        "citations": [],
+        "refused": true,
+        "retrieved": [
+          {
+            "chunk": {
+              "chunk_id": "sh-01-chunk-0",
+              "doc_id": "sh-01",
+              "title": "Returns policy",
+              "version": "2026",
+              "status": "current",
+              "text": "Items can be returned within 30 days of delivery in their original packaging."
+            },
+            "score": 0.494401154402225
+          },
+          {
+            "chunk": {
+              "chunk_id": "sh-01-chunk-1",
+              "doc_id": "sh-01",
+              "title": "Returns policy",
+              "version": "2026",
+              "status": "current",
+              "text": "Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse."
+            },
+            "score": 0.48833976009334007
+          }
+        ],
+        "generation_fallback_reason": null,
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "sh-01-chunk-0",
+                "score": 0.494401154402225
+              },
+              {
+                "chunk_id": "sh-01-chunk-1",
+                "score": 0.48833976009334007
+              },
+              {
+                "chunk_id": "sh-01-chunk-2",
+                "score": 0.46459649768840566
+              },
+              {
+                "chunk_id": "sh-06-chunk-0",
+                "score": 0.45340703317213027
+              },
+              {
+                "chunk_id": "sh-06-chunk-1",
+                "score": 0.4087105566110624
+              }
+            ]
+          },
+          {
+            "stage": "stage_timing",
+            "total_s": 1.461
+          },
+          {
+            "stage": "decision",
+            "reason": "below_gray_zone",
+            "refused": true
+          }
+        ],
+        "disposition": "answer",
+        "clarification": []
+      }
+    },
+    "Y32": {
+      "question": "Is the 14 day return period still valid?",
+      "answer": {
+        "answer": "I do not have enough grounded evidence in the provided corpus to answer that question.",
+        "citations": [],
+        "refused": true,
+        "retrieved": [
+          {
+            "chunk": {
+              "chunk_id": "sh-01-chunk-1",
+              "doc_id": "sh-01",
+              "title": "Returns policy",
+              "version": "2026",
+              "status": "current",
+              "text": "Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse."
+            },
+            "score": 0.5772292002713998
+          },
+          {
+            "chunk": {
+              "chunk_id": "sh-01-chunk-0",
+              "doc_id": "sh-01",
+              "title": "Returns policy",
+              "version": "2026",
+              "status": "current",
+              "text": "Items can be returned within 30 days of delivery in their original packaging."
+            },
+            "score": 0.5701695440951398
+          }
+        ],
+        "generation_fallback_reason": null,
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "sh-01-chunk-1",
+                "score": 0.5772292002713998
+              },
+              {
+                "chunk_id": "sh-01-chunk-0",
+                "score": 0.5701695440951398
+              },
+              {
+                "chunk_id": "sh-01-chunk-2",
+                "score": 0.5067520572664901
+              },
+              {
+                "chunk_id": "sh-04-chunk-0",
+                "score": 0.493563044529947
+              },
+              {
+                "chunk_id": "sh-05-chunk-0",
+                "score": 0.4907159033853306
+              }
+            ]
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "sh-01-chunk-1",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "sh-01-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "sh-01-chunk-2",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "sh-04-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "sh-05-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "stage_timing",
+            "total_s": 28.475
+          },
+          {
+            "stage": "decision",
+            "reason": "no_accepted_candidate",
+            "refused": true
+          }
+        ],
+        "disposition": "answer",
+        "clarification": []
+      }
+    },
+    "Y38": {
+      "question": "How long does a refund take for a gift card purchase?",
+      "answer": {
+        "answer": "The information provided does not specify the refund process for gift card purchases. [sh-01-chunk-1]\nSource [sh-01-chunk-1]: \"Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse.\"",
+        "citations": [
+          "sh-01-chunk-1"
+        ],
+        "refused": false,
+        "retrieved": [
+          {
+            "chunk": {
+              "chunk_id": "sh-01-chunk-1",
+              "doc_id": "sh-01",
+              "title": "Returns policy",
+              "version": "2026",
+              "status": "current",
+              "text": "Refunds are paid to the original payment method within 7 business days after the parcel reaches our warehouse."
+            },
+            "score": 0.6402242119916515
+          }
+        ],
+        "generation_fallback_reason": null,
+        "trace": [
+          {
+            "stage": "retrieval",
+            "candidates": [
+              {
+                "chunk_id": "sh-05-chunk-0",
+                "score": 0.6872369363987432
+              },
+              {
+                "chunk_id": "sh-01-chunk-0",
+                "score": 0.6507290056866005
+              },
+              {
+                "chunk_id": "sh-01-chunk-1",
+                "score": 0.6402242119916515
+              },
+              {
+                "chunk_id": "sh-05-chunk-1",
+                "score": 0.6170287978214818
+              },
+              {
+                "chunk_id": "sh-06-chunk-1",
+                "score": 0.5788775103752083
+              }
+            ]
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "sh-05-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "sh-01-chunk-0",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "sh-01-chunk-1",
+            "accepted": true
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "sh-05-chunk-1",
+            "accepted": false
+          },
+          {
+            "stage": "judge",
+            "chunk_id": "sh-06-chunk-1",
+            "accepted": false
+          },
+          {
+            "stage": "context",
+            "anchors": [
+              "sh-01-chunk-1"
+            ],
+            "expanded": [
+              "sh-01-chunk-1"
+            ],
+            "neighbor_scores": "inherited; not retrieval scores"
+          },
+          {
+            "stage": "generation",
+            "text": "The information provided does not specify the refund process for gift card purchases. [sh-01-chunk-1]",
+            "metadata": {
+              "done_reason": "stop",
+              "done": true,
+              "model": "qwen2.5:7b",
+              "eval_count": 25,
+              "prompt_eval_count": 141,
+              "total_duration": 3247021542
+            }
+          },
+          {
+            "stage": "stage_timing",
+            "retrieval_and_judging_s": 29.825,
+            "generation_s": 3.255,
+            "total_s": 33.08
+          },
+          {
+            "stage": "decision",
+            "refused": false,
+            "citations": [
+              "sh-01-chunk-1"
+            ],
+            "fallback": null
+          }
+        ],
+        "disposition": "answer",
+        "clarification": []
+      }
+    }
+  }
+}

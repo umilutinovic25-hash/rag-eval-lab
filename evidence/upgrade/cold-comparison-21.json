@@ -1,0 +1,27 @@
+{
+  "inputs": {
+    "evidence/upgrade/cold-21-1.json": "1c104349733807b0b2b1b0a321d9f09bd0c3bd6dba644ffd17883de9e534f214",
+    "evidence/upgrade/cold-21-2.json": "ea742795a31ada988cc724b9bffb95f6c30f7476d173ea0d912e79093f22e424"
+  },
+  "questions": 120,
+  "differences": [],
+  "configs_equal": true,
+  "set_hashes_equal": true,
+  "both_initial_caches_empty": true,
+  "repeat_scores": [
+    {
+      "test7": 33,
+      "near3": 28,
+      "implicit3": 19,
+      "inject3": 28
+    },
+    {
+      "test7": 33,
+      "near3": 28,
+      "implicit3": 19,
+      "inject3": 28
+    }
+  ],
+  "observed_model_digests_unchanged": true,
+  "ollama_version_unchanged": true
+}

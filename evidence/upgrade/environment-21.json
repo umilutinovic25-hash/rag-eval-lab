@@ -1,0 +1,269 @@
+{
+  "data_hashes_before": {
+    "llm_cache.json": "e7309ee1e2aa5f82357bf57ecda20dc2c8dec7f3d89e276224a915a8eaaeb3a8",
+    "sr-handbook.json": "cfc7b12388d0e73b1b0ca2ca4cd23aabbf67fd54053f58a0a147752e9426b212",
+    "llm_cache-metadata.json": "012daa3c35a7a410f6812d79180ac230e53b96e37d18f37ba95ec803e3cf9a60",
+    "embedding_cache.json": "7d23e6460e89249fc993ba5406b957d6742f69d465482d1ef075f5d0dfe0eab2"
+  },
+  "version": {
+    "version": "0.35.0"
+  },
+  "tags": {
+    "models": [
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "modified_at": "2026-10-15T12:04:59.186165239+02:00",
+        "size": 1157672605,
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "bert",
+          "families": [
+            "bert"
+          ],
+          "parameter_size": "566.70M",
+          "quantization_level": "F16",
+          "context_length": 8192,
+          "embedding_length": 1024
+        },
+        "capabilities": [
+          "embedding"
+        ]
+      },
+      {
+        "name": "qwen2.5-coder:7b",
+        "model": "qwen2.5-coder:7b",
+        "modified_at": "2026-07-24T01:25:37.51249607+02:00",
+        "size": 4683087561,
+        "digest": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "7.6B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 3584
+        },
+        "capabilities": [
+          "completion",
+          "tools",
+          "insert"
+        ]
+      },
+      {
+        "name": "qwen2.5:7b",
+        "model": "qwen2.5:7b",
+        "modified_at": "2026-07-22T21:37:16.527460121+02:00",
+        "size": 4683087332,
+        "digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "7.6B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 3584
+        },
+        "capabilities": [
+          "completion",
+          "tools"
+        ]
+      },
+      {
+        "name": "gemma3:4b",
+        "model": "gemma3:4b",
+        "modified_at": "2026-07-19T12:23:41.260086661+02:00",
+        "size": 3338801804,
+        "digest": "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma3",
+          "families": [
+            "gemma3"
+          ],
+          "parameter_size": "4.3B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 131072,
+          "embedding_length": 2560
+        },
+        "capabilities": [
+          "completion",
+          "vision"
+        ]
+      },
+      {
+        "name": "phi3:mini",
+        "model": "phi3:mini",
+        "modified_at": "2026-07-18T21:14:24.781840029+02:00",
+        "size": 2176178913,
+        "digest": "4f222292793889a9a40a020799cfd28d53f3e01af25d48e06c5e708610fc47e9",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "phi3",
+          "families": [
+            "phi3"
+          ],
+          "parameter_size": "3.8B",
+          "quantization_level": "Q4_0",
+          "context_length": 131072,
+          "embedding_length": 3072
+        },
+        "capabilities": [
+          "completion"
+        ]
+      },
+      {
+        "name": "llama3.2:1b",
+        "model": "llama3.2:1b",
+        "modified_at": "2026-07-18T21:10:30.566773992+02:00",
+        "size": 1321098329,
+        "digest": "baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "1.2B",
+          "quantization_level": "Q8_0",
+          "context_length": 131072,
+          "embedding_length": 2048
+        },
+        "capabilities": [
+          "completion",
+          "tools"
+        ]
+      },
+      {
+        "name": "qwen2.5:1.5b",
+        "model": "qwen2.5:1.5b",
+        "modified_at": "2026-07-18T20:53:10.826999687+02:00",
+        "size": 986061892,
+        "digest": "65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "1.5B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 1536
+        },
+        "capabilities": [
+          "completion",
+          "tools"
+        ]
+      },
+      {
+        "name": "gemma2:2b",
+        "model": "gemma2:2b",
+        "modified_at": "2026-07-18T20:51:37.974788507+02:00",
+        "size": 1629518495,
+        "digest": "8ccf136fdd5298f3ffe2d69862750ea7fb56555fa4d5b18c04e3fa4d82ee09d7",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma2",
+          "families": [
+            "gemma2"
+          ],
+          "parameter_size": "2.6B",
+          "quantization_level": "Q4_0",
+          "context_length": 8192,
+          "embedding_length": 2304
+        },
+        "capabilities": [
+          "completion"
+        ]
+      },
+      {
+        "name": "mistral:latest",
+        "model": "mistral:latest",
+        "modified_at": "2026-07-06T23:44:40.518437071+02:00",
+        "size": 4372824384,
+        "digest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "7.2B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 4096
+        },
+        "capabilities": [
+          "completion",
+          "tools"
+        ]
+      },
+      {
+        "name": "qwen2.5:3b",
+        "model": "qwen2.5:3b",
+        "modified_at": "2026-07-06T21:41:17.334525515+02:00",
+        "size": 1929912432,
+        "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048
+        },
+        "capabilities": [
+          "completion",
+          "tools"
+        ]
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "modified_at": "2026-07-06T19:24:05.966523026+02:00",
+        "size": 2019393189,
+        "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "3.2B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 131072,
+          "embedding_length": 3072
+        },
+        "capabilities": [
+          "completion",
+          "tools"
+        ]
+      }
+    ]
+  },
+  "ps": {
+    "models": []
+  }
+}

@@ -1,0 +1,625 @@
+{
+  "proposal-21": {
+    "sets": {
+      "eval": {
+        "before": 12,
+        "after": 11,
+        "fixed": [],
+        "broken": [
+          "E05"
+        ]
+      },
+      "holdout": {
+        "before": 34,
+        "after": 24,
+        "fixed": [],
+        "broken": [
+          "H01",
+          "H06",
+          "H07",
+          "H11",
+          "H13",
+          "H14",
+          "H19",
+          "H21",
+          "H23",
+          "H24"
+        ]
+      },
+      "test": {
+        "before": 24,
+        "after": 15,
+        "fixed": [],
+        "broken": [
+          "T02",
+          "T03",
+          "T04",
+          "T06",
+          "T09",
+          "T11",
+          "T13",
+          "T15",
+          "T16"
+        ]
+      },
+      "test2": {
+        "before": 32,
+        "after": 21,
+        "fixed": [],
+        "broken": [
+          "U02",
+          "U05",
+          "U07",
+          "U08",
+          "U10",
+          "U11",
+          "U12",
+          "U13",
+          "U16",
+          "U18",
+          "U19"
+        ]
+      },
+      "test3": {
+        "before": 36,
+        "after": 28,
+        "fixed": [],
+        "broken": [
+          "V03",
+          "V06",
+          "V08",
+          "V10",
+          "V17",
+          "V21",
+          "V23",
+          "V25"
+        ]
+      },
+      "test4": {
+        "before": 36,
+        "after": 24,
+        "fixed": [
+          "W38"
+        ],
+        "broken": [
+          "W01",
+          "W04",
+          "W06",
+          "W07",
+          "W11",
+          "W12",
+          "W16",
+          "W19",
+          "W20",
+          "W21",
+          "W24",
+          "W28",
+          "W29"
+        ]
+      },
+      "test5": {
+        "before": 39,
+        "after": 27,
+        "fixed": [
+          "X38"
+        ],
+        "broken": [
+          "X01",
+          "X04",
+          "X06",
+          "X08",
+          "X10",
+          "X13",
+          "X15",
+          "X18",
+          "X24",
+          "X26",
+          "X27",
+          "X28",
+          "X29"
+        ]
+      },
+      "inject": {
+        "before": 15,
+        "after": 16,
+        "fixed": [
+          "I12"
+        ],
+        "broken": []
+      },
+      "test6": {
+        "before": 37,
+        "after": 27,
+        "fixed": [
+          "Y05",
+          "Y38"
+        ],
+        "broken": [
+          "Y03",
+          "Y04",
+          "Y06",
+          "Y07",
+          "Y15",
+          "Y16",
+          "Y18",
+          "Y19",
+          "Y21",
+          "Y22",
+          "Y23",
+          "Y26"
+        ]
+      },
+      "inject2": {
+        "before": 16,
+        "after": 14,
+        "fixed": [],
+        "broken": [
+          "J15",
+          "J16"
+        ]
+      },
+      "test7": {
+        "before": 33,
+        "after": 26,
+        "fixed": [
+          "Z39"
+        ],
+        "broken": [
+          "Z03",
+          "Z05",
+          "Z11",
+          "Z17",
+          "Z21",
+          "Z22",
+          "Z24",
+          "Z28"
+        ]
+      },
+      "near3": {
+        "before": 28,
+        "after": 30,
+        "fixed": [
+          "N21",
+          "N23"
+        ],
+        "broken": []
+      },
+      "implicit3": {
+        "before": 19,
+        "after": 5,
+        "fixed": [],
+        "broken": [
+          "P01",
+          "P02",
+          "P03",
+          "P04",
+          "P07",
+          "P09",
+          "P10",
+          "P11",
+          "P13",
+          "P15",
+          "P16",
+          "P17",
+          "P18",
+          "P19"
+        ]
+      },
+      "inject3": {
+        "before": 28,
+        "after": 29,
+        "fixed": [
+          "K16",
+          "K24"
+        ],
+        "broken": [
+          "K29"
+        ]
+      }
+    },
+    "no_regressions": false
+  },
+  "version-only": {
+    "sets": {
+      "eval": {
+        "before": 12,
+        "after": 12,
+        "fixed": [],
+        "broken": []
+      },
+      "holdout": {
+        "before": 34,
+        "after": 34,
+        "fixed": [],
+        "broken": []
+      },
+      "test": {
+        "before": 24,
+        "after": 24,
+        "fixed": [],
+        "broken": []
+      },
+      "test2": {
+        "before": 32,
+        "after": 32,
+        "fixed": [],
+        "broken": []
+      },
+      "test3": {
+        "before": 36,
+        "after": 35,
+        "fixed": [],
+        "broken": [
+          "V25"
+        ]
+      },
+      "test4": {
+        "before": 36,
+        "after": 36,
+        "fixed": [],
+        "broken": []
+      },
+      "test5": {
+        "before": 39,
+        "after": 39,
+        "fixed": [],
+        "broken": []
+      },
+      "inject": {
+        "before": 15,
+        "after": 15,
+        "fixed": [],
+        "broken": []
+      },
+      "test6": {
+        "before": 37,
+        "after": 38,
+        "fixed": [
+          "Y05"
+        ],
+        "broken": []
+      },
+      "inject2": {
+        "before": 16,
+        "after": 16,
+        "fixed": [],
+        "broken": []
+      },
+      "test7": {
+        "before": 33,
+        "after": 34,
+        "fixed": [
+          "Z07"
+        ],
+        "broken": []
+      },
+      "near3": {
+        "before": 28,
+        "after": 28,
+        "fixed": [],
+        "broken": []
+      },
+      "implicit3": {
+        "before": 19,
+        "after": 19,
+        "fixed": [],
+        "broken": []
+      },
+      "inject3": {
+        "before": 28,
+        "after": 28,
+        "fixed": [],
+        "broken": []
+      }
+    },
+    "no_regressions": false
+  },
+  "relevance-only": {
+    "sets": {
+      "eval": {
+        "before": 12,
+        "after": 11,
+        "fixed": [],
+        "broken": [
+          "E05"
+        ]
+      },
+      "holdout": {
+        "before": 34,
+        "after": 24,
+        "fixed": [],
+        "broken": [
+          "H01",
+          "H06",
+          "H07",
+          "H11",
+          "H13",
+          "H14",
+          "H19",
+          "H21",
+          "H23",
+          "H24"
+        ]
+      },
+      "test": {
+        "before": 24,
+        "after": 15,
+        "fixed": [],
+        "broken": [
+          "T02",
+          "T03",
+          "T04",
+          "T06",
+          "T09",
+          "T11",
+          "T13",
+          "T15",
+          "T16"
+        ]
+      },
+      "test2": {
+        "before": 32,
+        "after": 21,
+        "fixed": [],
+        "broken": [
+          "U02",
+          "U05",
+          "U07",
+          "U08",
+          "U10",
+          "U11",
+          "U12",
+          "U13",
+          "U16",
+          "U18",
+          "U19"
+        ]
+      },
+      "test3": {
+        "before": 36,
+        "after": 28,
+        "fixed": [],
+        "broken": [
+          "V03",
+          "V06",
+          "V08",
+          "V10",
+          "V17",
+          "V21",
+          "V23",
+          "V25"
+        ]
+      },
+      "test4": {
+        "before": 36,
+        "after": 24,
+        "fixed": [
+          "W38"
+        ],
+        "broken": [
+          "W01",
+          "W04",
+          "W06",
+          "W07",
+          "W11",
+          "W12",
+          "W16",
+          "W19",
+          "W20",
+          "W21",
+          "W24",
+          "W28",
+          "W29"
+        ]
+      },
+      "test5": {
+        "before": 39,
+        "after": 27,
+        "fixed": [
+          "X38"
+        ],
+        "broken": [
+          "X01",
+          "X04",
+          "X06",
+          "X08",
+          "X10",
+          "X13",
+          "X15",
+          "X18",
+          "X24",
+          "X26",
+          "X27",
+          "X28",
+          "X29"
+        ]
+      },
+      "inject": {
+        "before": 15,
+        "after": 16,
+        "fixed": [
+          "I12"
+        ],
+        "broken": []
+      },
+      "test6": {
+        "before": 37,
+        "after": 26,
+        "fixed": [
+          "Y38"
+        ],
+        "broken": [
+          "Y03",
+          "Y04",
+          "Y06",
+          "Y07",
+          "Y15",
+          "Y16",
+          "Y18",
+          "Y19",
+          "Y21",
+          "Y22",
+          "Y23",
+          "Y26"
+        ]
+      },
+      "inject2": {
+        "before": 16,
+        "after": 14,
+        "fixed": [],
+        "broken": [
+          "J15",
+          "J16"
+        ]
+      },
+      "test7": {
+        "before": 33,
+        "after": 26,
+        "fixed": [
+          "Z39"
+        ],
+        "broken": [
+          "Z03",
+          "Z05",
+          "Z11",
+          "Z17",
+          "Z21",
+          "Z22",
+          "Z24",
+          "Z28"
+        ]
+      },
+      "near3": {
+        "before": 28,
+        "after": 30,
+        "fixed": [
+          "N21",
+          "N23"
+        ],
+        "broken": []
+      },
+      "implicit3": {
+        "before": 19,
+        "after": 5,
+        "fixed": [],
+        "broken": [
+          "P01",
+          "P02",
+          "P03",
+          "P04",
+          "P07",
+          "P09",
+          "P10",
+          "P11",
+          "P13",
+          "P15",
+          "P16",
+          "P17",
+          "P18",
+          "P19"
+        ]
+      },
+      "inject3": {
+        "before": 28,
+        "after": 29,
+        "fixed": [
+          "K16",
+          "K24"
+        ],
+        "broken": [
+          "K29"
+        ]
+      }
+    },
+    "no_regressions": false
+  },
+  "implicit-only": {
+    "sets": {
+      "eval": {
+        "before": 12,
+        "after": 12,
+        "fixed": [],
+        "broken": []
+      },
+      "holdout": {
+        "before": 34,
+        "after": 34,
+        "fixed": [],
+        "broken": []
+      },
+      "test": {
+        "before": 24,
+        "after": 24,
+        "fixed": [],
+        "broken": []
+      },
+      "test2": {
+        "before": 32,
+        "after": 32,
+        "fixed": [],
+        "broken": []
+      },
+      "test3": {
+        "before": 36,
+        "after": 36,
+        "fixed": [],
+        "broken": []
+      },
+      "test4": {
+        "before": 36,
+        "after": 36,
+        "fixed": [],
+        "broken": []
+      },
+      "test5": {
+        "before": 39,
+        "after": 39,
+        "fixed": [],
+        "broken": []
+      },
+      "inject": {
+        "before": 15,
+        "after": 15,
+        "fixed": [],
+        "broken": []
+      },
+      "test6": {
+        "before": 37,
+        "after": 37,
+        "fixed": [],
+        "broken": []
+      },
+      "inject2": {
+        "before": 16,
+        "after": 16,
+        "fixed": [],
+        "broken": []
+      },
+      "test7": {
+        "before": 33,
+        "after": 33,
+        "fixed": [],
+        "broken": []
+      },
+      "near3": {
+        "before": 28,
+        "after": 28,
+        "fixed": [],
+        "broken": []
+      },
+      "implicit3": {
+        "before": 19,
+        "after": 19,
+        "fixed": [],
+        "broken": []
+      },
+      "inject3": {
+        "before": 28,
+        "after": 28,
+        "fixed": [],
+        "broken": []
+      }
+    },
+    "no_regressions": true
+  }
+}
