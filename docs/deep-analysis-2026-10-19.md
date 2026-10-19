@@ -25,3 +25,6 @@ Hybrid BM25, reranking by cross-encoder (none installed), few-shot judge, TOP_K 
 
 ## Order of work if there is time
 (1) human labels + answer-level scoring on test 3-5; (2) new independent corpus with 40 fresh questions; (3) injection hardening with a new blind injection set; (4) per-stage timing and the local gate script.
+
+## Status after the fixes (same day)
+Done: gap 1 partly (polarity scoring on tests 3-6, AI-written labels; two wrong answers found and guarded), gap 3 measured (second corpus, 37/40), gap 4 partly (test 6 adds identifier, multipart and versioned questions on the new corpus), gap 5 (injection guards, with the caveat that they are regexes), gap 8 (`scripts/check.sh`, `scripts/check_sets.py`). Not done: human labels (gap 2), per-stage timing (gap 7), failures Y05/Y32/Y38 on the new corpus (left alone on purpose).

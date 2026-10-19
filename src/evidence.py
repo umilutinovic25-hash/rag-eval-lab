@@ -75,8 +75,21 @@ def english_share(text):
     return len(words), (sum(w in ENGLISH_WORDS for w in words) / len(words) if words else 0.0)
 
 
+FOREIGN_WORDS = frozenset(
+    "der die das und ist nicht ein eine einem einen zu mit f\u00fcr auf von im den dem des sie wir ihre sind werden "
+    "le la les et est pas un une des pour avec dans que el los las es por con para como "
+    "je da se na su za ne sa od ili ima nije koji kao".split())
+
+
+def foreign_share(text):
+    words = re.findall(r"[a-z\u00e0-\u017e]+", text.casefold())
+    return len(words), (sum(w in FOREIGN_WORDS for w in words) / len(words) if words else 0.0)
+
+
 def language_mismatch(question, answer):
-    """True when an English question got an answer that is clearly not English (for example a translation request)."""
+    """True when an English question got an answer that is clearly written in another language."""
     q_n, q_share = english_share(question)
-    a_n, a_share = english_share(re.sub(r"\[[^\[\]]+\]", " ", answer))
-    return q_n >= 3 and q_share >= 0.1 and a_n >= 6 and a_share < 0.12
+    body = re.sub(r"\[[^\[\]]+\]", " ", answer)
+    a_n, a_share = english_share(body)
+    _, f_share = foreign_share(body)
+    return q_n >= 3 and q_share >= 0.1 and a_n >= 6 and a_share < 0.12 and f_share >= 0.2

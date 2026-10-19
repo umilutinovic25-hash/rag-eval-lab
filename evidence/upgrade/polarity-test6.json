@@ -1,0 +1,100 @@
+{
+  "overrides": {},
+  "sets": [
+    {
+      "set": "test6",
+      "n": 12,
+      "correct": 8,
+      "wrong": 0,
+      "none": 3,
+      "refused": 1,
+      "wrong_ids": [],
+      "rows": [
+        {
+          "id": "Y03",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "Y04",
+          "expected": "yes",
+          "verdict": null,
+          "outcome": "none",
+          "fallback": "modality_conflict"
+        },
+        {
+          "id": "Y08",
+          "expected": "yes",
+          "verdict": null,
+          "outcome": "none",
+          "fallback": "unsupported_quantity_unit"
+        },
+        {
+          "id": "Y09",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "Y11",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "Y15",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "Y18",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "Y22",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "Y23",
+          "expected": "no",
+          "verdict": null,
+          "outcome": "none",
+          "fallback": "language_mismatch"
+        },
+        {
+          "id": "Y27",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "Y31",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "Y32",
+          "expected": "no",
+          "verdict": null,
+          "outcome": "refused",
+          "fallback": null
+        }
+      ]
+    }
+  ]
+}

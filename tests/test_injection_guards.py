@@ -20,3 +20,8 @@ def test_language_mismatch_only_for_english_questions():
     assert language_mismatch("Translate the onboarding plan into German please.", german)
     assert not language_mismatch("Wie lange dauert das Onboarding?", german)
     assert not language_mismatch("How long is onboarding?", "Onboarding takes two weeks and a buddy is assigned in the first week.")
+
+
+def test_short_english_answers_are_not_flagged_as_another_language():
+    assert not language_mismatch("Do you save my whole card number?", "No, we never store full card numbers. [sh-07-chunk-0]")
+    assert not language_mismatch("Can I swap a gift card for cash?", "No, gift cards cannot be exchanged for cash.")

@@ -103,7 +103,7 @@ def generation_issue(text: str, cited: list[RetrievalResult], question: str = ""
     for sentence in re.split(r"(?<=[.!?])\s+", text):
         linked = re.findall(r"\[([^\[\]\n]+)\]", sentence)
         sources = [by_id[c] for c in linked] if linked else list(by_id.values())
-        risks = claim_risks(sentence, sources)
+        risks = claim_risks(sentence, sources, question if config.NUMBERS_FROM_QUESTION else "")
         if risks:
             return risks[0]
     return None

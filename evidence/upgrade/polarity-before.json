@@ -1,0 +1,308 @@
+{
+  "overrides": {},
+  "sets": [
+    {
+      "set": "test3",
+      "n": 8,
+      "correct": 6,
+      "wrong": 1,
+      "none": 1,
+      "refused": 0,
+      "wrong_ids": [
+        "V05"
+      ],
+      "rows": [
+        {
+          "id": "V02",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "V03",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "V05",
+          "expected": "yes",
+          "verdict": "no",
+          "outcome": "wrong",
+          "fallback": null
+        },
+        {
+          "id": "V06",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "V08",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "V10",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "V21",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "V25",
+          "expected": "no",
+          "verdict": null,
+          "outcome": "none",
+          "fallback": "unsupported_number"
+        }
+      ]
+    },
+    {
+      "set": "test4",
+      "n": 15,
+      "correct": 12,
+      "wrong": 1,
+      "none": 0,
+      "refused": 2,
+      "wrong_ids": [
+        "W20"
+      ],
+      "rows": [
+        {
+          "id": "W04",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "W05",
+          "expected": "no",
+          "verdict": null,
+          "outcome": "refused",
+          "fallback": null
+        },
+        {
+          "id": "W06",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "W09",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "W10",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "W11",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "W12",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "W18",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "W19",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "W20",
+          "expected": "yes",
+          "verdict": "no",
+          "outcome": "wrong",
+          "fallback": null
+        },
+        {
+          "id": "W22",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "W23",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "W25",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "W26",
+          "expected": "no",
+          "verdict": null,
+          "outcome": "refused",
+          "fallback": null
+        },
+        {
+          "id": "W28",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        }
+      ]
+    },
+    {
+      "set": "test5",
+      "n": 15,
+      "correct": 13,
+      "wrong": 0,
+      "none": 2,
+      "refused": 0,
+      "wrong_ids": [],
+      "rows": [
+        {
+          "id": "X03",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "X04",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "X06",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "X08",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "X10",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "X12",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "X15",
+          "expected": "no",
+          "verdict": null,
+          "outcome": "none",
+          "fallback": null
+        },
+        {
+          "id": "X16",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "X19",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "X21",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "X23",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "X25",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "X26",
+          "expected": "no",
+          "verdict": null,
+          "outcome": "none",
+          "fallback": null
+        },
+        {
+          "id": "X28",
+          "expected": "no",
+          "verdict": "no",
+          "outcome": "correct",
+          "fallback": null
+        },
+        {
+          "id": "X30",
+          "expected": "yes",
+          "verdict": "yes",
+          "outcome": "correct",
+          "fallback": null
+        }
+      ]
+    }
+  ]
+}

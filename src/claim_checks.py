@@ -56,10 +56,10 @@ def action_roots(text, negative_only=False):
     return {root(v) for v in verbs}
 
 
-def claim_risks(answer,passages):
+def claim_risks(answer,passages,question=''):
     body=MARKERS.sub(' ',answer)
     risks=[]
-    if not quantities(body)<=set().union(*(quantities(p) for p in passages)):
+    if not quantities(body)<=set().union(quantities(question),*(quantities(p) for p in passages)):
         risks.append('unsupported_quantity_unit')
     source_clauses=[c for p in passages for c in clauses(p)]
     for claim in clauses(body):
