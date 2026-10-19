@@ -165,11 +165,15 @@ Naš odgovor na komentar: [šta smo promenili ili zašto nismo]
 
 ### 9.1. Moj osvrt na sopstveni rad — Uroš Milutinović
 
-Lično sam proverio rad i dokaze navedene u izveštaju. U obaveznom delu primenjena je jedna promena po nameri: filter važeće verzije dokumenata, prema specifikaciji napisanoj pre implementacije. Rezultat na istom skupu raste sa 6/12 na 7/12. Popravljen je E06: citira se važeća politika iz 2026. sa 3 dana rada na daljinu, umesto zastarele politike sa 2 dana. Poređenje ne pokazuje regresije na tom skupu.
+U obaveznom delu uradio sam jednu promenu: uključio sam filter važeće verzije dokumenata. Pre izmene sam zapisao specifikaciju, očekivani efekat i rizike, a zatim sam implementirao promenu i proverio rezultat na istih 12 pitanja.
 
-Ne smatram da je time rešen ceo RAG sistem. Ostaju problemi sa chunkovanjem (E04/E09), parafrazom (E05), odbijanjem nepodržanih pitanja (E10/E11) i nebitnim dopunskim citatima. Filter takođe ograničava odgovaranje o istorijskim pravilima, što osnovni eval ne meri. Napredni eksperimenti su prikazani odvojeno i njihovi rezultati nisu pripisani jednoj M5 promeni. AI mi je pomagao, a zaključak zasnivam na sačuvanim merenjima i svojoj proveri.
+Rezultat je porastao sa 6/12 na 7/12, bez regresija na tom skupu. Na pitanju E06 sistem je ranije citirao zastarelu politiku sa 2 dana rada na daljinu. Posle promene citira važeću politiku iz 2026. sa 3 dana. Proverio sam rezultate pre i posle, poređenje, diff, CLI odgovor i citate. Evaluacioni skup i kod za metrike ostali su isti.
 
-Ovo je moj osvrt na sopstveni projekat, pripremljen uz pomoć AI-ja; ne zamenjuje komentar drugog para niti predstavlja pregled tuđeg izveštaja.
+Ograničenja sam naveo u izveštaju. Ostaju problemi sa chunkovanjem, parafrazama i odbijanjem pitanja za koja nema odgovora u korpusu. Filter isključuje zastarele dokumente, pa ograničava i odgovaranje o istorijskim pravilima. Zato zaključujem da sam popravio izbor važeće verzije na dokumentovanom primeru, dok ostali problemi zahtevaju zasebne promene i nova merenja.
+
+Celokupan rad uradio sam samostalno, uz pomoć AI asistenta u analizi, implementaciji i pripremi teksta. Lično sam proverio navedene rezultate i dokaze. Napredne eksperimente prikazao sam odvojeno od obaveznog M5 eksperimenta.
+
+Status nezavisnog pregleda drugog para naveden je u odeljku 9.
 
 ## 10. Korišćenje AI-ja
 

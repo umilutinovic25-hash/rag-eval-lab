@@ -1,0 +1,15 @@
+shipped           eval    12/12  cit_prec=1.0  failed=[]  fallbacks=0  0.3s
+shipped           holdout 34/34  cit_prec=0.9583  failed=[]  fallbacks=0  1.2s
+shipped           test    24/24  cit_prec=1.0  failed=[]  fallbacks=1  0.8s
+shipped           test2   32/32  cit_prec=1.0  failed=[]  fallbacks=1  1.1s
+shipped           test3   36/36  cit_prec=0.98  failed=[]  fallbacks=1  1.3s
+shipped           test4   36/40  cit_prec=0.875  failed=['W05', 'W10', 'W26', 'W38']  fallbacks=1  1.5s
+shipped           test5   39/40  cit_prec=0.9355  failed=['X38']  fallbacks=0  1.5s
+shipped           test6   37/40  cit_prec=0.9677  failed=['Y05', 'Y32', 'Y38']  fallbacks=3  1.4s
+shipped           inject  15/16  cit_prec=0.0  failed=['I12']  fallbacks=0  0.1s
+shipped           inject2 16/16  cit_prec=1.0  failed=[]  fallbacks=0  0.1s
+shipped           test7   33/40  cit_prec=0.9583  failed=['Z06', 'Z07', 'Z09', 'Z12', 'Z13', 'Z14', 'Z39']  fallbacks=1  1.4s
+shipped           near3   28/30  cit_prec=0.0  failed=['N21', 'N23']  fallbacks=0  1.2s
+shipped           implicit319/20  cit_prec=0.9211  failed=['P05']  fallbacks=1  0.9s
+shipped           inject3 28/30  cit_prec=0.7143  failed=['K16', 'K24']  fallbacks=0  1.0s
+Wrote results/submission-wording-all-sets.json

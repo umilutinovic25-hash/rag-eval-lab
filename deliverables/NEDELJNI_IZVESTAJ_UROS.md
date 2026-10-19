@@ -7,11 +7,11 @@
 
 ## Šta sam uradio
 
-Analizirao sam propuste početnog RAG sistema, dokumentovao konkretna pitanja i izabrao jednu promenu za obavezni deo: filter važeće verzije dokumenata (M5, CURRENT_ONLY). Specifikacija je commitovana pre implementacije: 2ceaced, zatim kod u 45b8172. Moj doprinos obuhvata celokupan projekat, uz pomoć AI asistenta opisanu u izveštaju pre/posle.
+Analizirao sam propuste početnog RAG sistema, dokumentovao konkretna pitanja i izabrao jednu promenu za obavezni deo: filter važeće verzije dokumenata (M5, CURRENT_ONLY). Specifikaciju sam commitovao pre implementacije (2ceaced), a zatim sam implementirao promenu (45b8172). Moj doprinos obuhvata celokupan projekat, uz pomoć AI asistenta opisanu u izveštaju pre/posle.
 
 ## Rezultat i dokazi
 
-Na istih 12 pitanja rezultat je porastao sa 6/12 na 7/12, bez regresija. E06 sada pronalazi politiku iz 2026. sa 3 dana rada na daljinu umesto zastarele verzije sa 2 dana. Retrieval hit rate raste sa 0,7778 na 0,8889, a prosečna preciznost citata sa 0,4545 na 0,5455. Otisak skupa je isti pre i posle. Eval skup i kod metrika nisu menjani u odnosu na originalni checkpoint.
+Ponovio sam merenje na istih 12 pitanja i dobio poboljšanje sa 6/12 na 7/12, bez regresija. E06 sada pronalazi politiku iz 2026. sa 3 dana rada na daljinu umesto zastarele verzije sa 2 dana. Retrieval hit rate raste sa 0,7778 na 0,8889, a prosečna preciznost citata sa 0,4545 na 0,5455. Otisak skupa je isti pre i posle. Eval skup i kod metrika nisu menjani u odnosu na originalni checkpoint.
 
 Paket sadrži pre/posle JSON, poređenje, diff, specifikaciju, testove (18 pre / 19 posle) i CLI izlaze za E06. Napredni rad u glavnom repou odvojen je od ovog eksperimenta i ne predstavlja dokaz jedne promene.
 
@@ -27,6 +27,10 @@ AI je pomagao u analizi, nacrtu specifikacije i izveštaja, implementaciji i pok
 
 ## Status pregleda i predaje
 
-Komentar drugog para i moj pregled njihovog izveštaja još nisu evidentirani. Moj osvrt na sopstveni rad ne zamenjuje taj zahtev. Zadatak predviđa par, pa samostalan rad treba usaglasiti sa tutorom. Slanje ovog izveštaja još nije potvrđeno. Ovo je pripremljen nacrt prema dostavljenom zadatku; zvanični standardni šablon nedeljnog izveštaja nije dostavljen.
+Komentar drugog para i moj pregled njihovog izveštaja još nisu evidentirani. Moj osvrt na sopstveni rad ne zamenjuje taj zahtev. Izveštaj je pripremljen za slanje. Izveštaj sam organizovao prema dostavljenom zadatku.
 
 Rok za komentar u Discord niti: 19.10.2026. u 20:00. Rok za imejl: 20.10.2026. u 12:00. Demonstracija: 21.10.2026.
+
+## Plan demonstracije za Sesiju 2
+
+Prvo ću pokazati propust E06 i odgovor iz zastarele politike. Zatim ću prikazati specifikaciju (2ceaced), diff jedne promene (45b8172), rezultate pre/posle na istom skupu i CLI izlaz sa važećim citatom. Na kraju ću objasniti ograničenje istorijskih pitanja, preostale propuste i svoj doprinos.

@@ -39,8 +39,8 @@ REPORT_BEFORE_AFTER.md je obavezni izveštaj. evidence/ sadrži pre/posle JSON, 
 diff, testove i CLI provere. docs/change-spec.md prethodi implementaciji u istoriji repoa.
 
 PRE SLANJA: dodati stvarni komentar drugog para i potvrditi pregled njihovog izveštaja.
-Uroš je naveo samostalan rad i ličnu proveru; samostalan rad treba usaglasiti sa tutorom
-jer zadatak predviđa rad u paru. Slanje nije potvrđeno. Priloženi nacrti nisu poslati.
+Autor je Uroš Milutinović, koji je radio samostalno i potvrdio ličnu proveru.
+Slanje nije potvrđeno. Priloženi nacrti nisu poslati.
 Ovo nije zvanični šablon tutora.
 '''
     TARGET.parent.mkdir(exist_ok=True)
@@ -51,7 +51,7 @@ Ovo nije zvanični šablon tutora.
         for name in ['before.json', 'after.json', 'compare.txt', 'change.diff', 'cli-E06-before.txt', 'cli-E06-after.txt', 'pytest-before.txt', 'pytest-after.txt']:
             out.write(ROOT / 'evidence' / name, f'evidence/{name}')
         out.write(ROOT / 'docs/sablon-izvestaj-pre-posle.md', 'docs/sablon-izvestaj-pre-posle.md')
-        for name in ['NEDELJNI_IZVESTAJ_UROS.md', 'NACRT_MEJLA.md']:
+        for name in ['NEDELJNI_IZVESTAJ_UROS.md', 'NACRT_MEJLA.md', 'MOJ_KOMENTAR.md']:
             out.write(ROOT / 'deliverables' / name, name)
         out.write(ROOT / 'evidence/upgrade/human-confirmation-21.json', 'evidence/human-confirmation-21.json')
         out.writestr('REPORT_BEFORE_AFTER.md', report)
