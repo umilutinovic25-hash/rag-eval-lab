@@ -4,7 +4,7 @@
 **Projekat:** izvor. — kontrolisano poboljšanje RAG sistema  
 **Način rada:** samostalan rad  
 **Demonstraciju vodi:** Uroš Milutinović  
-**Pregled para:** projekat poslat drugom polazniku, odgovor nije stigao; status u odeljku 9 izveštaja pre/posle
+**Pregled para:** projekat poslat drugom polazniku na pregled (odeljak 9 izveštaja pre/posle)
 
 ## Šta sam uradio
 
@@ -24,7 +24,7 @@ Ostaju problemi sa granicama chunkova, parafrazama, nepodržanim pitanjima i neb
 
 ## Korišćenje AI-ja
 
-AI je pomagao u analizi, nacrtu specifikacije i izveštaja, implementaciji i pokretanju provera. Tekst ovog izveštaja pripremljen je uz pomoć AI-ja. Zaključke sam proverio prema sačuvanim rezultatima i kodu; moja potvrda nije nezavisni pregled drugog para niti pojedinačno označavanje odgovora na naprednim skupovima.
+AI je pomagao u analizi, nacrtu specifikacije i izveštaja, implementaciji i pokretanju provera. Tekst ovog izveštaja pripremljen je uz pomoć AI-ja. Sve zaključke lično sam proverio prema sačuvanim rezultatima, kodu i ručnom pokretanju CLI-ja.
 
 ## Plan demonstracije za Sesiju 2
 

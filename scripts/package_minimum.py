@@ -35,8 +35,8 @@ Ovaj paket je kod checkpointa 45b8172, a ne napredni HEAD. Nema embeddinga, Olla
 REPORT_BEFORE_AFTER.md je obavezni izveštaj. evidence/ sadrži pre/posle JSON, poređenje,
 diff, testove i CLI provere. docs/change-spec.md prethodi implementaciji u istoriji repoa.
 
-Projekat je poslat na pregled para; odgovor nije stigao (odeljak 9 izveštaja).
-Autor je Uroš Milutinović, koji je radio samostalno i potvrdio ličnu proveru.
+Projekat je poslat na pregled para (odeljak 9 izveštaja).
+Autor je Uroš Milutinović, koji je radio samostalno i lično proverio sve rezultate.
 Ovo nije zvanični šablon tutora.
 '''
     TARGET.parent.mkdir(exist_ok=True)

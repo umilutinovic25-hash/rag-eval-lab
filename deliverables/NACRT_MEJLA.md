@@ -10,7 +10,7 @@ Implementirao sam jednu promenu: filter važeće verzije dokumenata. Na istom ev
 
 Radio sam samostalno, uz pomoć AI asistenta opisanu u izveštaju, i lično proverio navedene rezultate i dokaze. Demonstraciju ću voditi ja.
 
-Napomena o pregledu para: projekat sam poslao drugom polazniku na pregled, ali odgovor nije stigao do slanja ovog mejla, pa komentar para nije unet (odeljak 9 izveštaja pre/posle). Ako komentar stigne naknadno, prosleđujem ga. Rado ću pregledati i izveštaj koji mi dodelite.
+Projekat sam poslao drugom polazniku na pregled; njegov komentar prosleđujem čim stigne. Rado ću pregledati i izveštaj koji mi dodelite.
 
 Srdačan pozdrav,
 Uroš Milutinović
