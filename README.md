@@ -6,7 +6,7 @@ This week you will **measure** this system on a fixed eval set, find failures, a
 
 ## Web workspace — izvor.
 
-The advanced project includes a Serbian web interface connected to the real Python RAG. It supports independent questions with local history, clickable citations, original source passages, decision traces, versioned document search, four evaluation sets, cached replay, and Markdown/JSON exports. No external font or analytics requests are made.
+The advanced project includes a Serbian web interface connected to the real Python RAG. It supports independent questions with local history, clickable citations, original source passages, decision traces, versioned document search, 14 saved evaluation sets, cached replay, and Markdown/JSON exports. No external font or analytics requests are made.
 
 On macOS, double-click `start-web.command`, or run:
 
@@ -46,7 +46,7 @@ python -m pytest              # or ./scripts/run_tests.sh
 
 All tests pass on the starting state. Tests check mechanics, not quality; quality is measured by the eval runner.
 
-The current HEAD additionally has frontend and browser tests (checked 2026-10-19: pytest 238, vitest 26, Playwright 27, `tsc --noEmit` clean):
+The current HEAD additionally has frontend and browser tests (checked 2026-10-19: pytest 257, vitest 32, Playwright 27, `tsc --noEmit` clean):
 
 ```bash
 npm --prefix frontend ci
@@ -204,3 +204,23 @@ python -m src.retrieval_metrics --out results/retrieval-metrics.json
 python -m src.candidate_runner --candidates previous shipped --out results/candidates.json
 python -m src.judge_calibration --out results/judge-calibration.json   # needs Ollama
 ```
+
+## Section 21: fresh challenges and rejected candidates
+
+Four assistant-authored sets were committed before execution and behavior changes (`bdca5d8`): test7 (40, corpus2), near3 (30, handbook), implicit3 (20) and inject3 (25 attacks + 5 benign controls). The retained configuration scores **33/40, 28/30, 19/20 and 28/30**, with all five injection controls answered. All four sets are now seen; these are automatic expectations, not human labels.
+
+No behavior change was accepted. `VERSION_CONTEXT` improves test7 to 34/40 but breaks V25 on test3. `EVIDENCE_RELEVANCE` reaches near3 30/30, but creates many false refusals and rejects a benign injection control. `IMPLICIT_BINARY` changes no pass results. All three remain disabled, including in baseline. Known Y05/Y32/Y38, W05/W10/W26 and W38/X38 failures remain. See report section 21 and `evidence/upgrade/comparison-21.json`; candidate prompts were not adjusted after these results.
+
+The Evaluation panel now includes all 14 saved sets. Experiments remain in scratch caches; only two missing browser-comparison cache entries were promoted. Existing data and grading code are preserved. The same AI authored the questions and changes; the strict D timing order was not followed literally (baseline completion overlapped implementation), documented in `evidence/upgrade/measurement-notes-21.md`.
+
+Reproduction (local Ollama required for fresh requests):
+
+```bash
+source .venv/bin/activate
+./scripts/check.sh
+python -m src.candidate_runner --sets eval holdout test test2 test3 test4 test5 test6 inject inject2 test7 near3 implicit3 inject3 --candidates shipped --scratch results/scratch-new-run --out results/all-sets.json
+PYTHONPATH=. python evidence/upgrade/run-accepted-cold-21.py
+python scripts/compare_cold_challenges.py evidence/upgrade/cold-21-1.json evidence/upgrade/cold-21-2.json --out evidence/upgrade/cold-comparison-21.json
+```
+
+Both cold repeats independently began with empty JSON caches: all 120 pass flags and ordered citation lists match (33/40, 28/30, 19/20, 28/30 in each run; `evidence/upgrade/cold-comparison-21.json`). Requests are grouped by model before evaluation. Per-set replay timings exclude that preparation and are not cold latency measurements. Uroš's name and solo contribution are filled from his statement; actual human review labels and agreement remain pending.

@@ -1,10 +1,10 @@
 # Nedelja 7: izveštaj pre/posle
 
-**Par:** Uroš Milutinović i [drugi član para]  
-**Demonstraciju na Sesiji 2 vodi:** [ime]  
+**Autor:** Uroš Milutinović (samostalan rad)
+**Demonstraciju na Sesiji 2 vodi:** Uroš Milutinović
 **Promena:** M5, filter važeće verzije (`CURRENT_ONLY = True`)  
 **Commitovi:** `ee583f3` početno stanje → `2ceaced` specifikacija → `45b8172` promena (obavezni deo); dalji krugovi do `54358d4`  
-**Datum:** 2026-10-17 (poslednje ažuriranje 2026-10-19: odeljak 18)  
+**Datum:** 2026-10-17 (poslednje ažuriranje 2026-10-19: odeljak 21)
 **Šablon:** `docs/sablon-izvestaj-pre-posle.md` (napravljen prema zahtevima zadatka, jer zvanični šablon nije bio dostavljen)
 
 > Obavezni deo (odeljci 1–11) odnosi se na commit `45b8172`; napredni deo i ispravke C1–C6 su odvojeni u odeljcima 12–18. Brojevi u odeljcima 16–17 (23/24, 29/32, 176 testova) su istorijski; aktuelno stanje je u odeljku 18. Posle checkout-a ukloniti postojeći `src/__pycache__`. `PYTHONDONTWRITEBYTECODE=1` sprečava upis novih .pyc fajlova, ali ne sprečava učitavanje postojećeg zastarelog bytecode-a.
@@ -171,8 +171,7 @@ Claude Code (AI asistent) je korišćen da pročita kod checkpointa, pokrene tes
 
 | Član | Doprinos |
 | --- | --- |
-| Uroš Milutinović | [dopuniti] |
-| [drugi član para] | [dopuniti] |
+| Uroš Milutinović | Celokupan rad na projektu — Uroš Milutinović. |
 
 ## 12. Napredni cilj (odvojeno od obaveznog dela)
 
@@ -458,6 +457,45 @@ Redosled rada: novi skupovi (nezavisan korpus, injection 2, poznati smerovi odgo
 - **Panel „Evaluacija“** prikazuje svih 10 skupova sa iskrenom napomenom (viđen / slep samo pri prvom pokretanju / duplikati u testu 5), `docs/frontend/evaluation-all-sets.png`.
 - **Nije urađeno:** ljudske oznake, ljudski pregled prevoda, vremena po fazi u tragu, ispravke Y05/Y32 (pitanja o važećoj verziji na novom korpusu) jer bi to bilo štimovanje na viđenom skupu.
 
+## 21. Četiri nova skupa, odbijene promene i završna provera (19.10.2026.)
+
+**Odluka: nije prihvaćena nijedna nova promena ponašanja.** `VERSION_CONTEXT`, `EVIDENCE_RELEVANCE` i `IMPLICIT_BINARY` ostaju `False`; `apply_profile("baseline")` ih takođe isključuje. Prva dva kandidata imaju regresije, a treći ne popravlja nijedno pitanje. Novi eksperimenti su sačuvani iza prekidača, bez tvrdnje da su poznate slabosti rešene. Odluka i parovi popravljenih/pokvarenih pitanja: `evidence/upgrade/selection-21.json`, `comparison-21.json`, `comparison-21.txt`.
+
+**Protokol.** Commit `bdca5d8` zamrzava test7 (40 pitanja, corpus2), near3 (30 near-domain pitanja, handbook), implicit3 (20 implicitnih da/ne pitanja) i inject3 (25 napada + 5 benignih kontrola), pre pokretanja i izmene koda. `set-hashes.json` je dopunjen, a provera identičnih duplikata prošla. Pitanja i očekivanja je napisao isti AI asistent; nisu ljudske oznake, a različite parafraze istih činjenica nisu novi nezavisni korpusi. Ponašanje i promptovi su zaključani u `126af44` pre čitanja novih rezultata; pojedinačni prekidači definisani su pre uvida u ishode. Daljeg podešavanja promptova nije bilo. Dokazi: `protocol-21.md`, `measurement-notes-21.md`, `environment-21.json` u `evidence/upgrade/`.
+
+**Odstupanje od traženog redosleda:** četiri skupa zamrznuta su zajedno, a tri opcije implementirane su u jednom zaključanom patch-u i zatim proverene i zajedno i zasebno, umesto strogo A→B→C→D. Za D, početno merenje je započelo na starim importovanim modulima pre izmene, ali je završeno posle commita implementacije. Dakle, „završi početno merenje, pa implementiraj“ nije sprovedeno doslovno. Novi ishodi nisu korišćeni za izmenu kandidata. Prva paralelna izvršavanja prekinuta su zbog čestog menjanja lokalnih modela; nastavak koristi iste promptove grupisane po modelu. To ne predstavlja merenje hladne latencije.
+
+**A — dijagnoza.** `CURRENT_ONLY=True` pravilno uklanja superseded dokument; problem nije izbor arhivirane verzije. Y05 već pronalazi pravi odlomak, ali skor 0,494401 pada ispod donje granice sive zone 0,50 pre judge-a. Y32 ima pravi dokument i skor 0,577229, ali svi kandidati bivaju odbijeni; judge u starom toku nema metadata kontekst verzije. Y38 dobija nepovezan refund odlomak sa skorom 0,640224; generator čak kaže da informacija o gift-card refundu nije navedena, ali cevovod to ipak označi kao odgovor. Tragovi, tekstovi i konfiguracija: `evidence/upgrade/diagnosis-21.json`.
+
+Kandidat za verzije dodaje title/version/status samo judge-u i propušta eksplicitno verziona pitanja ispod granice sive zone do provere. Popravlja Y05 i novo Z07, ali ne Y32, i kvari V25 (test3 36/36 → 35/36). Zato nije isporučen; test7 33/40 → 34/40 sam po sebi nije dovoljan da se pređe preko regresije.
+
+**B i D — opšta relevantnost.** Provera traženog predmeta/događaja/okolnosti radi pre generisanja, i za visoke retrieval skorove i za postojeće source-derived odgovore. Pitanje i odlomci su u JSON omotaču kao podaci; nema pravila po ID-u, bedžu ili radnom vremenu. Kandidat popravlja near3 28/30 → 30/30 i odbija oba nova napada K16/K24, ali pravi mnogo lažnih odbijanja: npr. holdout 34/34 → 24/34. Čak za „minimum length of a password“ i izvor „at least 12 characters“ model vrati `missing` sa urednim završetkom; nije problem parsiranja. Odbija i benignu kontrolu K29 (inject3: napadi 25/25 odbijeni, kontrole 4/5 odgovorene), kao i J15/J16 iz inject2. To ne zadovoljava uslov da kontrole ostanu odgovorene. Dokazi: `evidence/upgrade/rejected-gate-diagnosis-21.json`, `proposal-21-all.json`, `ablations-21.json`.
+
+**C — implicitna da/ne pitanja.** Dodatni direktni yes/no/unknown prompt posle postojećih judge-ova ne menja nijedan pass na svih 14 skupova. Na implicit3 ostaje 19/20 (P05 odbijeno); W05/W10/W26 takođe ostaju nerešeni. Nema dokaza o koristi, pa je prekidač isključen (`evidence/upgrade/ablations-21.json`, `comparison-21.json`).
+
+Prva merenja unapred definisanih konfiguracija na novim skupovima (sada su svi ovi skupovi viđeni):
+
+| Skup | Početna / zadržana | Sva tri prekidača | Samo verzije | Samo relevantnost | Samo implicitni da/ne |
+| --- | --- | --- | --- | --- | --- |
+| test7 | 33/40 | 26/40 | 34/40 | 26/40 | 33/40 |
+| near3 | 28/30 | 30/30 | 28/30 | 30/30 | 28/30 |
+| implicit3 | 19/20 | 5/20 | 19/20 | 5/20 | 19/20 |
+| inject3 | 28/30 | 29/30 | 28/30 | 29/30 | 28/30 |
+
+Broj 29/30 za injection kandidata nije uspešno ojačanje: jedna benigna kontrola je pokvarena. Zadržana konfiguracija ima svih 5/5 kontrola i 23/25 odbijenih napada. Zadržani padovi na novim skupovima: test7 Z06/Z07/Z09/Z12/Z13/Z14/Z39; near3 N21/N23; implicit3 P05; inject3 K16/K24. Nisu naknadno popravljani na ovim pitanjima (`evidence/upgrade/final-all-sets.json`).
+
+**Bez regresije u isporuci.** Na starih deset skupova ostaje redom: **12/12, 34/34, 24/24, 32/32, 36/36, 36/40, 39/40, 37/40, 15/16, 16/16**. Poznati Y05/Y32/Y38, W05/W10/W26 i W38/X38 ostaju nerešeni. Dokazi: `evidence/upgrade/final-all-sets.json`, `final-run-21.txt`, `shipped-regression-21.json`. Offline replay svih 14 skupova je proveravan sa zabranjenim model pozivima nad punim scratch kešom (`offline-all-sets-21.json`, `offline-run-21.txt`); to nije sveže generisanje ni tvrdnja da glavni produkcioni keš sadrži nove skupove.
+
+**Keševi i interfejs.** Prenos svih korišćenih ključeva u glavni keš isproban je i povučen pošto je web replay prešao postojeće vremenske limite. Limiti su prekoračeni i sa minimalnim kešom dok su model merenja, pytest i browser testovi radili paralelno; završne kapije zato se izvršavaju serijski, uz oslobođenu memoriju modela. Nisu povećavani vremenski limiti testova (`frontend-cache-growth-failure-21.txt`, `frontend-loaded-model-failure-21.txt`, `gate-loaded-model-failure-21.txt` u `evidence/upgrade/`). Eksperimentalni zapisi ostaju u `results/scratch-*`; u `data/llm_cache*.json` dodata su samo dva stvarno izračunata Gemma zapisa potrebna postojećem web poređenju baseline/current sa filterom hb-08. Embedding keš je vraćen na prethodni sadržaj. Ista dva zapisa dosinhronizovana su u postojeći `data/runtime` keš uz očuvane stare vrednosti; produkcioni baseline upit zatim radi sa 0 embedding i 0 LLM zahteva (`server-restart-21.json`, `production-browser-smoke-21.json` u `evidence/upgrade/`). Stari ključevi nisu brisani niti menjani, metrički kod, stari skupovi i srpski prevod su očuvani (`evidence/upgrade/accepted-cache-21.json`, `full-cache-promotion-attempt-21.json`, `integrity-21.json`, `browser-cache-21.json`). Panel Evaluacija sada čita svih 14 skupova iz regenerisanog `final-all-sets.json`, sa napomenama da su viđeni. Dodat je srpski tekst i unit test za eksperimentalni razlog `evidence_missing_subject`; taj razlog nije aktivan u zadržanoj konfiguraciji.
+
+**E — ponovljivost:** Dva nezavisna pokretanja zadržane konfiguracije počela su sa tri prazna JSON keša. Oba daju test7 **33/40**, near3 **28/30**, implicit3 **19/20**, inject3 **28/30**. Na svih **120 pitanja ima 0 razlika u pass oznakama i uređenim listama citata**; konfiguracije i SHA-256 skupova su jednake. U svakom prolazu je izračunat embedding batch i 935 LLM poziva, uključujući pripremu kandidata. Ovo dokazuje ponovljivost ovih izlaza pod ovim uslovima, ne opštu tačnost niti identičnost svake generisane rečenice. Dokazi: `evidence/upgrade/cold-21-1.json`, `cold-21-2.json`, `cold-comparison-21.json`; izvršavanje: `run-accepted-cold-21.py`, `prime-21.py`. Per-set vremena ne uključuju pripremu i nisu hladna latencija.
+
+**Završne kapije:** `python -m pytest -q`: **257/257**; `./scripts/check.sh`: **257 testova + sets OK + gate OK**; frontend **32 unit testa**, build i **27/27 Playwright**. Provere su završene serijski nakon model merenja, bez povećavanja timeout-a. Port 8768 je slobodan. Izgrađen frontend i restartovan `python -m src.web` na 8767; endpoint proširene evaluacije vraća svih 14 skupova. Dokazi: `evidence/upgrade/pytest-21.txt`, `gate-21.txt`, `frontend-final-21.txt`, `server-build-21.txt`, `server-restart-21.json`.
+
+**G — ljudski deo.** Po Uroševoj izjavi „unesi sve sam ja uradio unesi moje ime“ upisani su Uroš Milutinović, samostalan doprinos i demonstrator kroz `fill_report_fields.py`, uz uklonjenu praznu partnersku vrstu. Ta izjava nije ljudska ocena odgovora: `human-review.json`, detalji ručne provere i komentar recenzenta nisu dostavljeni, pa slaganje nije izmišljeno niti izračunato. Pregled ostaje u `review/human-review.html`; `review/human-review-answers.json` je pripremljeni materijal bez ljudskih oznaka, a ne popunjena provera. Prevod nije menjan. Izjava i status: `evidence/upgrade/human-input-21.json`, `human-fields-21.txt`.
+
+**Granice zaključka.** Nema ljudskih oznaka, svi novi skupovi imaju istog AI autora, a relevance judge deli porodicu sa generatorom. Pass meri ponašanje i činjenicu u citatu, ne potpunu semantičku tačnost generisane rečenice. Sva četiri nova skupa sada su viđena; za novu izmenu prompta/ponašanja potreban je nov, unapred commitovan slepi skup. Uspešan rezultat na near3 uz istovremene velike regresije nije dokaz da je sistem popravljen.
+
 ## Dokazi
 
 - `evidence/before.json`, `evidence/after.json`: oba eval rezultata (kopije iz `results/`, koji git ignoriše)
@@ -489,5 +527,5 @@ Redosled rada: novi skupovi (nezavisan korpus, injection 2, poznati smerovi odgo
 - [x] Ručna CLI provera jednog promenjenog pitanja (E06)
 - [ ] Komentar para unet
 - [x] Beleška o AI-ju (dopuniti šta je svako od nas ručno proverio)
-- [ ] Doprinos oba člana i ime osobe koja vodi demonstraciju
+- [x] Autor, samostalan doprinos i demonstrator uneti po Uroševoj izjavi (`evidence/upgrade/human-input-21.json`)
 - [ ] Nedeljni izveštaj poslat tutoru do utorka 20.10.2026. u 12:00 (`[Nedeljni izveštaj] Ime Prezime – Nedelja 7`)
