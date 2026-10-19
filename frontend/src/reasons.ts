@@ -13,6 +13,10 @@ const DECISIONS: Record<string, string> = {
     "Pitanje se odnosi na sam sistem (njegove instrukcije, ulogu ili podešavanja), a ne na priručnik.",
   evidence_missing_subject:
     "Izvori ne potvrđuju traženi predmet, događaj ili okolnosti pitanja.",
+  jev_insufficient_evidence:
+    "Provera izvora nije našla dovoljno pouzdan dokaz za traženu informaciju.",
+  jev_unavailable:
+    "Provera izvora trenutno nije dostupna. Odgovor nije pripremljen jer izvori nisu provereni.",
   empty_question: "Pitanje je prazno.",
   ambiguous_request: "Pitanje je preširoko; izaberite o kojoj politici je reč.",
 };

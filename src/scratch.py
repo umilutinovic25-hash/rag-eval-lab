@@ -3,7 +3,7 @@
 import shutil
 from pathlib import Path
 
-from . import embeddings, llm
+from . import embeddings, llm, jev
 
 DATA = embeddings.CACHE_PATH.parent
 NAMES = ("embedding_cache.json", "llm_cache.json", "llm_cache-metadata.json")
@@ -17,4 +17,6 @@ def use_scratch_caches(directory: Path) -> Path:
             shutil.copyfile(DATA / name, target)
     embeddings.CACHE_PATH = directory / "embedding_cache.json"
     llm.CACHE_PATH = directory / "llm_cache.json"
+    # Unaccepted external-provider results are never copied into data/.
+    jev.CACHE_PATH = directory / "jev_cache.json"
     return directory

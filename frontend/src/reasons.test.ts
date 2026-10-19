@@ -2,6 +2,10 @@ import { describe, expect, it } from "vitest";
 import { decisionReason, fallbackReason, traceNote } from "./reasons";
 
 describe("reasons", () => {
+  it("distinguishes insufficient evidence from an unavailable evidence check", () => {
+    expect(decisionReason([{stage: "decision", reason: "jev_insufficient_evidence"}])).toContain("pouzdan dokaz");
+    expect(decisionReason([{stage: "decision", reason: "jev_unavailable"}])).toContain("trenutno nije dostupna");
+  });
   it("explains the last decision step", () => {
     const trace = [
       { stage: "retrieval" },

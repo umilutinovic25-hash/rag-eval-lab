@@ -22,7 +22,8 @@ EVAL_DIR = Path(__file__).resolve().parents[1] / "eval"
 SETS = {"eval": "eval_set.json", "holdout": "holdout_set.json", "test": "test_set.json", "test2": "test2_set.json",
         "test3": "test3_set.json", "test4": "test4_set.json", "test5": "test5_set.json", "inject": "inject_set.json", "test6": "test6_set.json", "inject2": "inject2_set.json"}
 SETS.update({name: f"{name}_set.json" for name in ("test7", "near3", "implicit3", "inject3")})
-CORPORA = {"test6": "corpus2.json", "test7": "corpus2.json"}  # sets that run on a second, independent corpus (default: the handbook)
+SETS["jev"] = "jev_set.json"
+CORPORA = {"test6": "corpus2.json", "test7": "corpus2.json", "jev": "corpus2.json"}  # default: handbook
 SEEN = ("eval", "holdout", "test", "test2", "test3", "test4")  # historical default selection; every registered set is now seen
 KS = (1, 2, 3, 5)
 

@@ -1,5 +1,6 @@
 import argparse
 import sys
+from pathlib import Path
 
 from . import config
 from .chunking import build_chunks
@@ -14,12 +15,27 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--profile", choices=["current", "offline"], default="current", help="offline disables all model calls")
     parser.add_argument("--question", required=True, help="Question to ask over the handbook")
     parser.add_argument("--show-retrieved", action="store_true", help="Also print retrieved chunks and scores")
+    parser.add_argument("--jev", action="store_true", help="Use the optional external TypeSafe judge (requires an API key)")
+    parser.add_argument("--scratch", type=Path, default=Path("results/scratch-jev-cli"), help="Cache directory for --jev")
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
     config.apply_profile(args.profile)
+    if args.jev:
+        from .jev import JevError, api_key
+        from .scratch import use_scratch_caches
+        if args.profile == "offline":
+            print("Error: --jev cannot be combined with the offline profile.", file=sys.stderr)
+            sys.exit(2)
+        try:
+            api_key()
+        except JevError as error:
+            print(f"Error: {error}", file=sys.stderr)
+            sys.exit(2)
+        config.JEV_ENABLED = True
+        use_scratch_caches(args.scratch)
     chunks = build_chunks(load_corpus())
     by_id = {chunk.chunk_id: chunk for chunk in chunks}
     try:

@@ -39,6 +39,7 @@ SET_NOTES = {
     'test7': ('Nezavisan korpus (test 7)', '40 novih pitanja; viđen posle merenja, isti AI autor'),
     'near3': ('Bliska domena 3', '30 novih pitanja; viđen posle merenja'),
     'implicit3': ('Implicitna da/ne 3', '20 novih pitanja; viđen posle merenja'),
+    'jev': ('JEv provera', '40 novih pitanja na corpus2; rezultati i status u odeljku 22 izveštaja'),
     'inject3': ('Prompt injection 3', '25 napada i 5 benignih kontrola; viđen posle merenja'),
     'inject': ('Prompt injection', 'viđen'), 'inject2': ('Prompt injection 2', 'zaštita pisana posle prvog skupa'),
 }
@@ -96,7 +97,9 @@ def documents_payload():
 @contextmanager
 def runtime_caches():
     """Run under PIPELINE_LOCK; preserve historical experiment caches."""
+    from . import jev
     previous = embeddings.CACHE_PATH, llm.CACHE_PATH
+    previous_jev = jev.CACHE_PATH
     directory = RUNTIME_DIR
     directory.mkdir(parents=True, exist_ok=True)
     for source in (*previous, llm.metadata_path()):
@@ -104,10 +107,12 @@ def runtime_caches():
         if source.exists() and not destination.exists():
             shutil.copyfile(source, destination)
     embeddings.CACHE_PATH, llm.CACHE_PATH = (directory / p.name for p in previous)
+    jev.CACHE_PATH = directory / "jev_cache.json"
     try:
         yield
     finally:
         embeddings.CACHE_PATH, llm.CACHE_PATH = previous
+        jev.CACHE_PATH = previous_jev
 
 
 def profile_identity(profile):
@@ -373,7 +378,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--port', type=int, default=8767)
     parser.add_argument('--state-dir',type=Path,help='Isolated local library, jobs and runtime caches.')
+    parser.add_argument('--jev', action='store_true', help='Use the external TypeSafe evidence judge for current profiles')
     args = parser.parse_args()
+    if args.jev:
+        from .jev import JevError, api_key
+        try:
+            api_key()
+        except JevError as error:
+            parser.error(str(error))
+        BASE_CONFIG['JEV_ENABLED'] = True
     server = make_server(args.port,state_dir=args.state_dir)
     print(f'Izvor je dostupan na http://localhost:{server.server_address[1]}', flush=True)
     try:

@@ -143,6 +143,24 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
                       "chunks": [r.chunk.chunk_id for r in selected]})
         return accepted
 
+    def jev_filter(selected):
+        from .jev import JevError, classify
+        operation.progress('judge', 'Proveravam izvore preko TypeSafe servisa.')
+        try:
+            decisions = classify(question, [r.chunk for r in selected])
+        except JevError as error:
+            trace.append({"stage": "jev_error", "code": error.code, "model": config.JEV_MODEL})
+            return None
+        accepted = []
+        for item, decision in zip(selected, decisions):
+            trace.append({"stage": "jev", "chunk_id": item.chunk.chunk_id,
+                          "model": decision.model, "label": decision.label,
+                          "probability": decision.probability, "confidence": decision.confidence,
+                          "accepted": decision.accepted, "cached": decision.cached})
+            if decision.accepted:
+                accepted.append(item)
+        return accepted
+
     if not question.strip():
         return refuse("empty_question", [])
     if config.INJECTION_GUARDS:
@@ -160,13 +178,29 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
         evidence = select(question, chunks)
         if evidence:
             text, selected, rule = evidence
+            if config.JEV_ENABLED:
+                checked = jev_filter(selected)
+                if checked is None:
+                    return refuse("jev_unavailable", selected)
+                if len(checked) != len(selected):
+                    return refuse("jev_insufficient_evidence", selected)
             if config.EVIDENCE_RELEVANCE and config.ANSWER_MODE == "llm" and not relevant(selected):
                 return refuse("evidence_missing_subject", selected)
             return RagAnswer(text, [r.chunk.chunk_id for r in selected], False, selected,
-                             trace=[{'stage':'evidence','rule':rule,'score_kind':'lexical overlap, not cosine'}], disposition='limited' if rule=='separate_policy_limit' else 'answer')
+                             trace=trace + [{'stage':'evidence','rule':rule,'score_kind':'lexical overlap, not cosine'}], disposition='limited' if rule=='separate_policy_limit' else 'answer')
     if config.RERANK == "llm-gray-zone" and config.RETRIEVAL_MODE not in config.COSINE_MODES:
         raise ValueError("llm-gray-zone requires semantic or hybrid cosine scores; use the offline profile for lexical.")
-    if config.RERANK in ("llm", "llm-gray-zone"):
+    if config.JEV_ENABLED:
+        candidates = retrieve_top_k(question, chunks, k=config.RERANK_CANDIDATES)
+        record_retrieval(candidates)
+        accepted = jev_filter(candidates)
+        if accepted is None:
+            return refuse("jev_unavailable", candidates[:config.TOP_K])
+        if not accepted:
+            return refuse("jev_insufficient_evidence", candidates[:config.TOP_K])
+        results = accepted[:config.TOP_K]
+        cited = results
+    elif config.RERANK in ("llm", "llm-gray-zone"):
         candidates = retrieve_top_k(question, chunks, k=config.RERANK_CANDIDATES)
         record_retrieval(candidates)
         top = candidates[0].score if candidates else 0.0
@@ -202,6 +236,13 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
     cited = expand_context(cited, chunks, config.CONTEXT_NEIGHBORS, config.CONTEXT_POLICY)
     if config.CONTEXT_NEIGHBORS:
         trace.append({"stage": "context", "anchors": anchors, "expanded": [r.chunk.chunk_id for r in cited], "neighbor_scores": "inherited; not retrieval scores"})
+    if config.JEV_ENABLED and [r.chunk.chunk_id for r in cited] != anchors:
+        checked = jev_filter(cited)
+        if checked is None:
+            return refuse("jev_unavailable", results)
+        if not checked:
+            return refuse("jev_insufficient_evidence", results)
+        cited = checked
     if config.EVIDENCE_RELEVANCE and config.ANSWER_MODE == "llm" and not relevant(cited):
         return refuse("evidence_missing_subject", results)
     fallback_reason = None

@@ -8,7 +8,7 @@ Date: 2026-10-19. Author: AI assistant; not independent human annotation.
 
 Optional `JEV_ENABLED = False`. When explicitly enabled, use Jev as an independent evidence decision before generation, including evidence-rule shortcuts. In the retrieval path, Jev replaces local candidate judging and checks up to RERANK_CANDIDATES current candidates even outside the local gray zone. It receives only the question, candidate text and document metadata, never gold labels. A single Choice per candidate: supported / contradicted / insufficient. Supported and contradicted permit an answer if their selected probability is at least 0.80; explicit negative answers count as answerable. Shared topic alone does not suffice. Uncertain and insufficient do not permit an answer. No fallback to another judge on provider failure: refuse with an explicit service reason.
 
-Use pinned `jev-1.13.0` (documented stable alias target on 2026-10-19), HTTPS API only, server environment key, bounded timeout, no automatic retries, sanitized errors. Store provider output in scratch cache only, keyed by complete request and pinned version. Validate schema and version on cache replay too. Never log the key or raw transport errors.
+Use pinned `jev-1.13.0` (documented stable alias target on 2026-10-19), HTTPS API only, server environment key or private untracked `.env.jev` file (parsed as data, never executed), bounded timeout, no automatic retries, sanitized errors. Store provider output in scratch cache only, keyed by complete request and pinned version. Validate schema and version on cache replay too. Never log the key or raw transport errors.
 
 ## Evaluation and acceptance
 

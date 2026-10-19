@@ -9,10 +9,11 @@ _USAGE = ContextVar('rag_usage', default=None)
 def record(kind, cached=False, metadata=None, seconds=0):
     usage=_USAGE.get()
     if usage is None:return
-    usage['cache_hits' if cached else 'requests'][kind]+=1
+    counts = usage['cache_hits' if cached else 'requests']
+    counts[kind] = counts.get(kind, 0) + 1
     if not cached:
         usage['model_seconds']+=seconds
-        if kind=='llm':
+        if kind in ('llm', 'jev'):
             metadata=metadata or {}
             unknown=False
             for field,key in (('prompt_eval_count','prompt_tokens'),('eval_count','output_tokens')):

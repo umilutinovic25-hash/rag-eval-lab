@@ -14,7 +14,7 @@ def offline_lexical_defaults(monkeypatch):
     monkeypatch.setattr(config, "EVIDENCE_RULES_ENABLED", False)
     monkeypatch.setattr(config, "CHUNK_HEADERS", False)
     monkeypatch.setattr(config, "YESNO_QUESTION_JUDGE", None)
-    for name in ("VERSION_CONTEXT", "EVIDENCE_RELEVANCE", "IMPLICIT_BINARY"):
+    for name in ("VERSION_CONTEXT", "EVIDENCE_RELEVANCE", "IMPLICIT_BINARY", "JEV_ENABLED"):
         monkeypatch.setattr(config, name, False)
 
     def no_network(texts):
@@ -26,3 +26,8 @@ def offline_lexical_defaults(monkeypatch):
         raise AssertionError(f"Test tried to call Ollama model {model}")
 
     monkeypatch.setattr(llm, "request_generation", no_llm)
+
+    from src import jev
+    def no_jev(payload):
+        raise AssertionError("Test tried to call the external TypeSafe API")
+    monkeypatch.setattr(jev, "request_decisions", no_jev)
