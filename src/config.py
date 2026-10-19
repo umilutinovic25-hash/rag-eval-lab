@@ -22,6 +22,9 @@ CONTEXT_POLICY = "references"  # "all" or "references" (previous context only fo
 RETRIEVAL_MIN_SCORE = 0.01
 STOPWORDS_ENABLED = False
 CURRENT_ONLY = True
+# With CURRENT_ONLY, a question that explicitly asks for an older version (a year, or previous/old/former/before)
+# searches that version instead of the current one, for titles that exist in more than one version (docs/history-spec.md).
+HISTORICAL_VERSIONS = True
 
 # Guards against requests aimed at the assistant instead of the corpus (questions about its prompt, role-play, output
 # overrides) and against answers written in a different language than an English question.
@@ -153,13 +156,14 @@ def apply_profile(name: str) -> None:
     """CLI-only profile: change all coupled settings together, within this process."""
     global RETRIEVAL_MODE, RERANK, ANSWER_MODE, ANSWER_QUOTES, EVIDENCE_RULES_ENABLED, CHUNK_HEADERS
     global INJECTION_GUARDS, POLARITY_CHECK, NUMBERS_FROM_QUESTION
-    global VERSION_CONTEXT, EVIDENCE_RELEVANCE, IMPLICIT_BINARY, JEV_ENABLED
+    global VERSION_CONTEXT, EVIDENCE_RELEVANCE, IMPLICIT_BINARY, JEV_ENABLED, HISTORICAL_VERSIONS
     if name in ("current", "verified"):
         return
     if name == "baseline":
         JEV_ENABLED = False
         EVIDENCE_RULES_ENABLED = False
         VERSION_CONTEXT = EVIDENCE_RELEVANCE = IMPLICIT_BINARY = False
+        HISTORICAL_VERSIONS = False
         CHUNK_HEADERS = False  # the historical replay keys embeddings by the bare chunk text
         INJECTION_GUARDS = POLARITY_CHECK = NUMBERS_FROM_QUESTION = False  # later additions are not part of the historical replay
         return

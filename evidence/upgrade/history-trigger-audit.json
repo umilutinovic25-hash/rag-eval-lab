@@ -1,0 +1,18 @@
+{
+ "questions_checked": 470,
+ "candidate_list_changes": [
+  "history:HV01",
+  "history:HV02",
+  "history:HV03",
+  "history:HV04",
+  "history:HV08",
+  "history:HV09",
+  "history2:HR01",
+  "history2:HR02",
+  "history2:HR03",
+  "history2:HR04",
+  "history2:HR08",
+  "history2:HR09"
+ ],
+ "note": "Questions outside history sets get the identical candidate list with HISTORICAL_VERSIONS on, so their pipeline result cannot change."
+}

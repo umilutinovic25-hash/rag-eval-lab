@@ -68,7 +68,8 @@ def build_pairs(sets=SEEN, depth: int = 5, yes_no_only: bool = False) -> list[di
             if yes_no_only and not llm.is_yes_no_question(item["question"]):
                 continue
             candidates = ranked(item["question"], chunks)[:depth]
-            cosines = dict(zip(searchable_chunks(chunks), score_chunks(item["question"], searchable_chunks(chunks))))
+            searchable = searchable_chunks(chunks, item["question"])
+            cosines = dict(zip(searchable, score_chunks(item["question"], searchable)))
             top = max(cosines.values())
             for chunk in candidates:
                 positive = (

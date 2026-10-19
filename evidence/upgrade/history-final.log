@@ -1,0 +1,9 @@
+shipped           eval    12/12  cit_prec=1.0  failed=[]  fallbacks=0  0.4s
+shipped           holdout 34/34  cit_prec=0.9583  failed=[]  fallbacks=0  1.6s
+shipped           history 5/10  cit_prec=0.4444  failed=['HV01', 'HV02', 'HV03', 'HV04', 'HV08']  fallbacks=0  185.8s
+shipped           history24/10  cit_prec=0.4  failed=['HR01', 'HR02', 'HR03', 'HR04', 'HR08', 'HR09']  fallbacks=0  159.0s
+historical        eval    12/12  cit_prec=1.0  failed=[]  fallbacks=0  0.4s
+historical        holdout 34/34  cit_prec=0.9583  failed=[]  fallbacks=0  2.7s
+historical        history 10/10  cit_prec=1.0  failed=[]  fallbacks=0  65.7s
+historical        history28/10  cit_prec=0.7778  failed=['HR03', 'HR09']  fallbacks=0  91.3s
+Wrote results/history-final.json

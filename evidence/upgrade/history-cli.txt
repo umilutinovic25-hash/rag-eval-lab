@@ -1,0 +1,18 @@
+Question:
+How many remote days per week did the 2024 remote work policy allow?
+
+Answer:
+2 [hb-02-chunk-0]
+Source [hb-02-chunk-0]: "Remote work: employees can work remotely up to 2 days per week. Remote days per week are agreed with your team lead."
+
+Refused: False
+---
+Question:
+How many days per week can I work remotely?
+
+Answer:
+You can work remotely up to 3 days per week. [hb-03-chunk-0]
+Source [hb-03-chunk-0]: "Remote work: employees can work remotely up to 3 days per week."
+Source [hb-03-chunk-2]: "Remote work days can be moved within same week."
+
+---

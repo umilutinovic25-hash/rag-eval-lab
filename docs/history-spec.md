@@ -39,3 +39,18 @@ Pitanja sa godinom ili rečima kao „before“ u drugom značenju („must be a
 Kandidat `historical` protiv `shipped` na svim registrovanim skupovima (`python -m src.candidate_runner --candidates shipped historical --sets ...`). Uključuje se podrazumevano samo ako na postojećim skupovima nema nijedne nove regresije, a na istorijskim skupovima ima popravki. U suprotnom ostaje isključen i rezultat se dokumentuje. Uz to `pytest`, `scripts/check.sh` i frontend testovi.
 
 Napomena: refuse stavke su dopunjene poljima `expected_doc_ids: []` i `expected_fact: null` (format eval_runner-a) pre prvog merenja i pre izmene koda; pitanja i očekivanja nisu menjana.
+
+## Rezultat (posle implementacije)
+
+| Skup | Pre (`shipped`) | Posle (`historical`) | Popravljeno | Regresije |
+| --- | ---: | ---: | --- | --- |
+| history | 5/10 | 10/10 | HV01, HV02, HV03, HV04, HV08 | nema |
+| history2 | 4/10 | 8/10 | HR01, HR02, HR04, HR08 | nema |
+| eval | 12/12 | 12/12 | | nema |
+| holdout | 34/34 | 34/34 | | nema |
+
+**Izmena pravila pre prihvatanja.** Prva verzija pravila reči prošlosti je na postojećim skupovima pogrešno aktivirala istorijski režim kod 10 pitanja („is used to reserve“, „previous instructions“, „17-year-old“). Pre merenja tih skupova pravilo je suženo: reč prošlosti važi samo uz imenicu kao policy, rules, version, limit. Posle toga nijedno od 458 pitanja van istorijskih skupova ne dobija drugačiju listu kandidata (`evidence/upgrade/history-trigger-audit.json`), pa njihov rezultat ne može da se promeni. Puno merenje svih 15 skupova dvaput je prekinuto padom Ollama servera; ova provera ga zamenjuje.
+
+**Preostalo.** HR03 („before the current policy“) dobija staru verziju među kandidatima, ali pretraga izabere drugi dokument. HR09 (stara cena koja ne postoji u korpusu) sistem ne može da prepozna. Oba su sada viđena pitanja.
+
+Dokazi: `evidence/upgrade/history-before.json`, `history-final.json`, `history-final.log`, `history-trigger-audit.json`, `history-cli.txt`.

@@ -109,10 +109,50 @@ def sort_keys(query: str, chunks: list[Chunk], scores: list[float]) -> list[floa
     return [1 / (RRF_K + a) + 1 / (RRF_K + b) for a, b in zip(lexical_rank, semantic_rank)]
 
 
-def searchable_chunks(chunks: list[Chunk]) -> list[Chunk]:
-    if config.CURRENT_ONLY:
+YEAR_RE = re.compile(r"\b(20\d{2})\b")
+# A past word counts only next to a policy noun, so "previous instructions" or "is used to reserve" do not trigger it.
+PAST_RE = re.compile(
+    r"\b(?:previous|previously|old|older|former|formerly|earlier|prior)\b(?:\W+\w+){0,3}?\W+"
+    r"(?:policy|policies|rules?|version|limit|window|terms|allowance|price)\b"
+    r"|\bbefore (?:it|that|this|the (?:rule|policy|limit)) changed\b"
+    r"|\bused to (?:be|allow|have|get|give|take|pay)\b",
+    re.I,
+)
+BEFORE_PRESENT_RE = re.compile(r"\b(?:before|prior to) (?:the )?(?:current|new|latest)\b", re.I)
+BEFORE_YEAR_RE = re.compile(r"\b(?:before|prior to)\b[^.?]*?\b(20\d{2})\b", re.I)
+PRESENT_RE = re.compile(r"\b(now|currently|current|today|still|anymore|any more|latest)\b", re.I)
+
+
+def requested_versions(query: str | None, versions: set[str]) -> set[str] | None:
+    """Versions the question asks for, or None for the default (current only)."""
+    if not query or not config.HISTORICAL_VERSIONS:
+        return None
+    before = BEFORE_YEAR_RE.search(query)
+    if before:
+        return {v for v in versions if v < before.group(1)}
+    years = set(YEAR_RE.findall(query))
+    if years:
+        return years
+    if BEFORE_PRESENT_RE.search(query) or (PAST_RE.search(query) and not PRESENT_RE.search(query)):
+        return {"superseded"}
+    return None
+
+
+def searchable_chunks(chunks: list[Chunk], query: str | None = None) -> list[Chunk]:
+    if not config.CURRENT_ONLY:
+        return chunks
+    versioned = {chunk.title for chunk in chunks if chunk.status == "superseded"}
+    wanted = requested_versions(query, {chunk.version for chunk in chunks if chunk.title in versioned})
+    if wanted is None:
         return [chunk for chunk in chunks if chunk.status != "superseded"]
-    return chunks
+    keep = []
+    for chunk in chunks:
+        if chunk.title not in versioned:
+            if chunk.status != "superseded":
+                keep.append(chunk)
+        elif chunk.version in wanted or ("superseded" in wanted and chunk.status == "superseded"):
+            keep.append(chunk)
+    return keep
 
 
 def retrieve_top_k(query: str, chunks: list[Chunk], k: int | None = None) -> list[RetrievalResult]:
@@ -120,7 +160,7 @@ def retrieve_top_k(query: str, chunks: list[Chunk], k: int | None = None) -> lis
     if k <= 0:
         raise ValueError("k must be > 0")
 
-    candidates = searchable_chunks(chunks)
+    candidates = searchable_chunks(chunks, query)
     scores = score_chunks(query, candidates)
     keys = sort_keys(query, candidates, scores)
     scored = [

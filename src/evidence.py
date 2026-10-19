@@ -13,7 +13,7 @@ def suspicious(text):
 def select(question, chunks):
     """Return literal evidence and an explicitly limited qualifier, never an eval-ID lookup."""
     q = normalise_numbers(question)
-    candidates = searchable_chunks(chunks)
+    candidates = searchable_chunks(chunks, question)
     patterns = []
     qualifier = ''
     rule = None

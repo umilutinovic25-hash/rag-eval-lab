@@ -241,7 +241,7 @@ Oba izlaza se slažu sa `results/adv3b.json`. CLI izlazi su snimljeni pre A4, pa
 2. **Pragovi su kalibrisani na eval skupu** na kojem se i meri.
 3. **Zavisnost od Ollama** za nova pitanja; leksički režim ostaje dostupan kao potpuno offline rezerva.
 4. **Embeddingi slabije hvataju tačne brojeve i termine.** Hibridna pretraga je izmerena u odeljku 13 (B1) i ovde šteti.
-5. **Istorijska pitanja** i dalje nisu odgovoriva zbog `CURRENT_ONLY` (kao u obaveznom delu).
+5. **Istorijska pitanja** i dalje nisu odgovoriva zbog `CURRENT_ONLY` (kao u obaveznom delu). Rešeno kasnije, u odeljku 23.
 6. **„Odgovor“ je posle A4 i dalje spisak citiranih chunk-ova.** Generisanje preko LLM-a je urađeno u odeljku 13 (B3).
 
 ## 13. Max nivo: generalizacija i poređenje tehnika (odvojeno od obaveznog dela)
@@ -564,6 +564,18 @@ HTTP smoke potvrđuje da eksplicitno uključen current profil koristi JEv, basel
 **Završna provera.** Python: **285 passed**, `scripts/check.sh`: sets OK i gate OK; frontend: **33** unit testa, build uspešan i **27/27** Playwright testova. Server na 8767 je restartovan sa podrazumevanim lokalnim profilom, a 8768 je slobodan. Svih 14 ranijih skupova zadržava iste pass+citate u lokalnom profilu. Izvorni data/*.json keševi, prevod, eval_runner, eval_compare i M5 ZIP su identični pre integracije; lokalni digest-i modela nisu menjani. Dokazi: `evidence/upgrade/jev-final-pytest.txt`, `jev-final-gate.txt`, `jev-final-frontend.txt`, `jev-final-local-all-sets.txt`, `jev-cli-smoke.txt`, `jev-server-restart.json`, `jev-integrity.json`.
 
 **Status.** Integracija je dostupna kroz `--jev` u CLI-ju i web serveru, ali je podrazumevano isključena. Panel Evaluacija dobija petnaesti skup sa rezultatima lokalnog profila; poređenje sa JEv-om prikazano je ovde. Svi skupovi, uključujući `jev`, sada su viđeni. Za novu odluku o promptu, pragu ili verziji modela potreban je novi unapred commitovan slepi skup. Obavezni M5 ZIP nije menjan. Provera tipova i modelova verovatnoća nisu dokaz semantičke tačnosti; nema novih ljudskih oznaka.
+
+## 23. Istorijska pitanja: filter verzije zavisi od pitanja (19.10.2026.)
+
+Ograničenje 5 iz odeljka 8 rešio sam posebnom promenom `HISTORICAL_VERSIONS`, sa specifikacijom i dva nova skupa od po 10 pitanja commitovanim pre koda (`docs/history-spec.md`, commit `ad8df42`). Kada pitanje traži staru verziju (godinu, „before the 2026 update“, „previous policy“, „old rules“), pretraga za dokumente sa više verzija koristi traženu verziju umesto važeće. Ako tražena godina ne postoji (npr. 2022), nijedna verzija tog dokumenta ne ulazi u pretragu i sistem odbija. Obična pitanja rade isto kao posle M5.
+
+| Skup | Pre | Posle | Regresije |
+| --- | ---: | ---: | --- |
+| history (handbook) | 5/10 | 10/10 | nema |
+| history2 (corpus2) | 4/10 | 8/10 | nema |
+| eval / holdout | 12/12, 34/34 | 12/12, 34/34 | nema |
+
+Prva verzija pravila bi pogrešno reagovala na 10 postojećih pitanja („is used to reserve“, „previous instructions“), pa sam je suzio pre prihvatanja. Posle toga nijedno od 458 postojećih pitanja ne dobija drugačiju listu kandidata, pa njihov rezultat ne može da se promeni. Ručna CLI provera: „How many remote days per week did the 2024 remote work policy allow?“ daje 2 dana sa citatom `hb-02`, a „How many days per week can I work remotely?“ i dalje 3 dana sa `hb-03`. Ostaju HR03 (pretraga bira pogrešan dokument) i HR09 (stara cena koja ne postoji). Testovi: 286 Python, 33 frontend unit i 29 Playwright, `scripts/check.sh` prolazi.
 
 ## Kontrolna lista pre predaje
 

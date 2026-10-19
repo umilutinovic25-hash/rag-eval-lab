@@ -42,7 +42,7 @@ VARIANTS = {
 
 def ranked(question: str, chunks: list[Chunk]) -> list[Chunk]:
     """All searchable chunks, best first, with the same tie-break as retrieve_top_k."""
-    candidates = searchable_chunks(chunks)
+    candidates = searchable_chunks(chunks, question)
     scores = score_chunks(question, candidates)
     keys = sort_keys(question, candidates, scores)
     order = sorted(range(len(candidates)), key=lambda i: (-keys[i], candidates[i].chunk_id))
