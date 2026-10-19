@@ -417,7 +417,7 @@ Specifikacija `docs/rag-upgrade-spec.md` i rezultati `docs/rag-upgrade-results.m
 - **Odbačeno i isključeno:** BM25 hibrid (lošiji od semantike pri svim težinama), few-shot judge (holdout 30/34), mistral judge (31/34), JSON odgovori, `TOP_K` 1 i 3.
 - **Slepi test 3** (36 pitanja): 33/36 pre, 34/36 posle zaglavlja; dve greške (V21, V25) su lažna odbijanja implicitnih da/ne pitanja.
 - **Runda 2:** trosmerni (yes/no/unknown) judge za da/ne pitanja. Prva verzija (zamena postojećeg judge-a) je na slepom testu 4 **pogoršala** rezultat 36 → 34/40, jer `gemma3:4b` kaže „unknown“ za jasne pasuse (W20, W22). Isporučena je kao unija iza postojećeg judge-a: test 3 36/36, test 4 36/40. Lekcija: kalibracija na viđenim parovima (TPR 0,89) nije predvidela slepi rezultat.
-- **Slepi test 5** (40 pitanja, `eval/test5_set.json`, commit `54358d4` pre pokretanja): finalna konfiguracija pokrenuta jednom, bez podešavanja posle rezultata.
+- **Slepi test 5** (40 pitanja, od kojih je 36 novih, `eval/test5_set.json`, commit `54358d4` pre pokretanja): finalna konfiguracija pokrenuta jednom, bez podešavanja posle rezultata.
 
 | Konfiguracija | test 5 | Pali |
 | --- | --- | --- |
@@ -429,7 +429,11 @@ Tri implicitna da/ne pitanja (X04 „reći lozinku kolegi iz IT-a“, X06 „zah
 
 **Parni test** (`scripts/paired_test.py`, izlaz `evidence/upgrade/paired-tests.txt`): na test 5 da/ne judge je popravio 3 pitanja i pokvario 0 (egzaktni McNemar p = 0,25). To je konzistentno poboljšanje, ali **nije statistički značajno** na 40 pitanja; 3 pitanja ne mogu da dokažu efekat. Test 3 (2 : 0, p = 0,5) ne računam kao dokaz jer je judge pravljen upravo prema njegovim greškama (V21, V25), pa se ta dva skupa ne sabiraju. Test 4 nema promene (0 : 0).
 
-**Ograničenja:** test 5 je jedna nezavisna proba od 40 pitanja (39/40 ima širok interval poverenja, oko 87–99,6%), a autor pitanja je isti AI koji je gradio sistem; test 3, 4 i 5 su sada viđeni. Preostale poznate greške: W05, W10, W26 (test 4, implicitna da/ne pitanja) i W38, X38 (lažno prihvaćena pitanja blizu domena). Aktuelno stanje: 241 test prolazi; 12/12, 34/34, 24/24, 32/32, 36/36, 36/40 i slepi 39/40. Dokazi: `evidence/upgrade/test5-shipped.json`, `evidence/upgrade/test5-before.json`, `evidence/upgrade/paired-tests.txt`.
+**Ispravka „slepog“ testa 5.** Audit skupova (`evals-ops` skripta `goldenset-audit.py`, izlaz `evidence/upgrade/evals-ops-checks.txt`) je pokazao da su 4 od 40 pitanja u testu 5 identična pitanjima iz ranijih, viđenih skupova (X12=H10, X32=H28, X15=U13, X16=W18); to je moja greška pri pisanju, nije bila namera. Bez njih: isporučena konfiguracija **35/36**, bez da/ne judge-a 32/36; X04, X06 i X28 su i dalje među 36 novih pitanja, pa su razlika (3 : 0) i p = 0,25 nepromenjeni. Test 5 je dakle slep samo za 36 pitanja.
+
+**Kalibracija judge-ova preko Cohen kappa** (isti 510 viđenih parova iz G3, oznake su heuristika, ne ljudske): span qwen 0,85; yes/no qwen 0,83; yes/no mistral 0,80; isporučeni `either` 0,79; yes/no gemma 0,76; yes/no llama 0,68; few-shot gemma 0,50, mistral 0,42, llama 0,32. Redosled potvrđuje odluku da se few-shot judge odbaci (kappa ispod 0,6), a `either` je nešto slabiji od svoje span komponente zbog većeg broja lažnih prihvatanja.
+
+**Ograničenja:** test 5 je jedna nezavisna proba od 40 pitanja (39/40 ima širok interval poverenja, oko 87–99,6%), a autor pitanja je isti AI koji je gradio sistem; test 3, 4 i 5 su sada viđeni. Preostale poznate greške: W05, W10, W26 (test 4, implicitna da/ne pitanja) i W38, X38 (lažno prihvaćena pitanja blizu domena). Aktuelno stanje: 241 test prolazi; 12/12, 34/34, 24/24, 32/32, 36/36, 36/40 i slepi 39/40. Dokazi: `evidence/upgrade/test5-shipped.json`, `evidence/upgrade/test5-before.json`, `evidence/upgrade/paired-tests.txt`, `evidence/upgrade/evals-ops-checks.txt`.
 
 ## Dokazi
 

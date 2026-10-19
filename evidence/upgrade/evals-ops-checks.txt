@@ -1,0 +1,16 @@
+# evals-ops (0xDarkMatter/claude-mods, MIT) scripts run on our data, 2026-10-19
+## Cohen kappa of the G3 judge calibration (510 seen pairs, heuristic labels, not human)
+cal-either-shipped 0.7906
+cal-fewshot-gemma 0.5026
+cal-fewshot-llama 0.3209
+cal-fewshot-mistral 0.4205
+cal-span-qwen 0.8532
+cal-yesno-gemma 0.7618
+cal-yesno-llama 0.6789
+cal-yesno-mistral 0.797
+cal-yesno-qwen 0.8296
+## Question-set audit (218 questions, 7 sets)
+4 near-duplicate pairs
+{"groups": [["holdout_set:H10", "test5_set:X12"], ["holdout_set:H28", "test5_set:X32"]]}
+{"pairs": [{"a": "holdout_set:H10", "b": "test5_set:X12", "similarity": 1.0}, {"a": "holdout_set:H28", "b": "test5_set:X32", "similarity": 1.0}, {"a": "test2_set:U13", "b": "test5_set:X15", "similarity": 1.0}, {"a": "test4_set:W18", "b": "test5_set:X16", "similarity": 1.0}]}
+## test 5 without the 4 questions identical to seen ones (X12, X15, X16, X32): shipped 35/36 (X38 fails), before 32/36 (X04, X06, X28, X38 fail)
