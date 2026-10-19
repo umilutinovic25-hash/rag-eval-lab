@@ -37,3 +37,5 @@ Pitanja sa godinom ili rečima kao „before“ u drugom značenju („must be a
 ## Provera i pravilo prihvatanja
 
 Kandidat `historical` protiv `shipped` na svim registrovanim skupovima (`python -m src.candidate_runner --candidates shipped historical --sets ...`). Uključuje se podrazumevano samo ako na postojećim skupovima nema nijedne nove regresije, a na istorijskim skupovima ima popravki. U suprotnom ostaje isključen i rezultat se dokumentuje. Uz to `pytest`, `scripts/check.sh` i frontend testovi.
+
+Napomena: refuse stavke su dopunjene poljima `expected_doc_ids: []` i `expected_fact: null` (format eval_runner-a) pre prvog merenja i pre izmene koda; pitanja i očekivanja nisu menjana.

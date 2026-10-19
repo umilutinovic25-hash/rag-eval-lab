@@ -73,13 +73,17 @@
   "id": "HV08",
   "question": "What was the remote work limit in the 2022 policy?",
   "category": "historical-missing",
-  "expected_behaviour": "refuse"
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
  },
  {
   "id": "HV09",
   "question": "What was the old annual leave allowance before it changed?",
   "category": "historical-missing",
-  "expected_behaviour": "refuse"
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
  },
  {
   "id": "HV10",

@@ -73,13 +73,17 @@
   "id": "HR08",
   "question": "What was the return window in the 2021 returns policy?",
   "category": "historical-missing",
-  "expected_behaviour": "refuse"
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
  },
  {
   "id": "HR09",
   "question": "What was the old express delivery price before it changed?",
   "category": "historical-missing",
-  "expected_behaviour": "refuse"
+  "expected_behaviour": "refuse",
+  "expected_doc_ids": [],
+  "expected_fact": null
  },
  {
   "id": "HR10",
