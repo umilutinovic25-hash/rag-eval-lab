@@ -12,6 +12,10 @@ describe("reasons", () => {
     expect(traceNote(trace[0])).toBeNull();
   });
 
+  it("explains missing subject evidence", () => {
+    expect(decisionReason([{stage: "decision", reason: "evidence_missing_subject"}])).toContain("okolnosti");
+  });
+
   it("returns null for unknown or missing decisions", () => {
     expect(decisionReason([])).toBeNull();
     expect(decisionReason([{ stage: "decision", reason: "x" }])).toBeNull();

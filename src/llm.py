@@ -167,8 +167,12 @@ def passage_answers(question: str, passage: str) -> bool:
     if config.YESNO_QUESTION_JUDGE and is_yes_no_question(question):
         if config.YESNO_QUESTION_JUDGE == "answerability-only":
             return answerability_judge(question, passage)
-        return base_passage_answers(question, passage) or answerability_judge(question, passage)
-    return base_passage_answers(question, passage)
+        accepted = base_passage_answers(question, passage) or answerability_judge(question, passage)
+    else:
+        accepted = base_passage_answers(question, passage)
+    if not accepted and config.IMPLICIT_BINARY and is_yes_no_question(question):
+        return answerability_judge(question, passage, prompt=config.IMPLICIT_BINARY_PROMPT)
+    return accepted
 
 
 def base_passage_answers(question: str, passage: str) -> bool:
@@ -213,3 +217,12 @@ def write_answer(question: str, passages: list[tuple[str, str]]) -> str:
         return render_json_answer(generate(config.GENERATION_MODEL, prompt, 160), passages)
     prompt = config.GENERATION_PROMPT.format(passages=listed, question=question)
     return generate(config.GENERATION_MODEL, prompt, 80)
+
+
+def evidence_supports(question: str, passages: list[dict]) -> bool:
+    """Semantic relevance gate; no question IDs, gold labels or corpus-specific terms."""
+    data = json.dumps({"question": question, "evidence": passages}, ensure_ascii=False)
+    reply = generate(config.RELEVANCE_MODEL, config.RELEVANCE_PROMPT.format(data=data), 4)
+    if getattr(reply, "metadata", {}).get("done_reason") == "length":
+        return False
+    return reply.strip().lower().rstrip(".") == "supported"

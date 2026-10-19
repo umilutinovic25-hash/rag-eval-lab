@@ -122,6 +122,27 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
     def record_retrieval(results):
         trace.append({"stage": "retrieval", "candidates": [{"chunk_id": r.chunk.chunk_id, "score": r.score} for r in results]})
 
+    def version_intent():
+        return config.VERSION_CONTEXT and bool(re.search(
+            r"\b(current|latest|active|superseded|still|now|in force|20\d{2})\b", question, re.I))
+
+    def judge_context(chunk):
+        if not version_intent():
+            return chunk.text
+        return f"Document: {chunk.title}; version: {chunk.version}; status: {chunk.status}.\n{chunk.text}"
+
+    def relevant(selected):
+        from .llm import evidence_supports
+        try:
+            accepted = evidence_supports(question, [
+                {"title": r.chunk.title, "version": r.chunk.version, "status": r.chunk.status, "text": r.chunk.text}
+                for r in selected])
+        except LLMError:
+            accepted = False
+        trace.append({"stage": "evidence_relevance", "accepted": accepted,
+                      "chunks": [r.chunk.chunk_id for r in selected]})
+        return accepted
+
     if not question.strip():
         return refuse("empty_question", [])
     if config.INJECTION_GUARDS:
@@ -139,6 +160,8 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
         evidence = select(question, chunks)
         if evidence:
             text, selected, rule = evidence
+            if config.EVIDENCE_RELEVANCE and config.ANSWER_MODE == "llm" and not relevant(selected):
+                return refuse("evidence_missing_subject", selected)
             return RagAnswer(text, [r.chunk.chunk_id for r in selected], False, selected,
                              trace=[{'stage':'evidence','rule':rule,'score_kind':'lexical overlap, not cosine'}], disposition='limited' if rule=='separate_policy_limit' else 'answer')
     if config.RERANK == "llm-gray-zone" and config.RETRIEVAL_MODE not in config.COSINE_MODES:
@@ -152,13 +175,13 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
             results = candidates[: config.TOP_K]
             cited = select_citations(results)
             trace.append({"stage": "decision", "reason": "above_gray_zone"})
-        elif config.RERANK == "llm-gray-zone" and top < low:
+        elif config.RERANK == "llm-gray-zone" and top < low and not version_intent():
             return refuse("below_gray_zone", candidates[: config.TOP_K])
         else:
             results = []
             for item in candidates:
                 operation.progress('judge', f'Proveravam relevantnost odlomka {candidates.index(item)+1}/{len(candidates)}.')
-                accepted = passage_answers(question, item.chunk.text)
+                accepted = passage_answers(question, judge_context(item.chunk))
                 trace.append({"stage": "judge", "chunk_id": item.chunk.chunk_id, "accepted": accepted})
                 if accepted:
                     results.append(item)
@@ -179,6 +202,8 @@ def build_grounded_answer(question: str, chunks: list[Chunk]) -> RagAnswer:
     cited = expand_context(cited, chunks, config.CONTEXT_NEIGHBORS, config.CONTEXT_POLICY)
     if config.CONTEXT_NEIGHBORS:
         trace.append({"stage": "context", "anchors": anchors, "expanded": [r.chunk.chunk_id for r in cited], "neighbor_scores": "inherited; not retrieval scores"})
+    if config.EVIDENCE_RELEVANCE and config.ANSWER_MODE == "llm" and not relevant(cited):
+        return refuse("evidence_missing_subject", results)
     fallback_reason = None
     if config.ANSWER_MODE == "llm":
         operation.progress('generation', 'Pripremam odgovor iz odabranih izvora.')

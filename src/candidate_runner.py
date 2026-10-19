@@ -20,6 +20,7 @@ from .scratch import use_scratch_caches
 
 CANDIDATES = {
     "shipped": {},
+    "proposal-21": {"VERSION_CONTEXT": True, "EVIDENCE_RELEVANCE": True, "IMPLICIT_BINARY": True},
     "previous": {"CHUNK_HEADERS": False, "YESNO_QUESTION_JUDGE": None},
     "before-yesno3": {"YESNO_QUESTION_JUDGE": None},
     "headers": {"CHUNK_HEADERS": True},

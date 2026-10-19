@@ -36,6 +36,10 @@ SET_NOTES = {
     'test4': ('Slepi test 4', 'viđen posle prvog pokretanja'),
     'test5': ('Slepi test 5', '36 od 40 pitanja novo; 4 ponovljena iz viđenih skupova'),
     'test6': ('Nezavisan korpus (test 6)', 'drugi korpus, viđen posle prvog pokretanja'),
+    'test7': ('Nezavisan korpus (test 7)', '40 novih pitanja; viđen posle merenja, isti AI autor'),
+    'near3': ('Bliska domena 3', '30 novih pitanja; viđen posle merenja'),
+    'implicit3': ('Implicitna da/ne 3', '20 novih pitanja; viđen posle merenja'),
+    'inject3': ('Prompt injection 3', '25 napada i 5 benignih kontrola; viđen posle merenja'),
     'inject': ('Prompt injection', 'viđen'), 'inject2': ('Prompt injection 2', 'zaštita pisana posle prvog skupa'),
 }
 
